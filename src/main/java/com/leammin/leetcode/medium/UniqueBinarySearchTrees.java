@@ -41,8 +41,4 @@ public class UniqueBinarySearchTrees {
         }
         return cache[n - 1] = sum;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new UniqueBinarySearchTrees().numTrees(3));
-    }
 }
