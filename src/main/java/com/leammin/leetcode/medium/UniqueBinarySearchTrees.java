@@ -24,11 +24,25 @@ package com.leammin.leetcode.medium;
  * @date 2019-03-24
  */
 public class UniqueBinarySearchTrees {
-    // TODO: 2019/3/24 todo
     public int numTrees(int n) {
-        if (n == 1) {
+        return tree(n, new int[n]);
+    }
+
+    private int tree(int n, int[] cache) {
+        if (n == 0) {
             return 1;
         }
-        return 0;
+        if (cache[n - 1] != 0) {
+            return cache[n - 1];
+        }
+        int sum = 0;
+        for (int left = 0; left < n; left++) {
+            sum += tree(left, cache) * tree(n - 1 - left, cache);
+        }
+        return cache[n - 1] = sum;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new UniqueBinarySearchTrees().numTrees(3));
     }
 }
