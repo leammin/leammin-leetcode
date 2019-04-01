@@ -54,35 +54,38 @@ public class ShoppingOffers {
     private Map<List<Integer>, Integer> priceMapByNeeds = new HashMap<>();
 
     public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
-        return priceMapByNeeds.computeIfAbsent(needs, needsKey -> {
-            int minCost = 0;
-            Iterator<Integer> needsKeyIterator = needsKey.iterator();
-            Iterator<Integer> priceIterator = price.iterator();
-            while (needsKeyIterator.hasNext()) {
-                minCost += priceIterator.next() * needsKeyIterator.next();
+        Integer cache = priceMapByNeeds.get(needs);
+        if (cache != null) {
+            return cache;
+        }
+        int minCost = 0;
+        Iterator<Integer> needsKeyIterator = needs.iterator();
+        Iterator<Integer> priceIterator = price.iterator();
+        while (needsKeyIterator.hasNext()) {
+            minCost += priceIterator.next() * needsKeyIterator.next();
+        }
+        for (List<Integer> sp : special) {
+            boolean tooMany = false;
+            List<Integer> newNeeds = new ArrayList<>(needs.size());
+            Iterator<Integer> needsIterator = needs.iterator();
+            Iterator<Integer> spIterator = sp.iterator();
+            while (needsIterator.hasNext()) {
+                int newNeed = needsIterator.next() - spIterator.next();
+                if (newNeed < 0) {
+                    tooMany = true;
+                    break;
+                }
+                newNeeds.add(newNeed);
             }
-            for (List<Integer> sp : special) {
-                boolean tooMany = false;
-                List<Integer> newNeeds = new ArrayList<>(needsKey.size());
-                Iterator<Integer> needsIterator = needsKey.iterator();
-                Iterator<Integer> spIterator = sp.iterator();
-                while (needsIterator.hasNext()) {
-                    int newNeed = needsIterator.next() - spIterator.next();
-                    if (newNeed < 0) {
-                        tooMany = true;
-                        break;
-                    }
-                    newNeeds.add(newNeed);
-                }
-                if (tooMany) {
-                    continue;
-                }
-                int cost = spIterator.next() + shoppingOffers(price, special, newNeeds);
-                if (cost < minCost) {
-                    minCost = cost;
-                }
+            if (tooMany) {
+                continue;
             }
-            return minCost;
-        });
+            int cost = spIterator.next() + shoppingOffers(price, special, newNeeds);
+            if (cost < minCost) {
+                minCost = cost;
+            }
+        }
+        priceMapByNeeds.put(needs, minCost);
+        return minCost;
     }
 }
