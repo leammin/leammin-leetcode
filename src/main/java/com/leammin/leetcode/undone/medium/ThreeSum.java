@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone;
+package com.leammin.leetcode.undone.medium;
 
 import com.leammin.leetcode.util.AlgorithmUtils;
 
