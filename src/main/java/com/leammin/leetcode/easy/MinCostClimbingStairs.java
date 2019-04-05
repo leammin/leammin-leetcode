@@ -37,62 +37,73 @@ import java.util.Map;
  * @author Leammin
  * @date 2019-03-17
  */
-public class MinCostClimbingStairs {
-    public int minCostClimbingStairs(int[] cost) {
-        switch (cost.length) {
-            case 0:
-                return 0;
-            case 1:
-                return cost[0];
-            default:
-                int l = cost[0];
-                int r = cost[1];
-                for (int i = 2; i < cost.length; i++) {
-                    int t = (l < r ? l : r) + cost[i];
-                    l = r;
-                    r = t;
-                }
-                return l < r ? l : r;
+public interface MinCostClimbingStairs {
+    int minCostClimbingStairs(int[] cost);
+
+    class Solution implements MinCostClimbingStairs {
+        @Override
+        public int minCostClimbingStairs(int[] cost) {
+            switch (cost.length) {
+                case 0:
+                    return 0;
+                case 1:
+                    return cost[0];
+                default:
+                    int l = cost[0];
+                    int r = cost[1];
+                    for (int i = 2; i < cost.length; i++) {
+                        int t = (l < r ? l : r) + cost[i];
+                        l = r;
+                        r = t;
+                    }
+                    return l < r ? l : r;
+            }
         }
     }
 
-    public int minCostClimbingStairs2(int[] cost) {
-        int n = cost.length;
-        switch (n) {
-            case 0:
-                return 0;
-            case 1:
-                return cost[0];
-            case 2:
-                return Math.min(cost[0], cost[1]);
-            case 3:
-                return Math.min(cost[0] + cost[2], cost[1]);
-            case 4:
-                return Math.min(Math.min(cost[0] + cost[2], cost[1] + cost[2]), cost[1] + cost[3]);
-            default:
-                Map<String, Integer> costs = new HashMap<>((int) ((n - 2) * (n - 3) / 1.5F + 1.0F));
-                return Math.min(
-                        Math.min(
-                                minCost2(cost, 0, n - 1, costs),
-                                minCost2(cost, 0, n - 2, costs)
-                        ),
-                        Math.min(
-                                minCost2(cost, 1, n - 1, costs),
-                                minCost2(cost, 1, n - 2, costs)
-                        )
-                );
+    class Solution1 implements MinCostClimbingStairs {
+        @Override
+        public int minCostClimbingStairs(int[] cost) {
+            int n = cost.length;
+            switch (n) {
+                case 0:
+                    return 0;
+                case 1:
+                    return cost[0];
+                case 2:
+                    return Math.min(cost[0], cost[1]);
+                case 3:
+                    return Math.min(cost[0] + cost[2], cost[1]);
+                case 4:
+                    return Math.min(Math.min(cost[0] + cost[2], cost[1] + cost[2]), cost[1] + cost[3]);
+                default:
+                    Map<String, Integer> costs = new HashMap<>((int) ((n - 2) * (n - 3) / 1.5F + 1.0F));
+                    return Math.min(
+                            Math.min(
+                                    minCost(cost, 0, n - 1, costs),
+                                    minCost(cost, 0, n - 2, costs)
+                            ),
+                            Math.min(
+                                    minCost(cost, 1, n - 1, costs),
+                                    minCost(cost, 1, n - 2, costs)
+                            )
+                    );
+            }
+        }
+
+        private int minCost(int[] cost, int start, int end, Map<String, Integer> costs) {
+            if (start == end) {
+                return cost[start];
+            }
+            if (end - start == 1 || end - start == 2) {
+                return cost[start] + cost[end];
+            }
+            return costs.computeIfAbsent(start + "," + end, s -> cost[start] + Math.min(
+                    minCost(cost, start + 1, end, costs),
+                    minCost(cost, start + 2, end, costs)));
         }
     }
 
-    private int minCost2(int[] cost, int start, int end, Map<String, Integer> costs) {
-        if (start == end) {
-            return cost[start];
-        }
-        if (end - start == 1 || end - start == 2) {
-            return cost[start] + cost[end];
-        }
-        return costs.computeIfAbsent(start + "," + end, s -> cost[start] + Math.min(
-                minCost2(cost, start + 1, end, costs),
-                minCost2(cost, start + 2, end, costs)));
-    }
+
+
 }

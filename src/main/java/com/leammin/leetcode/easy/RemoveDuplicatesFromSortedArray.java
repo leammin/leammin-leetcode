@@ -2,7 +2,7 @@ package com.leammin.leetcode.easy;
 
 /**
  * 26. 从排序数组中删除重复项
- * 
+ *
  * <div><p>给定一个排序数组，你需要在<strong><a href="http://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95" target="_blank">原地</a></strong>删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。</p>
  *
  * <p>不要使用额外的数组空间，你必须在<strong><a href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95" target="_blank">原地</a>修改输入数组</strong>并在使用 O(1) 额外空间的条件下完成。</p>
@@ -43,30 +43,30 @@ package com.leammin.leetcode.easy;
  * </pre>
  * </div>
  *
- * @date 2018-08-26
  * @author Leammin
+ * @date 2018-08-26
  */
-public class RemoveDuplicatesFromSortedArray {
+public interface RemoveDuplicatesFromSortedArray {
+    int removeDuplicates(int[] nums);
 
-    public static void main(String[] args) {
-
-    }
-
-    public int removeDuplicates(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        int baseIndex = 0;
-        for (int findIndex = 1; findIndex < nums.length; findIndex++) {
-            if (nums[baseIndex] != nums[findIndex]) {
-                // 不相等时让baseIndex+1
-                baseIndex++;
-                if (findIndex > baseIndex) {
-                    // 说明find和base中间有重复项
-                    nums[baseIndex] = nums[findIndex];
+    class Solution implements RemoveDuplicatesFromSortedArray {
+        @Override
+        public int removeDuplicates(int[] nums) {
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+            int baseIndex = 0;
+            for (int findIndex = 1; findIndex < nums.length; findIndex++) {
+                if (nums[baseIndex] != nums[findIndex]) {
+                    // 不相等时让baseIndex+1
+                    baseIndex++;
+                    if (findIndex > baseIndex) {
+                        // 说明find和base中间有重复项
+                        nums[baseIndex] = nums[findIndex];
+                    }
                 }
             }
+            return baseIndex + 1;
         }
-        return baseIndex + 1;
     }
 }

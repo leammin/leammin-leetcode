@@ -19,26 +19,30 @@ package com.leammin.leetcode.medium;
  *    2     1         2                 3</pre>
  * </div>
  *
- *
  * @author Leammin
  * @date 2019-03-24
  */
-public class UniqueBinarySearchTrees {
-    public int numTrees(int n) {
-        return tree(n, new int[n]);
-    }
+public interface UniqueBinarySearchTrees {
+    int numTrees(int n);
 
-    private int tree(int n, int[] cache) {
-        if (n == 0) {
-            return 1;
+    class Solution implements UniqueBinarySearchTrees {
+        @Override
+        public int numTrees(int n) {
+            return tree(n, new int[n]);
         }
-        if (cache[n - 1] != 0) {
-            return cache[n - 1];
+
+        private int tree(int n, int[] cache) {
+            if (n == 0) {
+                return 1;
+            }
+            if (cache[n - 1] != 0) {
+                return cache[n - 1];
+            }
+            int sum = 0;
+            for (int left = 0; left < n; left++) {
+                sum += tree(left, cache) * tree(n - 1 - left, cache);
+            }
+            return cache[n - 1] = sum;
         }
-        int sum = 0;
-        for (int left = 0; left < n; left++) {
-            sum += tree(left, cache) * tree(n - 1 - left, cache);
-        }
-        return cache[n - 1] = sum;
     }
 }

@@ -65,29 +65,34 @@ package com.leammin.leetcode.medium;
  * @author Leammin
  * @date 2018-10-11
  */
-public class ValidSudoku {
-    public boolean isValidSudoku(char[][] board) {
-        boolean[][] row = new boolean[9][9];
-        boolean[][] col = new boolean[9][9];
-        boolean[][] box = new boolean[9][9];
-        for (int r = 0; r < board.length; r++) {
-            for (int c = 0; c < board[r].length; c++) {
-                if (board[r][c] != '.') {
-                    if (row[r][board[r][c] - '1']) {
-                        return false;
+public interface ValidSudoku {
+    boolean isValidSudoku(char[][] board);
+
+    class Solution implements ValidSudoku {
+        @Override
+        public boolean isValidSudoku(char[][] board) {
+            boolean[][] row = new boolean[9][9];
+            boolean[][] col = new boolean[9][9];
+            boolean[][] box = new boolean[9][9];
+            for (int r = 0; r < board.length; r++) {
+                for (int c = 0; c < board[r].length; c++) {
+                    if (board[r][c] != '.') {
+                        if (row[r][board[r][c] - '1']) {
+                            return false;
+                        }
+                        row[r][board[r][c] - '1'] = true;
+                        if (col[c][board[r][c] - '1']) {
+                            return false;
+                        }
+                        col[c][board[r][c] - '1'] = true;
+                        if (box[(c + r / 3 * 9) / 3][board[r][c] - '1']) {
+                            return false;
+                        }
+                        box[(c + r / 3 * 9) / 3][board[r][c] - '1'] = true;
                     }
-                    row[r][board[r][c] - '1'] = true;
-                    if (col[c][board[r][c] - '1']) {
-                        return false;
-                    }
-                    col[c][board[r][c] - '1'] = true;
-                    if (box[(c + r / 3 * 9) / 3][board[r][c] - '1']) {
-                        return false;
-                    }
-                    box[(c + r / 3 * 9) / 3][board[r][c] - '1'] = true;
                 }
             }
+            return true;
         }
-        return true;
     }
 }

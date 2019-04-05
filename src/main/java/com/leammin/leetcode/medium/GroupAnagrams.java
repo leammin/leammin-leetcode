@@ -30,25 +30,25 @@ import java.util.List;
  * @author Leammin
  * @date 2018-10-21
  */
-public class GroupAnagrams {
-    public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<Long, List<String>> map = new HashMap<>();
-        for (String str : strs) {
-            char[] chars = str.toCharArray();
-            long sum = 0;
-            long product = 1;
-            for (char aChar : chars) {
-                sum += aChar;
-                product *= aChar;
+public interface GroupAnagrams {
+    List<List<String>> groupAnagrams(String[] strs);
+
+    class Solution implements GroupAnagrams {
+        @Override
+        public List<List<String>> groupAnagrams(String[] strs) {
+            HashMap<Long, List<String>> map = new HashMap<>();
+            for (String str : strs) {
+                char[] chars = str.toCharArray();
+                long sum = 0;
+                long product = 1;
+                for (char aChar : chars) {
+                    sum += aChar;
+                    product *= aChar;
+                }
+                map.compute(sum + product, (k, v) -> (v == null ? new ArrayList<>() : v)).add(str);
             }
-            map.compute(sum + product, (k, v) -> (v == null ? new ArrayList<>() : v)).add(str);
+
+            return new ArrayList<>(map.values());
         }
-
-        return new ArrayList<>(map.values());
-    }
-
-    public static void main(String[] args) {
-        GroupAnagrams t = new GroupAnagrams();
-        System.out.println(t.groupAnagrams(new String[]{"abc", "bac", "ab", "ba"}));
     }
 }

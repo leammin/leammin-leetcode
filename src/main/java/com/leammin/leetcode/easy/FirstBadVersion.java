@@ -23,34 +23,40 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-09-06
  */
-public class FirstBadVersion {
-    /* The isBadVersion API is defined in the parent class VersionControl.
-      boolean isBadVersion(int version); */
+public interface FirstBadVersion {
+    int firstBadVersion(int n);
 
-    public static int firstBadVersion(int n) {
-        int low = 0;
-        int high = n;
-        int mid;
+    class Solution implements FirstBadVersion {
+        @Override
+        public int firstBadVersion(int n) {
+            int low = 0;
+            int high = n;
+            int mid;
 
-        while (low < high - 1) {
-            mid = low + (high - low) / 2;
-            if (isBadVersion(mid)) {
-                high = mid;
-            } else {
-                low = mid;
+            while (low < high - 1) {
+                mid = low + (high - low) / 2;
+                if (isBadVersion(mid)) {
+                    high = mid;
+                } else {
+                    low = mid;
+                }
             }
+            return high;
         }
-        return high;
     }
 
-    private static boolean isBadVersion(int version) {
+    /**
+     * The isBadVersion API is defined in the parent class VersionControl.
+     * boolean isBadVersion(int version);
+     *
+     * @param version
+     * @return
+     */
+    default boolean isBadVersion(int version) {
         if (version <= 4) {
             return false;
         }
         return true;
     }
 
-    public static void main(String[] args) {
-        System.out.println(firstBadVersion(5));
-    }
 }

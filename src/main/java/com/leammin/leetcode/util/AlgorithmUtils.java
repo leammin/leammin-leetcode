@@ -10,6 +10,7 @@ public class AlgorithmUtils {
         runnable.run();
         return System.nanoTime() - before;
     }
+
     public static int fastest(Runnable... runnables) {
         if (runnables == null || runnables.length == 0) {
             throw new IllegalArgumentException();
@@ -22,9 +23,9 @@ public class AlgorithmUtils {
                 fastestIndex = i;
                 fastestTime = time;
             }
-            System.out.println(String.format("index:%d, time:%.6fms",i, time/1000000.0));
+            System.out.println(String.format("index:%d, time:%.6fms", i, time / 1000000.0));
         }
-        System.out.println(String.format("fastest index:%d, fastest time:%.6fms",fastestIndex, fastestTime/1000000.0));
+        System.out.println(String.format("fastest index:%d, fastest time:%.6fms", fastestIndex, fastestTime / 1000000.0));
         return fastestIndex;
     }
 }

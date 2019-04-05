@@ -53,56 +53,43 @@ import java.util.Arrays;
  * @author Leammin
  * @date 2018-10-11
  */
-public class RotateImage {
-    public void rotate(int[][] matrix) {
-        if (matrix == null || matrix.length < 2) {
-            return;
+public interface RotateImage {
+    void rotate(int[][] matrix);
+
+    class Solution implements RotateImage {
+        @Override
+        public void rotate(int[][] matrix) {
+            if (matrix == null || matrix.length < 2) {
+                return;
+            }
+            for (int margin = 0; margin < matrix.length / 2; margin++) {
+                rotate(matrix, margin);
+            }
         }
-        for (int margin = 0; margin < matrix.length / 2; margin++) {
-            rotate(matrix, margin);
+
+        private void rotate(int[][] matrix, int margin) {
+            for (int col = margin; col < matrix.length - 1 - margin; col++) {
+                rotate(matrix, margin, col);
+            }
         }
-    }
 
-    public void rotate(int[][] matrix, int margin) {
-        for (int col = margin; col < matrix.length - 1 - margin; col++) {
-            rotate(matrix, margin, col);
-        }
-    }
-
-
-    /**
-     * row, col
-     * col, n-1-row
-     * n-1-row, n-1-col
-     * n-1-col, row
-     * 
-     * @param matrix
-     * @param row
-     * @param col
-     */
-    public void rotate(int[][] matrix, int row, int col) {
-        int n = matrix.length;
-        int tmp = matrix[row][col];
-        matrix[row][col] = matrix[n - 1 - col][row];
-        matrix[n - 1 - col][row] = matrix[n - 1 - row][n - 1 - col];
-        matrix[n - 1 - row][n - 1 - col] = matrix[col][n-1-row];
-        matrix[col][n - 1 - row] = tmp;
-    }
-
-    public static void main(String[] args) {
-        RotateImage ri = new RotateImage();
-
-        int[][] matrix = {
-                {1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16}
-        };
-
-        ri.rotate(matrix);
-
-        for (int[] ints : matrix) {
-            System.out.println(Arrays.toString(ints));
+        /**
+         * row, col
+         * col, n-1-row
+         * n-1-row, n-1-col
+         * n-1-col, row
+         *
+         * @param matrix
+         * @param row
+         * @param col
+         */
+        private void rotate(int[][] matrix, int row, int col) {
+            int n = matrix.length;
+            int tmp = matrix[row][col];
+            matrix[row][col] = matrix[n - 1 - col][row];
+            matrix[n - 1 - col][row] = matrix[n - 1 - row][n - 1 - col];
+            matrix[n - 1 - row][n - 1 - col] = matrix[col][n - 1 - row];
+            matrix[col][n - 1 - row] = tmp;
         }
     }
 }

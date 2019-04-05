@@ -2,7 +2,7 @@ package com.leammin.leetcode.easy;
 
 /**
  * 122. 买卖股票的最佳时机 II
- * 
+ *
  * <div><p>给定一个数组，它的第&nbsp;<em>i</em> 个元素是一支给定股票第 <em>i</em> 天的价格。</p>
  *
  * <p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p>
@@ -32,47 +32,56 @@ package com.leammin.leetcode.easy;
  * <strong>输出:</strong> 0
  * <strong>解释:</strong> 在这种情况下, 没有交易完成, 所以最大利润为 0。</pre>
  * </div>
- * 
+ *
  * @author Leammin
  * @date 2018-09-10
  */
-public class BestTimeToBuyAndSellStockII {
-    public int maxProfit(int[] prices) {
-        if (prices == null || prices.length <= 1) {
-            return 0;
-        }
+public interface BestTimeToBuyAndSellStockII {
+    int maxProfit(int[] prices);
 
-        int buyIndex = -1;
-        int profit = 0;
-        
-        for (int i = 1; i < prices.length; i++) {
-            // 未买入
-            if (buyIndex < 0) { 
-                if (prices[i] > prices[i - 1]) {
-                    buyIndex = i - 1;
-                }
-            } else { // 已买入
-                if (prices[i] < prices[i - 1]) {
-                    profit += (prices[i - 1] - prices[buyIndex]);
-                    buyIndex = -1;
+    class Solution implements BestTimeToBuyAndSellStockII {
+        @Override
+        public int maxProfit(int[] prices) {
+            int profit = 0;
+            for (int i = 1; i < prices.length; i++) {
+                if (prices[i] - prices[i - 1] > 0) {
+                    profit += prices[i] - prices[i - 1];
                 }
             }
+            return profit;
         }
-
-        if (buyIndex >= 0) {
-            profit += (prices[prices.length - 1] - prices[buyIndex]);
-        }
-
-        return profit;
     }
 
-    public int maxProfit2(int[] prices) {
-        int profit = 0;
-        for (int i = 1; i < prices.length; i++) {
-            if (prices[i] - prices[i - 1] > 0) {
-                profit += prices[i] - prices[i - 1];
+    class Solution1 implements BestTimeToBuyAndSellStockII {
+
+        @Override
+        public int maxProfit(int[] prices) {
+            if (prices == null || prices.length <= 1) {
+                return 0;
             }
+
+            int buyIndex = -1;
+            int profit = 0;
+
+            for (int i = 1; i < prices.length; i++) {
+                // 未买入
+                if (buyIndex < 0) {
+                    if (prices[i] > prices[i - 1]) {
+                        buyIndex = i - 1;
+                    }
+                } else { // 已买入
+                    if (prices[i] < prices[i - 1]) {
+                        profit += (prices[i - 1] - prices[buyIndex]);
+                        buyIndex = -1;
+                    }
+                }
+            }
+
+            if (buyIndex >= 0) {
+                profit += (prices[prices.length - 1] - prices[buyIndex]);
+            }
+
+            return profit;
         }
-        return profit;
     }
 }

@@ -23,32 +23,32 @@ package com.leammin.leetcode.medium;
  * @author Leammin
  * @date 2019-03-24
  */
-public class MinimumPathSum {
-    public int minPathSum(int[][] grid) {
-        return minPathSum(grid, 0, 0, new int[grid.length][grid[0].length]);
-    }
+public interface MinimumPathSum {
+    int minPathSum(int[][] grid);
 
-    public int minPathSum(int[][] grid, int row, int col, int[][] cache) {
-        if (cache[row][col] != 0) {
-            return cache[row][col];
-        }
-        if (row == grid.length - 1 && col == grid[0].length - 1) {
-            return grid[row][col];
-        }
-        if (row == grid.length - 1) {
-            return cache[row][col] = grid[row][col] + minPathSum(grid, row, col + 1, cache);
-        }
-        if (col == grid[0].length - 1) {
-            return cache[row][col] = grid[row][col] + minPathSum(grid, row + 1, col, cache);
-        }
-        return cache[row][col] = grid[row][col] + Math.min(
-                minPathSum(grid, row + 1, col, cache),
-                minPathSum(grid, row, col + 1, cache));
-    }
+    class Solution implements MinimumPathSum {
+        @Override
+        public int minPathSum(int[][] grid) {
 
-    public static void main(String[] args) {
-        int[][] ints = new int[1][2];
-        System.out.println(ints.length);
-        System.out.println(ints[0].length);
+            return minPathSum(grid, 0, 0, new int[grid.length][grid[0].length]);
+        }
+
+        private int minPathSum(int[][] grid, int row, int col, int[][] cache) {
+            if (cache[row][col] != 0) {
+                return cache[row][col];
+            }
+            if (row == grid.length - 1 && col == grid[0].length - 1) {
+                return grid[row][col];
+            }
+            if (row == grid.length - 1) {
+                return cache[row][col] = grid[row][col] + minPathSum(grid, row, col + 1, cache);
+            }
+            if (col == grid[0].length - 1) {
+                return cache[row][col] = grid[row][col] + minPathSum(grid, row + 1, col, cache);
+            }
+            return cache[row][col] = grid[row][col] + Math.min(
+                    minPathSum(grid, row + 1, col, cache),
+                    minPathSum(grid, row, col + 1, cache));
+        }
     }
 }

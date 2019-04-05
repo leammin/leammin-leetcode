@@ -1,8 +1,10 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.struct.ListNode;
+
 /**
  * 237. 删除链表中的节点
- * 
+ *
  * <div><p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点，你将只被给定要求被删除的节点。</p>
  *
  * <p>现有一个链表 --&nbsp;head =&nbsp;[4,5,1,9]，它可以表示为:</p>
@@ -34,21 +36,19 @@ package com.leammin.leetcode.easy;
  * </ul>
  * </div>
  *
- * @date 2018-08-26
  * @author Leammin
+ * @date 2018-08-26
  */
-public class DeleteNodeInLinkedList {
-    private class ListNode {
-        int val;
-        ListNode next;
+public interface DeleteNodeInLinkedList {
+    void deleteNode(ListNode node);
 
-        ListNode(int x) {
-            val = x;
+    class Solution implements DeleteNodeInLinkedList {
+        @Override
+        public void deleteNode(ListNode node) {
+            node.val = node.next.val;
+            node.next = node.next.next;
         }
     }
 
-    public void deleteNode(ListNode node) {
-        node.val = node.next.val;
-        node.next = node.next.next;
-    }
+
 }

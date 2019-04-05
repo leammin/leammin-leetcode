@@ -1,5 +1,7 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.struct.ListNode;
+
 /**
  * 21. 合并两个有序链表
  *
@@ -15,52 +17,50 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-09-26
  */
-public class MergeTwoSortedLists {
-    public class ListNode {
-        int val;
-        ListNode next;
+public interface MergeTwoSortedLists {
+    ListNode mergeTwoLists(ListNode l1, ListNode l2);
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null) {
-            return l2;
-        }
-        if (l2 == null) {
-            return l1;
-        }
-        ListNode res;
-        if (l1.val < l2.val) {
-            res = l1;
-            l1 = l1.next;
-        } else {
-            res = l2;
-            l2 = l2.next;
-        }
-        ListNode resNode = res;
-        while (l1 != null && l2 != null) {
+    class Solution implements MergeTwoSortedLists {
+        @Override
+        public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+            if (l1 == null) {
+                return l2;
+            }
+            if (l2 == null) {
+                return l1;
+            }
+            ListNode res;
             if (l1.val < l2.val) {
-                resNode.next = l1;
+                res = l1;
                 l1 = l1.next;
             } else {
-                resNode.next = l2;
+                res = l2;
                 l2 = l2.next;
             }
-            resNode = resNode.next;
+            ListNode resNode = res;
+            while (l1 != null && l2 != null) {
+                if (l1.val < l2.val) {
+                    resNode.next = l1;
+                    l1 = l1.next;
+                } else {
+                    resNode.next = l2;
+                    l2 = l2.next;
+                }
+                resNode = resNode.next;
+            }
+            while (l1 != null) {
+                resNode.next = l1;
+                resNode = resNode.next;
+                l1 = l1.next;
+            }
+            while (l2 != null) {
+                resNode.next = l2;
+                resNode = resNode.next;
+                l2 = l2.next;
+            }
+            return res;
         }
-        while (l1 != null) {
-            resNode.next = l1;
-            resNode = resNode.next;
-            l1 = l1.next;
-        }
-        while (l2 != null) {
-            resNode.next = l2;
-            resNode = resNode.next;
-            l2 = l2.next;
-        }
-        return res;
     }
+
+
 }

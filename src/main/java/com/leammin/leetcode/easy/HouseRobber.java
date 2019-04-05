@@ -26,33 +26,39 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-10-29
  */
-public class HouseRobber {
-    public int rob(int[] nums) {
-        int[] cache = new int[nums.length];
-        for (int i = 0; i < cache.length; i++) {
-            cache[i] = -1;
+public interface HouseRobber {
+    int rob(int[] nums);
+
+    class Solution implements HouseRobber {
+        @Override
+        public int rob(int[] nums) {
+            int[] cache = new int[nums.length];
+            for (int i = 0; i < cache.length; i++) {
+                cache[i] = -1;
+            }
+            return rob(nums, 0, cache);
         }
-        return rob(nums, 0, cache);
+
+        private int rob(int[] nums, int start, int[] cache) {
+            if (start >= nums.length) {
+                return 0;
+            }
+            if (cache[start] != -1) {
+                return cache[start];
+            }
+            int res;
+            if (start == nums.length - 1) {
+                res = nums[start];
+            } else if (start == nums.length - 2) {
+                res = Math.max(nums[start], nums[start + 1]);
+            } else if (start == nums.length - 3) {
+                res = Math.max(nums[start] + nums[start + 2], nums[start + 1]);
+            } else {
+                res = Math.max(nums[start] + rob(nums, start + 2, cache), nums[start + 1] + rob(nums, start + 3, cache));
+            }
+            cache[start] = res;
+            return res;
+        }
     }
 
-    private int rob(int[] nums, int start, int[] cache) {
-        if (start >= nums.length) {
-            return 0;
-        }
-        if (cache[start] != -1) {
-            return cache[start];
-        }
-        int res;
-        if (start == nums.length - 1) {
-            res = nums[start];
-        } else if (start == nums.length - 2) {
-            res = Math.max(nums[start], nums[start + 1]);
-        } else if (start == nums.length - 3) {
-            res = Math.max(nums[start] + nums[start + 2], nums[start + 1]);
-        } else {
-            res = Math.max(nums[start] + rob(nums, start + 2, cache), nums[start + 1] + rob(nums, start + 3, cache));
-        }
-        cache[start] = res;
-        return res;
-    }
 }

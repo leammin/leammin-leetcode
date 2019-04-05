@@ -26,29 +26,33 @@ import java.util.Arrays;
  * @author Leammin
  * @date 2018-10-28
  */
-public class MissingNumber {
-    public int missingNumber(int[] nums) {
-        boolean[] to = new boolean[nums.length + 1];
-        for (int num : nums) {
-            to[num] = true;
-        }
-        for (int i = 0; i < to.length; i++) {
-            if (!to[i]) {
-                return i;
+public interface MissingNumber {
+    int missingNumber(int[] nums);
+
+    class Solution implements MissingNumber {
+        @Override
+        public int missingNumber(int[] nums) {
+            boolean[] to = new boolean[nums.length + 1];
+            for (int num : nums) {
+                to[num] = true;
             }
+            for (int i = 0; i < to.length; i++) {
+                if (!to[i]) {
+                    return i;
+                }
+            }
+            return -1;
         }
-        return -1;
     }
 
-    public int missingNumber2(int[] nums) {
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
+    class Solution1 implements MissingNumber {
+        @Override
+        public int missingNumber(int[] nums) {
+            int sum = 0;
+            for (int num : nums) {
+                sum += num;
+            }
+            return (nums.length + 1) * nums.length / 2 - sum;
         }
-        return (nums.length + 1) * nums.length / 2 - sum;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(new boolean[1]));
     }
 }

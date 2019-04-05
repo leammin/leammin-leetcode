@@ -1,5 +1,7 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.struct.TreeNode;
+
 /**
  * 98. 验证二叉搜索树
  *
@@ -34,33 +36,29 @@ package com.leammin.leetcode.medium;
  * <strong>解释:</strong> 输入为: [5,1,4,null,null,3,6]。
  * &nbsp;    根节点的值为 5 ，但是其右子节点值为 4 。
  * </pre>
- * 
- * @date 2018-09-02
+ *
  * @author Leammin
+ * @date 2018-09-02
  */
-public class ValidateBinarySearchTree {
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
+public interface ValidateBinarySearchTree {
+    boolean isValidBST(TreeNode root);
 
-        TreeNode(int x) {
-            val = x;
+    class Solution implements ValidateBinarySearchTree {
+        @Override
+        public boolean isValidBST(TreeNode root) {
+            return validateNode(root, Long.MIN_VALUE, Long.MAX_VALUE);
+        }
+
+        private boolean validateNode(TreeNode node, long min, long max) {
+            if (node == null) {
+                return true;
+            }
+            if (node.val >= max || node.val <= min) {
+                return false;
+            }
+            return validateNode(node.left, min, node.val) && validateNode(node.right, node.val, max);
         }
     }
 
-    public boolean isValidBST(TreeNode root) {
-        return validateNode(root, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-
-    public boolean validateNode(TreeNode node, long min, long max) {
-        if (node == null) {
-            return true;
-        }
-        if (node.val >= max || node.val <= min) {
-            return false;
-        }
-        return validateNode(node.left, min, node.val) && validateNode(node.right, node.val, max);
-    }
 
 }

@@ -38,26 +38,31 @@ package com.leammin.leetcode.medium;
  * @author Leammin
  * @date 2019-03-29
  */
-public class ArithmeticSlices {
-    public int numberOfArithmeticSlices(int[] a) {
-        if (a == null || a.length < 3) {
-            return 0;
-        }
-        int result = 0;
-        int startIndex = 0;
-        for (int i = 2; i < a.length; i++) {
-            if (a[i] - a[i - 1] != a[i - 1] - a[i - 2]) {
-                int n = i - startIndex - 2;
-                if (n > 0) {
-                    result += n * (n + 1) / 2;
-                }
-                startIndex = i - 1;
+public interface ArithmeticSlices {
+    int numberOfArithmeticSlices(int[] a);
+
+    class Solution implements ArithmeticSlices {
+        @Override
+        public int numberOfArithmeticSlices(int[] a) {
+            if (a == null || a.length < 3) {
+                return 0;
             }
+            int result = 0;
+            int startIndex = 0;
+            for (int i = 2; i < a.length; i++) {
+                if (a[i] - a[i - 1] != a[i - 1] - a[i - 2]) {
+                    int n = i - startIndex - 2;
+                    if (n > 0) {
+                        result += n * (n + 1) / 2;
+                    }
+                    startIndex = i - 1;
+                }
+            }
+            int n = a.length - startIndex - 2;
+            if (n > 0) {
+                result += n * (n + 1) / 2;
+            }
+            return result;
         }
-        int n = a.length - startIndex - 2;
-        if (n > 0) {
-            result += n * (n + 1) / 2;
-        }
-        return result;
     }
 }

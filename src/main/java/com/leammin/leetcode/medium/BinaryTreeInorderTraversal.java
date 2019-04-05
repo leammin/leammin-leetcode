@@ -1,5 +1,7 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.struct.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,46 +28,45 @@ import java.util.List;
  * @author Leammin
  * @date 2018-10-21
  */
-public class BinaryTreeInorderTraversal {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
+public interface BinaryTreeInorderTraversal {
+    List<Integer> inorderTraversal(TreeNode root);
 
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
-    public List<Integer> inorderTraversal(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<Integer> result = inorderTraversal(root.left);
-        result.add(root.val);
-        result.addAll(inorderTraversal(root.right));
-        return result;
-    }
-
-    public List<Integer> inorderTraversal2(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<Integer> result = new ArrayList<>();
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode top = stack.pop();
-            if (top.left != null) {
-                stack.push(top.left);
-            } else {
-                result.add(top.val);
-                if (top.right != null) {
-                    stack.push(top.right);
-                }
+    class Solution implements BinaryTreeInorderTraversal {
+        @Override
+        public List<Integer> inorderTraversal(TreeNode root) {
+            if (root == null) {
+                return new ArrayList<>();
             }
-
+            List<Integer> result = inorderTraversal(root.left);
+            result.add(root.val);
+            result.addAll(inorderTraversal(root.right));
+            return result;
         }
-        return result;
     }
+
+    class Solution1 implements BinaryTreeInorderTraversal {
+        @Override
+        public List<Integer> inorderTraversal(TreeNode root) {
+            if (root == null) {
+                return new ArrayList<>();
+            }
+            List<Integer> result = new ArrayList<>();
+            LinkedList<TreeNode> stack = new LinkedList<>();
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                TreeNode top = stack.pop();
+                if (top.left != null) {
+                    stack.push(top.left);
+                } else {
+                    result.add(top.val);
+                    if (top.right != null) {
+                        stack.push(top.right);
+                    }
+                }
+
+            }
+            return result;
+        }
+    }
+
 }

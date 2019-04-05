@@ -28,25 +28,31 @@ import java.util.List;
  * @author Leammin
  * @date 2018-09-27
  */
-public class PascalTriangle {
-    public List<List<Integer>> generate(int numRows) {
-        if (numRows == 0) {
-            return new ArrayList<>();
-        }
-        List<List<Integer>> res = new ArrayList<>(numRows);
-        List<Integer> last = new ArrayList<>(1);
-        last.add(1);
-        res.add(last);
-        for (int i = 1; i < numRows; i++) {
-            List<Integer> cur = new ArrayList<>(i + 1);
-            cur.add(1);
-            for (int j = 1; j < last.size(); j++) {
-                cur.add(last.get(j) + last.get(j - 1));
+public interface PascalTriangle {
+    List<List<Integer>> generate(int numRows);
+
+    class Solution implements PascalTriangle {
+        @Override
+        public List<List<Integer>> generate(int numRows) {
+            if (numRows == 0) {
+                return new ArrayList<>();
             }
-            cur.add(1);
-            last = cur;
-            res.add(cur);
+            List<List<Integer>> res = new ArrayList<>(numRows);
+            List<Integer> last = new ArrayList<>(1);
+            last.add(1);
+            res.add(last);
+            for (int i = 1; i < numRows; i++) {
+                List<Integer> cur = new ArrayList<>(i + 1);
+                cur.add(1);
+                for (int j = 1; j < last.size(); j++) {
+                    cur.add(last.get(j) + last.get(j - 1));
+                }
+                cur.add(1);
+                last = cur;
+                res.add(cur);
+            }
+            return res;
         }
-        return res;
     }
+
 }

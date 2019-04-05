@@ -1,4 +1,4 @@
-package com.leammin.leetcode.easy;
+package com.leammin.leetcode.undone.easy;
 
 /**
  * 189. 旋转数组
@@ -31,40 +31,42 @@ package com.leammin.leetcode.easy;
  * </ul>
  * </div>
  *
- * @date 2018-09-01
  * @author Leammin
+ * @date 2018-09-01
  */
-public class RotateArray {
-    public static void rotate(int[] nums, int k) {
-        if (nums == null || nums.length == 0 || k <= 0) {
-            return;
-        }
-        int n = nums.length;
-        k = k % n;
-        if (k <= 0) {
-            return;
+public interface RotateArray {
+    void rotate(int[] nums, int k);
+
+    // TODO: 2019/4/6 至少三种解决方案
+    class Solution implements RotateArray {
+        @Override
+        public void rotate(int[] nums, int k) {
+            if (nums == null || nums.length == 0 || k <= 0) {
+                return;
+            }
+            int n = nums.length;
+            k = k % n;
+            if (k <= 0) {
+                return;
+            }
+
+            reverse(nums, n - k, n);
+            reverse(nums, 0, n - k);
+            reverse(nums, 0, n);
         }
 
-        reverse(nums, n - k, n);
-        reverse(nums, 0, n - k);
-        reverse(nums, 0, n);
+        private void reverse(int[] nums, int start, int end) {
+            if (nums == null || nums.length < 1) {
+                return;
+            }
+
+            int tmp = 0;
+            for (int i = 0; i < (end + start) / 2 - start; i++) {
+                tmp = nums[start + i];
+                nums[start + i] = nums[end - i - 1];
+                nums[end - i - 1] = tmp;
+            }
+        }
     }
 
-    private static void reverse(int[] nums, int start, int end) {
-        if (nums == null || nums.length < 1) {
-            return;
-        }
-
-        int tmp = 0;
-        for (int i = 0; i < (end + start) / 2 - start; i++) {
-            tmp = nums[start + i];
-            nums[start + i] = nums[end - i - 1];
-            nums[end - i - 1] = tmp;
-        }
-    }
-
-    public static void main(String[] args) {
-        int[] nums = {0, 1, 2, 3, 4, 5, 6};
-        rotate(nums, 7);
-    }
 }

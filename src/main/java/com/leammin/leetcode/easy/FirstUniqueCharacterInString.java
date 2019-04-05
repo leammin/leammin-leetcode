@@ -25,39 +25,43 @@ import java.util.Map;
  * @author Leammin
  * @date 2018-09-10
  */
-public class FirstUniqueCharacterInString {
-    public static int firstUniqChar(String s) {
-        Map<Character, Integer> map = new HashMap<>(s.length());
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if (map.containsKey(chars[i])) {
-                map.put(chars[i], null);
-            } else {
-                map.put(chars[i], i);
+public interface FirstUniqueCharacterInString {
+    int firstUniqChar(String s);
+
+    class Solution implements FirstUniqueCharacterInString {
+        @Override
+        public int firstUniqChar(String s) {
+            Map<Character, Integer> map = new HashMap<>(s.length());
+            char[] chars = s.toCharArray();
+            for (int i = 0; i < chars.length; i++) {
+                if (map.containsKey(chars[i])) {
+                    map.put(chars[i], null);
+                } else {
+                    map.put(chars[i], i);
+                }
             }
-        }
-        Integer res;
-        for (int i = 0; i < chars.length; i++) {
-            res = map.get(chars[i]);
-            if (res != null) {
-                return res;
+            Integer res;
+            for (int i = 0; i < chars.length; i++) {
+                res = map.get(chars[i]);
+                if (res != null) {
+                    return res;
+                }
             }
+            return -1;
         }
-        return -1;
     }
 
-    public int firstUniqChar2(String s) {
-        int result = -1;
-        for (char c = 'a'; c <= 'z'; c++) {
-            int index = s.indexOf(c);
-            if (index != -1 && index == s.lastIndexOf(c)) {
-                result = result != -1 ? Math.min(result, index) : index;
+    class Solution1 implements FirstUniqueCharacterInString {
+        @Override
+        public int firstUniqChar(String s) {
+            int result = -1;
+            for (char c = 'a'; c <= 'z'; c++) {
+                int index = s.indexOf(c);
+                if (index != -1 && index == s.lastIndexOf(c)) {
+                    result = result != -1 ? Math.min(result, index) : index;
+                }
             }
+            return result;
         }
-        return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(firstUniqChar("lll"));
     }
 }

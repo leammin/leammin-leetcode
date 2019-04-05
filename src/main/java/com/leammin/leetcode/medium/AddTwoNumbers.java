@@ -1,5 +1,7 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.struct.ListNode;
+
 /**
  * 2. 两数相加
  *
@@ -20,77 +22,73 @@ package com.leammin.leetcode.medium;
  * @author Leammin
  * @date 2018-10-21
  */
-public class AddTwoNumbers {
-    private class ListNode {
-        int val;
-        ListNode next;
+public interface AddTwoNumbers {
+    ListNode addTwoNumbers(ListNode l1, ListNode l2);
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
-
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        if (l1 == null) {
-            return l2;
-        }
-        if (l2 == null) {
-            return l1;
-        }
-        boolean addOne = false;
-        ListNode sum = null;
-        ListNode tail = null;
-        while (l1 != null && l2 != null) {
-            int plus = l1.val + l2.val;
-            if (addOne) {
-                plus++;
-                addOne = false;
+    class Solution implements AddTwoNumbers {
+        @Override
+        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+            if (l1 == null) {
+                return l2;
             }
-            if (plus > 9) {
-                addOne = true;
+            if (l2 == null) {
+                return l1;
             }
-            int modulo = plus % 10;
-            if (sum == null) {
-                sum = new ListNode(modulo);
-                tail = sum;
-            } else {
+            boolean addOne = false;
+            ListNode sum = null;
+            ListNode tail = null;
+            while (l1 != null && l2 != null) {
+                int plus = l1.val + l2.val;
+                if (addOne) {
+                    plus++;
+                    addOne = false;
+                }
+                if (plus > 9) {
+                    addOne = true;
+                }
+                int modulo = plus % 10;
+                if (sum == null) {
+                    sum = new ListNode(modulo);
+                    tail = sum;
+                } else {
+                    tail.next = new ListNode(modulo);
+                    tail = tail.next;
+                }
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            while (l1 != null) {
+                int val = l1.val;
+                if (addOne) {
+                    val++;
+                    addOne = false;
+                }
+                if (val > 9) {
+                    addOne = true;
+                }
+                int modulo = val % 10;
                 tail.next = new ListNode(modulo);
                 tail = tail.next;
+                l1 = l1.next;
             }
-            l1 = l1.next;
-            l2 = l2.next;
-        }
-        while (l1 != null) {
-            int val = l1.val;
+            while (l2 != null) {
+                int val = l2.val;
+                if (addOne) {
+                    val++;
+                    addOne = false;
+                }
+                if (val > 9) {
+                    addOne = true;
+                }
+                int modulo = val % 10;
+                tail.next = new ListNode(modulo);
+                tail = tail.next;
+                l2 = l2.next;
+            }
             if (addOne) {
-                val++;
-                addOne = false;
+                tail.next = new ListNode(1);
             }
-            if (val > 9) {
-                addOne = true;
-            }
-            int modulo = val % 10;
-            tail.next = new ListNode(modulo);
-            tail = tail.next;
-            l1 = l1.next;
+            return sum;
         }
-        while (l2 != null) {
-            int val = l2.val;
-            if (addOne) {
-                val++;
-                addOne = false;
-            }
-            if (val > 9) {
-                addOne = true;
-            }
-            int modulo = val % 10;
-            tail.next = new ListNode(modulo);
-            tail = tail.next;
-            l2 = l2.next;
-        }
-        if (addOne) {
-            tail.next = new ListNode(1);
-        }
-        return sum;
     }
 }

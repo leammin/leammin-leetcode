@@ -40,51 +40,56 @@ import java.util.*;
  * <p><strong>说明:</strong></p>
  *
  * <ol>
- * 	<li>最多6种物品， 100种大礼包。</li>
- * 	<li>每种物品，你最多只需要购买6个。</li>
- * 	<li>你不可以购买超出待购清单的物品，即使更便宜。</li>
+ * <li>最多6种物品， 100种大礼包。</li>
+ * <li>每种物品，你最多只需要购买6个。</li>
+ * <li>你不可以购买超出待购清单的物品，即使更便宜。</li>
  * </ol>
  * </div>
  *
- * @date 2018-08-31
  * @author Leammin
+ * @date 2018-08-31
  */
-public class ShoppingOffers {
-    private Map<List<Integer>, Integer> priceMapByNeeds = new HashMap<>();
+public interface ShoppingOffers {
+    int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs);
 
-    public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
-        Integer cache = priceMapByNeeds.get(needs);
-        if (cache != null) {
-            return cache;
-        }
-        int minCost = 0;
-        Iterator<Integer> needsKeyIterator = needs.iterator();
-        Iterator<Integer> priceIterator = price.iterator();
-        while (needsKeyIterator.hasNext()) {
-            minCost += priceIterator.next() * needsKeyIterator.next();
-        }
-        for (List<Integer> sp : special) {
-            boolean tooMany = false;
-            List<Integer> newNeeds = new ArrayList<>(needs.size());
-            Iterator<Integer> needsIterator = needs.iterator();
-            Iterator<Integer> spIterator = sp.iterator();
-            while (needsIterator.hasNext()) {
-                int newNeed = needsIterator.next() - spIterator.next();
-                if (newNeed < 0) {
-                    tooMany = true;
-                    break;
+    class Solution implements ShoppingOffers {
+        private Map<List<Integer>, Integer> priceMapByNeeds = new HashMap<>();
+
+        @Override
+        public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
+            Integer cache = priceMapByNeeds.get(needs);
+            if (cache != null) {
+                return cache;
+            }
+            int minCost = 0;
+            Iterator<Integer> needsKeyIterator = needs.iterator();
+            Iterator<Integer> priceIterator = price.iterator();
+            while (needsKeyIterator.hasNext()) {
+                minCost += priceIterator.next() * needsKeyIterator.next();
+            }
+            for (List<Integer> sp : special) {
+                boolean tooMany = false;
+                List<Integer> newNeeds = new ArrayList<>(needs.size());
+                Iterator<Integer> needsIterator = needs.iterator();
+                Iterator<Integer> spIterator = sp.iterator();
+                while (needsIterator.hasNext()) {
+                    int newNeed = needsIterator.next() - spIterator.next();
+                    if (newNeed < 0) {
+                        tooMany = true;
+                        break;
+                    }
+                    newNeeds.add(newNeed);
                 }
-                newNeeds.add(newNeed);
+                if (tooMany) {
+                    continue;
+                }
+                int cost = spIterator.next() + shoppingOffers(price, special, newNeeds);
+                if (cost < minCost) {
+                    minCost = cost;
+                }
             }
-            if (tooMany) {
-                continue;
-            }
-            int cost = spIterator.next() + shoppingOffers(price, special, newNeeds);
-            if (cost < minCost) {
-                minCost = cost;
-            }
+            priceMapByNeeds.put(needs, minCost);
+            return minCost;
         }
-        priceMapByNeeds.put(needs, minCost);
-        return minCost;
     }
 }

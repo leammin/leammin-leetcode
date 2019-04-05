@@ -31,28 +31,35 @@ import java.util.Map;
  * </pre>
  * </div>
  *
- * @date 2018-08-31
  * @author Leammin
+ * @date 2018-08-31
  */
-public class ClimbingStairs {
-    private Map<Integer, Integer> res = new HashMap<>();
+public interface ClimbingStairs {
+    int climbStairs(int n);
 
-    public int climbStairs(int n) {
-        Integer r = res.get(n);
-        if (r != null) {
-            return r;
+    class Solution implements ClimbingStairs {
+        private Map<Integer, Integer> res = new HashMap<>();
+
+        @Override
+        public int climbStairs(int n) {
+            Integer r = res.get(n);
+            if (r != null) {
+                return r;
+            }
+            if (n == 1) {
+                return 1;
+            } else if (n == 2) {
+                return 2;
+            } else if (n < 1) {
+                return 0;
+            }
+            int r1 = climbStairs(n - 1);
+            int r2 = climbStairs(n - 2);
+            res.put(n - 1, r1);
+            res.put(n - 2, r2);
+            return r1 + r2;
         }
-        if (n == 1) {
-            return 1;
-        } else if (n == 2) {
-            return 2;
-        } else if (n < 1) {
-            return 0;
-        }
-        int r1 = climbStairs(n - 1);
-        int r2 = climbStairs(n - 2);
-        res.put(n - 1, r1);
-        res.put(n - 2, r2);
-        return r1 + r2;
     }
+
+
 }

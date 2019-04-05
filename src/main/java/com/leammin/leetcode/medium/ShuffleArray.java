@@ -25,12 +25,10 @@ import java.util.Random;
  * </pre>
  * </div>
  *
- * @date 2018-08-31
  * @author Leammin
+ * @date 2018-08-31
  */
-public class ShuffleArray {
-    private int[] nums;
-
+public abstract class ShuffleArray {
     /**
      * Your Solution object will be instantiated and called as such:
      * Solution obj = new Solution(nums);
@@ -38,46 +36,56 @@ public class ShuffleArray {
      * int[] param_2 = obj.shuffle();
      */
     public ShuffleArray(int[] nums) {
-        this.nums = copyArray(nums);
     }
 
     /**
      * Resets the array to its original configuration and return it.
      */
-    public int[] reset() {
-        return copyArray(nums);
-    }
+    public abstract int[] reset();
 
     /**
      * Returns a random shuffling of the array.
      */
-    public int[] shuffle() {
-        int[] newInts = copyArray(nums);
+    public abstract int[] shuffle();
 
-        Random random = new Random();
-        for (int i = 1; i < newInts.length; i++) {
-            int randomInt = random.nextInt(i+1);
-            int temp = newInts[randomInt];
-            newInts[randomInt] = newInts[i];
-            newInts[i] = temp;
+    public static class Solution extends ShuffleArray {
+        private int[] nums;
+
+
+        public Solution(int[] nums) {
+            super(nums);
+            this.nums = copyArray(nums);
         }
-        return newInts;
-    }
 
-    private int[] copyArray(int[] src) {
-        int[] dest = new int[src.length];
-        return copyArray(src, dest);
-    }
 
-    private int[] copyArray(int[] src, int[] dest) {
-        System.arraycopy(src, 0, dest, 0, src.length);
-        return dest;
-    }
+        @Override
+        public int[] reset() {
+            return copyArray(nums);
+        }
 
-    public static void main(String[] args) {
-        ShuffleArray array = new ShuffleArray(new int[]{1, 2, 3});
-        System.out.println(Arrays.toString(array.shuffle()));
-        System.out.println(Arrays.toString(array.reset()));
-        System.out.println(Arrays.toString(array.shuffle()));
+
+        @Override
+        public int[] shuffle() {
+            int[] newInts = copyArray(nums);
+
+            Random random = new Random();
+            for (int i = 1; i < newInts.length; i++) {
+                int randomInt = random.nextInt(i + 1);
+                int temp = newInts[randomInt];
+                newInts[randomInt] = newInts[i];
+                newInts[i] = temp;
+            }
+            return newInts;
+        }
+
+        private int[] copyArray(int[] src) {
+            int[] dest = new int[src.length];
+            return copyArray(src, dest);
+        }
+
+        private int[] copyArray(int[] src, int[] dest) {
+            System.arraycopy(src, 0, dest, 0, src.length);
+            return dest;
+        }
     }
 }

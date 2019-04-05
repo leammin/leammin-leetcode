@@ -47,32 +47,37 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-10-27
  */
-public class ValidParentheses {
-    public boolean isValid(String s) {
-        char[] stack = new char[s.length()];
-        int stackIndex = 0;
+public interface ValidParentheses {
+    boolean isValid(String s);
 
-        char[] chars = s.toCharArray();
-        for (char p : chars) {
-            if (p == '(' || p == '[' || p == '{') {
-                stack[stackIndex++] = p;
-            } else {
-                if (stackIndex == 0) {
-                    return false;
-                }
-                char stackP = stack[--stackIndex];
-                if (p == ')' && stackP != '(') {
-                    return false;
-                }
-                if (p == ']' && stackP != '[') {
-                    return false;
-                }
-                if (p == '}' && stackP != '{') {
-                    return false;
+    class Solution implements ValidParentheses {
+        @Override
+        public boolean isValid(String s) {
+            char[] stack = new char[s.length()];
+            int stackIndex = 0;
+
+            char[] chars = s.toCharArray();
+            for (char p : chars) {
+                if (p == '(' || p == '[' || p == '{') {
+                    stack[stackIndex++] = p;
+                } else {
+                    if (stackIndex == 0) {
+                        return false;
+                    }
+                    char stackP = stack[--stackIndex];
+                    if (p == ')' && stackP != '(') {
+                        return false;
+                    }
+                    if (p == ']' && stackP != '[') {
+                        return false;
+                    }
+                    if (p == '}' && stackP != '{') {
+                        return false;
+                    }
                 }
             }
+
+            return stackIndex == 0;
         }
-        
-        return stackIndex == 0;
     }
 }

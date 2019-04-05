@@ -57,51 +57,52 @@ package com.leammin.leetcode.medium;
  * @author Leammin
  * @date 2018-10-09
  */
-public class StringToInteger {
-    public static int myAtoi(String str) {
-        if (str == null || "".equals(str)) {
-            return 0;
-        }
-        char[] chars = str.toCharArray();
-        boolean isPositive;
-        int index = 0;
-        while (true) {
-            if (index >= chars.length) {
-                return 0;
-            } else if (chars[index] == '-') {
-                isPositive = false;
-                index++;
-                break;
-            } else if (chars[index] == '+') {
-                isPositive = true;
-                index++;
-                break;
-            } else if (chars[index] <= '9' && chars[index] >= '0') {
-                isPositive = true;
-                break;
-            } else if (Character.isWhitespace(chars[index])) {
-                index++;
-            } else {
-                return 0;
-            }
-        }
-        long res = 0;
-        for (; index < chars.length; index++) {
-            if (chars[index] <= '9' && chars[index] >= '0') {
-                res = res * 10 + chars[index] - '0';
-                if (res > Integer.MAX_VALUE) {
-                    return isPositive ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-                }
-            } else {
-                break;
-            }
-        }
-        
-        return (int) (isPositive ? res : -res);
-    }
+public interface StringToInteger {
+    int myAtoi(String str);
 
-    public static void main(String[] args) {
-        System.out.println(StringToInteger.myAtoi(String.valueOf((long)Integer.MAX_VALUE+1)));
+    class Solution implements StringToInteger {
+        @Override
+        public int myAtoi(String str) {
+            if (str == null || "".equals(str)) {
+                return 0;
+            }
+            char[] chars = str.toCharArray();
+            boolean isPositive;
+            int index = 0;
+            while (true) {
+                if (index >= chars.length) {
+                    return 0;
+                } else if (chars[index] == '-') {
+                    isPositive = false;
+                    index++;
+                    break;
+                } else if (chars[index] == '+') {
+                    isPositive = true;
+                    index++;
+                    break;
+                } else if (chars[index] <= '9' && chars[index] >= '0') {
+                    isPositive = true;
+                    break;
+                } else if (Character.isWhitespace(chars[index])) {
+                    index++;
+                } else {
+                    return 0;
+                }
+            }
+            long res = 0;
+            for (; index < chars.length; index++) {
+                if (chars[index] <= '9' && chars[index] >= '0') {
+                    res = res * 10 + chars[index] - '0';
+                    if (res > Integer.MAX_VALUE) {
+                        return isPositive ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+                    }
+                } else {
+                    break;
+                }
+            }
+
+            return (int) (isPositive ? res : -res);
+        }
     }
 }
 

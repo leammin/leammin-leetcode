@@ -1,5 +1,7 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.struct.ListNode;
+
 /**
  * 19. 删除链表的倒数第N个节点
  *
@@ -21,37 +23,33 @@ package com.leammin.leetcode.medium;
  * <p>你能尝试使用一趟扫描实现吗？</p>
  * </div>
  *
- * @date 2018-09-02
  * @author Leammin
+ * @date 2018-09-02
  */
-public class RemoveNthNodeFromEndOfList {
-    private static class ListNode {
-        int val;
-        ListNode next;
+public interface RemoveNthNodeFromEndOfList {
+    ListNode removeNthFromEnd(ListNode head, int n);
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
+    class Solution implements RemoveNthNodeFromEndOfList {
+        @Override
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            if (n == 0 || head == null) {
+                return head;
+            }
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        if (n == 0 || head == null) {
+            ListNode cur = head;
+            ListNode pre = head;
+            for (int i = 0; i < n; i++) {
+                cur = cur.next;
+            }
+            if (cur == null) {
+                return head.next;
+            }
+            while (cur.next != null) {
+                cur = cur.next;
+                pre = pre.next;
+            }
+            pre.next = pre.next.next;
             return head;
         }
-        
-        ListNode cur = head;
-        ListNode pre = head;
-        for (int i = 0; i < n; i++) {
-            cur = cur.next;
-        }
-        if (cur == null) {
-            return head.next;
-        }
-        while (cur.next != null) {
-            cur = cur.next;
-            pre = pre.next;
-        }
-        pre.next = pre.next.next;
-        return head;
     }
 }

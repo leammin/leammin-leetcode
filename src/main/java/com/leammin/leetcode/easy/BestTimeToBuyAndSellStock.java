@@ -2,7 +2,7 @@ package com.leammin.leetcode.easy;
 
 /**
  * 121. 买卖股票的最佳时机
- * 
+ *
  * <div><p>给定一个数组，它的第&nbsp;<em>i</em> 个元素是一支给定股票第 <em>i</em> 天的价格。</p>
  *
  * <p>如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。</p>
@@ -24,30 +24,38 @@ package com.leammin.leetcode.easy;
  * <strong>解释: </strong>在这种情况下, 没有交易完成, 所以最大利润为 0。
  * </pre>
  * </div>
- * 
+ *
  * @author Leammin
  * @date 2018-09-09
  */
-public class BestTimeToBuyAndSellStock {
-    public static int maxProfit(int[] prices) {
-        if (prices == null || prices.length <= 1) {
-            return 0;
-        }
-        int buyIndex = prices.length - 1;
-        int maxStock = prices[buyIndex];
-        int maxSpread = 0;
-        while (--buyIndex >= 0) {
-            if (prices[buyIndex] > maxStock) {
-                maxStock = prices[buyIndex];
+public interface BestTimeToBuyAndSellStock {
+    int maxProfit(int[] prices);
+
+    class Solution implements BestTimeToBuyAndSellStock {
+
+        @Override
+        public int maxProfit(int[] prices) {
+
+            if (prices == null || prices.length <= 1) {
+                return 0;
             }
-            if (maxStock - prices[buyIndex] > maxSpread) {
-                maxSpread = maxStock - prices[buyIndex];
+            int buyIndex = prices.length - 1;
+            int maxStock = prices[buyIndex];
+            int maxSpread = 0;
+            while (--buyIndex >= 0) {
+                if (prices[buyIndex] > maxStock) {
+                    maxStock = prices[buyIndex];
+                }
+                if (maxStock - prices[buyIndex] > maxSpread) {
+                    maxSpread = maxStock - prices[buyIndex];
+                }
             }
+            return maxSpread;
         }
-        return maxSpread;
     }
 
+
     public static void main(String[] args) {
-        System.out.println(maxProfit(new int[]{1,2}));
+        System.out.println(new Solution().maxProfit(new int[]{1, 2}));
     }
 }

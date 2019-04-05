@@ -1,5 +1,7 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.struct.ListNode;
+
 /**
  * 141. 环形链表
  *
@@ -12,38 +14,23 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-10-21
  */
-public class LinkedListCycle {
-    /**
-     * Definition for singly-linked list.
-     * class ListNode {
-     *     int val;
-     *     ListNode next;
-     *     ListNode(int x) {
-     *         val = x;
-     *         next = null;
-     *     }
-     * }
-     */
-    private static class ListNode {
-        int val;
-        ListNode next;
+public interface LinkedListCycle {
+    boolean hasCycle(ListNode head);
 
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-
-    public boolean hasCycle(ListNode head) {
-        ListNode tail = head;
-        ListNode mid = head;
-        while (tail !=null && tail.next != null) {
-            tail = tail.next.next;
-            mid = mid.next;
-            if (tail == mid) {
-                return true;
+    class Solution implements LinkedListCycle {
+        @Override
+        public boolean hasCycle(ListNode head) {
+            ListNode tail = head;
+            ListNode mid = head;
+            while (tail != null && tail.next != null) {
+                tail = tail.next.next;
+                mid = mid.next;
+                if (tail == mid) {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
     }
+
 }

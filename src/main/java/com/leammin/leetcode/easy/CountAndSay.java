@@ -38,23 +38,29 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-10-13
  */
-public class CountAndSay {
-    public String countAndSay(int n) {
-        StringBuilder res = new StringBuilder("1");
-        for (int i = 0; i < n - 1; i++) {
-            StringBuilder sb = new StringBuilder();
-            int index = 0;
-            while (index < res.length()) {
-                int same = index + 1;
-                while (same < res.length() && res.charAt(same) == res.charAt(index)) {
-                    same++;
+public interface CountAndSay {
+    String countAndSay(int n);
+
+    class Solution implements CountAndSay {
+        @Override
+        public String countAndSay(int n) {
+            StringBuilder res = new StringBuilder("1");
+            for (int i = 0; i < n - 1; i++) {
+                StringBuilder sb = new StringBuilder();
+                int index = 0;
+                while (index < res.length()) {
+                    int same = index + 1;
+                    while (same < res.length() && res.charAt(same) == res.charAt(index)) {
+                        same++;
+                    }
+                    int count = same - index;
+                    sb.append(same - index).append(res.charAt(index));
+                    index = same;
                 }
-                int count = same - index;
-                sb.append(same - index).append(res.charAt(index));
-                index = same;
+                res = sb;
             }
-            res = sb;
+            return res.toString();
         }
-        return res.toString();
     }
+
 }

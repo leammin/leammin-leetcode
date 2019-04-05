@@ -1,5 +1,7 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.struct.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,50 +34,35 @@ import java.util.List;
  * @author Leammin
  * @date 2018-10-21
  */
-public class BinaryTreeLevelOrderTraversal {
+public interface BinaryTreeLevelOrderTraversal {
+    List<List<Integer>> levelOrder(TreeNode root);
 
-    /**
-     * Definition for a binary tree node.
-     * public class TreeNode {
-     * int val;
-     * TreeNode left;
-     * TreeNode right;
-     * TreeNode(int x) { val = x; }
-     * }
-     */
-    private static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new LinkedList<>();
-        if (root == null) {
+    class Solution implements BinaryTreeLevelOrderTraversal {
+        @Override
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            List<List<Integer>> res = new LinkedList<>();
+            if (root == null) {
+                return res;
+            }
+            List<TreeNode> parentsList = new ArrayList<>();
+            parentsList.add(root);
+            List<TreeNode> childrenList;
+            while (!parentsList.isEmpty()) {
+                List<Integer> resItem = new ArrayList<>(parentsList.size());
+                childrenList = new ArrayList<>(2 * parentsList.size());
+                for (TreeNode parentsNode : parentsList) {
+                    resItem.add(parentsNode.val);
+                    if (parentsNode.left != null) {
+                        childrenList.add(parentsNode.left);
+                    }
+                    if (parentsNode.right != null) {
+                        childrenList.add(parentsNode.right);
+                    }
+                }
+                parentsList = childrenList;
+                res.add(resItem);
+            }
             return res;
         }
-        List<TreeNode> parentsList = new ArrayList<>();
-        parentsList.add(root);
-        List<TreeNode> childrenList;
-        while (!parentsList.isEmpty()) {
-            List<Integer> resItem = new ArrayList<>(parentsList.size());
-            childrenList = new ArrayList<>(2 * parentsList.size());
-            for (TreeNode parentsNode : parentsList) {
-                resItem.add(parentsNode.val);
-                if (parentsNode.left != null) {
-                    childrenList.add(parentsNode.left);
-                }
-                if (parentsNode.right != null) {
-                    childrenList.add(parentsNode.right);
-                }
-            }
-            parentsList = childrenList;
-            res.add(resItem);
-        }
-        return res;
     }
 }

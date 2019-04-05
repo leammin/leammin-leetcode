@@ -29,34 +29,38 @@ import java.util.Arrays;
  * @author Leammin
  * @date 2019-03-24
  */
-public class CountingBits {
-    public int[] countBits(int num) {
-        int[] res = new int[num + 1];
-        for (int i = 1; i < res.length; i++) {
-            res[i] = res[i >> 1] + (i & 1);
-        }
-        return res;
-    }
+public interface CountingBits {
+    int[] countBits(int num);
 
-    public int[] countBits2(int num) {
-        int[] res = new int[num + 1];
-        if (num == 0) {
+    class Solution implements CountingBits {
+        @Override
+        public int[] countBits(int num) {
+            int[] res = new int[num + 1];
+            for (int i = 1; i < res.length; i++) {
+                res[i] = res[i >> 1] + (i & 1);
+            }
             return res;
         }
-        int f = 1;
-        for (int i = 1; i < res.length; i++) {
-            int t = f << 1;
-            if (i < t) {
-                res[i] = 1 + res[i - f];
-            } else {
-                res[i] = 1;
-                f = t;
-            }
-        }
-        return res;
     }
 
-    public static void main(String[] args) {
-        System.out.println(Arrays.toString(new CountingBits().countBits(5)));
+    class Solution1 implements CountingBits {
+        @Override
+        public int[] countBits(int num) {
+            int[] res = new int[num + 1];
+            if (num == 0) {
+                return res;
+            }
+            int f = 1;
+            for (int i = 1; i < res.length; i++) {
+                int t = f << 1;
+                if (i < t) {
+                    res[i] = 1 + res[i - f];
+                } else {
+                    res[i] = 1;
+                    f = t;
+                }
+            }
+            return res;
+        }
     }
 }

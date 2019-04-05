@@ -30,22 +30,28 @@ import java.util.ListIterator;
  * @author Leammin
  * @date 2019-03-29
  */
-public class Triangle {
-    public int minimumTotal(List<List<Integer>> triangle) {
-        if (triangle == null || triangle.isEmpty()) {
-            return 0;
-        }
-        if (triangle.size() == 1) {
-            return triangle.get(0).get(0);
-        }
-        Integer[] cache = triangle.get(triangle.size() - 1).toArray(new Integer[triangle.size()]);
-        ListIterator<List<Integer>> iterator = triangle.listIterator(triangle.size() - 1);
-        while (iterator.hasPrevious()) {
-            List<Integer> row = iterator.previous();
-            for (int i = 0; i < row.size(); i++) {
-                cache[i] = row.get(i) + Math.min(cache[i], cache[i + 1]);
+public interface Triangle {
+    int minimumTotal(List<List<Integer>> triangle);
+
+    class Solution implements Triangle {
+        @Override
+        public int minimumTotal(List<List<Integer>> triangle) {
+            if (triangle == null || triangle.isEmpty()) {
+                return 0;
             }
+            if (triangle.size() == 1) {
+                return triangle.get(0).get(0);
+            }
+            Integer[] cache = triangle.get(triangle.size() - 1).toArray(new Integer[triangle.size()]);
+            ListIterator<List<Integer>> iterator = triangle.listIterator(triangle.size() - 1);
+            while (iterator.hasPrevious()) {
+                List<Integer> row = iterator.previous();
+                for (int i = 0; i < row.size(); i++) {
+                    cache[i] = row.get(i) + Math.min(cache[i], cache[i + 1]);
+                }
+            }
+            return cache[0];
         }
-        return cache[0];
     }
+
 }

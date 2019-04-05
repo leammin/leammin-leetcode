@@ -1,5 +1,7 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.struct.TreeNode;
+
 /**
  * 104. 二叉树的最大深度
  *
@@ -21,27 +23,23 @@ package com.leammin.leetcode.easy;
  * <p>返回它的最大深度&nbsp;3 。</p>
  * </div>
  *
- * @date 2018-08-26
  * @author Leammin
+ * @date 2018-08-26
  */
-public class MaximumDepthOfBinaryTree {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
+public interface MaximumDepthOfBinaryTree {
+    int maxDepth(TreeNode root);
 
-        TreeNode(int x) {
-            val = x;
+    class Solution implements MaximumDepthOfBinaryTree {
+        @Override
+        public int maxDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            int leftMax = maxDepth(root.left) + 1;
+            int rightMax = maxDepth(root.right) + 1;
+            return leftMax > rightMax ? leftMax : rightMax;
         }
     }
 
 
-    public int maxDepth(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int leftMax = maxDepth(root.left) + 1;
-        int rightMax = maxDepth(root.right) + 1;
-        return leftMax > rightMax ? leftMax : rightMax;
-    }
 }

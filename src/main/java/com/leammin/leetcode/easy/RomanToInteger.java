@@ -60,42 +60,48 @@ import java.util.HashMap;
  * @author Leammin
  * @date 2018-10-27
  */
-public class RomanToInteger {
-    public int romanToInt(String s) {
-        HashMap<Character, Integer> romanMapInt = new HashMap<>();
-        romanMapInt.put('I', 1);
-        romanMapInt.put('V', 5);
-        romanMapInt.put('X', 10);
-        romanMapInt.put('L', 50);
-        romanMapInt.put('C', 100);
-        romanMapInt.put('D', 500);
-        romanMapInt.put('M', 1000);
+public interface RomanToInteger {
+    int romanToInt(String s);
 
-        int res = 0;
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            int cache = res;
-            if (i < chars.length - 1) {
-                if (chars[i] == 'I' && chars[i + 1] == 'V') {
-                    res += 4;
-                } else if (chars[i] == 'I' && chars[i + 1] == 'X') {
-                    res += 9;
-                } else if (chars[i] == 'X' && chars[i + 1] == 'L') {
-                    res += 40;
-                } else if (chars[i] == 'X' && chars[i + 1] == 'C') {
-                    res += 90;
-                } else if (chars[i] == 'C' && chars[i + 1] == 'D') {
-                    res += 400;
-                } else if (chars[i] == 'C' && chars[i + 1] == 'M') {
-                    res += 900;
+    class Solution implements RomanToInteger {
+        @Override
+        public int romanToInt(String s) {
+            HashMap<Character, Integer> romanMapInt = new HashMap<>();
+            romanMapInt.put('I', 1);
+            romanMapInt.put('V', 5);
+            romanMapInt.put('X', 10);
+            romanMapInt.put('L', 50);
+            romanMapInt.put('C', 100);
+            romanMapInt.put('D', 500);
+            romanMapInt.put('M', 1000);
+
+            int res = 0;
+            char[] chars = s.toCharArray();
+            for (int i = 0; i < chars.length; i++) {
+                int cache = res;
+                if (i < chars.length - 1) {
+                    if (chars[i] == 'I' && chars[i + 1] == 'V') {
+                        res += 4;
+                    } else if (chars[i] == 'I' && chars[i + 1] == 'X') {
+                        res += 9;
+                    } else if (chars[i] == 'X' && chars[i + 1] == 'L') {
+                        res += 40;
+                    } else if (chars[i] == 'X' && chars[i + 1] == 'C') {
+                        res += 90;
+                    } else if (chars[i] == 'C' && chars[i + 1] == 'D') {
+                        res += 400;
+                    } else if (chars[i] == 'C' && chars[i + 1] == 'M') {
+                        res += 900;
+                    }
                 }
+                if (cache != res) {
+                    i++;
+                    continue;
+                }
+                res += romanMapInt.get(chars[i]);
             }
-            if (cache != res) {
-                i++;
-                continue;
-            }
-            res += romanMapInt.get(chars[i]);
+            return res;
         }
-        return res;
     }
+
 }
