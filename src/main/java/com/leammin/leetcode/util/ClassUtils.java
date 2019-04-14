@@ -1,12 +1,8 @@
 package com.leammin.leetcode.util;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import org.apache.commons.lang3.reflect.TypeUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * @author Leammin
