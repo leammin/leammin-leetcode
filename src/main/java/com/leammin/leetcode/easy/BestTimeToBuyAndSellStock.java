@@ -53,9 +53,4 @@ public interface BestTimeToBuyAndSellStock {
             return maxSpread;
         }
     }
-
-
-    public static void main(String[] args) {
-        System.out.println(new Solution().maxProfit(new int[]{1, 2}));
-    }
 }
