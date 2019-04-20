@@ -59,7 +59,7 @@ public class ClassUtils {
      * @param solution 解法class
      * @return 解法名称：问题名称$解法
      */
-    public static String getSolutionName(Class<?> solution) {
+    public static String getName(Class<?> solution) {
         String name = solution.getName();
         name = name.substring(name.lastIndexOf(".") + 1);
         return name;
@@ -69,7 +69,7 @@ public class ClassUtils {
      * @param solution 解法
      * @return 解法名称：问题名称$解法
      */
-    public static String getSolutionName(Object solution) {
-        return getSolutionName(solution.getClass());
+    public static String getName(Object solution) {
+        return getName(solution.getClass());
     }
 }

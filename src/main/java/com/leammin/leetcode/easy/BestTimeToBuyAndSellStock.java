@@ -35,7 +35,6 @@ public interface BestTimeToBuyAndSellStock {
 
         @Override
         public int maxProfit(int[] prices) {
-
             if (prices == null || prices.length <= 1) {
                 return 0;
             }

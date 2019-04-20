@@ -69,7 +69,8 @@ public interface BestTimeToBuyAndSellStockII {
                     if (prices[i] > prices[i - 1]) {
                         buyIndex = i - 1;
                     }
-                } else { // 已买入
+                } else {
+                    // 已买入
                     if (prices[i] < prices[i - 1]) {
                         profit += (prices[i - 1] - prices[buyIndex]);
                         buyIndex = -1;

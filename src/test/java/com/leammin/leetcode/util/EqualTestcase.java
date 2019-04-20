@@ -31,7 +31,7 @@ public interface EqualTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
         OUTPUT output = run(solution);
         long time = System.nanoTime() - before;
 
-        Assertions.assertThat(output).as(ClassUtils.getSolutionName(solution)).isEqualTo(expected);
+        Assertions.assertThat(output).as(ClassUtils.getName(solution)).isEqualTo(expected);
 
         return time;
     }
