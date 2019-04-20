@@ -53,11 +53,13 @@ public class Testsuite<PROBLEM> {
      */
     public static class TestsuiteBuilder<PROBLEM> {
         private final List<Testcase<PROBLEM>> cases = new ArrayList<>();
+        private boolean built = false;
 
         /**
          * @return 创建测试套件
          */
         public Testsuite<PROBLEM> build() {
+            built = true;
             return new Testsuite<>(cases);
         }
 
@@ -68,6 +70,9 @@ public class Testsuite<PROBLEM> {
          * @return 自身
          */
         public TestsuiteBuilder<PROBLEM> add(Testcase<PROBLEM> testcase) {
+            if (built) {
+                throw new IllegalStateException("this builder is built");
+            }
             cases.add(testcase);
             return this;
         }
