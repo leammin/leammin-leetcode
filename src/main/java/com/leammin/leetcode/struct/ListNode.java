@@ -42,4 +42,15 @@ public class ListNode {
         }
         return head;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[").append(val);
+        ListNode node = this.next;
+        while (node != null) {
+            result.append(",").append(node.val);
+            node = node.next;
+        }
+        return result.append("]").toString();
+    }
 }
