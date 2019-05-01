@@ -1,8 +1,8 @@
 package com.leammin.leetcode.util;
 
+import com.google.common.reflect.TypeToken;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -13,7 +13,9 @@ public abstract class AbstractTest<PROBLEM> {
 
     @SuppressWarnings("unchecked")
     protected Class<PROBLEM> problem() {
-        return (Class<PROBLEM>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        TypeToken<PROBLEM> typeToken = new TypeToken<PROBLEM>(getClass()) {
+        };
+        return (Class<PROBLEM>) typeToken.getRawType();
     }
 
     private List<Class<? extends PROBLEM>> solutions() {
