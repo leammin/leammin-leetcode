@@ -67,10 +67,10 @@ public class TreeNode {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("[").append(this.val);
+        int nullTimes = 0;
         Queue<TreeNode> nodes = new LinkedList<>();
         nodes.add(this.left);
         nodes.add(this.right);
-        int nullTimes = 0;
         while (!nodes.isEmpty()) {
             TreeNode node = nodes.remove();
             if (node == null) {
@@ -85,28 +85,5 @@ public class TreeNode {
             }
         }
         return result.append("]").toString();
-    }
-
-    public String serialize(TreeNode root) {
-
-        StringBuilder result = new StringBuilder().append(root.val);
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.add(root.left);
-        nodes.add(root.right);
-        int nullTimes = 0;
-        while (!nodes.isEmpty()) {
-            TreeNode node = nodes.remove();
-            if (node == null) {
-                nullTimes++;
-            } else {
-                for (; nullTimes > 0; nullTimes--) {
-                    result.append(",null");
-                }
-                result.append(",").append(node.val);
-                nodes.add(node.left);
-                nodes.add(node.right);
-            }
-        }
-        return result.toString();
     }
 }
