@@ -63,4 +63,13 @@ public class TreeNode {
     private static TreeNode node(Integer val) {
         return val == null ? null : new TreeNode(val);
     }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "val=" + val +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
+    }
 }
