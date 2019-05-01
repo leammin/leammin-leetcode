@@ -11,7 +11,6 @@ import org.assertj.core.api.Assertions;
  * @date 2019-04-07
  */
 class RangeSumQueryImmutableTest extends AbstractTest<RangeSumQueryImmutable> {
-
     @Override
     protected Testsuite<RangeSumQueryImmutable> testsuite() {
         return Testsuite.<RangeSumQueryImmutable>builder()

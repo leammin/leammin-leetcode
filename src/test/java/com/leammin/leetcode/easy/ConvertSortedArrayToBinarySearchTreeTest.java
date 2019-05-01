@@ -10,7 +10,6 @@ import com.leammin.leetcode.util.TreeNodeUtils;
  * @date 2019-05-01
  */
 class ConvertSortedArrayToBinarySearchTreeTest extends AbstractTest<ConvertSortedArrayToBinarySearchTree> {
-
     @Override
     protected Testsuite<ConvertSortedArrayToBinarySearchTree> testsuite() {
         return Testsuite.<ConvertSortedArrayToBinarySearchTree>builder()

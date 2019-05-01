@@ -9,7 +9,6 @@ import com.leammin.leetcode.util.Testsuite;
  * @date 2019-04-20
  */
 class ContainsDuplicateTest extends AbstractTest<ContainsDuplicate> {
-
     @Override
     protected Testsuite<ContainsDuplicate> testsuite() {
         return Testsuite.<ContainsDuplicate>builder()

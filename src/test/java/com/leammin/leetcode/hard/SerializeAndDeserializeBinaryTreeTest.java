@@ -9,7 +9,6 @@ import com.leammin.leetcode.util.Testsuite;
  * @date 2019-05-01
  */
 class SerializeAndDeserializeBinaryTreeTest extends AbstractTest<SerializeAndDeserializeBinaryTree> {
-
     @Override
     protected Testsuite<SerializeAndDeserializeBinaryTree> testsuite() {
         return Testsuite.<SerializeAndDeserializeBinaryTree>builder()

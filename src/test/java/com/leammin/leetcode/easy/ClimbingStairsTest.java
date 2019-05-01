@@ -9,7 +9,6 @@ import com.leammin.leetcode.util.Testsuite;
  * @date 2019-04-20
  */
 class ClimbingStairsTest extends AbstractTest<ClimbingStairs> {
-
     @Override
     protected Testsuite<ClimbingStairs> testsuite() {
         return Testsuite.<ClimbingStairs>builder()

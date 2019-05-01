@@ -9,7 +9,6 @@ import com.leammin.leetcode.util.Testsuite;
  * @date 2019-04-20
  */
 class BestTimeToBuyAndSellStockIITest extends AbstractTest<BestTimeToBuyAndSellStockII> {
-
     @Override
     protected Testsuite<BestTimeToBuyAndSellStockII> testsuite() {
         return Testsuite.<BestTimeToBuyAndSellStockII>builder()
