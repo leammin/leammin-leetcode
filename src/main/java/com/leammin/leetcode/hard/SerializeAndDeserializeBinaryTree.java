@@ -45,13 +45,21 @@ public interface SerializeAndDeserializeBinaryTree {
             if (root == null) {
                 return "";
             }
-            LinkedList<TreeNode> level = new LinkedList<>();
-            level.add(root);
-            StringBuilder result = new StringBuilder();
-            while (!level.isEmpty()) {
-                TreeNode node = level.pop();
+            StringBuilder result = new StringBuilder().append(root.val);
+            LinkedList<TreeNode> nodes = new LinkedList<>();
+            nodes.add(root.left);
+            nodes.add(root.right);
+            while (!nodes.isEmpty()) {
+                TreeNode node = nodes.pop();
+                if (node == null) {
+                    result.append(",null");
+                } else {
+                    result.append(",").append(node.val);
+                    nodes.add(node.left);
+                    nodes.add(node.right);
+                }
             }
-            return null;
+            return result.toString();
         }
 
         @Override
