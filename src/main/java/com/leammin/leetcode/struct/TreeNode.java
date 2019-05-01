@@ -17,6 +17,20 @@ public class TreeNode {
         this.val = x;
     }
 
+    public boolean isBst() {
+        return validateBst(this, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean validateBst(TreeNode node, long min, long max) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val >= max || node.val <= min) {
+            return false;
+        }
+        return validateBst(node.left, min, node.val) && validateBst(node.right, node.val, max);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -34,6 +48,29 @@ public class TreeNode {
     @Override
     public int hashCode() {
         return Objects.hash(val, left, right);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[").append(this.val);
+        int nullTimes = 0;
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(this.left);
+        nodes.add(this.right);
+        while (!nodes.isEmpty()) {
+            TreeNode node = nodes.remove();
+            if (node == null) {
+                nullTimes++;
+            } else {
+                for (; nullTimes > 0; nullTimes--) {
+                    result.append(",null");
+                }
+                result.append(",").append(node.val);
+                nodes.add(node.left);
+                nodes.add(node.right);
+            }
+        }
+        return result.append("]").toString();
     }
 
     public static TreeNode of(Integer... values) {
@@ -62,28 +99,5 @@ public class TreeNode {
 
     private static TreeNode node(Integer val) {
         return val == null ? null : new TreeNode(val);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder("[").append(this.val);
-        int nullTimes = 0;
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.add(this.left);
-        nodes.add(this.right);
-        while (!nodes.isEmpty()) {
-            TreeNode node = nodes.remove();
-            if (node == null) {
-                nullTimes++;
-            } else {
-                for (; nullTimes > 0; nullTimes--) {
-                    result.append(",null");
-                }
-                result.append(",").append(node.val);
-                nodes.add(node.left);
-                nodes.add(node.right);
-            }
-        }
-        return result.append("]").toString();
     }
 }
