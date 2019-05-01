@@ -28,13 +28,13 @@ public class ListNode {
         return Objects.hash(val, next);
     }
 
-    public static ListNode of(int... vals) {
-        if (vals == null || vals.length == 0) {
+    public static ListNode of(int... nodes) {
+        if (nodes == null || nodes.length == 0) {
             return null;
         }
-        ListNode head = new ListNode(vals[0]);
-        for (int i = 1; i < vals.length; i++) {
-            head.next = new ListNode(vals[i]);
+        ListNode head = new ListNode(nodes[0]);
+        for (int i = 1; i < nodes.length; i++) {
+            head.next = new ListNode(nodes[i]);
         }
         return head;
     }
