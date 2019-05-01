@@ -40,22 +40,30 @@ public class TreeNodeUtils {
      * @return 判断是否是平衡二叉树搜索树
      */
     public static boolean isAvl(TreeNode root) {
-        return isBst(root) && (avlHeight(root) >= 0);
+        return isBst(root) && isBalanced(root);
+    }
+
+    /**
+     * @param root 树
+     * @return 是否是平衡树
+     */
+    public static boolean isBalanced(TreeNode root) {
+        return balancedHeight(root) >= 0;
     }
 
     /**
      * @param root 树
      * @return 该树的每个节点的左右子树高度差不超过1，则返回高度，否则返回-1
      */
-    private static int avlHeight(TreeNode root) {
+    private static int balancedHeight(TreeNode root) {
         if (root == null) {
             return 0;
         }
-        int leftHeight = avlHeight(root.left);
+        int leftHeight = balancedHeight(root.left);
         if (leftHeight < 0) {
             return -1;
         }
-        int rightHeight = avlHeight(root.right);
+        int rightHeight = balancedHeight(root.right);
         if (rightHeight < 0) {
             return -1;
         }
