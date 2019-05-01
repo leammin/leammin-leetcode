@@ -35,7 +35,7 @@ public interface ConvertSortedArrayToBinarySearchTree {
             return sortedArrayToBST(nums, 0, nums.length - 1);
         }
 
-        public TreeNode sortedArrayToBST(int[] nums, int startIndex, int endIndex) {
+        private TreeNode sortedArrayToBST(int[] nums, int startIndex, int endIndex) {
             if (startIndex < 0 || startIndex >= nums.length || endIndex < 0 || endIndex >= nums.length || startIndex > endIndex) {
                 return null;
             }
