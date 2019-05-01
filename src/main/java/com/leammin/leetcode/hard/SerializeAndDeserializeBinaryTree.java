@@ -3,6 +3,7 @@ package com.leammin.leetcode.hard;
 import com.leammin.leetcode.struct.TreeNode;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 297. 二叉树的序列化与反序列化
@@ -46,14 +47,18 @@ public interface SerializeAndDeserializeBinaryTree {
                 return "";
             }
             StringBuilder result = new StringBuilder().append(root.val);
-            LinkedList<TreeNode> nodes = new LinkedList<>();
+            Queue<TreeNode> nodes = new LinkedList<>();
             nodes.add(root.left);
             nodes.add(root.right);
+            int nullTimes = 0;
             while (!nodes.isEmpty()) {
-                TreeNode node = nodes.pop();
+                TreeNode node = nodes.remove();
                 if (node == null) {
-                    result.append(",null");
+                    nullTimes++;
                 } else {
+                    for (; nullTimes > 0; nullTimes--) {
+                        result.append(",null");
+                    }
                     result.append(",").append(node.val);
                     nodes.add(node.left);
                     nodes.add(node.right);
@@ -64,7 +69,36 @@ public interface SerializeAndDeserializeBinaryTree {
 
         @Override
         public TreeNode deserialize(String data) {
-            return null;
+            if (data == null || data.isEmpty() || data.startsWith("null")) {
+                return null;
+            }
+            String[] nodeStrings = data.split(",");
+            TreeNode root = new TreeNode(Integer.valueOf(nodeStrings[0]));
+            Queue<TreeNode> nodes = new LinkedList<>();
+            nodes.add(root);
+            int nodeIndex = 1;
+            while (!nodes.isEmpty() && nodeIndex < nodeStrings.length) {
+                TreeNode node = nodes.remove();
+                node.left = treeNode(nodeStrings[nodeIndex++]);
+                if (node.left != null) {
+                    nodes.add(node.left);
+                }
+                if (nodeIndex < nodeStrings.length) {
+                    node.right = treeNode(nodeStrings[nodeIndex++]);
+                    if (node.right != null) {
+                        nodes.add(node.right);
+                    }
+                }
+            }
+            return root;
+        }
+
+        private TreeNode treeNode(String str) {
+            if ("null".equals(str)) {
+                return null;
+            } else {
+                return new TreeNode(Integer.valueOf(str));
+            }
         }
     }
 }
