@@ -2,6 +2,7 @@ package com.leammin.leetcode.util;
 
 import org.assertj.core.api.Assertions;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -24,16 +25,14 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
      */
     OUTPUT run(PROBLEM solution);
 
-    @Override
-    default long test(PROBLEM solution) {
-        long before = System.nanoTime();
-        OUTPUT output = run(solution);
-        long time = System.nanoTime() - before;
-
-        boolean result = verify(output);
-        Assertions.assertThat(result).as(ClassUtils.getName(solution)).isEqualTo(true);
-
-        return time;
+    static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
+            Consumer<OUTPUT> verifier,
+            Function<PROBLEM, OUTPUT> runner
+    ) {
+        return of(TestcaseUtils.defaultSolutionProducer(), o -> {
+            verifier.accept(o);
+            return true;
+        }, runner);
     }
 
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
@@ -64,5 +63,17 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
             Function<PROBLEM, OUTPUT> runner
     ) {
         return of(TestcaseUtils.defaultSolutionProducer(), verifier, runner);
+    }
+
+    @Override
+    default long test(PROBLEM solution) {
+        long before = System.nanoTime();
+        OUTPUT output = run(solution);
+        long time = System.nanoTime() - before;
+
+        boolean result = verify(output);
+        Assertions.assertThat(result).as(ClassUtils.getName(solution)).isTrue();
+
+        return time;
     }
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.util;
 
+import com.google.common.collect.ImmutableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +14,8 @@ import java.util.List;
  * @date 2019-04-07
  */
 public class Testsuite<PROBLEM> {
+    private static final Logger logger = LoggerFactory.getLogger(Testsuite.class);
+
     private final List<Testcase<PROBLEM>> cases;
 
     /**
@@ -18,7 +24,7 @@ public class Testsuite<PROBLEM> {
      * @param cases 测试用例
      */
     private Testsuite(List<Testcase<PROBLEM>> cases) {
-        this.cases = cases;
+        this.cases = ImmutableList.copyOf(cases);
     }
 
     /**
@@ -28,12 +34,29 @@ public class Testsuite<PROBLEM> {
      * @return 平均时间
      */
     public long test(Class<? extends PROBLEM> clazz) {
-        long time = 0;
-        for (Testcase<PROBLEM> testcase : cases) {
+        long totalTime = 0;
+        for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
+            Testcase<PROBLEM> testcase = cases.get(i);
             PROBLEM solution = testcase.solution(clazz);
-            time += testcase.test(solution);
+            long time = testcase.test(solution);
+            logger.debug("{} 测试用例-{} 耗时: {}ms", clazz.getSimpleName(), String.format("%02d", i + 1), time / 1000000.0);
+            totalTime += time;
         }
-        return time / cases.size();
+        return totalTime / cases.size();
+    }
+
+    /**
+     * @return 测试用例的数量
+     */
+    public int size() {
+        return cases.size();
+    }
+
+    /**
+     * @return 测试用例是否是空的
+     */
+    public boolean isEmpty() {
+        return cases.isEmpty();
     }
 
     /**
@@ -53,13 +76,11 @@ public class Testsuite<PROBLEM> {
      */
     public final static class TestsuiteBuilder<PROBLEM> {
         private final List<Testcase<PROBLEM>> cases = new ArrayList<>();
-        private boolean built = false;
 
         /**
          * @return 创建测试套件
          */
         public Testsuite<PROBLEM> build() {
-            built = true;
             return new Testsuite<>(cases);
         }
 
@@ -70,9 +91,6 @@ public class Testsuite<PROBLEM> {
          * @return 自身
          */
         public TestsuiteBuilder<PROBLEM> add(Testcase<PROBLEM> testcase) {
-            if (built) {
-                throw new IllegalStateException("this builder is built");
-            }
             cases.add(testcase);
             return this;
         }

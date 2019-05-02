@@ -2,7 +2,7 @@ package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 95. 不同的二叉搜索树 II
@@ -38,11 +38,44 @@ public interface UniqueBinarySearchTreesII {
     List<TreeNode> generateTrees(int n);
 
     class Solution implements UniqueBinarySearchTreesII {
+        private Map<String, List<TreeNode>> dp = new HashMap<>();
 
         @Override
         public List<TreeNode> generateTrees(int n) {
+            if (n == 0) {
+                return Collections.emptyList();
+            }
+            return generateTrees(1, n);
+        }
 
-            return null;
+        private List<TreeNode> generateTrees(int low, int high) {
+            if (low > high) {
+                return Collections.singletonList(null);
+            }
+            String key = low + "," + high;
+            if (dp.containsKey(key)) {
+                return dp.get(key);
+            }
+            if (low == high) {
+                List<TreeNode> result = Collections.singletonList(new TreeNode(low));
+                dp.put(key, result);
+                return result;
+            }
+            List<TreeNode> result = new ArrayList<>();
+            for (int rootVal = low; rootVal <= high; rootVal++) {
+                List<TreeNode> leftNodes = generateTrees(low, rootVal - 1);
+                List<TreeNode> rightNodes = generateTrees(rootVal + 1, high);
+                for (TreeNode leftNode : leftNodes) {
+                    for (TreeNode rightNode : rightNodes) {
+                        TreeNode rootNode = new TreeNode(rootVal);
+                        rootNode.left = leftNode;
+                        rootNode.right = rightNode;
+                        result.add(rootNode);
+                    }
+                }
+            }
+            dp.put(key, result);
+            return result;
         }
     }
 }

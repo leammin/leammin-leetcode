@@ -2,12 +2,28 @@ package com.leammin.leetcode.util;
 
 import com.leammin.leetcode.struct.TreeNode;
 
+import java.util.Objects;
+
 /**
  * @author Leammin
  * @date 2019-05-01
  */
 public class TreeNodeUtils {
     private TreeNodeUtils() {
+    }
+
+    public static boolean structurallyEquals(TreeNode a, TreeNode b) {
+        if (a == b) {
+            return true;
+        }
+        if (a == null || b == null) {
+            return false;
+        }
+        return structurallyEquals(a.left, b.left) && structurallyEquals(a.right, b.right);
+    }
+
+    public static boolean equals(TreeNode a, TreeNode b) {
+        return Objects.equals(a, b);
     }
 
     /**

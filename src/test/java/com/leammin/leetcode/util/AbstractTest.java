@@ -1,7 +1,10 @@
 package com.leammin.leetcode.util;
 
 import com.google.common.reflect.TypeToken;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.Function;
@@ -9,6 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class AbstractTest<PROBLEM> {
+    private static final Logger logger = LoggerFactory.getLogger(AbstractTest.class);
+
     protected abstract Testsuite<PROBLEM> testsuite();
 
     @SuppressWarnings("unchecked")
@@ -28,14 +33,20 @@ public abstract class AbstractTest<PROBLEM> {
     @Test
     public void test() {
         Testsuite<PROBLEM> testsuite = testsuite();
+        Assertions.assertThat(testsuite.isEmpty())
+                .withFailMessage("Testsuite cannot be empty")
+                .isFalse();
+
         List<Class<? extends PROBLEM>> solutions = solutions();
+        Assertions.assertThat(solutions)
+                .withFailMessage("Number of solutions must be greater than zero")
+                .hasSizeGreaterThan(0);
+
+        logger.info("题目: {}", problem().getSimpleName());
+
         for (Class<? extends PROBLEM> solution : solutions) {
             long time = testsuite.test(solution);
-            print(solution, time);
+            logger.info("{}-{} 平均耗时: {}ms", problem().getSimpleName(), solution.getSimpleName(), time / 1000000.0);
         }
-    }
-
-    private void print(Class<? extends PROBLEM> solution, long time) {
-        System.out.println(ClassUtils.getName(solution) + ": " + time / 1000000.0 + "ms");
     }
 }
