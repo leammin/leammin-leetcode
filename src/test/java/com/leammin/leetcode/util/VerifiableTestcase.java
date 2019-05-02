@@ -10,6 +10,31 @@ import java.util.function.Predicate;
  * @date 2019-05-02
  */
 public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
+    /**
+     * 验证输出是否正确
+     *
+     * @param output 输出
+     * @return 是否正确
+     */
+    boolean verify(OUTPUT output);
+
+    /**
+     * @param solution 解法
+     * @return 执行解法后输出
+     */
+    OUTPUT run(PROBLEM solution);
+
+    @Override
+    default long test(PROBLEM solution) {
+        long before = System.nanoTime();
+        OUTPUT output = run(solution);
+        long time = System.nanoTime() - before;
+
+        boolean result = verify(output);
+        Assertions.assertThat(result).as(ClassUtils.getName(solution)).isEqualTo(true);
+
+        return time;
+    }
 
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
@@ -39,31 +64,5 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
             Function<PROBLEM, OUTPUT> runner
     ) {
         return of(TestcaseUtils.defaultSolutionProducer(), verifier, runner);
-    }
-
-    /**
-     * 验证输出是否正确
-     *
-     * @param output 输出
-     * @return 是否正确
-     */
-    boolean verify(OUTPUT output);
-
-    /**
-     * @param solution 解法
-     * @return 执行解法后输出
-     */
-    OUTPUT run(PROBLEM solution);
-
-    @Override
-    default long test(PROBLEM solution) {
-        long before = System.nanoTime();
-        OUTPUT output = run(solution);
-        long time = System.nanoTime() - before;
-
-        boolean result = verify(output);
-        Assertions.assertThat(result).as(ClassUtils.getName(solution)).isEqualTo(true);
-
-        return time;
     }
 }

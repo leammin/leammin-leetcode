@@ -17,6 +17,24 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
      */
     OUTPUT expected();
 
+    /**
+     * @param solution 解法
+     * @return 执行解法后输出
+     */
+    OUTPUT run(PROBLEM solution);
+
+    default long test(PROBLEM solution) {
+        OUTPUT expected = expected();
+
+        long before = System.nanoTime();
+        OUTPUT output = run(solution);
+        long time = System.nanoTime() - before;
+
+        Assertions.assertThat(output).as(ClassUtils.getName(solution)).isEqualTo(expected);
+
+        return time;
+    }
+
     static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
             OUTPUT expected,
@@ -42,28 +60,10 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
         };
     }
 
-    default long test(PROBLEM solution) {
-        OUTPUT expected = expected();
-
-        long before = System.nanoTime();
-        OUTPUT output = run(solution);
-        long time = System.nanoTime() - before;
-
-        Assertions.assertThat(output).as(ClassUtils.getName(solution)).isEqualTo(expected);
-
-        return time;
-    }
-
     static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
             OUTPUT expected,
             Function<PROBLEM, OUTPUT> runner
     ) {
         return of(TestcaseUtils.defaultSolutionProducer(), expected, runner);
     }
-
-    /**
-     * @param solution 解法
-     * @return 执行解法后输出
-     */
-    OUTPUT run(PROBLEM solution);
 }
