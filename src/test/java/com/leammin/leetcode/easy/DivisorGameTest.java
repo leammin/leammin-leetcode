@@ -1,7 +1,7 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.EqualTestcase;
+import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
 
 /**
@@ -13,10 +13,10 @@ class DivisorGameTest extends AbstractTest<DivisorGame> {
     @Override
     protected Testsuite<DivisorGame> testsuite() {
         return Testsuite.<DivisorGame>builder()
-                .add(EqualTestcase.of(true, s -> s.divisorGame(2)))
-                .add(EqualTestcase.of(true, s -> s.divisorGame(4)))
-                .add(EqualTestcase.of(false, s -> s.divisorGame(5)))
-                .add(EqualTestcase.of(false, s -> s.divisorGame(3)))
+                .add(ExpectedTestcase.of(true, s -> s.divisorGame(2)))
+                .add(ExpectedTestcase.of(true, s -> s.divisorGame(4)))
+                .add(ExpectedTestcase.of(false, s -> s.divisorGame(5)))
+                .add(ExpectedTestcase.of(false, s -> s.divisorGame(3)))
                 .build();
     }
 }

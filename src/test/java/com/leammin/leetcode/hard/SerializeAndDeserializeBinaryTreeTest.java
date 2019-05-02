@@ -1,7 +1,7 @@
 package com.leammin.leetcode.hard;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.EqualTestcase;
+import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
 
 /**
@@ -12,11 +12,11 @@ class SerializeAndDeserializeBinaryTreeTest extends AbstractTest<SerializeAndDes
     @Override
     protected Testsuite<SerializeAndDeserializeBinaryTree> testsuite() {
         return Testsuite.<SerializeAndDeserializeBinaryTree>builder()
-                .add(EqualTestcase.of("0,null,1,2,3",
+                .add(ExpectedTestcase.of("0,null,1,2,3",
                         s -> s.serialize(s.deserialize("0,null,1,2,3"))))
-                .add(EqualTestcase.of("0,1,null,2,3",
+                .add(ExpectedTestcase.of("0,1,null,2,3",
                         s -> s.serialize(s.deserialize("0,1,null,2,3"))))
-                .add(EqualTestcase.of("5,4,7,3,null,2,null,-1,null,9",
+                .add(ExpectedTestcase.of("5,4,7,3,null,2,null,-1,null,9",
                         s -> s.serialize(s.deserialize("5,4,7,3,null,2,null,-1,null,9"))))
                 .build();
     }

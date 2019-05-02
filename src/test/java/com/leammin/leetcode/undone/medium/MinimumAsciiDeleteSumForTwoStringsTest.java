@@ -1,7 +1,7 @@
 package com.leammin.leetcode.undone.medium;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.EqualTestcase;
+import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
 
 /**
@@ -13,9 +13,9 @@ class MinimumAsciiDeleteSumForTwoStringsTest extends AbstractTest<MinimumAsciiDe
     @Override
     protected Testsuite<MinimumAsciiDeleteSumForTwoStrings> testsuite() {
         return Testsuite.<MinimumAsciiDeleteSumForTwoStrings>builder()
-                .add(EqualTestcase.of(231, s -> s.minimumDeleteSum("sea", "eat")))
-                .add(EqualTestcase.of(403, s -> s.minimumDeleteSum("delete", "leet")))
-                .add(EqualTestcase.of(1638, s -> s.minimumDeleteSum("sjfqkfxqoditw", "fxymelgo")))
+                .add(ExpectedTestcase.of(231, s -> s.minimumDeleteSum("sea", "eat")))
+                .add(ExpectedTestcase.of(403, s -> s.minimumDeleteSum("delete", "leet")))
+                .add(ExpectedTestcase.of(1638, s -> s.minimumDeleteSum("sjfqkfxqoditw", "fxymelgo")))
                 .build();
     }
 }

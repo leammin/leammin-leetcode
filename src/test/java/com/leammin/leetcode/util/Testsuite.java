@@ -51,7 +51,7 @@ public class Testsuite<PROBLEM> {
      *
      * @param <PROBLEM> 问题
      */
-    public static class TestsuiteBuilder<PROBLEM> {
+    public final static class TestsuiteBuilder<PROBLEM> {
         private final List<Testcase<PROBLEM>> cases = new ArrayList<>();
         private boolean built = false;
 

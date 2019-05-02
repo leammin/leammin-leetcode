@@ -1,9 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.EqualTestcase;
 import com.leammin.leetcode.util.Testsuite;
 import com.leammin.leetcode.util.TreeNodeUtils;
+import com.leammin.leetcode.util.VerifiableTestcase;
 
 /**
  * @author Leammin
@@ -13,11 +13,11 @@ class ConvertSortedArrayToBinarySearchTreeTest extends AbstractTest<ConvertSorte
     @Override
     protected Testsuite<ConvertSortedArrayToBinarySearchTree> testsuite() {
         return Testsuite.<ConvertSortedArrayToBinarySearchTree>builder()
-                .add(EqualTestcase.of(true, s -> TreeNodeUtils.isAvl(s.sortedArrayToBST(new int[]{}))))
-                .add(EqualTestcase.of(true, s -> TreeNodeUtils.isAvl(s.sortedArrayToBST(new int[]{-10, -3, 0, 5, 9}))))
-                .add(EqualTestcase.of(true, s -> TreeNodeUtils.isAvl(s.sortedArrayToBST(new int[]{
+                .add(VerifiableTestcase.of(TreeNodeUtils::isAvl, s -> s.sortedArrayToBST(new int[]{})))
+                .add(VerifiableTestcase.of(TreeNodeUtils::isAvl, s -> s.sortedArrayToBST(new int[]{-10, -3, 0, 5, 9})))
+                .add(VerifiableTestcase.of(TreeNodeUtils::isAvl, s -> s.sortedArrayToBST(new int[]{
                         -10, -3, -1, 0, 5, 9, 10, 11, 13, 28, 30,
-                        31, 32, 33, 59, 100, 156, 258, 1024, 1025}))))
+                        31, 32, 33, 59, 100, 156, 258, 1024, 1025})))
                 .build();
     }
 }
