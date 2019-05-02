@@ -36,4 +36,13 @@ import java.util.List;
  */
 public interface UniqueBinarySearchTreesII {
     List<TreeNode> generateTrees(int n);
+
+    class Solution implements UniqueBinarySearchTreesII {
+
+        @Override
+        public List<TreeNode> generateTrees(int n) {
+
+            return null;
+        }
+    }
 }
