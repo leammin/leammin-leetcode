@@ -1,7 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import java.util.Arrays;
-
 /**
  * 48. 旋转图像
  *

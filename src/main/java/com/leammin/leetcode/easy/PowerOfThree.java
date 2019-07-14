@@ -1,7 +1,5 @@
 package com.leammin.leetcode.easy;
 
-import java.util.Arrays;
-
 /**
  * 326. 3的幂
  *

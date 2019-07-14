@@ -1,7 +1,5 @@
 package com.leammin.leetcode.easy;
 
-import java.util.Arrays;
-
 /**
  * 268. 缺失数字
  *

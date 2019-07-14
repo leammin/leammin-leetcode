@@ -4,8 +4,6 @@ import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PerfectSquaresTest extends AbstractTest<PerfectSquares> {
 
     @Override

@@ -1,7 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import java.util.Arrays;
-
 /**
  * 338. 比特位计数
  *
