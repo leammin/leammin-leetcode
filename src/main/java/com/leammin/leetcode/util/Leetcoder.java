@@ -4,10 +4,12 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
 import org.apache.commons.codec.Charsets;
+import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.BasicHttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -24,13 +26,6 @@ import java.util.*;
  * @date 2019-07-13
  */
 public final class Leetcoder {
-    static {
-        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.SimpleLog");
-
-        System.setProperty("org.apache.commons.logging.simplelog.showdatetime", "true");
-
-        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.commons.httpclient", "debug");// "stdout"为标准输出格式，"debug"为调试模式
-    }
     private static final CloseableHttpClient HTTP_CLIENT = HttpClientBuilder.create().build();
     private static final String LEETCODE_ALL_PROBLEMS_URL = "https://leetcode.com/api/problems/all";
     private static final String LEETCODE_GRAPHQL_URL = "https://leetcode-cn.com/graphql";
@@ -101,7 +96,7 @@ public final class Leetcoder {
 
     private static String getQuestionDataParams(String titleSlug) {
         List<String> propertiesList = Arrays.asList("questionId", "content", "difficulty", "title", "titleSlug", "translatedTitle", "translatedContent");
-        String properties = Joiner.on("　\\n　").join(propertiesList);
+        String properties = Joiner.on("\n").join(propertiesList);
         String query = "query questionData($titleSlug: String!){question(titleSlug: $titleSlug) {" + properties + "}}";
         Map<String, Serializable> params = ImmutableMap.of(
                 "operationName", "questionData",
@@ -114,9 +109,9 @@ public final class Leetcoder {
     private static Question getQuestionData(String titleSlug) {
         HttpPost http = new HttpPost(LEETCODE_GRAPHQL_URL);
         http.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-        http.addHeader(HttpHeaders.USER_AGENT, "application/json");
+//        http.addHeader("cookie", "csrftoken=8aJxhOGH1U4wFCBmos0qAQVSBagO18wSeBVbqY8LVjDqrKBnlfSV70s2FoXflm6L;");
+//        http.addHeader("x-csrftoken", "8aJxhOGH1U4wFCBmos0qAQVSBagO18wSeBVbqY8LVjDqrKBnlfSV70s2FoXflm6L");
         http.setEntity(new StringEntity(getQuestionDataParams(titleSlug), Charsets.UTF_8));
-
         try (CloseableHttpResponse response = HTTP_CLIENT.execute(http)) {
             if (response.getStatusLine().getStatusCode() != 200) {
                 throw new RuntimeException("获取详情失败：code=" + response.getStatusLine().getStatusCode()
