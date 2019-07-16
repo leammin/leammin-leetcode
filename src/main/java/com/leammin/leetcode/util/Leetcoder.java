@@ -1,12 +1,9 @@
 package com.leammin.leetcode.util;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableMap;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.apache.commons.codec.Charsets;
-import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -16,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -24,173 +22,160 @@ import java.util.*;
  */
 public final class Leetcoder {
     private static final CloseableHttpClient HTTP_CLIENT = HttpClientBuilder.create().build();
-    private static final String LEETCODE_ALL_PROBLEMS_URL = "https://leetcode.com/api/problems/all";
+    private static final String LEETCODE_ALL_PROBLEMS_URL = "https://leetcode-cn.com/api/problems/all";
     private static final String LEETCODE_GRAPHQL_URL = "https://leetcode-cn.com/graphql";
-    private static final Path LEETCODE_FILE_PATH = Paths.get("src", "main", "resources", "leetcode.txt");
+    private static final Path LEETCODE_FILE_PATH = Paths.get("src", "main", "resources", "leetcode.json");
 
-    private static Map<String, String> getAllProblems() {
-        Map<String, String> result = new TreeMap<>(Comparator.comparingInt(Integer::valueOf));
-        HttpGet httpGet = new HttpGet(LEETCODE_ALL_PROBLEMS_URL);
-        try (CloseableHttpResponse response = HTTP_CLIENT.execute(httpGet)) {
+    private static String getAllQuestionsParams() {
+        return "{\"operationName\": \"allQuestions\",\"variables\": {},\"query\": \"query allQuestions{ allQuestions{ " +
+                "...questionSummaryFields\\n__typename\\n } } fragment questionSummaryFields on QuestionNode{ " +
+                "title\\n titleSlug\\n translatedTitle\\n questionId\\n difficulty\\n translatedTitle\\n " +
+                "translatedContent\\n content\\n codeSnippets{ lang\\n code }\\n __typename }\"}";
+    }
+
+    private static String requestAllQuestions() {
+        HttpPost http = new HttpPost(LEETCODE_GRAPHQL_URL);
+        http.addHeader("content-type", "application/json");
+//        http.addHeader("cookie", "csrftoken=65w47xnUaEqLWglDYqI046nTqKNkVLjM5T17gZib9cNQqSuVOpBXEWhLmEEQdoPQ;");
+//        http.addHeader("x-csrftoken", "65w47xnUaEqLWglDYqI046nTqKNkVLjM5T17gZib9cNQqSuVOpBXEWhLmEEQdoPQ");
+        http.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
+        http.setEntity(new StringEntity(getAllQuestionsParams(), Charsets.UTF_8));
+        try (CloseableHttpResponse response = HTTP_CLIENT.execute(http)) {
+            String responseStr = EntityUtils.toString(response.getEntity());
+
             if (response.getStatusLine().getStatusCode() != 200) {
-                throw new RuntimeException("获取列表失败：code=" + response.getStatusLine().getStatusCode()
-                        + " message=" + EntityUtils.toString(response.getEntity()));
+                throw new RuntimeException("获取详情失败：code=" + response.getStatusLine().getStatusCode());
             }
-            InputStreamReader reader = new InputStreamReader(new BufferedInputStream(response.getEntity().getContent()), Charsets.UTF_8);
-            JsonObject json = new JsonParser().parse(reader).getAsJsonObject();
-            JsonArray array = json.getAsJsonArray("stat_status_pairs");
-            for (JsonElement jsonElement : array) {
-                JsonObject stat = jsonElement.getAsJsonObject().getAsJsonObject("stat");
-                String questionId = stat.getAsJsonPrimitive("question_id").getAsString();
-                String questionTitleSlug = stat.getAsJsonPrimitive("question__title_slug").getAsString();
-                result.put(questionId, questionTitleSlug);
-            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Map result = gson.fromJson(responseStr, Map.class);
+            Map data = (Map) result.get("data");
+            return gson.toJson(data.get("allQuestions"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return result;
     }
 
-    private static void writeProblemsFile() {
-        Map<String, String> problems = getAllProblems();
-        String result = new GsonBuilder().setPrettyPrinting().create().toJson(problems);
+    private static void writeLeetcodeFile(String content) {
         File file = LEETCODE_FILE_PATH.toFile();
-        try(Writer writer = new BufferedWriter(new FileWriter(file))) {
-            writer.append(result);
+        try (Writer writer = new BufferedWriter(new FileWriter(file))) {
+            writer.append(content);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static Map<String, String> readProblemsFile() {
+    private static List<Question> getAllQuestions() {
         File file = LEETCODE_FILE_PATH.toFile();
         if (!file.exists()) {
-            return Collections.emptyMap();
+            writeLeetcodeFile(requestAllQuestions());
         }
         try {
-            return new Gson().fromJson(new BufferedReader(new FileReader(file)), Map.class);
+            Reader reader = new BufferedReader(new FileReader(file));
+            Question[] questions = new Gson().fromJson(reader, Question[].class);
+            return Arrays.asList(questions);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static String getTitleSlug(String questionId) {
-        Map<String, String> problems = readProblemsFile();
-        if (problems == null || problems.isEmpty()) {
-            writeProblemsFile();
-            problems = readProblemsFile();
-            if (problems == null || problems.isEmpty()) {
-                throw new RuntimeException("无法获取列表");
-            }
-        }
-        String titleSlug = problems.get(questionId);
-        if (titleSlug == null) {
-            throw new RuntimeException("不存在此questionId：" + questionId);
-        }
-        return titleSlug;
+    private static Optional<Question> getQuestion(String questionId) {
+        return getAllQuestions().stream()
+                .filter(question -> Objects.equals(question.getQuestionId(), questionId))
+                .findFirst();
     }
 
-    private static String getQuestionDataParams(String titleSlug) {
-        List<String> propertiesList = Arrays.asList("questionId", "content", "difficulty", "title", "titleSlug", "translatedTitle", "translatedContent");
-        String properties = Joiner.on("\n").join(propertiesList);
-        String query = "query questionData($titleSlug: String!){question(titleSlug: $titleSlug) {" + properties + "}}";
-        Map<String, Serializable> params = ImmutableMap.of(
-                "operationName", "questionData",
-                "query", query,
-                "variables", ImmutableMap.of("titleSlug", titleSlug)
-        );
-        return new Gson().toJson(params);
+    private static String getClassName(Question question) {
+        return question.getTitle().replace(" ", "");
     }
 
-    private static Question getQuestionData(String titleSlug) {
-        HttpPost http = new HttpPost(LEETCODE_GRAPHQL_URL);
-        http.addHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-//        http.addHeader("cookie", "csrftoken=8aJxhOGH1U4wFCBmos0qAQVSBagO18wSeBVbqY8LVjDqrKBnlfSV70s2FoXflm6L;");
-//        http.addHeader("x-csrftoken", "8aJxhOGH1U4wFCBmos0qAQVSBagO18wSeBVbqY8LVjDqrKBnlfSV70s2FoXflm6L");
-        http.setEntity(new StringEntity(getQuestionDataParams(titleSlug), Charsets.UTF_8));
-        try (CloseableHttpResponse response = HTTP_CLIENT.execute(http)) {
-            if (response.getStatusLine().getStatusCode() != 200) {
-                throw new RuntimeException("获取详情失败：code=" + response.getStatusLine().getStatusCode()
-                        + " message=" + EntityUtils.toString(response.getEntity()));
-            }
-            InputStreamReader reader = new InputStreamReader(new BufferedInputStream(response.getEntity().getContent()), Charsets.UTF_8);
-            JsonObject json = new JsonParser().parse(reader).getAsJsonObject();
-            JsonObject jsonObject = json.getAsJsonObject("data").getAsJsonObject("question");
-            return new Gson().fromJson(jsonObject, Question.class);
+    private static String getPackage(Question question) {
+        return "com.leammin.leetcode.undone." + question.getDifficulty().toLowerCase();
+    }
+
+    private static String generateCode(Question question) {
+        return "package " + getPackage(question) + ";\n" +
+                "\n" +
+                "/**\n" +
+                " * " + question.getQuestionId() + ". " + question.getTranslatedTitle() + "\n" +
+                " * \n" +
+                " * " + commentContent(question.getTranslatedContent()) + "\n" +
+                " * \n" +
+                " * @author Leammin\n" +
+                " * @date " + LocalDate.now().toString() + "\n" +
+                " */\n" +
+                "public interface " + getClassName(question) + " {\n" +
+                "    \n" +
+                "}\n";
+    }
+
+    private static String commentContent(String content) {
+        return content.replace("\n", "\n * ");
+    }
+
+    private static Path getCodePath(Question question) {
+        return Paths.get("src", "main", "java", "com", "leammin", "leetcode", "undone",
+                question.getDifficulty().toLowerCase(),
+                getClassName(question) + ".java");
+    }
+
+    private static void createCodeFile(Question question) {
+        createFile(getCodePath(question), generateCode(question));
+    }
+
+    private static void createFile(Path path, String content) {
+        File file = path.toFile();
+        if (file.exists()) {
+            throw new RuntimeException("文件已存在: " + file.getAbsolutePath());
+        }
+        try (Writer writer = new BufferedWriter(new FileWriter(file))) {
+            writer.append(content);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private static String generateTest(Question question) {
+        String className = getClassName(question);
+        return "package " + "com.leammin.leetcode." + question.getDifficulty().toLowerCase() + ";\n" +
+                "\n" +
+                "import " + getPackage(question) + "." + className + ";\n" +
+                "import com.leammin.leetcode.util.AbstractTest;\n" +
+                "import com.leammin.leetcode.util.Testsuite;\n" +
+                "\n" +
+                "/**\n" +
+                " * @author Leammin\n" +
+                " * @date " + LocalDate.now().toString() + "\n" +
+                " */\n" +
+                "class " + className + "Test extends AbstractTest<" + className + "> {\n" +
+                "    @Override\n" +
+                "    protected Testsuite<" + className + "> testsuite() {\n" +
+                "        return Testsuite.<" + className + ">builder()\n" +
+                "                .build();\n" +
+                "    }\n" +
+                "}";
+    }
+
+    private static Path getTestPath(Question question) {
+        return Paths.get("src", "test", "java", "com", "leammin", "leetcode",
+                question.getDifficulty().toLowerCase(),
+                getClassName(question) + "Test.java");
+    }
+
+    private static void createTestFile(Question question) {
+        createFile(getTestPath(question), generateTest(question));
+    }
+
     public static void main(String[] args) {
+        System.out.print("请输入id: ");
+        Scanner sc = new Scanner(System.in);
+        String questionId = sc.next();
 
-        System.out.println(getQuestionData(getTitleSlug("1")));
+        Question question = getQuestion(questionId)
+                .orElseThrow(() -> new RuntimeException("该 questionId 不存在: " + questionId));
+        createCodeFile(question);
+        createTestFile(question);
+        System.out.println(question.getJavaCode());
     }
 
-    private class Question {
-        private String questionId;
-        private String content;
-        private String difficulty;
-        private String title;
-        private String titleSlug;
-        private String translatedTitle;
-        private String translatedContent;
-
-        public String getQuestionId() {
-            return questionId;
-        }
-
-        public void setQuestionId(String questionId) {
-            this.questionId = questionId;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public String getDifficulty() {
-            return difficulty;
-        }
-
-        public void setDifficulty(String difficulty) {
-            this.difficulty = difficulty;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getTitleSlug() {
-            return titleSlug;
-        }
-
-        public void setTitleSlug(String titleSlug) {
-            this.titleSlug = titleSlug;
-        }
-
-        public String getTranslatedTitle() {
-            return translatedTitle;
-        }
-
-        public void setTranslatedTitle(String translatedTitle) {
-            this.translatedTitle = translatedTitle;
-        }
-
-        public String getTranslatedContent() {
-            return translatedContent;
-        }
-
-        public void setTranslatedContent(String translatedContent) {
-            this.translatedContent = translatedContent;
-        }
-    }
 }
