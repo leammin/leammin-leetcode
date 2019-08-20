@@ -1,11 +1,11 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
 
 /**
  * 206. 反转链表
  *
- * <div><p>反转一个单链表。</p>
+ * <p>反转一个单链表。</p>
  *
  * <p><strong>示例:</strong></p>
  *
@@ -14,16 +14,18 @@ import com.leammin.leetcode.struct.ListNode;
  *
  * <p><strong>进阶:</strong><br>
  * 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
- * </div>
  *
  * @author Leammin
- * @date 2018-09-15
+ * @date 2019-08-20
  */
 public interface ReverseLinkedList {
     ListNode reverseList(ListNode head);
 
     // TODO: 2019/4/6 两种方法
     class Solution implements ReverseLinkedList {
+        /**
+         * 迭代
+         */
         @Override
         public ListNode reverseList(ListNode head) {
             if (head == null || head.next == null) {
@@ -39,6 +41,25 @@ public interface ReverseLinkedList {
                 head = next;
             }
             return last;
+        }
+    }
+
+    class Solution2 implements ReverseLinkedList {
+        /**
+         * 递归
+         */
+        @Override
+        public ListNode reverseList(ListNode head) {
+            return reverse(head, null);
+        }
+
+        public ListNode reverse(ListNode current, ListNode last) {
+            if (current == null) {
+                return last;
+            }
+            ListNode next = current.next;
+            current.next = last;
+            return reverse(next, current);
         }
     }
 }
