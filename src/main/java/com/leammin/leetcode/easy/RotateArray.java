@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 /**
  * 189. 旋转数组
@@ -37,7 +37,11 @@ package com.leammin.leetcode.undone.easy;
 public interface RotateArray {
     void rotate(int[] nums, int k);
 
-    // TODO: 2019/4/6 至少三种解决方案
+    /**
+     * 通过三次反转
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(1)
+     */
     class Solution implements RotateArray {
         @Override
         public void rotate(int[] nums, int k) {
@@ -60,13 +64,58 @@ public interface RotateArray {
                 return;
             }
 
-            int tmp = 0;
             for (int i = 0; i < (end + start) / 2 - start; i++) {
-                tmp = nums[start + i];
+                int tmp = nums[start + i];
                 nums[start + i] = nums[end - i - 1];
                 nums[end - i - 1] = tmp;
             }
         }
     }
 
+    /**
+     * 最常规解法
+     * 时间复杂度 O(nk)
+     * 空间复杂度 O(1)
+     */
+    class Solution2 implements RotateArray {
+        @Override
+        public void rotate(int[] nums, int k) {
+            if (nums == null || nums.length == 0 || k <= 0) {
+                return;
+            }
+            int n = nums.length;
+            k = k % n;
+            if (k <= 0) {
+                return;
+            }
+            for (int i = 0; i < k; i++) {
+                int tail = nums[n - 1];
+                System.arraycopy(nums, 0, nums, 1, n - 1);
+                nums[0] = tail;
+            }
+        }
+    }
+
+
+    /**
+     * 时间复杂度 O(n)
+     * 空间复杂度 O(k)
+     */
+    class Solution3 implements RotateArray {
+        @Override
+        public void rotate(int[] nums, int k) {
+            if (nums == null || nums.length == 0 || k <= 0) {
+                return;
+            }
+            int n = nums.length;
+            k = k % n;
+            if (k <= 0) {
+                return;
+            }
+            int[] cache = new int[k];
+            System.arraycopy(nums, n - k, cache, 0, k);
+            System.arraycopy(nums, 0, nums, k, n - k);
+            System.arraycopy(cache, 0, nums, 0, k);
+        }
+    }
 }

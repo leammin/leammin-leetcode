@@ -21,11 +21,10 @@ import com.leammin.leetcode.struct.ListNode;
 public interface ReverseLinkedList {
     ListNode reverseList(ListNode head);
 
-    // TODO: 2019/4/6 两种方法
+    /**
+     * 迭代
+     */
     class Solution implements ReverseLinkedList {
-        /**
-         * 迭代
-         */
         @Override
         public ListNode reverseList(ListNode head) {
             if (head == null || head.next == null) {
@@ -44,10 +43,10 @@ public interface ReverseLinkedList {
         }
     }
 
+    /**
+     * 递归
+     */
     class Solution2 implements ReverseLinkedList {
-        /**
-         * 递归
-         */
         @Override
         public ListNode reverseList(ListNode head) {
             return reverse(head, null);
