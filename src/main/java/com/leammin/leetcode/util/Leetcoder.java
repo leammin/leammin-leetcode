@@ -167,14 +167,29 @@ public final class Leetcoder {
     }
 
     public static void main(String[] args) {
-        System.out.print("请输入id: ");
         Scanner sc = new Scanner(System.in);
+        System.out.println("0.生成全部");
+        System.out.println("1.生成代码");
+        System.out.println("2.生成测试");
+        System.out.print("请输入要执行的操作：");
+        int op;
+        try {
+            op = sc.nextInt();
+        } catch (Exception e) {
+            e.printStackTrace();
+            op = 0;
+        }
+        System.out.print("请输入id: ");
         String questionId = sc.next();
 
         Question question = getQuestion(questionId)
                 .orElseThrow(() -> new RuntimeException("该 questionId 不存在: " + questionId));
-        createCodeFile(question);
-        createTestFile(question);
+        if (op == 0 || op == 1) {
+            createCodeFile(question);
+        }
+        if (op == 0 || op == 2) {
+            createTestFile(question);
+        }
         System.out.println(question.getJavaCode());
     }
 
