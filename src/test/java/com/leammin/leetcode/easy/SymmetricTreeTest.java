@@ -1,12 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
-import com.leammin.leetcode.undone.easy.SymmetricTree;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SymmetricTreeTest extends AbstractTest<SymmetricTree> {
 

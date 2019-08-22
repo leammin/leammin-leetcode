@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.*;
 
@@ -40,12 +40,13 @@ import java.util.*;
 public interface MinimumAsciiDeleteSumForTwoStrings {
     int minimumDeleteSum(String s1, String s2);
 
-    class Solution implements MinimumAsciiDeleteSumForTwoStrings {
+    class Best implements MinimumAsciiDeleteSumForTwoStrings {
 
         @Override
         public int minimumDeleteSum(String s1, String s2) {
             // row 取 s1 的前 i 个字符 s1[0:i) i:0~n
             // col 取 s2 的前 j 个字符 s2[0:j) j:0~m
+            // value 为 s1[0:i) s2[0:j) 时的解
             int n = s1.length();
             int m = s2.length();
             int[][] dp = new int[n + 1][m + 1];

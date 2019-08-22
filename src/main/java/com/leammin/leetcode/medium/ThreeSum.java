@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -211,17 +211,22 @@ public interface ThreeSum {
         }
     }
 
-    class Solution4 implements ThreeSum {
+    class Best implements ThreeSum {
         @Override
         public List<List<Integer>> threeSum(int[] nums) {
             if (nums.length < 3) {
                 return Collections.emptyList();
             }
             List<List<Integer>> res = new ArrayList<>();
+            // 数组最小值
             int minValue = Integer.MAX_VALUE;
+            // 数组最大值
             int maxValue = Integer.MIN_VALUE;
+            // 小于0的个数
             int negSize = 0;
+            // 大于0的个数
             int posSize = 0;
+            // 等于0的个数
             int zeroSize = 0;
             for (int v : nums) {
                 if (v < minValue) {
@@ -244,14 +249,18 @@ public interface ThreeSum {
             if (negSize == 0 || posSize == 0) {
                 return res;
             }
+            // 缩小最大值和最小值的范围
             if (minValue * 2 + maxValue > 0) {
                 maxValue = -minValue * 2;
             } else if (maxValue * 2 + minValue < 0) {
                 minValue = -maxValue * 2;
             }
 
+            //　标记各数字出现的次数（减去　minValue）
             int[] map = new int[maxValue - minValue + 1];
+            // 数组中的负数
             int[] negs = new int[negSize];
+            // 数组中的正数
             int[] poses = new int[posSize];
             negSize = 0;
             posSize = 0;
@@ -268,31 +277,45 @@ public interface ThreeSum {
             }
             Arrays.sort(poses, 0, posSize);
             Arrays.sort(negs, 0, negSize);
+            // 正数从 basej 处开始遍历
             int basej = 0;
+            // 遍历负数 从大到小
             for (int i = negSize - 1; i >= 0; i--) {
+                // 取一个负数
                 int nv = negs[i];
+                // 最小的正数
                 int minp = (-nv) >>> 1;
+                // 找到最小正数的基础索引
                 while (basej < posSize && poses[basej] < minp) {
                     basej++;
                 }
+                // 遍历正数 从小到大
                 for (int j = basej; j < posSize; j++) {
+                    // 取一个正数
                     int pv = poses[j];
+                    // 第三个值
                     int cv = 0 - nv - pv;
+                    // 必须是 (nv, pv) 之间的值，避免重复，因为如果是 (nv, pv) 之外的值，在后续的遍历中会重复计算。
                     if (cv >= nv && cv <= pv) {
                         if (cv == nv) {
+                            // cv 必须有 2 个以上
                             if (map[nv - minValue] > 1) {
                                 res.add(Arrays.asList(nv, nv, pv));
                             }
                         } else if (cv == pv) {
+                            // cv 必须有 2 个以上
                             if (map[pv - minValue] > 1) {
                                 res.add(Arrays.asList(nv, pv, pv));
                             }
                         } else {
+                            // 必须存在 cv
                             if (map[cv - minValue] > 0) {
                                 res.add(Arrays.asList(nv, cv, pv));
                             }
                         }
                     } else if (cv < nv) {
+                        // 正数是从小到大遍历，随着 pv 增大 cv 只会越来越小，一直都会小于 nv
+                        // 继续遍历没有意义，因此直接中断正数的遍历
                         break;
                     }
                 }
