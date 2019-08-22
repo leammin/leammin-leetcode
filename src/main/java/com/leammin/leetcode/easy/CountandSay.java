@@ -38,10 +38,10 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-10-13
  */
-public interface CountAndSay {
+public interface CountandSay {
     String countAndSay(int n);
 
-    class Solution implements CountAndSay {
+    class Solution implements CountandSay {
         @Override
         public String countAndSay(int n) {
             StringBuilder res = new StringBuilder("1");
