@@ -1,5 +1,7 @@
 package com.leammin.leetcode.util;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Streams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.codec.Charsets;
@@ -15,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Leammin
@@ -90,7 +93,10 @@ public final class Leetcoder {
     }
 
     private static String getClassName(Question question) {
-        return question.getTitle().replace(" ", "");
+        String title = question.getTitle();
+        return Streams.stream(Splitter.on(' ').trimResults().omitEmptyStrings().split(question.getTitle()))
+                .map(t -> Character.toUpperCase(t.charAt(0)) + (t.length() > 1 ? t.substring(1) : ""))
+                .collect(Collectors.joining());
     }
 
     private static String getPackage(Question question) {
