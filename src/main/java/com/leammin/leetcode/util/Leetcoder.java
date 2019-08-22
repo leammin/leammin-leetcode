@@ -81,7 +81,11 @@ public final class Leetcoder {
 
     private static Optional<Question> getQuestion(String questionId) {
         return getAllQuestions().stream()
-                .filter(question -> Objects.equals(question.getQuestionId(), questionId))
+                .filter(question -> Objects.equals(question.getQuestionId(), questionId) ||
+                        Objects.equals(question.getTitleSlug(), questionId) ||
+                        Objects.equals(question.getTitle(), questionId) ||
+                        Objects.equals(question.getTranslatedTitle(), questionId)
+                )
                 .findFirst();
     }
 
@@ -179,7 +183,7 @@ public final class Leetcoder {
             e.printStackTrace();
             op = 0;
         }
-        System.out.print("请输入id: ");
+        System.out.print("请输入id/title: ");
         String questionId = sc.next();
 
         Question question = getQuestion(questionId)
