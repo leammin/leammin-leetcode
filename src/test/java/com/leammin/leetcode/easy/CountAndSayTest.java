@@ -8,10 +8,10 @@ import com.leammin.leetcode.util.Testsuite;
  * @author Leammin
  * @date 2019-08-22
  */
-class CountandSayTest extends AbstractTest<CountandSay> {
+class CountAndSayTest extends AbstractTest<CountAndSay> {
     @Override
-    protected Testsuite<CountandSay> testsuite() {
-        return Testsuite.<CountandSay>builder()
+    protected Testsuite<CountAndSay> testsuite() {
+        return Testsuite.<CountAndSay>builder()
                 .add(ExpectedTestcase.of("1", t->t.countAndSay(1)))
                 .add(ExpectedTestcase.of("11", t->t.countAndSay(2)))
                 .add(ExpectedTestcase.of("21", t->t.countAndSay(3)))
