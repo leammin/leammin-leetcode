@@ -12,6 +12,9 @@ public class TreeNodeUtils {
     private TreeNodeUtils() {
     }
 
+    /**
+     * 判断是否结构相等
+     */
     public static boolean structurallyEquals(TreeNode a, TreeNode b) {
         if (a == b) {
             return true;

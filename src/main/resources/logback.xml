@@ -1,8 +1,9 @@
 <configuration>
-    <contextName>myAppName</contextName>
+    <contextName>leammin-leetcode</contextName>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %contextName [%t] %level %logger{36} - %msg%n</pattern>
+<!--            <pattern>%d %contextName [%t] %level %logger{36} - %msg%n</pattern>-->
+            <pattern>%d [%t] %level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
