@@ -42,11 +42,11 @@ public abstract class AbstractTest<PROBLEM> {
                 .withFailMessage("Number of solutions must be greater than zero")
                 .hasSizeGreaterThan(0);
 
-        logger.info("题目: {}", problem().getSimpleName());
+        logger.info("Problem: {}", problem().getSimpleName());
 
         for (Class<? extends PROBLEM> solution : solutions) {
             long time = testsuite.test(solution);
-            logger.info("{}-{} 平均耗时: {}ms", problem().getSimpleName(), solution.getSimpleName(), time / 1000000.0);
+            logger.info("{}-{} Running Time: {}ms", problem().getSimpleName(), solution.getSimpleName(), time / 1000000.0);
         }
     }
 }

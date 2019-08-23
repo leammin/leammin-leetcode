@@ -66,15 +66,6 @@ public interface RomanToInteger {
     class Solution implements RomanToInteger {
         @Override
         public int romanToInt(String s) {
-            HashMap<Character, Integer> romanMapInt = new HashMap<>();
-            romanMapInt.put('I', 1);
-            romanMapInt.put('V', 5);
-            romanMapInt.put('X', 10);
-            romanMapInt.put('L', 50);
-            romanMapInt.put('C', 100);
-            romanMapInt.put('D', 500);
-            romanMapInt.put('M', 1000);
-
             int res = 0;
             char[] chars = s.toCharArray();
             for (int i = 0; i < chars.length; i++) {
@@ -98,9 +89,30 @@ public interface RomanToInteger {
                     i++;
                     continue;
                 }
-                res += romanMapInt.get(chars[i]);
+                res += charToInt(chars[i]);
             }
             return res;
+        }
+
+        private int charToInt(char c) {
+            switch (c) {
+                case 'I':
+                    return 1;
+                case 'V':
+                    return 5;
+                case 'X':
+                    return 10;
+                case 'L':
+                    return 50;
+                case 'C':
+                    return 100;
+                case 'D':
+                    return 500;
+                case 'M':
+                    return 1000;
+                default:
+                    throw new RuntimeException("unknown char: " + c);
+            }
         }
     }
 

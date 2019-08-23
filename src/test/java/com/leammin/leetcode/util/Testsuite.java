@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,22 +30,25 @@ public class Testsuite<PROBLEM> {
     }
 
     /**
-     * 测试测试用例，并返回平均时间
+     * 测试测试用例，并返回执行时间
      *
-     * @param clazz 解法class对象
-     * @return 平均时间
+     * @param solutionClass 解法class对象
+     * @return 执行时间
      */
-    public long test(Class<? extends PROBLEM> clazz) {
+    public long test(Class<? extends PROBLEM> solutionClass) {
         long totalTime = 0;
         for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
             Testcase<PROBLEM> testcase = cases.get(i);
-            PROBLEM solution = testcase.solution(clazz);
-            logger.debug("{} 测试用例-{} running", clazz.getSimpleName(), String.format("%02d", i + 1));
+            PROBLEM solution = testcase.solution(solutionClass);
             long time = testcase.test(solution);
-            logger.debug("{} 测试用例-{} time: {}ms", clazz.getSimpleName(), String.format("%02d", i + 1), time / 1000000.0);
+            logger.debug("{} Testcase-{} Running Time: {}ms",
+                    solutionClass.getSimpleName(),
+                    String.format("%02d", i + 1),
+                    BigDecimal.valueOf(time).divide(BigDecimal.valueOf(1000000), 6, RoundingMode.HALF_UP));
             totalTime += time;
         }
-        return totalTime / cases.size();
+
+        return totalTime;
     }
 
     /**
