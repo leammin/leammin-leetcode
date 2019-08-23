@@ -38,8 +38,9 @@ public class Testsuite<PROBLEM> {
         for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
             Testcase<PROBLEM> testcase = cases.get(i);
             PROBLEM solution = testcase.solution(clazz);
+            logger.debug("{} 测试用例-{} running", clazz.getSimpleName(), String.format("%02d", i + 1));
             long time = testcase.test(solution);
-            logger.debug("{} 测试用例-{} 耗时: {}ms", clazz.getSimpleName(), String.format("%02d", i + 1), time / 1000000.0);
+            logger.debug("{} 测试用例-{} time: {}ms", clazz.getSimpleName(), String.format("%02d", i + 1), time / 1000000.0);
             totalTime += time;
         }
         return totalTime / cases.size();
