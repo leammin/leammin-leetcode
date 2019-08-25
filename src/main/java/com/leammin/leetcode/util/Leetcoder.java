@@ -104,6 +104,7 @@ public final class Leetcoder {
     }
 
     private static String generateCode(Question question) {
+        String className = getClassName(question);
         return "package " + getPackage(question) + ";\n" +
                 "\n" +
                 "/**\n" +
@@ -114,8 +115,11 @@ public final class Leetcoder {
                 " * @author Leammin\n" +
                 " * @date " + LocalDate.now().toString() + "\n" +
                 " */\n" +
-                "public interface " + getClassName(question) + " {\n" +
+                "public interface " + className + " {\n" +
                 "    \n" +
+                "    class Solution implements " + className + " {\n" +
+                "        \n" +
+                "    }\n" +
                 "}\n";
     }
 
@@ -194,11 +198,11 @@ public final class Leetcoder {
 
         Question question = getQuestion(questionId)
                 .orElseThrow(() -> new RuntimeException("该 questionId 不存在: " + questionId));
-        if (op == 0 || op == 1) {
-            createCodeFile(question);
-        }
         if (op == 0 || op == 2) {
             createTestFile(question);
+        }
+        if (op == 0 || op == 1) {
+            createCodeFile(question);
         }
         System.out.println(question.getJavaCode());
     }
