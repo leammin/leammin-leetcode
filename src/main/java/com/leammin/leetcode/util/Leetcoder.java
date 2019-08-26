@@ -13,6 +13,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -142,8 +143,14 @@ public final class Leetcoder {
         if (file.exists()) {
             throw new RuntimeException("文件已存在: " + file.getAbsolutePath());
         }
+        try {
+            Files.createDirectories(path.getParent());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         try (Writer writer = new BufferedWriter(new FileWriter(file))) {
             writer.append(content);
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
