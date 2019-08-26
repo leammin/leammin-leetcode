@@ -4,6 +4,7 @@ import java.util.List;
 
 class Question {
     private String questionId;
+    private String questionFrontendId;
     private String content;
     private String difficulty;
     private String title;
@@ -14,6 +15,10 @@ class Question {
 
     public String getQuestionId() {
         return questionId;
+    }
+
+    public String getQuestionFrontendId() {
+        return questionFrontendId;
     }
 
     public String getContent() {

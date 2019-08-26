@@ -33,16 +33,25 @@ public final class Leetcoder {
     private static String getAllQuestionsParams() {
         return "{\"operationName\": \"allQuestions\",\"variables\": {},\"query\": \"query allQuestions{ allQuestions{ " +
                 "...questionSummaryFields\\n__typename\\n } } fragment questionSummaryFields on QuestionNode{ " +
-                "title\\n titleSlug\\n translatedTitle\\n questionId\\n difficulty\\n translatedTitle\\n " +
+                "title\\n titleSlug\\n translatedTitle\\n questionId\\n questionFrontendId\\n difficulty\\n translatedTitle\\n " +
                 "translatedContent\\n content\\n codeSnippets{ lang\\n code }\\n __typename }\"}";
     }
 
     private static String requestAllQuestions() {
         HttpPost http = new HttpPost(LEETCODE_GRAPHQL_URL);
         http.addHeader("content-type", "application/json");
-//        http.addHeader("cookie", "csrftoken=65w47xnUaEqLWglDYqI046nTqKNkVLjM5T17gZib9cNQqSuVOpBXEWhLmEEQdoPQ;");
-//        http.addHeader("x-csrftoken", "65w47xnUaEqLWglDYqI046nTqKNkVLjM5T17gZib9cNQqSuVOpBXEWhLmEEQdoPQ");
+        http.addHeader("accept-encoding", "gzip, deflate, br");
+        http.addHeader("accept-language", "zh-CN,zh;q=0.9,zh-TW;q=0.8");
+        http.addHeader("dnt", "1");
+        http.addHeader("accept", "*/*");
+        http.addHeader("authority", "leetcode-cn.com");
         http.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
+        http.addHeader("origin", "https://leetcode-cn.com");
+        http.addHeader("referer", "https://leetcode-cn.com");
+        http.addHeader("sec-fetch-mode", "cors");
+        http.addHeader("sec-fetch-site", "same-origin");
+//        http.addHeader("cookie", "csrftoken=cTFH9oarSwffuR9OSCGtoGdlaHy67uZilBckjt6i36r2DMHiCD3JwHADMZsxMDKQ;");
+//        http.addHeader("x-csrftoken", "cTFH9oarSwffuR9OSCGtoGdlaHy67uZilBckjt6i36r2DMHiCD3JwHADMZsxMDKQ");
         http.setEntity(new StringEntity(getAllQuestionsParams(), Charsets.UTF_8));
         try (CloseableHttpResponse response = HTTP_CLIENT.execute(http)) {
             String responseStr = EntityUtils.toString(response.getEntity());
@@ -85,7 +94,7 @@ public final class Leetcoder {
 
     private static Optional<Question> getQuestion(String questionId) {
         return getAllQuestions().stream()
-                .filter(question -> Objects.equals(question.getQuestionId(), questionId) ||
+                .filter(question -> Objects.equals(question.getQuestionFrontendId(), questionId) ||
                         Objects.equals(question.getTitleSlug(), questionId) ||
                         Objects.equals(question.getTitle(), questionId) ||
                         Objects.equals(question.getTranslatedTitle(), questionId)
