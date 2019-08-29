@@ -34,6 +34,9 @@ package com.leammin.leetcode.undone.medium;
 public interface IsSubsequence {
     boolean isSubsequence(String s, String t);
 
+    /**
+     * n
+     */
     class Solution implements IsSubsequence {
         @Override
         public boolean isSubsequence(String s, String t) {
