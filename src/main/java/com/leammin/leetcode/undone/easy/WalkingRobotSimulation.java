@@ -58,7 +58,7 @@ public interface WalkingRobotSimulation {
     class Solution implements WalkingRobotSimulation {
         @Override
         public int robotSim(int[] commands, int[][] obstacles) {
-            Map<Integer, Set<Integer>> obstacleMap = new HashMap<>();
+            Map<Integer, Set<Integer>> obstacleMap = new HashMap<>(obstacles.length);
             for (int[] obstacle : obstacles) {
                 obstacleMap.computeIfAbsent(obstacle[0], k -> new HashSet<>()).add(obstacle[1]);
             }
@@ -67,6 +67,7 @@ public interface WalkingRobotSimulation {
             // 坐标轴，初始面朝北面
             int axis = 1;
             int dir = 1;
+            int res = 0;
             for (int command : commands) {
                 switch (command) {
                     case -2:
@@ -87,9 +88,10 @@ public interface WalkingRobotSimulation {
                                 break;
                             }
                         }
+                        res = Math.max(res, robot[0] * robot[0] + robot[1] * robot[1]);
                 }
             }
-            return robot[0] * robot[0] + robot[1] * robot[1];
+            return res;
         }
 
         private boolean hasObstacle(Map<Integer, Set<Integer>> obstacleMap, int x, int y) {
