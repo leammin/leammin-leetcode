@@ -1,6 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.undone.medium.IsSubsequence;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
