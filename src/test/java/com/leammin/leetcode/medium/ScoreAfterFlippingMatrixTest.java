@@ -1,6 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.undone.medium.ScoreAfterFlippingMatrix;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
