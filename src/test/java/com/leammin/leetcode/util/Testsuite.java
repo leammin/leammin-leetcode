@@ -43,7 +43,7 @@ public class Testsuite<PROBLEM> {
             long time = testcase.test(solution);
             logger.debug("{} Testcase-{} Running Time: {}ms",
                     solutionClass.getSimpleName(),
-                    String.format("%02d", i + 1),
+                    String.format("%02d", i),
                     BigDecimal.valueOf(time).divide(BigDecimal.valueOf(1000000), 6, RoundingMode.HALF_UP));
             totalTime += time;
         }
@@ -88,6 +88,17 @@ public class Testsuite<PROBLEM> {
          */
         public Testsuite<PROBLEM> build() {
             return new Testsuite<>(cases);
+        }
+
+        public Testsuite<PROBLEM> build(int... indexes) {
+            List<Testcase<PROBLEM>> list = new ArrayList<>(indexes.length);
+            for (int index : indexes) {
+                if (index < 0) {
+                    index += cases.size();
+                }
+                list.add(cases.get(index));
+            }
+            return new Testsuite<>(list);
         }
 
         /**
