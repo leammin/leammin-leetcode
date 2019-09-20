@@ -77,4 +77,34 @@ public interface Candy {
             }
         }
     }
+
+    class Solution2 implements Candy {
+
+        @Override
+        public int candy(int[] ratings) {
+            if (ratings == null || ratings.length < 2) {
+                return 1;
+            }
+            int res = 0;
+            int last = ratings.length - 1;
+            int lastMin = 1;
+            for (int i = ratings.length - 2; i >= -1; i--) {
+                if (i == -1 || ratings[i] >= ratings[i + 1]) {
+                    int n = last - i;
+                    res += (1 + n) * n / 2;
+                    if (lastMin > n) {
+                        res += lastMin - n;
+                    }
+                    last = i;
+                    if (i != -1 && ratings[i] == ratings[i + 1]) {
+                        lastMin = 1;
+                    } else {
+                        lastMin = n == 1 ? lastMin + 1 : 2;
+                    }
+                }
+            }
+            return res;
+        }
+
+    }
 }
