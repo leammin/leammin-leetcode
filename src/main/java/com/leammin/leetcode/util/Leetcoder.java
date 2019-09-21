@@ -202,13 +202,7 @@ public final class Leetcoder {
         System.out.println("1.生成代码");
         System.out.println("2.生成测试");
         System.out.print("请输入要执行的操作：");
-        int op;
-        try {
-            op = sc.nextInt();
-        } catch (Exception e) {
-            e.printStackTrace();
-            op = 0;
-        }
+        int op = sc.nextInt();
         System.out.print("请输入id/title: ");
         String questionId = sc.next();
 
