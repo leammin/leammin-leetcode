@@ -38,6 +38,10 @@ import java.util.Comparator;
 public interface Candy {
     int candy(int[] ratings);
 
+    /**
+     * 时间复杂度 nlogn
+     * 空间复杂度 n
+     */
     class Solution implements Candy {
 
         @Override
@@ -78,6 +82,10 @@ public interface Candy {
         }
     }
 
+    /**
+     * 时间复杂度　ｎ
+     * 空间复杂度　１
+     */
     class Solution2 implements Candy {
 
         @Override
