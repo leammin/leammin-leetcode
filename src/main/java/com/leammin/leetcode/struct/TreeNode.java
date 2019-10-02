@@ -17,20 +17,6 @@ public class TreeNode {
         this.val = x;
     }
 
-    public boolean isBst() {
-        return validateBst(this, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-
-    private boolean validateBst(TreeNode node, long min, long max) {
-        if (node == null) {
-            return true;
-        }
-        if (node.val >= max || node.val <= min) {
-            return false;
-        }
-        return validateBst(node.left, min, node.val) && validateBst(node.right, node.val, max);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
