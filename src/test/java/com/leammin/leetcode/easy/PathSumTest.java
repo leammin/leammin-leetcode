@@ -14,6 +14,7 @@ class PathSumTest extends AbstractTest<PathSum> {
     protected Testsuite<PathSum> testsuite() {
         return Testsuite.<PathSum>builder()
                 .add(ExpectedTestcase.of(true, t -> t.hasPathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1), 22)))
+                .add(ExpectedTestcase.of(false, t -> t.hasPathSum(TreeNode.of(1,2), 1)))
                 .build();
     }
 }

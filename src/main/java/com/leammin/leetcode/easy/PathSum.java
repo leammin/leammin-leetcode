@@ -33,7 +33,19 @@ public interface PathSum {
     class Solution implements PathSum {
         @Override
         public boolean hasPathSum(TreeNode root, int sum) {
-            return (root == null || sum <= 0) ? (root == null && sum == 0) : (hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val));
+            if (root == null) {
+                return false;
+            }
+            if (root.left == null && root.right == null) {
+                return sum == root.val;
+            }
+            if (root.left == null) {
+                return hasPathSum(root.right, sum - root.val);
+            }
+            if (root.right == null) {
+                return hasPathSum(root.left, sum - root.val);
+            }
+            return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
         }
     }
 }
