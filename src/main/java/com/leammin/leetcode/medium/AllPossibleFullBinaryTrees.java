@@ -5,7 +5,7 @@ import com.leammin.leetcode.struct.TreeNode;
 import java.util.*;
 
 /**
- * 930. 所有可能的满二叉树
+ * 894. 所有可能的满二叉树
  * 
  * <p><em>满二叉树</em>是一类二叉树，其中每个结点恰好有 0 或 2 个子结点。</p>
  * 

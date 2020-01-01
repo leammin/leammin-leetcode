@@ -3,7 +3,7 @@ package com.leammin.leetcode.easy;
 import java.util.Arrays;
 
 /**
- * 1127. 最后一块石头的重量
+ * 1046. 最后一块石头的重量
  * 
  * <p>有一堆石头，每块石头的重量都是正整数。</p>
  * 

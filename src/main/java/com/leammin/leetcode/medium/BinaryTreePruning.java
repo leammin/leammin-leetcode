@@ -3,7 +3,7 @@ package com.leammin.leetcode.medium;
 import com.leammin.leetcode.struct.TreeNode;
 
 /**
- * 832. 二叉树剪枝
+ * 814. 二叉树剪枝
  * 
  * <p>给定二叉树根结点&nbsp;<code>root</code>&nbsp;，此外树的每个结点的值要么是 0，要么是 1。</p>
  * 

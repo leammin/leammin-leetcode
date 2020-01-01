@@ -1,7 +1,7 @@
 package com.leammin.leetcode.easy;
 
 /**
- * 890. 柠檬水找零
+ * 860. 柠檬水找零
  * 
  * <p>在柠檬水摊上，每一杯柠檬水的售价为&nbsp;<code>5</code>&nbsp;美元。</p>
  * 

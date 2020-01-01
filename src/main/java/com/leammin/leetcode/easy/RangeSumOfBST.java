@@ -3,7 +3,7 @@ package com.leammin.leetcode.easy;
 import com.leammin.leetcode.struct.TreeNode;
 
 /**
- * 975. 二叉搜索树的范围和
+ * 938. 二叉搜索树的范围和
  * 
  * <p>给定二叉搜索树的根结点&nbsp;<code>root</code>，返回 <code>L</code> 和 <code>R</code>（含）之间的所有结点的值的和。</p>
  * 

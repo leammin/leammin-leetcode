@@ -1,7 +1,7 @@
 package com.leammin.leetcode.easy;
 
 /**
- * 981. 删列造序
+ * 944. 删列造序
  * 
  * <p>给定由&nbsp;<code>N</code>&nbsp;个小写字母字符串组成的数组 <code>A</code>，其中每个字符串长度相等。</p>
  * 

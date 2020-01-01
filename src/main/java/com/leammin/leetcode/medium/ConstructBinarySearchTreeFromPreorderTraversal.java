@@ -3,7 +3,7 @@ package com.leammin.leetcode.medium;
 import com.leammin.leetcode.struct.TreeNode;
 
 /**
- * 1050. 先序遍历构造二叉树
+ * 1008. 先序遍历构造二叉树
  * 
  * <p>返回与给定先序遍历&nbsp;<code>preorder</code> 相匹配的二叉搜索树（binary <strong>search</strong> tree）的根结点。</p>
  * 

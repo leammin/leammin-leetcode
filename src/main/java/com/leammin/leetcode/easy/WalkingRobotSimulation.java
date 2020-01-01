@@ -3,7 +3,7 @@ package com.leammin.leetcode.easy;
 import java.util.*;
 
 /**
- * 906. 模拟行走机器人
+ * 874. 模拟行走机器人
  *
  * <p>机器人在一个无限大小的网格上行走，从点&nbsp;(0, 0) 处开始出发，面向北方。该机器人可以接收以下三种类型的命令：</p>
  *
