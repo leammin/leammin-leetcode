@@ -2,7 +2,7 @@ package com.leammin.leetcode.util;
 
 import com.leammin.leetcode.struct.TreeNode;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author Leammin
@@ -91,5 +91,61 @@ public class TreeNodeUtils {
         } else {
             return Integer.max(leftHeight, rightHeight) + 1;
         }
+    }
+
+    public static List<Integer> serialize(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        result.add(root.val);
+
+        int nullTimes = 0;
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(root.left);
+        nodes.add(root.right);
+        while (!nodes.isEmpty()) {
+            TreeNode node = nodes.remove();
+            if (node == null) {
+                nullTimes++;
+            } else {
+                for (; nullTimes > 0; nullTimes--) {
+                    result.add(null);
+                }
+                result.add(node.val);
+                nodes.add(node.left);
+                nodes.add(node.right);
+            }
+        }
+        return result;
+    }
+
+    public static TreeNode deserialize(Integer ... values) {
+        return deserialize(Arrays.asList(values));
+    }
+
+    public static TreeNode deserialize(List<Integer> values) {
+        if (values == null || values.size() == 0 || values.get(0) == null) {
+            return null;
+        }
+        TreeNode root = new TreeNode(values.get(0));
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(root);
+        int nodeIndex = 1;
+        while (!nodes.isEmpty() && nodeIndex < values.size()) {
+            TreeNode node = nodes.remove();
+            node.left = node(values.get(nodeIndex++));
+            if (node.left != null) {
+                nodes.add(node.left);
+            }
+            if (nodeIndex < values.size()) {
+                node.right = node(values.get(nodeIndex++));
+                if (node.right != null) {
+                    nodes.add(node.right);
+                }
+            }
+        }
+        return root;
+    }
+
+    private static TreeNode node(Integer val) {
+        return val == null ? null : new TreeNode(val);
     }
 }

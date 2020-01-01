@@ -8,8 +8,8 @@ import com.leammin.leetcode.util.VerifiableTestcase;
 import org.assertj.core.api.Assertions;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.IntFunction;
+import java.util.function.Predicate;
 
 /**
  * @author Leammin
@@ -19,7 +19,7 @@ class UniqueBinarySearchTreesIITest extends AbstractTest<UniqueBinarySearchTrees
 
     @Override
     protected Testsuite<UniqueBinarySearchTreesII> testsuite() {
-        IntFunction<Consumer<List<TreeNode>>> verifierFactory = length ->
+        IntFunction<Predicate<List<TreeNode>>> verifierFactory = length ->
                 (nodes -> {
                     Assertions.assertThat(nodes)
                             .hasSize(length)
@@ -31,6 +31,7 @@ class UniqueBinarySearchTreesIITest extends AbstractTest<UniqueBinarySearchTrees
                                     .isFalse();
                         }
                     }
+                    return true;
                 });
         return Testsuite.<UniqueBinarySearchTreesII>builder()
                 .add(VerifiableTestcase.of(verifierFactory.apply(0), s -> s.generateTrees(0)))

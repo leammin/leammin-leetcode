@@ -1,8 +1,8 @@
 package com.leammin.leetcode.struct;
 
-import java.util.LinkedList;
+import com.leammin.leetcode.util.TreeNodeUtils;
+
 import java.util.Objects;
-import java.util.Queue;
 
 /**
  * @author Leammin
@@ -38,52 +38,10 @@ public class TreeNode {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("[").append(this.val);
-        int nullTimes = 0;
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.add(this.left);
-        nodes.add(this.right);
-        while (!nodes.isEmpty()) {
-            TreeNode node = nodes.remove();
-            if (node == null) {
-                nullTimes++;
-            } else {
-                for (; nullTimes > 0; nullTimes--) {
-                    result.append(",null");
-                }
-                result.append(",").append(node.val);
-                nodes.add(node.left);
-                nodes.add(node.right);
-            }
-        }
-        return result.append("]").toString();
+        return TreeNodeUtils.serialize(this).toString();
     }
 
     public static TreeNode of(Integer... values) {
-        if (values == null || values.length == 0 || values[0] == null) {
-            return null;
-        }
-        TreeNode root = new TreeNode(values[0]);
-        Queue<TreeNode> nodes = new LinkedList<>();
-        nodes.add(root);
-        int nodeIndex = 1;
-        while (!nodes.isEmpty() && nodeIndex < values.length) {
-            TreeNode node = nodes.remove();
-            node.left = node(values[nodeIndex++]);
-            if (node.left != null) {
-                nodes.add(node.left);
-            }
-            if (nodeIndex < values.length) {
-                node.right = node(values[nodeIndex++]);
-                if (node.right != null) {
-                    nodes.add(node.right);
-                }
-            }
-        }
-        return root;
-    }
-
-    private static TreeNode node(Integer val) {
-        return val == null ? null : new TreeNode(val);
+        return TreeNodeUtils.deserialize(values);
     }
 }

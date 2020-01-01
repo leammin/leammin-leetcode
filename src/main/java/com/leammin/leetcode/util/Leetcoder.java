@@ -118,7 +118,7 @@ public final class Leetcoder {
         return "package " + getPackage(question) + ";\n" +
                 "\n" +
                 "/**\n" +
-                " * " + question.getQuestionId() + ". " + question.getTranslatedTitle() + "\n" +
+                " * " + question.getQuestionFrontendId() + ". " + question.getTranslatedTitle() + "\n" +
                 " * \n" +
                 " * " + commentContent(question.getTranslatedContent()) + "\n" +
                 " * \n" +
