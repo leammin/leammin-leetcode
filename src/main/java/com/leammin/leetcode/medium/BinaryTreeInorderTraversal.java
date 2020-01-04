@@ -2,9 +2,7 @@ package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 94. 二叉树的中序遍历
@@ -48,22 +46,44 @@ public interface BinaryTreeInorderTraversal {
         @Override
         public List<Integer> inorderTraversal(TreeNode root) {
             if (root == null) {
-                return new ArrayList<>();
+                return Collections.emptyList();
             }
             List<Integer> result = new ArrayList<>();
-            LinkedList<TreeNode> stack = new LinkedList<>();
+            Deque<TreeNode> stack = new LinkedList<>();
             stack.push(root);
             while (!stack.isEmpty()) {
                 TreeNode top = stack.pop();
-                if (top.left != null) {
-                    stack.push(top.left);
-                } else {
-                    result.add(top.val);
-                    if (top.right != null) {
-                        stack.push(top.right);
-                    }
+                if (top.right != null) {
+                    stack.push(top.right);
                 }
+                if (top.left == null) {
+                    result.add(top.val);
+                } else {
+                    stack.push(new TreeNode(top.val));
+                    stack.push(top.left);
+                }
+            }
+            return result;
+        }
+    }
 
+    class Best implements BinaryTreeInorderTraversal {
+
+        @Override
+        public List<Integer> inorderTraversal(TreeNode root) {
+            if (root == null) {
+                return Collections.emptyList();
+            }
+            List<Integer> result = new ArrayList<>();
+            Deque<TreeNode> stack = new LinkedList<>();
+            while (root != null || !stack.isEmpty()) {
+                while (root != null) {
+                    stack.push(root);
+                    root = root.left;
+                }
+                root = stack.pop();
+                result.add(root.val);
+                root = root.right;
             }
             return result;
         }
