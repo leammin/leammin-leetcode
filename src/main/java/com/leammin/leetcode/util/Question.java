@@ -1,5 +1,7 @@
 package com.leammin.leetcode.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 class Question {
@@ -11,6 +13,7 @@ class Question {
     private String titleSlug;
     private String translatedTitle;
     private String translatedContent;
+    private Boolean paidOnly;
     private List<CodeSnippet> codeSnippets;
 
     public String getQuestionId() {
@@ -50,14 +53,85 @@ class Question {
     }
 
     public String getJavaCode() {
-        return getCodeSnippets().stream()
+        if (codeSnippets == null) {
+            return null;
+        }
+        return codeSnippets.stream()
                 .filter(cs -> "Java".equalsIgnoreCase(cs.getLang()))
                 .findAny()
-                .orElseThrow(() -> new RuntimeException("this question not java code: " + title))
-                .getCode();
+                .map(CodeSnippet::getCode)
+                .orElse(null);
     }
 
-    static class CodeSnippet {
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public void setQuestionFrontendId(String questionFrontendId) {
+        this.questionFrontendId = questionFrontendId;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setTitleSlug(String titleSlug) {
+        this.titleSlug = titleSlug;
+    }
+
+    public void setTranslatedTitle(String translatedTitle) {
+        this.translatedTitle = translatedTitle;
+    }
+
+    public void setTranslatedContent(String translatedContent) {
+        this.translatedContent = translatedContent;
+    }
+
+    public void setCodeSnippets(List<CodeSnippet> codeSnippets) {
+        this.codeSnippets = codeSnippets;
+    }
+
+    public boolean needInit() {
+        if (paidOnly != null && paidOnly) {
+            return false;
+        }
+        return codeSnippets == null || codeSnippets.isEmpty()
+                || StringUtils.isEmpty(content) || StringUtils.isEmpty(translatedContent);
+    }
+
+    public void init() {
+        if (StringUtils.isEmpty(titleSlug)) {
+            throw new RuntimeException("titleSlug is empty");
+        }
+        Question question = LeetcodeRequests.questionData(titleSlug);
+        this.codeSnippets = question.codeSnippets;
+        this.questionId = question.questionId;
+        this.questionFrontendId = question.questionFrontendId;
+        this.content = question.content;
+        this.difficulty = question.difficulty;
+        this.title = question.title;
+        this.titleSlug = question.titleSlug;
+        this.translatedTitle = question.translatedTitle;
+        this.translatedContent = question.translatedContent;
+    }
+
+    public Boolean getPaidOnly() {
+        return paidOnly;
+    }
+
+    public void setPaidOnly(Boolean paidOnly) {
+        this.paidOnly = paidOnly;
+    }
+
+    public static class CodeSnippet {
         private String lang;
         private String code;
 
@@ -68,6 +142,38 @@ class Question {
         public String getCode() {
             return code;
         }
+
+        public void setLang(String lang) {
+            this.lang = lang;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        @Override
+        public String toString() {
+            return "CodeSnippet{" +
+                    "lang='" + lang + '\'' +
+                    ", code='" + code + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId='" + questionId + '\'' +
+                ", questionFrontendId='" + questionFrontendId + '\'' +
+                ", content='" + content + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", title='" + title + '\'' +
+                ", titleSlug='" + titleSlug + '\'' +
+                ", translatedTitle='" + translatedTitle + '\'' +
+                ", translatedContent='" + translatedContent + '\'' +
+                ", paidOnly=" + paidOnly +
+                ", codeSnippets=" + codeSnippets +
+                '}';
     }
 }
 

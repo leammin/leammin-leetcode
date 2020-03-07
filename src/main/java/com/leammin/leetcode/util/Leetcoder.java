@@ -1,16 +1,10 @@
 package com.leammin.leetcode.util;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.apache.commons.codec.Charsets;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -25,86 +19,69 @@ import java.util.stream.Collectors;
  * @date 2019-07-13
  */
 public final class Leetcoder {
-    private static final CloseableHttpClient HTTP_CLIENT = HttpClientBuilder.create().build();
-    private static final String LEETCODE_ALL_PROBLEMS_URL = "https://leetcode-cn.com/api/problems/all";
-    private static final String LEETCODE_GRAPHQL_URL = "https://leetcode-cn.com/graphql";
     private static final Path LEETCODE_FILE_PATH = Paths.get("src", "main", "resources", "leetcode.json");
 
-    private static String getAllQuestionsParams() {
-        return "{\"operationName\": \"allQuestions\",\"variables\": {},\"query\": \"query allQuestions{ allQuestions{ " +
-                "...questionSummaryFields\\n__typename\\n } } fragment questionSummaryFields on QuestionNode{ " +
-                "title\\n titleSlug\\n translatedTitle\\n questionId\\n questionFrontendId\\n difficulty\\n translatedTitle\\n " +
-                "translatedContent\\n content\\n codeSnippets{ lang\\n code }\\n __typename }\"}";
-    }
+    private static void writeLeetcodeFile(List<Question> questions) {
+        String questionStr = JSON.toJSONString(questions, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteDateUseDateFormat);
 
-    private static String requestAllQuestions() {
-        HttpPost http = new HttpPost(LEETCODE_GRAPHQL_URL);
-        http.addHeader("content-type", "application/json");
-        http.addHeader("accept-encoding", "gzip, deflate, br");
-        http.addHeader("accept-language", "zh-CN,zh;q=0.9,zh-TW;q=0.8");
-        http.addHeader("dnt", "1");
-        http.addHeader("accept", "*/*");
-        http.addHeader("authority", "leetcode-cn.com");
-        http.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36");
-        http.addHeader("origin", "https://leetcode-cn.com");
-        http.addHeader("referer", "https://leetcode-cn.com");
-        http.addHeader("sec-fetch-mode", "cors");
-        http.addHeader("sec-fetch-site", "same-origin");
-//        http.addHeader("cookie", "csrftoken=cTFH9oarSwffuR9OSCGtoGdlaHy67uZilBckjt6i36r2DMHiCD3JwHADMZsxMDKQ;");
-//        http.addHeader("x-csrftoken", "cTFH9oarSwffuR9OSCGtoGdlaHy67uZilBckjt6i36r2DMHiCD3JwHADMZsxMDKQ");
-        http.setEntity(new StringEntity(getAllQuestionsParams(), Charsets.UTF_8));
-        try (CloseableHttpResponse response = HTTP_CLIENT.execute(http)) {
-            String responseStr = EntityUtils.toString(response.getEntity());
-
-            if (response.getStatusLine().getStatusCode() != 200) {
-                throw new RuntimeException("获取详情失败：code=" + response.getStatusLine().getStatusCode());
-            }
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            Map result = gson.fromJson(responseStr, Map.class);
-            Map data = (Map) result.get("data");
-            return gson.toJson(data.get("allQuestions"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static void writeLeetcodeFile(String content) {
-        File file = LEETCODE_FILE_PATH.toFile();
-        try (Writer writer = new BufferedWriter(new FileWriter(file))) {
-            writer.append(content);
+        try {
+            Files.writeString(LEETCODE_FILE_PATH, questionStr);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     private static List<Question> getAllQuestions() {
-        File file = LEETCODE_FILE_PATH.toFile();
-        if (!file.exists()) {
-            writeLeetcodeFile(requestAllQuestions());
-        }
         try {
-            Reader reader = new BufferedReader(new FileReader(file));
-            Question[] questions = new Gson().fromJson(reader, Question[].class);
-            return Arrays.asList(questions);
-        } catch (FileNotFoundException e) {
+            String questionStr = Files.readString(LEETCODE_FILE_PATH);
+            return JSONArray.parseArray(questionStr, Question.class);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static Optional<Question> getQuestion(String questionId) {
-        return getAllQuestions().stream()
-                .filter(question -> Objects.equals(question.getQuestionFrontendId(), questionId) ||
-                        Objects.equals(question.getTitleSlug(), questionId) ||
-                        Objects.equals(question.getTitle(), questionId) ||
-                        Objects.equals(question.getTranslatedTitle(), questionId)
+    private static List<Question> getAllQuestionsWithLeetcode() {
+        List<Question> questionsFromLeetcode = LeetcodeRequests.allQuestionsBeta();
+        List<Question> questionsFromFile = getAllQuestions();
+        Set<String> idsFromFile = questionsFromFile.stream()
+                .map(Question::getQuestionId)
+                .collect(Collectors.toSet());
+
+        List<Question> fileNotExist = questionsFromLeetcode.stream()
+                .filter(q -> !idsFromFile.contains(q.getQuestionId()))
+                .collect(Collectors.toList());
+        questionsFromFile.addAll(fileNotExist);
+        for (Question question : questionsFromFile) {
+            if (question.needInit()) {
+                System.out.println("初始化中: " + question);
+                question.init();
+                writeLeetcodeFile(questionsFromFile);
+            }
+        }
+        return questionsFromFile;
+    }
+
+    private static Question getQuestion(String key) {
+        List<Question> allQuestions = getAllQuestions();
+        return getQuestionByKey(allQuestions, key)
+                .or(() -> getQuestionByKey(getAllQuestionsWithLeetcode(), key))
+                .orElseThrow(() -> new RuntimeException("该 key 不存在: " + key));
+    }
+
+    private static Optional<Question> getQuestionByKey(List<Question> allQuestions, String key) {
+        return allQuestions.stream()
+                .filter(question -> Objects.equals(question.getQuestionFrontendId(), key) ||
+                        Objects.equals(question.getTitleSlug(), key) ||
+                        Objects.equals(question.getTitle(), key) ||
+                        Objects.equals(question.getTranslatedTitle(), key)
                 )
                 .findFirst();
     }
 
     private static String getClassName(Question question) {
         String title = question.getTitle();
-        return Streams.stream(Splitter.on(' ').trimResults().omitEmptyStrings().split(question.getTitle()))
+        return Streams.stream(Splitter.on('-').trimResults().omitEmptyStrings().split(question.getTitleSlug()))
                 .map(t -> Character.toUpperCase(t.charAt(0)) + (t.length() > 1 ? t.substring(1) : ""))
                 .collect(Collectors.joining());
     }
@@ -204,10 +181,9 @@ public final class Leetcoder {
         System.out.print("请输入要执行的操作：");
         int op = sc.nextInt();
         System.out.print("请输入id/title: ");
-        String questionId = sc.next();
+        String key = sc.next();
 
-        Question question = getQuestion(questionId)
-                .orElseThrow(() -> new RuntimeException("该 questionId 不存在: " + questionId));
+        Question question = getQuestion(key);
         if (op == 0 || op == 2) {
             createTestFile(question);
         }
