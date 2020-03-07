@@ -27,14 +27,14 @@ import java.util.Random;
  * @author Leammin
  * @date 2018-08-31
  */
-public abstract class ShuffleArray {
+public abstract class ShuffleAnArray {
     /**
      * Your Solution object will be instantiated and called as such:
      * Solution obj = new Solution(nums);
      * int[] param_1 = obj.reset();
      * int[] param_2 = obj.shuffle();
      */
-    public ShuffleArray(int[] nums) {
+    public ShuffleAnArray(int[] nums) {
     }
 
     /**
@@ -47,7 +47,7 @@ public abstract class ShuffleArray {
      */
     public abstract int[] shuffle();
 
-    public static class Solution extends ShuffleArray {
+    public static class Solution extends ShuffleAnArray {
         private int[] nums;
 
 
