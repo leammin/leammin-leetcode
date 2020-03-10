@@ -37,8 +37,10 @@ public class ListNode {
             return null;
         }
         ListNode head = new ListNode(nodes[0]);
+        ListNode tail = head;
         for (int i = 1; i < nodes.length; i++) {
-            head.next = new ListNode(nodes[i]);
+            tail.next = new ListNode(nodes[i]);
+            tail = tail.next;
         }
         return head;
     }
