@@ -13,7 +13,7 @@ class Question {
     private String titleSlug;
     private String translatedTitle;
     private String translatedContent;
-    private Boolean paidOnly;
+    private Boolean isPaidOnly;
     private List<CodeSnippet> codeSnippets;
 
     public String getQuestionId() {
@@ -100,7 +100,7 @@ class Question {
     }
 
     public boolean needInit() {
-        if (paidOnly != null && paidOnly) {
+        if (isPaidOnly != null && isPaidOnly) {
             return false;
         }
         return codeSnippets == null || codeSnippets.isEmpty()
@@ -120,15 +120,16 @@ class Question {
         this.title = question.title;
         this.titleSlug = question.titleSlug;
         this.translatedTitle = question.translatedTitle;
-        this.translatedContent = question.translatedContent;
+        this.translatedTitle = question.translatedTitle;
+        this.isPaidOnly = question.isPaidOnly;
     }
 
-    public Boolean getPaidOnly() {
-        return paidOnly;
+    public Boolean getIsPaidOnly() {
+        return isPaidOnly;
     }
 
-    public void setPaidOnly(Boolean paidOnly) {
-        this.paidOnly = paidOnly;
+    public void setIsPaidOnly(Boolean paidOnly) {
+        isPaidOnly = paidOnly;
     }
 
     public static class CodeSnippet {
@@ -171,7 +172,7 @@ class Question {
                 ", titleSlug='" + titleSlug + '\'' +
                 ", translatedTitle='" + translatedTitle + '\'' +
                 ", translatedContent='" + translatedContent + '\'' +
-                ", paidOnly=" + paidOnly +
+                ", isPaidOnly=" + isPaidOnly +
                 ", codeSnippets=" + codeSnippets +
                 '}';
     }
