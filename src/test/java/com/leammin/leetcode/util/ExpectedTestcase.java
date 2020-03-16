@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * 通过 output 和 expected 来判断是否成功的测试用例
@@ -60,10 +61,25 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
         };
     }
 
+    static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> ofSupplier(
+            Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
+            Supplier<OUTPUT> expected,
+            Function<PROBLEM, OUTPUT> runner
+    ) {
+        return of(solutionProducer, expected.get(), runner);
+    }
+
     static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
             OUTPUT expected,
             Function<PROBLEM, OUTPUT> runner
     ) {
         return of(TestcaseUtils.defaultSolutionProducer(), expected, runner);
+    }
+
+    static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> ofSupplier(
+            Supplier<OUTPUT> expected,
+            Function<PROBLEM, OUTPUT> runner
+    ) {
+        return ofSupplier(TestcaseUtils.defaultSolutionProducer(), expected, runner);
     }
 }
