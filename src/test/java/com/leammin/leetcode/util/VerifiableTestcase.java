@@ -2,6 +2,7 @@ package com.leammin.leetcode.util;
 
 import org.assertj.core.api.Assertions;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -23,7 +24,7 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
      * @return 执行解法后输出
      */
     OUTPUT run(PROBLEM solution);
-    
+
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
             Predicate<OUTPUT> verifier,
@@ -52,6 +53,16 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
             Function<PROBLEM, OUTPUT> runner
     ) {
         return of(TestcaseUtils.defaultSolutionProducer(), verifier, runner);
+    }
+
+    static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> ofConsumer(
+            Consumer<OUTPUT> verifier,
+            Function<PROBLEM, OUTPUT> runner
+    ) {
+        return of(output -> {
+            verifier.accept(output);
+            return true;
+        }, runner);
     }
 
     @Override
