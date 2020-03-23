@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 /**
  * 945. 使数组唯一的最小增量
