@@ -35,7 +35,8 @@ public final class Leetcoder {
     private static List<Question> getAllQuestions() {
         try {
             String questionStr = Files.readString(LEETCODE_FILE_PATH);
-            return JSONArray.parseArray(questionStr, Question.class);
+            return JSONArray.parseArray(questionStr, Question.class).stream()
+                    .filter(q -> !q.needInit()).collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -76,7 +77,7 @@ public final class Leetcoder {
                         Objects.equals(question.getTitle(), key) ||
                         Objects.equals(question.getTranslatedTitle(), key)
                 )
-                .findFirst();
+                .findFirst().filter(q -> !q.needInit());
     }
 
     private static String getClassName(Question question) {

@@ -118,9 +118,8 @@ class Question {
         this.content = question.content;
         this.difficulty = question.difficulty;
         this.title = question.title;
-        this.titleSlug = question.titleSlug;
         this.translatedTitle = question.translatedTitle;
-        this.translatedTitle = question.translatedTitle;
+        this.translatedContent = question.translatedContent;
         this.isPaidOnly = question.isPaidOnly;
     }
 

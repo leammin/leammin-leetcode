@@ -184,7 +184,7 @@ public class LeetcodeRequests {
     }
 
     public static void main(String[] args) {
-        Question question = questionData("one-edit-distance");
+        Question question = questionData("sort-an-array");
         System.out.println(question);
 //        System.out.println("测试");
     }
