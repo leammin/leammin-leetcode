@@ -31,19 +31,25 @@ public interface FindFirstAndLastPositionOfElementInSortedArray {
         @Override
         public int[] searchRange(int[] nums, int target) {
             int index = search(nums, target, 0, nums.length);
-            if (index == -1) {
-                return new int[]{-1, -1};
+            int left = index;
+            for (int t = index; t != -1; ) {
+                left = t;
+                t = search(nums, target, 0, t);
             }
-
-            return new int[0];
+            int right = index;
+            for (int t = index; t != -1; ) {
+                right = t;
+                t = search(nums, target, t + 1, nums.length);
+            }
+            return new int[]{left, right};
         }
 
         private int search(int[] nums, int target, int start, int end) {
             while (start < end) {
                 int mid = (start + end) / 2;
-                if (mid > target) {
+                if (nums[mid] > target) {
                     end = mid;
-                } else if (mid < target) {
+                } else if (nums[mid] < target) {
                     start = mid + 1;
                 } else {
                     return mid;
