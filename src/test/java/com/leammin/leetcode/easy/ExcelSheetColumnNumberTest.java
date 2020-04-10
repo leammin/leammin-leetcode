@@ -1,6 +1,5 @@
 package com.leammin.leetcode.easy;
 
-import com.leammin.leetcode.undone.easy.ExcelSheetColumnNumber;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.Testsuite;
 
