@@ -13,19 +13,19 @@ class WildcardMatchingTest extends AbstractTest<WildcardMatching> {
     @Override
     protected Testsuite<WildcardMatching> testsuite() {
         return Testsuite.<WildcardMatching>builder()
-                .add(ExpectedTestcase.of(false, t -> t.isMatch("aa", "a")))
-                .add(ExpectedTestcase.of(false, t -> t.isMatch("cb", "?a")))
-                .add(ExpectedTestcase.of(false, t -> t.isMatch("acdcb", "a*c?b")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("aa", "*")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("adceb", "*a*b")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("adcasdeb", "*a*d*")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("aaaa", "***a")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("", "*")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("c", "*?*")))
-                .add(ExpectedTestcase.of(true, t -> t.isMatch("ho", "ho**")))
-                .add(ExpectedTestcase.of(false, t -> t.isMatch("mississippi", "m??*ss*?i*pi")))
-                .add(ExpectedTestcase.of(false, t -> t.isMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbabababa", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b*")))
-                .add(ExpectedTestcase.of(false, t -> t.isMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb")))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aa", "a"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("cb", "?a"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("acdcb", "a*c?b"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aa", "*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("adceb", "*a*b"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("adcasdeb", "*a*d*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aaaa", "***a"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("", "*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("c", "*?*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("ho", "ho**"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("mississippi", "m??*ss*?i*pi"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbabababa", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b*"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"), false))
                 .build();
     }
 }

@@ -12,7 +12,7 @@ class AvailableCapturesForRookTest extends AbstractTest<AvailableCapturesForRook
     @Override
     protected Testsuite<AvailableCapturesForRook> testsuite() {
         return Testsuite.<AvailableCapturesForRook>builder()
-                .add(ExpectedTestcase.of(3, t -> t.numRookCaptures(new char[][]{
+                .add(ExpectedTestcase.of(t -> t.numRookCaptures(new char[][]{
                         {'.', '.', '.', '.', '.', '.', '.', '.'},
                         {'.', '.', '.', 'p', '.', '.', '.', '.'},
                         {'.', '.', '.', 'p', '.', '.', '.', '.'},
@@ -20,7 +20,7 @@ class AvailableCapturesForRookTest extends AbstractTest<AvailableCapturesForRook
                         {'.', '.', '.', '.', '.', '.', '.', '.'},
                         {'.', '.', '.', 'B', '.', '.', '.', '.'},
                         {'.', '.', '.', 'p', '.', '.', '.', '.'},
-                        {'.', '.', '.', '.', '.', '.', '.', '.'}})))
+                        {'.', '.', '.', '.', '.', '.', '.', '.'}}), 3))
                 .build();
     }
 }

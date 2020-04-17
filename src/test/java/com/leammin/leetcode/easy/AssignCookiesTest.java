@@ -12,8 +12,8 @@ class AssignCookiesTest extends AbstractTest<AssignCookies> {
     @Override
     protected Testsuite<AssignCookies> testsuite() {
         return Testsuite.<AssignCookies>builder()
-                .add(ExpectedTestcase.of(1, t -> t.findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1})))
-                .add(ExpectedTestcase.of(2, t -> t.findContentChildren(new int[]{1, 2}, new int[]{1, 2, 3})))
+                .add(ExpectedTestcase.of(t -> t.findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}), 1))
+                .add(ExpectedTestcase.of(t -> t.findContentChildren(new int[]{1, 2}, new int[]{1, 2, 3}), 2))
                 .build();
     }
 }

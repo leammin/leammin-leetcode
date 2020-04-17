@@ -15,8 +15,8 @@ class LetterCombinationsOfAPhoneNumberTest extends AbstractTest<LetterCombinatio
     @Override
     protected Testsuite<LetterCombinationsOfAPhoneNumber> testsuite() {
         return Testsuite.<LetterCombinationsOfAPhoneNumber>builder()
-                .add(ExpectedTestcase.of(Set.of("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"),
-                        t -> new HashSet<>(t.letterCombinations("23"))))
+                .add(ExpectedTestcase.of(t -> new HashSet<>(t.letterCombinations("23")), Set.of("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf")
+                ))
                 .build();
     }
 }

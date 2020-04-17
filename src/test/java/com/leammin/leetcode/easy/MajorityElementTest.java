@@ -12,8 +12,8 @@ class MajorityElementTest extends AbstractTest<MajorityElement> {
     @Override
     protected Testsuite<MajorityElement> testsuite() {
         return Testsuite.<MajorityElement>builder()
-                .add(ExpectedTestcase.of(3, t -> t.majorityElement(new int[]{3, 2, 3})))
-                .add(ExpectedTestcase.of(2, t -> t.majorityElement(new int[]{2,2,1,1,1,2,2})))
+                .add(ExpectedTestcase.of(t -> t.majorityElement(new int[]{3, 2, 3}), 3))
+                .add(ExpectedTestcase.of(t -> t.majorityElement(new int[]{2,2,1,1,1,2,2}), 2))
                 .build();
     }
 }

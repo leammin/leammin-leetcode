@@ -12,9 +12,9 @@ class RectangleOverlapTest extends AbstractTest<RectangleOverlap> {
     @Override
     protected Testsuite<RectangleOverlap> testsuite() {
         return Testsuite.<RectangleOverlap>builder()
-                .add(ExpectedTestcase.of(true, t -> t.isRectangleOverlap(new int[]{0, 0, 2, 2}, new int[]{1, 1, 3, 3})))
-                .add(ExpectedTestcase.of(false, t -> t.isRectangleOverlap(new int[]{0, 0, 1, 1}, new int[]{1, 0, 2, 1})))
-                .add(ExpectedTestcase.of(true, t -> t.isRectangleOverlap(new int[]{-7, -3, 10, 5}, new int[]{-6, -5, 5, 10})))
+                .add(ExpectedTestcase.of(t -> t.isRectangleOverlap(new int[]{0, 0, 2, 2}, new int[]{1, 1, 3, 3}), true))
+                .add(ExpectedTestcase.of(t -> t.isRectangleOverlap(new int[]{0, 0, 1, 1}, new int[]{1, 0, 2, 1}), false))
+                .add(ExpectedTestcase.of(t -> t.isRectangleOverlap(new int[]{-7, -3, 10, 5}, new int[]{-6, -5, 5, 10}), true))
                 .build();
     }
 }

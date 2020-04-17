@@ -12,8 +12,8 @@ class MinimumIncrementToMakeArrayUniqueTest extends AbstractTest<MinimumIncremen
     @Override
     protected Testsuite<MinimumIncrementToMakeArrayUnique> testsuite() {
         return Testsuite.<MinimumIncrementToMakeArrayUnique>builder()
-                .add(ExpectedTestcase.of(1, t -> t.minIncrementForUnique(new int[]{1, 2, 2})))
-                .add(ExpectedTestcase.of(6, t -> t.minIncrementForUnique(new int[]{3, 2, 1, 2, 1, 7})))
+                .add(ExpectedTestcase.of(t -> t.minIncrementForUnique(new int[]{1, 2, 2}), 1))
+                .add(ExpectedTestcase.of(t -> t.minIncrementForUnique(new int[]{3, 2, 1, 2, 1, 7}), 6))
                 .build();
     }
 }

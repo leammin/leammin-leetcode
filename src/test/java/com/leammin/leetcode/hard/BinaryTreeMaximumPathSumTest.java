@@ -13,10 +13,10 @@ class BinaryTreeMaximumPathSumTest extends AbstractTest<BinaryTreeMaximumPathSum
     @Override
     protected Testsuite<BinaryTreeMaximumPathSum> testsuite() {
         return Testsuite.<BinaryTreeMaximumPathSum>builder()
-                .add(ExpectedTestcase.of(6, t -> t.maxPathSum(TreeNode.of(1, 2, 3))))
-                .add(ExpectedTestcase.of(42, t -> t.maxPathSum(TreeNode.of(-10, 9, 20, null, null, 15, 7))))
-                .add(ExpectedTestcase.of(-3, t -> t.maxPathSum(TreeNode.of(-3))))
-                .add(ExpectedTestcase.of(48, t -> t.maxPathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1))))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(1, 2, 3)), 6))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(-10, 9, 20, null, null, 15, 7)), 42))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(-3)), -3))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1)), 48))
                 .build();
     }
 }

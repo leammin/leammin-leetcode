@@ -12,13 +12,13 @@ class LongestIncreasingSubsequenceTest extends AbstractTest<LongestIncreasingSub
     @Override
     protected Testsuite<LongestIncreasingSubsequence> testsuite() {
         return Testsuite.<LongestIncreasingSubsequence>builder()
-                .add(ExpectedTestcase.of(4, t -> t.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 7, 101, 18})))
-                .add(ExpectedTestcase.of(3, t -> t.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 4})))
-                .add(ExpectedTestcase.of(4, t -> t.lengthOfLIS(new int[]{7, 8, 9, 1, 2, 10})))
-                .add(ExpectedTestcase.of(5, t -> t.lengthOfLIS(new int[]{6, 7, 8, 9, 1, 2, 10})))
-                .add(ExpectedTestcase.of(7, t -> t.lengthOfLIS(new int[]{6, 7, 8, 9, 15, 1, 2, 10, 12, 13})))
-                .add(ExpectedTestcase.of(8, t -> t.lengthOfLIS(new int[]{6, 7, 8, 9, 15, 1, 2, 3, 4, 5, 10, 12, 13})))
-                .add(ExpectedTestcase.of(9, t -> t.lengthOfLIS(new int[]{0, 7, 8, 9, 15, 1, 2, 3, 4, 5, 10, 12, 13})))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 7, 101, 18}), 4))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 4}), 3))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{7, 8, 9, 1, 2, 10}), 4))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{6, 7, 8, 9, 1, 2, 10}), 5))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{6, 7, 8, 9, 15, 1, 2, 10, 12, 13}), 7))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{6, 7, 8, 9, 15, 1, 2, 3, 4, 5, 10, 12, 13}), 8))
+                .add(ExpectedTestcase.of(t -> t.lengthOfLIS(new int[]{0, 7, 8, 9, 15, 1, 2, 3, 4, 5, 10, 12, 13}), 9))
                 .build();
     }
 }

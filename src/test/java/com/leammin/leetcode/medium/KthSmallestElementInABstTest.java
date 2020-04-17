@@ -13,8 +13,8 @@ class KthSmallestElementInABstTest extends AbstractTest<KthSmallestElementInABst
     @Override
     protected Testsuite<KthSmallestElementInABst> testsuite() {
         return Testsuite.<KthSmallestElementInABst>builder()
-                .add(ExpectedTestcase.of(1, t -> t.kthSmallest(TreeNode.of(3, 1, 4, null, 2), 1)))
-                .add(ExpectedTestcase.of(3, t -> t.kthSmallest(TreeNode.of(5, 3, 6, 2, 4, null, null, 1), 3)))
+                .add(ExpectedTestcase.of(t -> t.kthSmallest(TreeNode.of(3, 1, 4, null, 2), 1), 1))
+                .add(ExpectedTestcase.of(t -> t.kthSmallest(TreeNode.of(5, 3, 6, 2, 4, null, null, 1), 3), 3))
                 .build();
     }
 }

@@ -19,13 +19,13 @@ class InsertIntoABinarySearchTreeTest extends AbstractTest<InsertIntoABinarySear
     protected Testsuite<InsertIntoABinarySearchTree> testsuite() {
         return Testsuite.<InsertIntoABinarySearchTree>builder()
                 .add(VerifiableTestcase.of(
-                        root -> TreeNodeUtils.isBst(root) &&
+                        s -> s.insertIntoBST(TreeNode.of(4, 2, 7, 1, 3), 5), root -> TreeNodeUtils.isBst(root) &&
                                 TreeNodeUtils.serialize(root)
                                         .stream()
                                         .filter(Objects::nonNull)
                                         .collect(Collectors.toSet())
-                                        .equals(Set.of(4, 2, 7, 1, 3, 5)),
-                        s -> s.insertIntoBST(TreeNode.of(4, 2, 7, 1, 3), 5)))
+                                        .equals(Set.of(4, 2, 7, 1, 3, 5))
+                ))
                 .build();
     }
 }

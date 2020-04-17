@@ -15,7 +15,7 @@ class SubsetsTest extends AbstractTest<Subsets> {
     @Override
     protected Testsuite<Subsets> testsuite() {
         return Testsuite.<Subsets>builder()
-                .add(VerifiableTestcase.ofConsumer(res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                .add(VerifiableTestcase.ofConsumer(t -> t.subsets(new int[]{1, 2, 3}), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
                         List.of(3),
                         List.of(1),
                         List.of(2),
@@ -23,8 +23,8 @@ class SubsetsTest extends AbstractTest<Subsets> {
                         List.of(1, 3),
                         List.of(2, 3),
                         List.of(1, 2),
-                        List.of()),
-                        t -> t.subsets(new int[]{1, 2, 3})))
+                        List.of())
+                ))
                 .build();
     }
 }

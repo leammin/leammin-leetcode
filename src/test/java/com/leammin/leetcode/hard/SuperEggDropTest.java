@@ -13,10 +13,10 @@ class SuperEggDropTest extends AbstractTest<SuperEggDrop> {
     @Override
     protected Testsuite<SuperEggDrop> testsuite() {
         return Testsuite.<SuperEggDrop>builder()
-                .add(ExpectedTestcase.of(2, t -> t.superEggDrop(1, 2)))
-                .add(ExpectedTestcase.of(3, t -> t.superEggDrop(2, 6)))
-                .add(ExpectedTestcase.of(4, t -> t.superEggDrop(3, 14)))
-                .add(ExpectedTestcase.of(14, t -> t.superEggDrop(8, 10000)))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1, 2), 2))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(2, 6), 3))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(3, 14), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(8, 10000), 14))
                 .build();
     }
 }

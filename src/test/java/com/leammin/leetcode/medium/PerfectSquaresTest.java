@@ -9,8 +9,8 @@ class PerfectSquaresTest extends AbstractTest<PerfectSquares> {
     @Override
     protected Testsuite<PerfectSquares> testsuite() {
         return Testsuite.<PerfectSquares>builder()
-                .add(ExpectedTestcase.of(3, s -> s.numSquares(12)))
-                .add(ExpectedTestcase.of(2, s -> s.numSquares(13)))
+                .add(ExpectedTestcase.of(s -> s.numSquares(12), 3))
+                .add(ExpectedTestcase.of(s -> s.numSquares(13), 2))
                 .build();
     }
 }

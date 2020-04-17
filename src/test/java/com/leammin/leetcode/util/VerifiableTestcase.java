@@ -27,8 +27,7 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
 
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
-            Predicate<OUTPUT> verifier,
-            Function<PROBLEM, OUTPUT> runner
+            Function<PROBLEM, OUTPUT> runner, Predicate<OUTPUT> verifier
     ) {
         return new VerifiableTestcase<PROBLEM, OUTPUT>() {
             @Override
@@ -49,20 +48,18 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
     }
 
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
-            Predicate<OUTPUT> verifier,
-            Function<PROBLEM, OUTPUT> runner
+            Function<PROBLEM, OUTPUT> runner, Predicate<OUTPUT> verifier
     ) {
-        return of(TestcaseUtils.defaultSolutionProducer(), verifier, runner);
+        return of(TestcaseUtils.defaultSolutionProducer(), runner, verifier);
     }
 
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> ofConsumer(
-            Consumer<OUTPUT> verifier,
-            Function<PROBLEM, OUTPUT> runner
+            Function<PROBLEM, OUTPUT> runner, Consumer<OUTPUT> verifier
     ) {
-        return of(output -> {
+        return of(runner, output -> {
             verifier.accept(output);
             return true;
-        }, runner);
+        });
     }
 
     @Override

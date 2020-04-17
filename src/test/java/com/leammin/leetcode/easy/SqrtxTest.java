@@ -12,11 +12,11 @@ class SqrtxTest extends AbstractTest<Sqrtx> {
     @Override
     protected Testsuite<Sqrtx> testsuite() {
         return Testsuite.<Sqrtx>builder()
-                .add(ExpectedTestcase.of(2, t -> t.mySqrt(4)))
-                .add(ExpectedTestcase.of(2, t -> t.mySqrt(8)))
-                .add(ExpectedTestcase.of(3, t -> t.mySqrt(10)))
-                .add(ExpectedTestcase.of(4, t -> t.mySqrt(16)))
-                .add(ExpectedTestcase.of(46339, t -> t.mySqrt(2147395599)))
+                .add(ExpectedTestcase.of(t -> t.mySqrt(4), 2))
+                .add(ExpectedTestcase.of(t -> t.mySqrt(8), 2))
+                .add(ExpectedTestcase.of(t -> t.mySqrt(10), 3))
+                .add(ExpectedTestcase.of(t -> t.mySqrt(16), 4))
+                .add(ExpectedTestcase.of(t -> t.mySqrt(2147395599), 46339))
                 .build();
     }
 }

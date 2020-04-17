@@ -12,9 +12,9 @@ class DeleteColumnsToMakeSortedTest extends AbstractTest<DeleteColumnsToMakeSort
     @Override
     protected Testsuite<DeleteColumnsToMakeSorted> testsuite() {
         return Testsuite.<DeleteColumnsToMakeSorted>builder()
-                .add(ExpectedTestcase.of(0, t -> t.minDeletionSize(new String[]{"a", "b"})))
-                .add(ExpectedTestcase.of(1, t -> t.minDeletionSize(new String[]{"cba", "daf", "ghi"})))
-                .add(ExpectedTestcase.of(3, t -> t.minDeletionSize(new String[]{"zyx", "wvu", "tsr"})))
+                .add(ExpectedTestcase.of(t -> t.minDeletionSize(new String[]{"a", "b"}), 0))
+                .add(ExpectedTestcase.of(t -> t.minDeletionSize(new String[]{"cba", "daf", "ghi"}), 1))
+                .add(ExpectedTestcase.of(t -> t.minDeletionSize(new String[]{"zyx", "wvu", "tsr"}), 3))
                 .build();
     }
 }

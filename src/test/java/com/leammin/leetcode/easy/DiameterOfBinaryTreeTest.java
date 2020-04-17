@@ -13,7 +13,7 @@ class DiameterOfBinaryTreeTest extends AbstractTest<DiameterOfBinaryTree> {
     @Override
     protected Testsuite<DiameterOfBinaryTree> testsuite() {
         return Testsuite.<DiameterOfBinaryTree>builder()
-                .add(ExpectedTestcase.of(3, t -> t.diameterOfBinaryTree(TreeNode.of(1, 2, 3, 4, 5))))
+                .add(ExpectedTestcase.of(t -> t.diameterOfBinaryTree(TreeNode.of(1, 2, 3, 4, 5)), 3))
                 .build();
     }
 }

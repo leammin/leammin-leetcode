@@ -12,7 +12,7 @@ class UniqueMorseCodeWordsTest extends AbstractTest<UniqueMorseCodeWords> {
     @Override
     protected Testsuite<UniqueMorseCodeWords> testsuite() {
         return Testsuite.<UniqueMorseCodeWords>builder()
-                .add(ExpectedTestcase.of(2, t -> t.uniqueMorseRepresentations(new String[]{"gin", "zen", "gig", "msg"})))
+                .add(ExpectedTestcase.of(t -> t.uniqueMorseRepresentations(new String[]{"gin", "zen", "gig", "msg"}), 2))
                 .build();
     }
 }

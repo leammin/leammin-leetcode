@@ -12,8 +12,8 @@ class FactorialTrailingZeroesTest extends AbstractTest<FactorialTrailingZeroes> 
     @Override
     protected Testsuite<FactorialTrailingZeroes> testsuite() {
         return Testsuite.<FactorialTrailingZeroes>builder()
-                .add(ExpectedTestcase.of(0, t -> t.trailingZeroes(3)))
-                .add(ExpectedTestcase.of(1, t -> t.trailingZeroes(5)))
+                .add(ExpectedTestcase.of(t -> t.trailingZeroes(3), 0))
+                .add(ExpectedTestcase.of(t -> t.trailingZeroes(5), 1))
                 .build();
     }
 }

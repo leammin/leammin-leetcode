@@ -13,7 +13,7 @@ class InvertBinaryTreeTest extends AbstractTest<InvertBinaryTree> {
     @Override
     protected Testsuite<InvertBinaryTree> testsuite() {
         return Testsuite.<InvertBinaryTree>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(4, 7, 2, 9, 6, 3, 1), s -> s.invertTree(TreeNode.of(4, 2, 7, 1, 3, 6, 9))))
+                .add(ExpectedTestcase.of(s -> s.invertTree(TreeNode.of(4, 2, 7, 1, 3, 6, 9)), TreeNode.of(4, 7, 2, 9, 6, 3, 1)))
                 .build();
     }
 }

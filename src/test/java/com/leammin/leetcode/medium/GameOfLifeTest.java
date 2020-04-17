@@ -12,12 +12,7 @@ class GameOfLifeTest extends AbstractTest<GameOfLife> {
     @Override
     protected Testsuite<GameOfLife> testsuite() {
         return Testsuite.<GameOfLife>builder()
-                .add(ExpectedTestcase.of(new int[][]{
-                        {0, 0, 0},
-                        {1, 0, 1},
-                        {0, 1, 1},
-                        {0, 1, 0}
-                }, t -> {
+                .add(ExpectedTestcase.of(t -> {
                     int[][] board = {
                             {0, 1, 0},
                             {0, 0, 1},
@@ -26,6 +21,11 @@ class GameOfLifeTest extends AbstractTest<GameOfLife> {
                     };
                     t.gameOfLife(board);
                     return board;
+                }, new int[][]{
+                        {0, 0, 0},
+                        {1, 0, 1},
+                        {0, 1, 1},
+                        {0, 1, 0}
                 }))
                 .build();
     }

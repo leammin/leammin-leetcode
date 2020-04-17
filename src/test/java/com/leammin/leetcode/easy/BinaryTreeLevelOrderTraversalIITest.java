@@ -16,12 +16,12 @@ class BinaryTreeLevelOrderTraversalIITest extends AbstractTest<BinaryTreeLevelOr
     protected Testsuite<BinaryTreeLevelOrderTraversalII> testsuite() {
         return Testsuite.<BinaryTreeLevelOrderTraversalII>builder()
                 .add(ExpectedTestcase.of(
-                        List.of(
+                        t -> t.levelOrderBottom(TreeNode.of(3, 9, 20, null, null, 15, 7)), List.of(
                                 List.of(15,7),
                                 List.of(9,20),
                                 List.of(3)
-                        ),
-                        t -> t.levelOrderBottom(TreeNode.of(3, 9, 20, null, null, 15, 7))))
+                        )
+                ))
                 .build();
     }
 }

@@ -12,8 +12,8 @@ class CompressStringLcciTest extends AbstractTest<CompressStringLcci> {
     @Override
     protected Testsuite<CompressStringLcci> testsuite() {
         return Testsuite.<CompressStringLcci>builder()
-                .add(ExpectedTestcase.of("a2b1c5a3", t -> t.compressString("aabcccccaaa")))
-                .add(ExpectedTestcase.of("abbccd", t -> t.compressString("abbccd")))
+                .add(ExpectedTestcase.of(t -> t.compressString("aabcccccaaa"), "a2b1c5a3"))
+                .add(ExpectedTestcase.of(t -> t.compressString("abbccd"), "abbccd"))
                 .build();
     }
 }

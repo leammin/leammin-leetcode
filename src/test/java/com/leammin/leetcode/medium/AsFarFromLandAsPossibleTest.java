@@ -12,8 +12,8 @@ class AsFarFromLandAsPossibleTest extends AbstractTest<AsFarFromLandAsPossible> 
     @Override
     protected Testsuite<AsFarFromLandAsPossible> testsuite() {
         return Testsuite.<AsFarFromLandAsPossible>builder()
-                .add(ExpectedTestcase.of(2, t -> t.maxDistance(new int[][]{{1, 0, 1}, {0, 0, 0}, {1, 0, 1}})))
-                .add(ExpectedTestcase.of(4, t -> t.maxDistance(new int[][]{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}})))
+                .add(ExpectedTestcase.of(t -> t.maxDistance(new int[][]{{1, 0, 1}, {0, 0, 0}, {1, 0, 1}}), 2))
+                .add(ExpectedTestcase.of(t -> t.maxDistance(new int[][]{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}), 4))
                 .build();
     }
 }

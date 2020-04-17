@@ -13,10 +13,10 @@ class DivisorGameTest extends AbstractTest<DivisorGame> {
     @Override
     protected Testsuite<DivisorGame> testsuite() {
         return Testsuite.<DivisorGame>builder()
-                .add(ExpectedTestcase.of(true, s -> s.divisorGame(2)))
-                .add(ExpectedTestcase.of(true, s -> s.divisorGame(4)))
-                .add(ExpectedTestcase.of(false, s -> s.divisorGame(5)))
-                .add(ExpectedTestcase.of(false, s -> s.divisorGame(3)))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(2), true))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(4), true))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(5), false))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(3), false))
                 .build();
     }
 }

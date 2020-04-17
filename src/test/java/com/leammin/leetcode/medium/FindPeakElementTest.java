@@ -14,8 +14,8 @@ class FindPeakElementTest extends AbstractTest<FindPeakElement> {
     @Override
     protected Testsuite<FindPeakElement> testsuite() {
         return Testsuite.<FindPeakElement>builder()
-                .add(ExpectedTestcase.of(2, t -> t.findPeakElement(new int[]{1, 2, 3, 1})))
-                .add(VerifiableTestcase.ofConsumer(res -> Assertions.assertThat(res).isIn(1, 5), t -> t.findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4})))
+                .add(ExpectedTestcase.of(t -> t.findPeakElement(new int[]{1, 2, 3, 1}), 2))
+                .add(VerifiableTestcase.ofConsumer(t -> t.findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4}), res -> Assertions.assertThat(res).isIn(1, 5)))
                 .build();
     }
 }

@@ -13,9 +13,9 @@ class BinaryTreePruningTest extends AbstractTest<BinaryTreePruning> {
     @Override
     protected Testsuite<BinaryTreePruning> testsuite() {
         return Testsuite.<BinaryTreePruning>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(1, null, 0, null, 1), s -> s.pruneTree(TreeNode.of(1, null, 0, 0, 1))))
-                .add(ExpectedTestcase.of(TreeNode.of(1,null,1,null,1), s -> s.pruneTree(TreeNode.of(1,0,1,0,0,0,1))))
-                .add(ExpectedTestcase.of(TreeNode.of(1,1,0,1,1,null,1), s -> s.pruneTree(TreeNode.of(1,1,0,1,1,0,1,0))))
+                .add(ExpectedTestcase.of(s -> s.pruneTree(TreeNode.of(1, null, 0, 0, 1)), TreeNode.of(1, null, 0, null, 1)))
+                .add(ExpectedTestcase.of(s -> s.pruneTree(TreeNode.of(1,0,1,0,0,0,1)), TreeNode.of(1,null,1,null,1)))
+                .add(ExpectedTestcase.of(s -> s.pruneTree(TreeNode.of(1,1,0,1,1,0,1,0)), TreeNode.of(1,1,0,1,1,null,1)))
                 .build();
     }
 }

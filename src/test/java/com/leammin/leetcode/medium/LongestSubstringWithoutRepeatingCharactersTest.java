@@ -12,11 +12,11 @@ class LongestSubstringWithoutRepeatingCharactersTest extends AbstractTest<Longes
     @Override
     protected Testsuite<LongestSubstringWithoutRepeatingCharacters> testsuite() {
         return Testsuite.<LongestSubstringWithoutRepeatingCharacters>builder()
-                .add(ExpectedTestcase.of(3, s -> s.lengthOfLongestSubstring("abcabcbb")))
-                .add(ExpectedTestcase.of(1, s -> s.lengthOfLongestSubstring("bbbbb")))
-                .add(ExpectedTestcase.of(3, s -> s.lengthOfLongestSubstring("pwwkew")))
-                .add(ExpectedTestcase.of(6, s -> s.lengthOfLongestSubstring("umvejcuuk")))
-                .add(ExpectedTestcase.of(1, s -> s.lengthOfLongestSubstring(" ")))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("abcabcbb"), 3))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("bbbbb"), 1))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("pwwkew"), 3))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("umvejcuuk"), 6))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring(" "), 1))
                 .build();
     }
 }

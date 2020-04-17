@@ -13,10 +13,10 @@ class CandyTest extends AbstractTest<Candy> {
     @Override
     protected Testsuite<Candy> testsuite() {
         return Testsuite.<Candy>builder()
-                .add(ExpectedTestcase.of(5, t -> t.candy(new int[]{1,0,2})))
-                .add(ExpectedTestcase.of(4, t -> t.candy(new int[]{1,2,2})))
-                .add(ExpectedTestcase.of(7, t -> t.candy(new int[]{1,3,2,2,1})))
-                .add(ExpectedTestcase.of(18, t -> t.candy(new int[]{1,6,10,8,7,3,2})))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,0,2}), 5))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,2,2}), 4))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,3,2,2,1}), 7))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,6,10,8,7,3,2}), 18))
                 .build();
     }
 }

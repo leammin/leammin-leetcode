@@ -12,9 +12,9 @@ class GreatestCommonDivisorOfStringsTest extends AbstractTest<GreatestCommonDivi
     @Override
     protected Testsuite<GreatestCommonDivisorOfStrings> testsuite() {
         return Testsuite.<GreatestCommonDivisorOfStrings>builder()
-                .add(ExpectedTestcase.of("ABC", t -> t.gcdOfStrings("ABCABC", "ABC")))
-                .add(ExpectedTestcase.of("AB", t -> t.gcdOfStrings("ABABAB", "ABAB")))
-                .add(ExpectedTestcase.of("", t -> t.gcdOfStrings("LEET", "CODE")))
+                .add(ExpectedTestcase.of(t -> t.gcdOfStrings("ABCABC", "ABC"), "ABC"))
+                .add(ExpectedTestcase.of(t -> t.gcdOfStrings("ABABAB", "ABAB"), "AB"))
+                .add(ExpectedTestcase.of(t -> t.gcdOfStrings("LEET", "CODE"), ""))
                 .build();
     }
 }

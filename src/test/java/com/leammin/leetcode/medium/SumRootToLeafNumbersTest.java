@@ -13,8 +13,8 @@ class SumRootToLeafNumbersTest extends AbstractTest<SumRootToLeafNumbers> {
     @Override
     protected Testsuite<SumRootToLeafNumbers> testsuite() {
         return Testsuite.<SumRootToLeafNumbers>builder()
-                .add(ExpectedTestcase.of(25, t -> t.sumNumbers(TreeNode.of(1, 2, 3))))
-                .add(ExpectedTestcase.of(1026, t -> t.sumNumbers(TreeNode.of(4, 9, 0, 5, 1))))
+                .add(ExpectedTestcase.of(t -> t.sumNumbers(TreeNode.of(1, 2, 3)), 25))
+                .add(ExpectedTestcase.of(t -> t.sumNumbers(TreeNode.of(4, 9, 0, 5, 1)), 1026))
                 .build();
     }
 }

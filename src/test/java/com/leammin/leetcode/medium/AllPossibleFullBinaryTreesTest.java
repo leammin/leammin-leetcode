@@ -17,7 +17,7 @@ class AllPossibleFullBinaryTreesTest extends AbstractTest<AllPossibleFullBinaryT
     protected Testsuite<AllPossibleFullBinaryTrees> testsuite() {
         return Testsuite.<AllPossibleFullBinaryTrees>builder()
                 .add(VerifiableTestcase.of(
-                        output -> {
+                        s -> s.allPossibleFBT(7), output -> {
                             Set<TreeNode> expected = Set.of(
                                     TreeNode.of(0, 0, 0, null, null, 0, 0, null, null, 0, 0),
                                     TreeNode.of(0, 0, 0, null, null, 0, 0, 0, 0),
@@ -26,8 +26,7 @@ class AllPossibleFullBinaryTreesTest extends AbstractTest<AllPossibleFullBinaryT
                                     TreeNode.of(0, 0, 0, 0, 0, null, null, 0, 0)
                             );
                             return expected.size() == output.size() && expected.equals(new HashSet<>(output));
-                        },
-                        s -> s.allPossibleFBT(7)
+                        }
                 ))
                 .build();
     }

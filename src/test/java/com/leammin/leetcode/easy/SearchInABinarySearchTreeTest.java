@@ -13,7 +13,7 @@ class SearchInABinarySearchTreeTest extends AbstractTest<SearchInABinarySearchTr
     @Override
     protected Testsuite<SearchInABinarySearchTree> testsuite() {
         return Testsuite.<SearchInABinarySearchTree>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(2, 1, 3), s -> s.searchBST(TreeNode.of(4, 2, 7, 1, 3), 2)))
+                .add(ExpectedTestcase.of(s -> s.searchBST(TreeNode.of(4, 2, 7, 1, 3), 2), TreeNode.of(2, 1, 3)))
                 .build();
     }
 }

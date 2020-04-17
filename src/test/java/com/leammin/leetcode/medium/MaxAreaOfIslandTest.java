@@ -12,7 +12,7 @@ class MaxAreaOfIslandTest extends AbstractTest<MaxAreaOfIsland> {
     @Override
     protected Testsuite<MaxAreaOfIsland> testsuite() {
         return Testsuite.<MaxAreaOfIsland>builder()
-                .add(ExpectedTestcase.of(6, t -> t.maxAreaOfIsland(new int[][]{
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
                         {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                         {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -21,8 +21,8 @@ class MaxAreaOfIslandTest extends AbstractTest<MaxAreaOfIsland> {
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
-                })))
-                .add(ExpectedTestcase.of(6, t -> t.maxAreaOfIsland(new int[][]{
+                }), 6))
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
                         {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                         {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -31,16 +31,16 @@ class MaxAreaOfIslandTest extends AbstractTest<MaxAreaOfIsland> {
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
-                })))
-                .add(ExpectedTestcase.of(0, t -> t.maxAreaOfIsland(new int[][]{
+                }), 6))
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
                         {0,0,0,0,0,0,0,0},
-                })))
-                .add(ExpectedTestcase.of(4, t -> t.maxAreaOfIsland(new int[][]{
+                }), 0))
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
                         {1, 1, 0, 0, 0},
                         {1, 1, 0, 0, 0},
                         {0, 0, 0, 1, 1},
                         {0, 0, 0, 1, 1}
-                })))
+                }), 4))
                 .build();
     }
 }

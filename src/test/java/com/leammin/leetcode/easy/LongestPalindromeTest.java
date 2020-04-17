@@ -12,7 +12,7 @@ class LongestPalindromeTest extends AbstractTest<LongestPalindrome> {
     @Override
     protected Testsuite<LongestPalindrome> testsuite() {
         return Testsuite.<LongestPalindrome>builder()
-                .add(ExpectedTestcase.of(7, t -> t.longestPalindrome("abccccdd")))
+                .add(ExpectedTestcase.of(t -> t.longestPalindrome("abccccdd"), 7))
                 .build();
     }
 }

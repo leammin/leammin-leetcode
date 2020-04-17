@@ -12,10 +12,10 @@ class HappyNumberTest extends AbstractTest<HappyNumber> {
     @Override
     protected Testsuite<HappyNumber> testsuite() {
         return Testsuite.<HappyNumber>builder()
-                .add(ExpectedTestcase.of(true, t->t.isHappy(19)))
-                .add(ExpectedTestcase.of(true, t->t.isHappy(1)))
-                .add(ExpectedTestcase.of(true, t->t.isHappy(10)))
-                .add(ExpectedTestcase.of(true, t->t.isHappy(100)))
+                .add(ExpectedTestcase.of(t->t.isHappy(19), true))
+                .add(ExpectedTestcase.of(t->t.isHappy(1), true))
+                .add(ExpectedTestcase.of(t->t.isHappy(10), true))
+                .add(ExpectedTestcase.of(t->t.isHappy(100), true))
                 .build();
     }
 }

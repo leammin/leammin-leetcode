@@ -12,8 +12,8 @@ class MergeIntervalsTest extends AbstractTest<MergeIntervals> {
     @Override
     protected Testsuite<MergeIntervals> testsuite() {
         return Testsuite.<MergeIntervals>builder()
-                .add(ExpectedTestcase.of(new int[][]{{1,6},{8,10},{15,18}}, t->t.merge(new int[][]{{1,3},{2,6},{8,10},{15,18}})))
-                .add(ExpectedTestcase.of(new int[][]{{1,5}}, t->t.merge(new int[][]{{1,4},{4,5}})))
+                .add(ExpectedTestcase.of(t->t.merge(new int[][]{{1,3},{2,6},{8,10},{15,18}}), new int[][]{{1,6},{8,10},{15,18}}))
+                .add(ExpectedTestcase.of(t->t.merge(new int[][]{{1,4},{4,5}}), new int[][]{{1,5}}))
                 .build();
     }
 }

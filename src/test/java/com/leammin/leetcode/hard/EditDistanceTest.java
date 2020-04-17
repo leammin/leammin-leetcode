@@ -12,10 +12,10 @@ class EditDistanceTest extends AbstractTest<EditDistance> {
     @Override
     protected Testsuite<EditDistance> testsuite() {
         return Testsuite.<EditDistance>builder()
-                .add(ExpectedTestcase.of(3, t -> t.minDistance("horse", "ros")))
-                .add(ExpectedTestcase.of(5, t -> t.minDistance("intention", "execution")))
-                .add(ExpectedTestcase.of(3, t -> t.minDistance("mart", "karma")))
-                .add(ExpectedTestcase.of(3, t -> t.minDistance("park", "spake")))
+                .add(ExpectedTestcase.of(t -> t.minDistance("horse", "ros"), 3))
+                .add(ExpectedTestcase.of(t -> t.minDistance("intention", "execution"), 5))
+                .add(ExpectedTestcase.of(t -> t.minDistance("mart", "karma"), 3))
+                .add(ExpectedTestcase.of(t -> t.minDistance("park", "spake"), 3))
                 .build();
     }
 }

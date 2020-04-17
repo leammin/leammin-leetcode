@@ -12,9 +12,9 @@ class ContainsDuplicateTest extends AbstractTest<ContainsDuplicate> {
     @Override
     protected Testsuite<ContainsDuplicate> testsuite() {
         return Testsuite.<ContainsDuplicate>builder()
-                .add(ExpectedTestcase.of(true, s -> s.containsDuplicate(new int[]{1, 2, 3, 1})))
-                .add(ExpectedTestcase.of(false, s -> s.containsDuplicate(new int[]{1, 2, 3, 4, 5})))
-                .add(ExpectedTestcase.of(true, s -> s.containsDuplicate(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12})))
+                .add(ExpectedTestcase.of(s -> s.containsDuplicate(new int[]{1, 2, 3, 1}), true))
+                .add(ExpectedTestcase.of(s -> s.containsDuplicate(new int[]{1, 2, 3, 4, 5}), false))
+                .add(ExpectedTestcase.of(s -> s.containsDuplicate(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12}), true))
                 .build();
     }
 }
