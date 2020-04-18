@@ -25,7 +25,19 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
      */
     OUTPUT run(PROBLEM solution);
 
-    static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
+    @Override
+    default long test(PROBLEM solution) {
+        long before = System.nanoTime();
+        OUTPUT output = run(solution);
+        long time = System.nanoTime() - before;
+
+        boolean result = verify(output);
+        Assertions.assertThat(result).as(ClassUtils.getName(solution)).isTrue();
+
+        return time;
+    }
+
+    static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> create(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
             Function<PROBLEM, OUTPUT> runner, Predicate<OUTPUT> verifier
     ) {
@@ -50,7 +62,7 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> of(
             Function<PROBLEM, OUTPUT> runner, Predicate<OUTPUT> verifier
     ) {
-        return of(TestcaseUtils.defaultSolutionProducer(), runner, verifier);
+        return create(TestcaseUtils.defaultSolutionProducer(), runner, verifier);
     }
 
     static <PROBLEM, OUTPUT> VerifiableTestcase<PROBLEM, OUTPUT> ofConsumer(
@@ -60,17 +72,5 @@ public interface VerifiableTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
             verifier.accept(output);
             return true;
         });
-    }
-
-    @Override
-    default long test(PROBLEM solution) {
-        long before = System.nanoTime();
-        OUTPUT output = run(solution);
-        long time = System.nanoTime() - before;
-
-        boolean result = verify(output);
-        Assertions.assertThat(result).as(ClassUtils.getName(solution)).isTrue();
-
-        return time;
     }
 }

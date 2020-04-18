@@ -1,6 +1,7 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.AbstractTest;
+import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
 
 /**
@@ -11,6 +12,9 @@ class ExcelSheetColumnNumberTest extends AbstractTest<ExcelSheetColumnNumber> {
     @Override
     protected Testsuite<ExcelSheetColumnNumber> testsuite() {
         return Testsuite.<ExcelSheetColumnNumber>builder()
+                .add(ExpectedTestcase.of(t->t.titleToNumber("A"), 1))
+                .add(ExpectedTestcase.of(t->t.titleToNumber("AB"), 28))
+                .add(ExpectedTestcase.of(t->t.titleToNumber("ZY"), 701))
                 .build();
     }
 }

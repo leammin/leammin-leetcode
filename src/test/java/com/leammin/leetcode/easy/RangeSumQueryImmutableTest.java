@@ -14,7 +14,7 @@ class RangeSumQueryImmutableTest extends AbstractTest<RangeSumQueryImmutable> {
     @Override
     protected Testsuite<RangeSumQueryImmutable> testsuite() {
         return Testsuite.<RangeSumQueryImmutable>builder()
-                .add(Testcase.of(
+                .add(Testcase.create(
                         clazz -> ClassUtils.newInstance(clazz, (Object) new int[]{-2, 0, 3, -5, 2, -1}),
                         solution -> {
                             String name = ClassUtils.getName(solution);
@@ -32,7 +32,7 @@ class RangeSumQueryImmutableTest extends AbstractTest<RangeSumQueryImmutable> {
                             Assertions.assertThat(c).as(name).isEqualTo(-3);
                             return time;
                         }))
-                .add(Testcase.of(
+                .add(Testcase.create(
                         clazz -> ClassUtils.newInstance(clazz, (Object) new int[]{-2, 0, 3, -5, 2, -1}),
                         solution -> {
                             String name = ClassUtils.getName(solution);

@@ -34,7 +34,7 @@ public interface Testcase<PROBLEM> {
      * @param <PROBLEM>        问题
      * @return 测试用例实例
      */
-    static <PROBLEM> Testcase<PROBLEM> of(
+    static <PROBLEM> Testcase<PROBLEM> create(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
             ToLongFunction<PROBLEM> tester) {
         Objects.requireNonNull(solutionProducer, "solutionProducer cannot be null");
@@ -60,6 +60,6 @@ public interface Testcase<PROBLEM> {
      * @return 测试用例实例
      */
     static <PROBLEM> Testcase<PROBLEM> of(ToLongFunction<PROBLEM> tester) {
-        return of(TestcaseUtils.defaultSolutionProducer(), tester);
+        return create(TestcaseUtils.defaultSolutionProducer(), tester);
     }
 }

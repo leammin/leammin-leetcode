@@ -13,8 +13,13 @@ class PopulatingNextRightPointersInEachNodeTest extends AbstractTest<PopulatingN
     @Override
     protected Testsuite<PopulatingNextRightPointersInEachNode> testsuite() {
         return Testsuite.<PopulatingNextRightPointersInEachNode>builder()
-                .add(ExpectedTestcase.of(
-                        () -> {
+                .add(ExpectedTestcase.ofSupplier(
+                        t -> t.connect(new Node(
+                                1,
+                                new Node(2, new Node(4), new Node(5), null),
+                                new Node(3, new Node(6), new Node(7), null),
+                                null
+                        )), () -> {
                             Node node7 = new Node(7);
                             Node node6 = new Node(6, null, null, node7);
                             Node node5 = new Node(5, null, null, node6);
@@ -22,13 +27,8 @@ class PopulatingNextRightPointersInEachNodeTest extends AbstractTest<PopulatingN
                             Node node3 = new Node(3, node6, node7, null);
                             Node node2 = new Node(2, node4, node5, node3);
                             return new Node(1, node2, node3, null);
-                        },
-                        t -> t.connect(new Node(
-                                1,
-                                new Node(2, new Node(4), new Node(5), null),
-                                new Node(3, new Node(6), new Node(7), null),
-                                null
-                        ))))
+                        }
+                ))
                 .build();
     }
 }

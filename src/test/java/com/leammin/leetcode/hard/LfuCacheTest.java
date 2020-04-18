@@ -15,7 +15,7 @@ class LfuCacheTest extends AbstractTest<LfuCache> {
     @Override
     protected Testsuite<LfuCache> testsuite() {
         return Testsuite.<LfuCache>builder()
-                .add(Testcase.of(clazz -> {
+                .add(Testcase.create(clazz -> {
                     try {
                         return clazz.getDeclaredConstructor(int.class).newInstance(2);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException
@@ -36,7 +36,7 @@ class LfuCacheTest extends AbstractTest<LfuCache> {
                     Assertions.assertThat(cache.get(4)).isEqualTo(4);   // 返回 4
                     return System.nanoTime() - time;
                 }))
-                .add(Testcase.of(clazz -> {
+                .add(Testcase.create(clazz -> {
                     try {
                         return clazz.getDeclaredConstructor(int.class).newInstance(3);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException
@@ -58,7 +58,7 @@ class LfuCacheTest extends AbstractTest<LfuCache> {
                     Assertions.assertThat(cache.get(4)).isEqualTo(4);
                     return System.nanoTime() - time;
                 }))
-                .add(Testcase.of(clazz -> {
+                .add(Testcase.create(clazz -> {
                     try {
                         return clazz.getDeclaredConstructor(int.class).newInstance(2);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException
@@ -75,7 +75,7 @@ class LfuCacheTest extends AbstractTest<LfuCache> {
                     Assertions.assertThat(cache.get(2)).isEqualTo(3);
                     return System.nanoTime() - time;
                 }))
-                .add(Testcase.of(clazz -> {
+                .add(Testcase.create(clazz -> {
                     try {
                         return clazz.getDeclaredConstructor(int.class).newInstance(3);
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException
