@@ -18,19 +18,17 @@ class ThreeSumTest extends AbstractTest<ThreeSum> {
     protected Testsuite<ThreeSum> testsuite() {
         return Testsuite.<ThreeSum>builder()
                 .add(ExpectedTestcase.of(
-                        sort(Lists.newArrayList(
+                        t -> sort(t.threeSum(new int[]{-1, 0, 1, 2, -1, -4})), sort(Lists.newArrayList(
                                 Lists.newArrayList(-1, 0, 1),
                                 Lists.newArrayList(-1, -1, 2)
-                        )),
-                        t -> sort(t.threeSum(new int[]{-1, 0, 1, 2, -1, -4}))
+                        ))
                 ))
                 .add(ExpectedTestcase.of(
-                        sort(Lists.newArrayList(
+                        t -> sort(t.threeSum(new int[]{-2,-1, 0, 1, 2, -1, -4})), sort(Lists.newArrayList(
                                 Lists.newArrayList(-1, 0, 1),
                                 Lists.newArrayList(-1, -1, 2),
                                 Lists.newArrayList(-2, 0, 2)
-                        )),
-                        t -> sort(t.threeSum(new int[]{-2,-1, 0, 1, 2, -1, -4}))
+                        ))
                 ))
                 .build();
 

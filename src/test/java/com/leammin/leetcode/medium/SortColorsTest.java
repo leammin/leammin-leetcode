@@ -12,16 +12,16 @@ class SortColorsTest extends AbstractTest<SortColors> {
     @Override
     protected Testsuite<SortColors> testsuite() {
         return Testsuite.<SortColors>builder()
-                .add(ExpectedTestcase.of(new int[]{0, 0, 1, 1, 2, 2}, t -> {
+                .add(ExpectedTestcase.of(t -> {
                     int[] nums = {2, 0, 2, 1, 1, 0};
                     t.sortColors(nums);
                     return nums;
-                }))
-                .add(ExpectedTestcase.of(new int[]{0, 1, 2}, t -> {
+                }, new int[]{0, 0, 1, 1, 2, 2}))
+                .add(ExpectedTestcase.of(t -> {
                     int[] nums = {1, 2, 0};
                     t.sortColors(nums);
                     return nums;
-                }))
+                }, new int[]{0, 1, 2}))
                 .build();
     }
 }

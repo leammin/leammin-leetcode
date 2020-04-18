@@ -13,9 +13,9 @@ class SameTreeTest extends AbstractTest<SameTree> {
     @Override
     protected Testsuite<SameTree> testsuite() {
         return Testsuite.<SameTree>builder()
-                .add(ExpectedTestcase.of(true, t -> t.isSameTree(TreeNode.of(1, 2, 3), TreeNode.of(1, 2, 3))))
-                .add(ExpectedTestcase.of(false, t -> t.isSameTree(TreeNode.of(1, 2), TreeNode.of(1, null, 2))))
-                .add(ExpectedTestcase.of(false, t -> t.isSameTree(TreeNode.of(1, 2, 1), TreeNode.of(1, 1, 2))))
+                .add(ExpectedTestcase.of(t -> t.isSameTree(TreeNode.of(1, 2, 3), TreeNode.of(1, 2, 3)), true))
+                .add(ExpectedTestcase.of(t -> t.isSameTree(TreeNode.of(1, 2), TreeNode.of(1, null, 2)), false))
+                .add(ExpectedTestcase.of(t -> t.isSameTree(TreeNode.of(1, 2, 1), TreeNode.of(1, 1, 2)), false))
                 .build();
     }
 }

@@ -13,12 +13,12 @@ class UniquePathsTest extends AbstractTest<UniquePaths> {
     @Override
     protected Testsuite<UniquePaths> testsuite() {
         return Testsuite.<UniquePaths>builder()
-                .add(ExpectedTestcase.of(3, s -> s.uniquePaths(3, 2)))
-                .add(ExpectedTestcase.of(28, s -> s.uniquePaths(3, 7)))
-                .add(ExpectedTestcase.of(6, s -> s.uniquePaths(3, 3)))
-                .add(ExpectedTestcase.of(20, s -> s.uniquePaths(4, 4)))
-                .add(ExpectedTestcase.of(70, s -> s.uniquePaths(5, 5)))
-                .add(ExpectedTestcase.of(252, s -> s.uniquePaths(6, 6)))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(3, 2), 3))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(3, 7), 28))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(3, 3), 6))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(4, 4), 20))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(5, 5), 70))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(6, 6), 252))
                 .build();
     }
 }

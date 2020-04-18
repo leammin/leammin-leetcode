@@ -13,8 +13,8 @@ class MiddleOfTheLinkedListTest extends AbstractTest<MiddleOfTheLinkedList> {
     @Override
     protected Testsuite<MiddleOfTheLinkedList> testsuite() {
         return Testsuite.<MiddleOfTheLinkedList>builder()
-                .add(VerifiableTestcase.of(res -> res.val == 3, t -> t.middleNode(ListNode.of(1, 2, 3, 4, 5))))
-                .add(VerifiableTestcase.of(res -> res.val == 4, t -> t.middleNode(ListNode.of(1, 2, 3, 4, 5, 6))))
+                .add(VerifiableTestcase.of(t -> t.middleNode(ListNode.of(1, 2, 3, 4, 5)), res -> res.val == 3))
+                .add(VerifiableTestcase.of(t -> t.middleNode(ListNode.of(1, 2, 3, 4, 5, 6)), res -> res.val == 4))
                 .build();
     }
 }

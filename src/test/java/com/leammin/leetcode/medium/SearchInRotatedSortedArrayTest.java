@@ -12,9 +12,9 @@ class SearchInRotatedSortedArrayTest extends AbstractTest<SearchInRotatedSortedA
     @Override
     protected Testsuite<SearchInRotatedSortedArray> testsuite() {
         return Testsuite.<SearchInRotatedSortedArray>builder()
-                .add(ExpectedTestcase.of(4, t->t.search(new int[]{4,5,6,7,0,1,2}, 0)))
-                .add(ExpectedTestcase.of(-1, t->t.search(new int[]{4,5,6,7,0,1,2}, 3)))
-                .add(ExpectedTestcase.of(1, t->t.search(new int[]{1,3}, 3)))
+                .add(ExpectedTestcase.of(t->t.search(new int[]{4,5,6,7,0,1,2}, 0), 4))
+                .add(ExpectedTestcase.of(t->t.search(new int[]{4,5,6,7,0,1,2}, 3), -1))
+                .add(ExpectedTestcase.of(t->t.search(new int[]{1,3}, 3), 1))
                 .build();
     }
 }

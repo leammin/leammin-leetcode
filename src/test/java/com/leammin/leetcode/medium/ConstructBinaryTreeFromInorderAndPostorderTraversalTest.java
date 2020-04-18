@@ -13,8 +13,8 @@ class ConstructBinaryTreeFromInorderAndPostorderTraversalTest extends AbstractTe
     @Override
     protected Testsuite<ConstructBinaryTreeFromInorderAndPostorderTraversal> testsuite() {
         return Testsuite.<ConstructBinaryTreeFromInorderAndPostorderTraversal>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(3, 9, 20, null, null, 15, 7),
-                        t -> t.buildTree(new int[]{9, 3, 15, 20, 7}, new int[]{9, 15, 7, 20, 3})))
+                .add(ExpectedTestcase.of(t -> t.buildTree(new int[]{9, 3, 15, 20, 7}, new int[]{9, 15, 7, 20, 3}), TreeNode.of(3, 9, 20, null, null, 15, 7)
+                ))
                 .build();
     }
 }

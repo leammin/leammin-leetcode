@@ -12,18 +12,18 @@ class NumberOfIslandsTest extends AbstractTest<NumberOfIslands> {
     @Override
     protected Testsuite<NumberOfIslands> testsuite() {
         return Testsuite.<NumberOfIslands>builder()
-                .add(ExpectedTestcase.of(1, t -> t.numIslands(new char[][]{
+                .add(ExpectedTestcase.of(t -> t.numIslands(new char[][]{
                         {'1', '1', '1', '1', '0'},
                         {'1', '1', '0', '1', '0'},
                         {'1', '1', '0', '0', '0'},
                         {'0', '0', '0', '0', '0'},
-                })))
-                .add(ExpectedTestcase.of(3, t -> t.numIslands(new char[][]{
+                }), 1))
+                .add(ExpectedTestcase.of(t -> t.numIslands(new char[][]{
                         {'1', '1', '0', '0', '0'},
                         {'1', '1', '0', '0', '0'},
                         {'0', '0', '1', '0', '0'},
                         {'0', '0', '0', '1', '1'},
-                })))
+                }), 3))
                 .build();
     }
 }

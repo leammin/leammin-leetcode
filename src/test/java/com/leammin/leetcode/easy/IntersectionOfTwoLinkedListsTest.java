@@ -26,9 +26,9 @@ class IntersectionOfTwoLinkedListsTest extends AbstractTest<IntersectionOfTwoLin
         ListNodeUtils.tail(case2B).next = case2;
 
         return Testsuite.<IntersectionOfTwoLinkedLists>builder()
-                .add(ExpectedTestcase.of(case1, t -> t.getIntersectionNode(case1A, case1B)))
-                .add(ExpectedTestcase.of(case2, t -> t.getIntersectionNode(case2A, case2B)))
-                .add(ExpectedTestcase.of(null, t -> t.getIntersectionNode(ListNode.of(2, 6, 4), ListNode.of(1, 5))))
+                .add(ExpectedTestcase.of(t -> t.getIntersectionNode(case1A, case1B), case1))
+                .add(ExpectedTestcase.of(t -> t.getIntersectionNode(case2A, case2B), case2))
+                .add(ExpectedTestcase.of(t -> t.getIntersectionNode(ListNode.of(2, 6, 4), ListNode.of(1, 5)), null))
                 .build();
     }
 }

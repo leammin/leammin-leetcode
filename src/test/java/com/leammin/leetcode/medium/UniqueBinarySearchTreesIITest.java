@@ -34,12 +34,12 @@ class UniqueBinarySearchTreesIITest extends AbstractTest<UniqueBinarySearchTrees
                     return true;
                 });
         return Testsuite.<UniqueBinarySearchTreesII>builder()
-                .add(VerifiableTestcase.of(verifierFactory.apply(0), s -> s.generateTrees(0)))
-                .add(VerifiableTestcase.of(verifierFactory.apply(5), s -> s.generateTrees(3)))
-                .add(VerifiableTestcase.of(verifierFactory.apply(14), s -> s.generateTrees(4)))
-                .add(VerifiableTestcase.of(verifierFactory.apply(42), s -> s.generateTrees(5)))
-                .add(VerifiableTestcase.of(verifierFactory.apply(132), s -> s.generateTrees(6)))
-                .add(VerifiableTestcase.of(verifierFactory.apply(1430), s -> s.generateTrees(8)))
+                .add(VerifiableTestcase.of(s -> s.generateTrees(0), verifierFactory.apply(0)))
+                .add(VerifiableTestcase.of(s -> s.generateTrees(3), verifierFactory.apply(5)))
+                .add(VerifiableTestcase.of(s -> s.generateTrees(4), verifierFactory.apply(14)))
+                .add(VerifiableTestcase.of(s -> s.generateTrees(5), verifierFactory.apply(42)))
+                .add(VerifiableTestcase.of(s -> s.generateTrees(6), verifierFactory.apply(132)))
+                .add(VerifiableTestcase.of(s -> s.generateTrees(8), verifierFactory.apply(1430)))
                 .build();
     }
 }

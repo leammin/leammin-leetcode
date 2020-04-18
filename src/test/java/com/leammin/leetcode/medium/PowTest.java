@@ -13,10 +13,10 @@ class PowTest extends AbstractTest<Pow> {
     protected Testsuite<Pow> testsuite() {
 
         return Testsuite.<Pow>builder()
-                .add(ExpectedTestcase.of(1024.00, t->t.myPow(2.00000, 10)))
+                .add(ExpectedTestcase.of(t->t.myPow(2.00000, 10), 1024.00))
 //                .add(ExpectedTestcase.of(9.26100, t->t.myPow(2.10000, 3)))
-                .add(ExpectedTestcase.of(1.0, t->t.myPow(1, 2147483647)))
-                .add(ExpectedTestcase.of(0.0, t->t.myPow(0.00001, 2147483647)))
+                .add(ExpectedTestcase.of(t->t.myPow(1, 2147483647), 1.0))
+                .add(ExpectedTestcase.of(t->t.myPow(0.00001, 2147483647), 0.0))
                 .build();
     }
 }

@@ -13,8 +13,8 @@ class MergeTwoBinaryTreesTest extends AbstractTest<MergeTwoBinaryTrees> {
     @Override
     protected Testsuite<MergeTwoBinaryTrees> testsuite() {
         return Testsuite.<MergeTwoBinaryTrees>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(3, 4, 5, 5, 4, null, 7),
-                        s -> s.mergeTrees(TreeNode.of(1, 3, 2, 5), TreeNode.of(2, 1, 3, null, 4, null, 7))))
+                .add(ExpectedTestcase.of(s -> s.mergeTrees(TreeNode.of(1, 3, 2, 5), TreeNode.of(2, 1, 3, null, 4, null, 7)), TreeNode.of(3, 4, 5, 5, 4, null, 7)
+                ))
                 .build();
     }
 }

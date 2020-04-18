@@ -12,9 +12,9 @@ class ReverseWordsInAStringTest extends AbstractTest<ReverseWordsInAString> {
     @Override
     protected Testsuite<ReverseWordsInAString> testsuite() {
         return Testsuite.<ReverseWordsInAString>builder()
-                .add(ExpectedTestcase.of("blue is sky the", t->t.reverseWords("the sky is blue")))
-                .add(ExpectedTestcase.of("world! hello", t->t.reverseWords("  hello world!  ")))
-                .add(ExpectedTestcase.of("example good a", t->t.reverseWords("a good   example")))
+                .add(ExpectedTestcase.of(t->t.reverseWords("the sky is blue"), "blue is sky the"))
+                .add(ExpectedTestcase.of(t->t.reverseWords("  hello world!  "), "world! hello"))
+                .add(ExpectedTestcase.of(t->t.reverseWords("a good   example"), "example good a"))
                 .build();
     }
 }

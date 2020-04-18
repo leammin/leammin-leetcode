@@ -12,9 +12,9 @@ class MaximizeSumOfArrayAfterKNegationsTest extends AbstractTest<MaximizeSumOfAr
     @Override
     protected Testsuite<MaximizeSumOfArrayAfterKNegations> testsuite() {
         return Testsuite.<MaximizeSumOfArrayAfterKNegations>builder()
-                .add(ExpectedTestcase.of(5, t -> t.largestSumAfterKNegations(new int[]{4, 2, 3}, 1)))
-                .add(ExpectedTestcase.of(6, t -> t.largestSumAfterKNegations(new int[]{3, -1, 0, 2}, 3)))
-                .add(ExpectedTestcase.of(13, t -> t.largestSumAfterKNegations(new int[]{2, -3, -1, 5, -4}, 2)))
+                .add(ExpectedTestcase.of(t -> t.largestSumAfterKNegations(new int[]{4, 2, 3}, 1), 5))
+                .add(ExpectedTestcase.of(t -> t.largestSumAfterKNegations(new int[]{3, -1, 0, 2}, 3), 6))
+                .add(ExpectedTestcase.of(t -> t.largestSumAfterKNegations(new int[]{2, -3, -1, 5, -4}, 2), 13))
                 .build();
     }
 }

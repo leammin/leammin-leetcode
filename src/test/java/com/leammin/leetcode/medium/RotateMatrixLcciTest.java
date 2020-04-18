@@ -12,11 +12,7 @@ class RotateMatrixLcciTest extends AbstractTest<RotateMatrixLcci> {
     @Override
     protected Testsuite<RotateMatrixLcci> testsuite() {
         return Testsuite.<RotateMatrixLcci>builder()
-                .add(ExpectedTestcase.of(new int[][]{
-                        {7, 4, 1},
-                        {8, 5, 2},
-                        {9, 6, 3}
-                }, t -> {
+                .add(ExpectedTestcase.of(t -> {
                     int[][] matrix = {
                             {1, 2, 3},
                             {4, 5, 6},
@@ -24,13 +20,12 @@ class RotateMatrixLcciTest extends AbstractTest<RotateMatrixLcci> {
                     };
                     t.rotate(matrix);
                     return matrix;
+                }, new int[][]{
+                        {7, 4, 1},
+                        {8, 5, 2},
+                        {9, 6, 3}
                 }))
-                .add(ExpectedTestcase.of(new int[][]{
-                        {15, 13, 2, 5},
-                        {14, 3, 4, 1},
-                        {12, 6, 8, 9},
-                        {16, 7, 10, 11}
-                }, t -> {
+                .add(ExpectedTestcase.of(t -> {
                     int[][] matrix = {
                             {5, 1, 9, 11},
                             {2, 4, 8, 10},
@@ -39,6 +34,11 @@ class RotateMatrixLcciTest extends AbstractTest<RotateMatrixLcci> {
                     };
                     t.rotate(matrix);
                     return matrix;
+                }, new int[][]{
+                        {15, 13, 2, 5},
+                        {14, 3, 4, 1},
+                        {12, 6, 8, 9},
+                        {16, 7, 10, 11}
                 }))
                 .build();
     }

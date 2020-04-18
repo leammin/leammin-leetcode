@@ -12,8 +12,8 @@ class CountPrimesTest extends AbstractTest<CountPrimes> {
     @Override
     protected Testsuite<CountPrimes> testsuite() {
         return Testsuite.<CountPrimes>builder()
-                .add(ExpectedTestcase.of(4, t -> t.countPrimes(10)))
-                .add(ExpectedTestcase.of(1229, t -> t.countPrimes(10000)))
+                .add(ExpectedTestcase.of(t -> t.countPrimes(10), 4))
+                .add(ExpectedTestcase.of(t -> t.countPrimes(10000), 1229))
                 .build();
     }
 }

@@ -12,11 +12,11 @@ class CountAndSayTest extends AbstractTest<CountAndSay> {
     @Override
     protected Testsuite<CountAndSay> testsuite() {
         return Testsuite.<CountAndSay>builder()
-                .add(ExpectedTestcase.of("1", t->t.countAndSay(1)))
-                .add(ExpectedTestcase.of("11", t->t.countAndSay(2)))
-                .add(ExpectedTestcase.of("21", t->t.countAndSay(3)))
-                .add(ExpectedTestcase.of("1211", t->t.countAndSay(4)))
-                .add(ExpectedTestcase.of("111221", t->t.countAndSay(5)))
+                .add(ExpectedTestcase.of(t->t.countAndSay(1), "1"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(2), "11"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(3), "21"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(4), "1211"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(5), "111221"))
                 .build();
     }
 }

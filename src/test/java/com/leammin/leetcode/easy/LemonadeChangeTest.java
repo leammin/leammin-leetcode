@@ -12,10 +12,10 @@ class LemonadeChangeTest extends AbstractTest<LemonadeChange> {
     @Override
     protected Testsuite<LemonadeChange> testsuite() {
         return Testsuite.<LemonadeChange>builder()
-                .add(ExpectedTestcase.of(true, t -> t.lemonadeChange(new int[]{5,5,5,10,20})))
-                .add(ExpectedTestcase.of(true, t -> t.lemonadeChange(new int[]{5,5,10})))
-                .add(ExpectedTestcase.of(false, t -> t.lemonadeChange(new int[]{10,10})))
-                .add(ExpectedTestcase.of(false, t -> t.lemonadeChange(new int[]{5,5,10,10,20})))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{5,5,5,10,20}), true))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{5,5,10}), true))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{10,10}), false))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{5,5,10,10,20}), false))
                 .build();
     }
 }

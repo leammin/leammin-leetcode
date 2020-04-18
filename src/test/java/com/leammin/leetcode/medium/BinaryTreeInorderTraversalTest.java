@@ -15,7 +15,7 @@ class BinaryTreeInorderTraversalTest extends AbstractTest<BinaryTreeInorderTrave
     @Override
     protected Testsuite<BinaryTreeInorderTraversal> testsuite() {
         return Testsuite.<BinaryTreeInorderTraversal>builder()
-                .add(ExpectedTestcase.of(List.of(1, 3, 2), s -> s.inorderTraversal(TreeNode.of(1, null, 2, 3))))
+                .add(ExpectedTestcase.of(s -> s.inorderTraversal(TreeNode.of(1, null, 2, 3)), List.of(1, 3, 2)))
                 .build();
     }
 }

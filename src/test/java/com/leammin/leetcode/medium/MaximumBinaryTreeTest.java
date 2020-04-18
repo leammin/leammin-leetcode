@@ -13,7 +13,7 @@ class MaximumBinaryTreeTest extends AbstractTest<MaximumBinaryTree> {
     @Override
     protected Testsuite<MaximumBinaryTree> testsuite() {
         return Testsuite.<MaximumBinaryTree>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(6, 3, 5, null, 2, 0, null, null, 1), s -> s.constructMaximumBinaryTree(new int[]{3, 2, 1, 6, 0, 5})))
+                .add(ExpectedTestcase.of(s -> s.constructMaximumBinaryTree(new int[]{3, 2, 1, 6, 0, 5}), TreeNode.of(6, 3, 5, null, 2, 0, null, null, 1)))
                 .build();
     }
 }

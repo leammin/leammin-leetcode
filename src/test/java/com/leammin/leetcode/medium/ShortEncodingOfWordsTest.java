@@ -12,12 +12,12 @@ class ShortEncodingOfWordsTest extends AbstractTest<ShortEncodingOfWords> {
     @Override
     protected Testsuite<ShortEncodingOfWords> testsuite() {
         return Testsuite.<ShortEncodingOfWords>builder()
-                .add(ExpectedTestcase.of(4, t -> t.minimumLengthEncoding(new String[]{"a", "b"})))
-                .add(ExpectedTestcase.of(8, t -> t.minimumLengthEncoding(new String[]{"a", "bc", "dc"})))
-                .add(ExpectedTestcase.of(10, t -> t.minimumLengthEncoding(new String[]{"time", "me", "bell"})))
-                .add(ExpectedTestcase.of(14, t -> t.minimumLengthEncoding(new String[]{"times", "me", "bell"})))
-                .add(ExpectedTestcase.of(8, t -> t.minimumLengthEncoding(new String[]{"abcdefg", "defg", "fg"})))
-                .add(ExpectedTestcase.of(12, t -> t.minimumLengthEncoding(new String[]{"time", "atime", "btime"})))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"a", "b"}), 4))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"a", "bc", "dc"}), 8))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"time", "me", "bell"}), 10))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"times", "me", "bell"}), 14))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"abcdefg", "defg", "fg"}), 8))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"time", "atime", "btime"}), 12))
                 .build();
     }
 }

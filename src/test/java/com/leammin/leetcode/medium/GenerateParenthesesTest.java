@@ -13,15 +13,15 @@ class GenerateParenthesesTest extends AbstractTest<GenerateParentheses> {
     @Override
     protected Testsuite<GenerateParentheses> testsuite() {
         return Testsuite.<GenerateParentheses>builder()
-                .add(VerifiableTestcase.ofConsumer(res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                .add(VerifiableTestcase.ofConsumer(t -> t.generateParenthesis(3), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
                         "((()))", "(()())", "(())()", "()(())", "()()()"
-                        ),
-                        t -> t.generateParenthesis(3)))
-                .add(VerifiableTestcase.ofConsumer(res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                        )
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.generateParenthesis(4), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
                         "(((())))", "((()()))", "((())())", "((()))()", "(()(()))", "(()()())", "(()())()", "(())(())",
                         "(())()()", "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"
-                        ),
-                        t -> t.generateParenthesis(4)))
+                        )
+                ))
                 .build();
     }
 }

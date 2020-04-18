@@ -13,9 +13,9 @@ class MinimumAsciiDeleteSumForTwoStringsTest extends AbstractTest<MinimumAsciiDe
     @Override
     protected Testsuite<MinimumAsciiDeleteSumForTwoStrings> testsuite() {
         return Testsuite.<MinimumAsciiDeleteSumForTwoStrings>builder()
-                .add(ExpectedTestcase.of(231, s -> s.minimumDeleteSum("sea", "eat")))
-                .add(ExpectedTestcase.of(403, s -> s.minimumDeleteSum("delete", "leet")))
-                .add(ExpectedTestcase.of(1638, s -> s.minimumDeleteSum("sjfqkfxqoditw", "fxymelgo")))
+                .add(ExpectedTestcase.of(s -> s.minimumDeleteSum("sea", "eat"), 231))
+                .add(ExpectedTestcase.of(s -> s.minimumDeleteSum("delete", "leet"), 403))
+                .add(ExpectedTestcase.of(s -> s.minimumDeleteSum("sjfqkfxqoditw", "fxymelgo"), 1638))
                 .build();
     }
 }

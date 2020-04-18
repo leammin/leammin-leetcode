@@ -16,11 +16,11 @@ class PathSumIITest extends AbstractTest<PathSumII> {
     protected Testsuite<PathSumII> testsuite() {
         return Testsuite.<PathSumII>builder()
                 .add(ExpectedTestcase.of(
-                        List.of(
+                        t -> t.pathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1), 22), List.of(
                                 List.of(5, 4, 11, 2),
                                 List.of(5, 8, 4, 5)
-                        ),
-                        t -> t.pathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1), 22)))
+                        )
+                ))
                 .build();
     }
 }

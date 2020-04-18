@@ -13,10 +13,10 @@ class TopKFrequentElementsTest extends AbstractTest<TopKFrequentElements> {
     @Override
     protected Testsuite<TopKFrequentElements> testsuite() {
         return Testsuite.<TopKFrequentElements>builder()
-                .add(VerifiableTestcase.ofConsumer(res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1, 2),
-                        t -> t.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2)))
-                .add(VerifiableTestcase.ofConsumer(res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1),
-                        t -> t.topKFrequent(new int[]{1}, 1)))
+                .add(VerifiableTestcase.ofConsumer(t -> t.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1, 2)
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.topKFrequent(new int[]{1}, 1), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1)
+                ))
                 .build();
     }
 }

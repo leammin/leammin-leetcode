@@ -13,9 +13,9 @@ class WalkingRobotSimulationTest extends AbstractTest<WalkingRobotSimulation> {
     protected Testsuite<WalkingRobotSimulation> testsuite() {
 
         return Testsuite.<WalkingRobotSimulation>builder()
-                .add(ExpectedTestcase.of(25, t -> t.robotSim(new int[]{4, -1, 3}, new int[][]{})))
-                .add(ExpectedTestcase.of(65, t -> t.robotSim(new int[]{4, -1, 4, -2, 4}, new int[][]{new int[]{2, 4}})))
-                .add(ExpectedTestcase.of(5140, t -> t.robotSim(
+                .add(ExpectedTestcase.of(t -> t.robotSim(new int[]{4, -1, 3}, new int[][]{}), 25))
+                .add(ExpectedTestcase.of(t -> t.robotSim(new int[]{4, -1, 4, -2, 4}, new int[][]{new int[]{2, 4}}), 65))
+                .add(ExpectedTestcase.of(t -> t.robotSim(
                         new int[]{1, 2, -2, 5, -1, -2, -1, 8, 3, -1, 9, 4, -2, 3, 2, 4, 3, 9, 2, -1, -1, -2, 1, 3, -2,
                                 4, 1, 4, -1, 1, 9, -1, -2, 5, -1, 5, 5, -2, 6, 6, 7, 7, 2, 8, 9, -1, 7, 4, 6, 9, 9, 9,
                                 -1, 5, 1, 3, 3, -1, 5, 9, 7, 4, 8, -1, -2, 1, 3, 2, 9, 3, -1, -2, 8, 8, 7, 5, -2, 6, 8,
@@ -72,7 +72,7 @@ class WalkingRobotSimulationTest extends AbstractTest<WalkingRobotSimulation> {
                                 new int[]{-85, -46}, new int[]{-94, -23}, new int[]{-48, -3}, new int[]{-64, -37},
                                 new int[]{2, 26}, new int[]{76, 88}, new int[]{-8, -46}, new int[]{-19, -68}
                         }
-                )))
+                ), 5140))
                 .build();
     }
 }

@@ -38,8 +38,7 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
 
     static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
-            OUTPUT expected,
-            Function<PROBLEM, OUTPUT> runner
+            Function<PROBLEM, OUTPUT> runner, OUTPUT expected
     ) {
         Objects.requireNonNull(solutionProducer, "solutionProducer cannot be null");
         Objects.requireNonNull(runner, "runner cannot be null");
@@ -61,25 +60,23 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
         };
     }
 
-    static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> ofSupplier(
+    static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
             Function<Class<? extends PROBLEM>, PROBLEM> solutionProducer,
-            Supplier<OUTPUT> expected,
-            Function<PROBLEM, OUTPUT> runner
+            Function<PROBLEM, OUTPUT> runner, Supplier<OUTPUT> expected
     ) {
-        return of(solutionProducer, expected.get(), runner);
+        return of(solutionProducer, runner, expected.get());
     }
 
     static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
-            OUTPUT expected,
-            Function<PROBLEM, OUTPUT> runner
+            Function<PROBLEM, OUTPUT> runner, OUTPUT expected
     ) {
-        return of(TestcaseUtils.defaultSolutionProducer(), expected, runner);
+        return of(TestcaseUtils.defaultSolutionProducer(), runner, expected);
     }
 
-    static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> ofSupplier(
+    static <PROBLEM, OUTPUT> ExpectedTestcase<PROBLEM, OUTPUT> of(
             Supplier<OUTPUT> expected,
             Function<PROBLEM, OUTPUT> runner
     ) {
-        return ofSupplier(TestcaseUtils.defaultSolutionProducer(), expected, runner);
+        return of(TestcaseUtils.defaultSolutionProducer(), runner, expected);
     }
 }

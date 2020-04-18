@@ -12,9 +12,9 @@ class FindFirstAndLastPositionOfElementInSortedArrayTest extends AbstractTest<Fi
     @Override
     protected Testsuite<FindFirstAndLastPositionOfElementInSortedArray> testsuite() {
         return Testsuite.<FindFirstAndLastPositionOfElementInSortedArray>builder()
-                .add(ExpectedTestcase.of(new int[]{3, 4}, t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8)))
-                .add(ExpectedTestcase.of(new int[]{-1, -1}, t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6)))
-                .add(ExpectedTestcase.of(new int[]{0, 0}, t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 5)))
+                .add(ExpectedTestcase.of(t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8), new int[]{3, 4}))
+                .add(ExpectedTestcase.of(t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6), new int[]{-1, -1}))
+                .add(ExpectedTestcase.of(t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 5), new int[]{0, 0}))
                 .build();
     }
 }

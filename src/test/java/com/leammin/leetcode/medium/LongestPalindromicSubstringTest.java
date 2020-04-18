@@ -12,8 +12,8 @@ class LongestPalindromicSubstringTest extends AbstractTest<LongestPalindromicSub
     @Override
     protected Testsuite<LongestPalindromicSubstring> testsuite() {
         return Testsuite.<LongestPalindromicSubstring>builder()
-                .add(ExpectedTestcase.of(3, t -> t.longestPalindrome("babad").length()))
-                .add(ExpectedTestcase.of(2, t -> t.longestPalindrome("cbbd").length()))
+                .add(ExpectedTestcase.of(t -> t.longestPalindrome("babad").length(), 3))
+                .add(ExpectedTestcase.of(t -> t.longestPalindrome("cbbd").length(), 2))
                 .build();
     }
 }

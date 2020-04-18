@@ -12,8 +12,8 @@ class MaximumNestingDepthOfTwoValidParenthesesStringsTest extends AbstractTest<M
     @Override
     protected Testsuite<MaximumNestingDepthOfTwoValidParenthesesStrings> testsuite() {
         return Testsuite.<MaximumNestingDepthOfTwoValidParenthesesStrings>builder()
-                .add(ExpectedTestcase.of(new int[]{0,1,1,1,1,0}, t->t.maxDepthAfterSplit("(()())")))
-                .add(ExpectedTestcase.of(new int[]{0,0,0,1,1,0,0,0}, t->t.maxDepthAfterSplit("()(())()")))
+                .add(ExpectedTestcase.of(t->t.maxDepthAfterSplit("(()())"), new int[]{0,1,1,1,1,0}))
+                .add(ExpectedTestcase.of(t->t.maxDepthAfterSplit("()(())()"), new int[]{0,0,0,1,1,0,0,0}))
                 .build();
     }
 }

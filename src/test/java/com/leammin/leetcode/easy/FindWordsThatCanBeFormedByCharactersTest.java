@@ -12,8 +12,8 @@ class FindWordsThatCanBeFormedByCharactersTest extends AbstractTest<FindWordsTha
     @Override
     protected Testsuite<FindWordsThatCanBeFormedByCharacters> testsuite() {
         return Testsuite.<FindWordsThatCanBeFormedByCharacters>builder()
-                .add(ExpectedTestcase.of(6, t -> t.countCharacters(new String[]{"cat", "bt", "hat", "tree"}, "atach")))
-                .add(ExpectedTestcase.of(10, t -> t.countCharacters(new String[]{"hello", "world", "leetcode"}, "welldonehoneyr")))
+                .add(ExpectedTestcase.of(t -> t.countCharacters(new String[]{"cat", "bt", "hat", "tree"}, "atach"), 6))
+                .add(ExpectedTestcase.of(t -> t.countCharacters(new String[]{"hello", "world", "leetcode"}, "welldonehoneyr"), 10))
                 .build();
     }
 }

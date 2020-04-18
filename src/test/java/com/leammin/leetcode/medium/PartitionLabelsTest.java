@@ -14,7 +14,7 @@ class PartitionLabelsTest extends AbstractTest<PartitionLabels> {
     @Override
     protected Testsuite<PartitionLabels> testsuite() {
         return Testsuite.<PartitionLabels>builder()
-                .add(ExpectedTestcase.of(Arrays.asList(9,7,8), t->t.partitionLabels("ababcbacadefegdehijhklij")))
+                .add(ExpectedTestcase.of(t->t.partitionLabels("ababcbacadefegdehijhklij"), Arrays.asList(9,7,8)))
                 .build();
     }
 }

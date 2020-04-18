@@ -12,8 +12,8 @@ class YuanQuanZhongZuiHouShengXiaDeShuZiLcofTest extends AbstractTest<YuanQuanZh
     @Override
     protected Testsuite<YuanQuanZhongZuiHouShengXiaDeShuZiLcof> testsuite() {
         return Testsuite.<YuanQuanZhongZuiHouShengXiaDeShuZiLcof>builder()
-                .add(ExpectedTestcase.of(3, t -> t.lastRemaining(5, 3)))
-                .add(ExpectedTestcase.of(2, t -> t.lastRemaining(10, 17)))
+                .add(ExpectedTestcase.of(t -> t.lastRemaining(5, 3), 3))
+                .add(ExpectedTestcase.of(t -> t.lastRemaining(10, 17), 2))
                 .build();
     }
 }

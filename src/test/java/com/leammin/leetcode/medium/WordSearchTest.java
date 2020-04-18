@@ -17,9 +17,9 @@ class WordSearchTest extends AbstractTest<WordSearch> {
                 {'A', 'D', 'E', 'E'}
         };
         return Testsuite.<WordSearch>builder()
-                .add(ExpectedTestcase.of(true, t->t.exist(board, "ABCCED")))
-                .add(ExpectedTestcase.of(true, t->t.exist(board, "SEE")))
-                .add(ExpectedTestcase.of(false, t->t.exist(board, "ABCB")))
+                .add(ExpectedTestcase.of(t->t.exist(board, "ABCCED"), true))
+                .add(ExpectedTestcase.of(t->t.exist(board, "SEE"), true))
+                .add(ExpectedTestcase.of(t->t.exist(board, "ABCB"), false))
                 .build();
     }
 }

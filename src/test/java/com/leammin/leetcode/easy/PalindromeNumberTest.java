@@ -12,12 +12,12 @@ class PalindromeNumberTest extends AbstractTest<PalindromeNumber> {
     @Override
     protected Testsuite<PalindromeNumber> testsuite() {
         return Testsuite.<PalindromeNumber>builder()
-                .add(ExpectedTestcase.of(true, t-> t.isPalindrome(101)))
-                .add(ExpectedTestcase.of(true, t-> t.isPalindrome(1)))
-                .add(ExpectedTestcase.of(false, t-> t.isPalindrome(10)))
-                .add(ExpectedTestcase.of(true, t-> t.isPalindrome(1122332211)))
-                .add(ExpectedTestcase.of(false, t-> t.isPalindrome(-121)))
-                .add(ExpectedTestcase.of(false, t-> t.isPalindrome(-1)))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(101), true))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(1), true))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(10), false))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(1122332211), true))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(-121), false))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(-1), false))
                 .build();
     }
 }

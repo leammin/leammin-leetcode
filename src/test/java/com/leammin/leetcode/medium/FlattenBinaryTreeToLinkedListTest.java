@@ -14,12 +14,12 @@ class FlattenBinaryTreeToLinkedListTest extends AbstractTest<FlattenBinaryTreeTo
     protected Testsuite<FlattenBinaryTreeToLinkedList> testsuite() {
         return Testsuite.<FlattenBinaryTreeToLinkedList>builder()
                 .add(ExpectedTestcase.of(
-                        TreeNode.of(1, null, 2, null, 3, null, 4, null, 5, null, 6),
                         t -> {
                             TreeNode root = TreeNode.of(1, 2, 5, 3, 4, null, 6);
                             t.flatten(root);
                             return root;
-                        }))
+                        }, TreeNode.of(1, null, 2, null, 3, null, 4, null, 5, null, 6)
+                ))
                 .build();
     }
 }

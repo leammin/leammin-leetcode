@@ -13,7 +13,7 @@ class ConstructBinarySearchTreeFromPreorderTraversalTest extends AbstractTest<Co
     @Override
     protected Testsuite<ConstructBinarySearchTreeFromPreorderTraversal> testsuite() {
         return Testsuite.<ConstructBinarySearchTreeFromPreorderTraversal>builder()
-                .add(ExpectedTestcase.of(TreeNode.of(8, 5, 10, 1, 7, null, 12), s -> s.bstFromPreorder(new int[]{8, 5, 1, 7, 10, 12})))
+                .add(ExpectedTestcase.of(s -> s.bstFromPreorder(new int[]{8, 5, 1, 7, 10, 12}), TreeNode.of(8, 5, 10, 1, 7, null, 12)))
                 .build();
     }
 }

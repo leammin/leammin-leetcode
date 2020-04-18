@@ -12,10 +12,10 @@ class IncreasingTripletSubsequenceTest extends AbstractTest<IncreasingTripletSub
     @Override
     protected Testsuite<IncreasingTripletSubsequence> testsuite() {
         return Testsuite.<IncreasingTripletSubsequence>builder()
-                .add(ExpectedTestcase.of(true, t -> t.increasingTriplet(new int[]{1, 2, 3, 4, 5})))
-                .add(ExpectedTestcase.of(false, t -> t.increasingTriplet(new int[]{5, 4, 3, 2, 1})))
-                .add(ExpectedTestcase.of(true, t -> t.increasingTriplet(new int[]{100, 90, 95, 80, 110})))
-                .add(ExpectedTestcase.of(true, t -> t.increasingTriplet(new int[]{100, 120, 80, 90, 95})))
+                .add(ExpectedTestcase.of(t -> t.increasingTriplet(new int[]{1, 2, 3, 4, 5}), true))
+                .add(ExpectedTestcase.of(t -> t.increasingTriplet(new int[]{5, 4, 3, 2, 1}), false))
+                .add(ExpectedTestcase.of(t -> t.increasingTriplet(new int[]{100, 90, 95, 80, 110}), true))
+                .add(ExpectedTestcase.of(t -> t.increasingTriplet(new int[]{100, 120, 80, 90, 95}), true))
                 .build();
     }
 }

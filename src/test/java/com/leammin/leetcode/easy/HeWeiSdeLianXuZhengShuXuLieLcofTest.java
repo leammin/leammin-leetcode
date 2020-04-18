@@ -17,7 +17,7 @@ class HeWeiSdeLianXuZhengShuXuLieLcofTest extends AbstractTest<HeWeiSdeLianXuZhe
     @Override
     protected Testsuite<HeWeiSdeLianXuZhengShuXuLieLcof> testsuite() {
         return Testsuite.<HeWeiSdeLianXuZhengShuXuLieLcof>builder()
-                .add(VerifiableTestcase.of(output -> {
+                .add(VerifiableTestcase.of(t -> t.findContinuousSequence(9), output -> {
                     List<List<Integer>> expected = List.of(
                             List.of(2, 3, 4),
                             List.of(4, 5)
@@ -26,8 +26,8 @@ class HeWeiSdeLianXuZhengShuXuLieLcofTest extends AbstractTest<HeWeiSdeLianXuZhe
                             .map(Ints::asList)
                             .collect(Collectors.toList());
                     return expected.equals(outputSet);
-                }, t -> t.findContinuousSequence(9)))
-                .add(VerifiableTestcase.of(output -> {
+                }))
+                .add(VerifiableTestcase.of(t -> t.findContinuousSequence(15), output -> {
                     List<List<Integer>> expected = List.of(
                             List.of(1, 2, 3, 4, 5),
                             List.of(4, 5, 6),
@@ -37,7 +37,7 @@ class HeWeiSdeLianXuZhengShuXuLieLcofTest extends AbstractTest<HeWeiSdeLianXuZhe
                             .map(Ints::asList)
                             .collect(Collectors.toList());
                     return expected.equals(outputSet);
-                }, t -> t.findContinuousSequence(15)))
+                }))
                 .build();
     }
 }

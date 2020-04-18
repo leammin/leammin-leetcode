@@ -12,8 +12,8 @@ class IsSubsequenceTest extends AbstractTest<IsSubsequence> {
     @Override
     protected Testsuite<IsSubsequence> testsuite() {
         return Testsuite.<IsSubsequence>builder()
-                .add(ExpectedTestcase.of(true, t -> t.isSubsequence("abc", "ahbgdc")))
-                .add(ExpectedTestcase.of(false, t -> t.isSubsequence("axc", "ahbgdc")))
+                .add(ExpectedTestcase.of(t -> t.isSubsequence("abc", "ahbgdc"), true))
+                .add(ExpectedTestcase.of(t -> t.isSubsequence("axc", "ahbgdc"), false))
                 .build();
     }
 }

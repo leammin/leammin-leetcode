@@ -12,10 +12,10 @@ class RomanToIntegerTest extends AbstractTest<RomanToInteger> {
     @Override
     protected Testsuite<RomanToInteger> testsuite() {
         return Testsuite.<RomanToInteger>builder()
-                .add(ExpectedTestcase.of(3, t -> t.romanToInt("III")))
-                .add(ExpectedTestcase.of(4, t -> t.romanToInt("IV")))
-                .add(ExpectedTestcase.of(58, t -> t.romanToInt("LVIII")))
-                .add(ExpectedTestcase.of(1994, t -> t.romanToInt("MCMXCIV")))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("III"), 3))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("IV"), 4))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("LVIII"), 58))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("MCMXCIV"), 1994))
                 .build();
     }
 }
