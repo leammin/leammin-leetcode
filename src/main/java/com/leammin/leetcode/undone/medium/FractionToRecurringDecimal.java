@@ -35,7 +35,28 @@ public interface FractionToRecurringDecimal {
 
         @Override
         public String fractionToDecimal(int numerator, int denominator) {
-            return null;
+            int integer = numerator / denominator;
+            int remainder = numerator - integer * denominator;
+            if (remainder == 0) {
+                return String.valueOf(integer);
+            }
+            StringBuilder builder = new StringBuilder();
+            int tmp = remainder * 10;
+            while (true) {
+                builder.append(tmp / denominator);
+                if (tmp >= denominator) {
+                    tmp %= denominator;
+                }
+                if (tmp == remainder || tmp == 0) {
+                    break;
+                }
+                tmp *= 10;
+            }
+            if (tmp != 0) {
+                return integer + ".(" + builder + ")";
+            } else {
+                return integer + "." + builder;
+            }
         }
     }
 }
