@@ -1,6 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.undone.medium.FractionToRecurringDecimal;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
@@ -18,6 +17,8 @@ class FractionToRecurringDecimalTest extends AbstractTest<FractionToRecurringDec
                 .add(ExpectedTestcase.of(t -> t.fractionToDecimal(2, 3), "0.(6)"))
                 .add(ExpectedTestcase.of(t -> t.fractionToDecimal(4, 333), "0.(012)"))
                 .add(ExpectedTestcase.of(t -> t.fractionToDecimal(1, 6), "0.1(6)"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(7, -12), "-0.58(3)"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(-1, -2147483648), "0.0000000004656612873077392578125"))
                 .build();
     }
 }

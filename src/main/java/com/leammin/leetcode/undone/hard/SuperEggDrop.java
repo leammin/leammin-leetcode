@@ -65,6 +65,10 @@ public interface SuperEggDrop {
 
         @Override
         public int superEggDrop(int K, int N) {
+            int t = (int) (Math.log(N) / Math.log(2)) + 1;
+            if (t <= K) {
+                return t;
+            }
             int[][] dp = new int[K][N];
             for (int ni = 1; ni <= N; ni++) {
                 dp[0][ni - 1] = ni;
@@ -75,15 +79,17 @@ public interface SuperEggDrop {
             }
             for (int ki = 2; ki <= K; ki++) {
                 for (int ni = 3; ni <= N; ni++) {
-                    int d = ni;
-                    for (int i = 2; i <= ni / 2 + 1; i++) {
-                        int s = Math.max(dp[ki - 1][ni - 1 - i], dp[ki - 1 - 1][i - 1 - 1]) + 1;
-                        d = Math.min(d, s);
+                    int d = (int) (Math.log(ni) / Math.log(2)) + 1;
+                    if (d > ki) {
+                        d = ni;
+                        for (int i = 2; i <= ni / 2 + 1; i++) {
+                            int s = Math.max(dp[ki - 1][ni - 1 - i], dp[ki - 1 - 1][i - 1 - 1]) + 1;
+                            d = Math.min(d, s);
+                        }
                     }
                     dp[ki - 1][ni - 1] = d;
                 }
             }
-//            System.out.println(Arrays.deepToString(dp));
             return dp[K - 1][N - 1];
         }
     }
