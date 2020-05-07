@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -27,8 +26,9 @@ public abstract class AbstractTest<PROBLEM> {
     protected List<Class<? extends PROBLEM>> solutions() {
         Class<PROBLEM> problem = problem();
         return Stream.of(problem.getDeclaredClasses())
+                .filter(problem::isAssignableFrom)
                 .map((Function<Class<?>, Class<? extends PROBLEM>>) solution -> solution.asSubclass(problem))
-                .sorted(Comparator.comparing(Class::getName))
+//                .sorted(Comparator.comparing(Class::getSimpleName))
                 .collect(Collectors.toList());
     }
 
