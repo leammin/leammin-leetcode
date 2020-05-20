@@ -13,6 +13,7 @@ class FindTheLongestSubstringContainingVowelsInEvenCountsTest extends AbstractTe
     @Override
     protected Testsuite<FindTheLongestSubstringContainingVowelsInEvenCounts> testsuite() {
         return Testsuite.<FindTheLongestSubstringContainingVowelsInEvenCounts>builder()
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("ee"), 2))
                 .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("eleetminicoworoep"), 13))
                 .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("leetcodeisgreat"), 5))
                 .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("bcbcbc"), 6))
