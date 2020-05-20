@@ -1,5 +1,7 @@
 package com.leammin.leetcode.undone.medium;
 
+import java.util.Arrays;
+
 /**
  * 1371. 每个元音包含偶数次的最长子字符串
  *
@@ -50,35 +52,37 @@ public interface FindTheLongestSubstringContainingVowelsInEvenCounts {
 
         @Override
         public int findTheLongestSubstring(String s) {
-            char[] vowels = {'a', 'e', 'i', 'o', 'u'};
-
-            int[][] dp = new int[0b11111][];
+            int[] dp = new int[32];
+            Arrays.fill(dp, -1);
+            int max = 0;
             int d = 0;
             for (int i = 0; i < s.length(); i++) {
-                int x = indexOf(vowels, s.charAt(i));
-                d ^= x > 0 ? 1 << x : 0;
-                if (dp[d] == null) {
-                    dp[d] = new int[]{i, -1};
+                if ((d ^= xor(s.charAt(i))) == 0) {
+                    max = i + 1;
+                } else if (dp[d] < 0) {
+                    dp[d] = i;
                 } else {
-                    dp[d][1] = i;
-                }
-            }
-            int max = dp[0] == null ? 0 : (Math.max(dp[0][0], dp[0][1]) + 1);
-            for (int i = 1; i < dp.length; i++) {
-                if (dp[i] != null && dp[i][1] >= 0) {
-                    max = Math.max(max, dp[i][1] - dp[i][0]);
+                    max = Math.max(max, i - dp[d]);
                 }
             }
             return max;
         }
 
-        private int indexOf(char[] cs, char target) {
-            for (int i = 0; i < cs.length; i++) {
-                if (cs[i] == target) {
-                    return i;
-                }
+        private int xor(char target) {
+            switch (target) {
+                case 'a':
+                    return 1;
+                case 'e':
+                    return 1 << 1;
+                case 'i':
+                    return 1 << 2;
+                case 'o':
+                    return 1 << 3;
+                case 'u':
+                    return 1 << 4;
+                default:
+                    return 0;
             }
-            return -1;
         }
     }
 }
