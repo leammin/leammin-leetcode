@@ -1,4 +1,6 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
+
+import java.util.*;
 
 /**
  * 560. 和为K的子数组
@@ -41,6 +43,36 @@ public interface SubarraySumEqualsK {
                 }
             }
             return count;
+        }
+    }
+
+    class Solution2 implements SubarraySumEqualsK {
+
+        @Override
+        public int subarraySum(int[] nums, int k) {
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+            Map<Integer, List<Integer>> cache = new HashMap<>();
+            int count = 0;
+            for (int i = 0; i < nums.length; i++) {
+                cache.computeIfAbsent((count += nums[i]), key -> new ArrayList<>()).add(i);
+            }
+            count = 0;
+            int res = 0;
+            for (int i = 0; i < nums.length; i++) {
+                count += nums[i];
+                List<Integer> indexes = cache.get(k + count);
+                if (indexes != null) {
+                    int s = Collections.binarySearch(indexes, i);
+                    s = s < 0 ? -s - 1 : s + 1;
+                    res += indexes.size() - s;
+                }
+                if (count == k) {
+                    res++;
+                }
+            }
+            return res;
         }
     }
 }

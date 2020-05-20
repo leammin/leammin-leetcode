@@ -1,6 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.undone.medium.SubarraySumEqualsK;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
@@ -14,6 +13,8 @@ class SubarraySumEqualsKTest extends AbstractTest<SubarraySumEqualsK> {
     protected Testsuite<SubarraySumEqualsK> testsuite() {
         return Testsuite.<SubarraySumEqualsK>builder()
                 .add(ExpectedTestcase.of(t -> t.subarraySum(new int[]{1,1,1}, 2), 2))
+                .add(ExpectedTestcase.of(t -> t.subarraySum(new int[]{1}, 0), 0))
+                .add(ExpectedTestcase.of(t -> t.subarraySum(new int[]{1,1}, 0), 0))
                 .build();
     }
 }
