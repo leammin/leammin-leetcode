@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 /**
  * 680. 验证回文字符串 Ⅱ
@@ -37,7 +37,32 @@ public interface ValidPalindromeIi {
 
         @Override
         public boolean validPalindrome(String s) {
-            return false;
+            int lo = 0;
+            int hi = s.length() - 1;
+            int blo = lo;
+            int bhi = hi;
+            boolean b = true;
+            boolean r = true;
+            while (lo < hi) {
+                char loc = s.charAt(lo);
+                char hic = s.charAt(hi);
+                if (loc == hic) {
+                    lo++;
+                    hi--;
+                } else if (b){
+                    b = false;
+                    blo = lo;
+                    bhi = hi - 1;
+                    lo++;
+                } else if (r){
+                    r = false;
+                    lo = blo;
+                    hi = bhi;
+                } else {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
