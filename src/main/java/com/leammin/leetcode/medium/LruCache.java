@@ -1,4 +1,9 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 146. LRU缓存机制
@@ -34,26 +39,47 @@ package com.leammin.leetcode.undone.medium;
 public abstract class LruCache {
 
     public LruCache(int capacity) {
+
     }
 
     public abstract int get(int key);
 
     public abstract void put(int key, int value);
 
-    class Solution extends LruCache {
+    public static class Solution extends LruCache {
+        Map<Integer, Integer> map;
+        int capacity;
 
         public Solution(int capacity) {
             super(capacity);
+            this.capacity = capacity;
+            map = capacity > 0 ? new LinkedHashMap<>((int) (capacity / 0.75 + 1)) : Collections.emptyMap();
         }
 
         @Override
         public int get(int key) {
-            return 0;
+            if (capacity <= 0) {
+                return -1;
+            }
+            Integer val = map.remove(key);
+            if (val == null) {
+                return -1;
+            }
+            map.put(key, val);
+            return val;
         }
 
         @Override
         public void put(int key, int value) {
-
+            if (capacity > 0) {
+                if (map.size() == capacity && !map.containsKey(key)) {
+                    Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+                    iterator.next();
+                    iterator.remove();
+                }
+                map.remove(key);
+                map.put(key, value);
+            }
         }
     }
 }
