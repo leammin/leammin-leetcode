@@ -39,7 +39,7 @@ public interface TaskScheduler {
 
         @Override
         public int leastInterval(char[] tasks, int n) {
-            if (n == 0) {
+            if (n == 0 || tasks.length == 1) {
                 return tasks.length;
             }
             int[] count = new int[26];
@@ -47,7 +47,6 @@ public interface TaskScheduler {
                 count[c - 'A']++;
             }
             PriorityQueue<Integer> sorted = new PriorityQueue<>(26, Comparator.reverseOrder());
-
             for (int value : count) {
                 if (value > 0) {
                     sorted.add(value);
@@ -64,20 +63,97 @@ public interface TaskScheduler {
                     }
                 }
                 wait.add(--task);
-                System.out.println(task);
                 run++;
             }
+            int r = tasks.length - run;
+            while (wait.size() < n) {
+                wait.add(0);
+                run++;
+            }
+            task = 0;
+            while (r > 0) {
+                Integer wt = wait.poll();
+                if (task > 0) {
+                    wait.add(task - 1);
+                    r--;
+                } else {
+                    wait.add(0);
+                }
+                task = wt;
+                run++;
+            }
+            return run;
+        }
+    }
+
+    class Solution2 implements TaskScheduler {
+
+        @Override
+        public int leastInterval(char[] tasks, int n) {
+            if (n == 0 || tasks.length == 1) {
+                return tasks.length;
+            }
+            int[] count = new int[26];
+            for (char c : tasks) {
+                count[c - 'A']++;
+            }
+            PriorityQueue<Integer> sorted = new PriorityQueue<>(26, Comparator.reverseOrder());
+            for (int value : count) {
+                if (value > 0) {
+                    sorted.add(value);
+                }
+            }
+            ArrayDeque<Integer> wait = new ArrayDeque<>(n);
+            int run = 0;
+            Integer task;
+            while ((task = sorted.poll()) != null) {
+                if (wait.size() == n) {
+                    Integer wt = wait.poll();
+                    if (wt > 0) {
+                        sorted.add(wt);
+                    }
+                }
+                wait.add(--task);
+                run++;
+            }
+
             int max = 0;
             int mc = 0;
+            int mi = 0;
+            int i = 0;
             for (Integer w : wait) {
                 if (w > max) {
                     max = w;
                     mc = 1;
+                    mi = i;
                 } else if (w == max) {
                     mc++;
                 }
+                i++;
             }
-            return run + (max > 0 ? (max - 1) * (n + 1) + mc : 0);
+            return max > 0 ? run + n - wait.size() + mi + (n + 1) * (max - 1) + mc + 1 : run;
+        }
+    }
+
+    class Best implements TaskScheduler {
+
+        @Override
+        public int leastInterval(char[] tasks, int n) {
+            int[] count = new int[26];
+            for (char c : tasks) {
+                count[c - 'A']++;
+            }
+            int max = 0;
+            int mc = 0;
+            for (int c : count) {
+                if (c > max) {
+                    max = c;
+                    mc = 1;
+                } else if (c == max) {
+                    mc++;
+                }
+            }
+            return Math.max((n + 1) * (max - 1) + mc, tasks.length);
         }
     }
 }
