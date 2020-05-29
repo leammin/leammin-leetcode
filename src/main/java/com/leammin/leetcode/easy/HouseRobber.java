@@ -1,5 +1,7 @@
 package com.leammin.leetcode.easy;
 
+import java.util.Arrays;
+
 /**
  * 198. 打家劫舍
  *
@@ -33,9 +35,7 @@ public interface HouseRobber {
         @Override
         public int rob(int[] nums) {
             int[] cache = new int[nums.length];
-            for (int i = 0; i < cache.length; i++) {
-                cache[i] = -1;
-            }
+            Arrays.fill(cache, -1);
             return rob(nums, 0, cache);
         }
 
@@ -58,6 +58,21 @@ public interface HouseRobber {
             }
             cache[start] = res;
             return res;
+        }
+    }
+
+    class Solution2 implements HouseRobber {
+
+        @Override
+        public int rob(int[] nums) {
+            int a = 0, b = 0, c = 0;
+            for (int num : nums) {
+                int t = num + Math.max(a, b);
+                a = b;
+                b = c;
+                c = t;
+            }
+            return Math.max(b, c);
         }
     }
 
