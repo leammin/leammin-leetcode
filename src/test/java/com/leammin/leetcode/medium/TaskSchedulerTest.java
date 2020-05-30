@@ -19,6 +19,9 @@ class TaskSchedulerTest extends AbstractTest<TaskScheduler> {
                 .add(ExpectedTestcase.of(t -> t.leastInterval(new char[]{'A','A','A','B','B','B'}, 0), 6))
                 .add(ExpectedTestcase.of(t -> t.leastInterval(new char[]{'A','A','A','A','A','A','B','C','D','E','F','G'}, 2), 16))
                 .add(ExpectedTestcase.of(t -> t.leastInterval(new char[]{'A','A','A','A','A','A','B','C','D','E','F','G'}, 1), 12))
-                .build(-2);
+                .add(ExpectedTestcase.of(t -> t.leastInterval(new char[]{'A'}, 2), 1))
+                .add(ExpectedTestcase.of(t -> t.leastInterval(new char[]{'A','B','A'}, 2), 4))
+                .add(ExpectedTestcase.of(t -> t.leastInterval(new char[]{'A', 'A', 'A', 'B', 'B','B', 'C', 'C', 'D'}, 3), 10))
+                .build();
     }
 }
