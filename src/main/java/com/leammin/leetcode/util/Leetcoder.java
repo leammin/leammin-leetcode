@@ -1,8 +1,5 @@
 package com.leammin.leetcode.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
 
@@ -11,7 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -19,54 +19,12 @@ import java.util.stream.Collectors;
  * @date 2019-07-13
  */
 public final class Leetcoder {
-    private static final Path LEETCODE_FILE_PATH = Paths.get("src", "main", "resources", "leetcode.json");
 
-    private static void writeLeetcodeFile(List<Question> questions) {
-        String questionStr = JSON.toJSONString(questions, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue,
-                SerializerFeature.WriteDateUseDateFormat);
-
-        try {
-            Files.writeString(LEETCODE_FILE_PATH, questionStr);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static List<Question> getAllQuestions() {
-        try {
-            String questionStr = Files.readString(LEETCODE_FILE_PATH);
-            return JSONArray.parseArray(questionStr, Question.class).stream()
-                    .filter(q -> !q.needInit()).collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static List<Question> getAllQuestionsWithLeetcode() {
-        List<Question> questionsFromLeetcode = LeetcodeRequests.allQuestionsBeta();
-        List<Question> questionsFromFile = getAllQuestions();
-        Set<String> idsFromFile = questionsFromFile.stream()
-                .map(Question::getQuestionId)
-                .collect(Collectors.toSet());
-
-        List<Question> fileNotExist = questionsFromLeetcode.stream()
-                .filter(q -> !idsFromFile.contains(q.getQuestionId()))
-                .collect(Collectors.toList());
-        questionsFromFile.addAll(fileNotExist);
-        for (Question question : questionsFromFile) {
-            if (question.needInit()) {
-                System.out.println("初始化中: " + question);
-                question.init();
-                writeLeetcodeFile(questionsFromFile);
-            }
-        }
-        return questionsFromFile;
-    }
 
     private static Question getQuestion(String key) {
-        List<Question> allQuestions = getAllQuestions();
+        List<Question> allQuestions = LeetcodeFiles.getAllQuestionsFromFile();
         return getQuestionByKey(allQuestions, key)
-                .or(() -> getQuestionByKey(getAllQuestionsWithLeetcode(), key))
+                .or(() -> getQuestionByKey(LeetcodeFiles.getAllQuestions(), key))
                 .orElseThrow(() -> new RuntimeException("该 key 不存在: " + key));
     }
 
@@ -81,7 +39,6 @@ public final class Leetcoder {
     }
 
     private static String getClassName(Question question) {
-        String title = question.getTitle();
         return Streams.stream(Splitter.on('-').trimResults().omitEmptyStrings().split(question.getTitleSlug()))
                 .map(t -> Character.toUpperCase(t.charAt(0)) + (t.length() > 1 ? t.substring(1) : ""))
                 .collect(Collectors.joining());

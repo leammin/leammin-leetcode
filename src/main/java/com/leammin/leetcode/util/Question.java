@@ -103,8 +103,7 @@ class Question {
         if (isPaidOnly != null && isPaidOnly) {
             return false;
         }
-        return codeSnippets == null || codeSnippets.isEmpty()
-                || StringUtils.isEmpty(content) || StringUtils.isEmpty(translatedContent);
+        return codeSnippets == null || codeSnippets.isEmpty() || StringUtils.isEmpty(translatedContent);
     }
 
     public void init() {

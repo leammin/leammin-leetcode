@@ -40,6 +40,7 @@ public class LeetcodeRequests {
 
     }
 
+    @Deprecated
     public static List<Question> allQuestions() {
         HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_GRAPHQL_URL))
                 .headers(LEETCODE_REQUEST_HEADERS)
@@ -53,6 +54,7 @@ public class LeetcodeRequests {
                 .toJavaList(Question.class);
     }
 
+    @Deprecated
     private static String allQuestionsBody() {
         return "{\"operationName\": \"allQuestions\",\"variables\": {},\"query\": \"query allQuestions{ allQuestions{ " +
                 "...questionSummaryFields\\n__typename\\n } } fragment questionSummaryFields on QuestionNode{ " +
