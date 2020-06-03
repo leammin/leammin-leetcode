@@ -43,19 +43,11 @@ public interface New21Game {
     double new21Game(int N, int K, int W);
 
     class Solution implements New21Game {
-
+        // score >= K stop
+        // score <= N p
         @Override
         public double new21Game(int N, int K, int W) {
-            if (N == 0) {
-                return 0;
-            }
-            int count = 0;
-            int lteN = 0;
-            for (int i = Math.max(N - W, 0); i < K; i++) {
-                count += i + W - K + 1;
-                lteN += N - K + 1;
-            }
-            return count == 0 ? 1 : ((double) lteN / count);
+            return 0;
         }
     }
 }
