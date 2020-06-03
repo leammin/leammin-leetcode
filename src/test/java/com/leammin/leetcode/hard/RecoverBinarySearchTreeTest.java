@@ -15,11 +15,11 @@ class RecoverBinarySearchTreeTest extends AbstractTest<RecoverBinarySearchTree> 
     @Override
     protected Testsuite<RecoverBinarySearchTree> testsuite() {
         return Testsuite.<RecoverBinarySearchTree>builder()
-                .add(ExpectedTestcase.of(true, t -> {
+                .add(ExpectedTestcase.of(t -> {
                     TreeNode root = TreeNode.of(1, 3, null, null, 2);
                     t.recoverTree(root);
                     return TreeNodeUtils.isBst(root);
-                }))
+                }, true))
                 .build();
     }
 }

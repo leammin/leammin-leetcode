@@ -28,6 +28,7 @@ public class ClassUtils {
         try {
             Constructor<?>[] constructors = clazz.getDeclaredConstructors();
             for (Constructor<?> constructor : constructors) {
+                constructor.setAccessible(true);
                 if (constructor.getParameterCount() != args.length) {
                     continue;
                 }
