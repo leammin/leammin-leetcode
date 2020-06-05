@@ -75,16 +75,23 @@ public interface TargetSum {
     class Solution2 implements TargetSum {
         @Override
         public int findTargetSumWays(int[] nums, int S) {
+            int zero = 0;
             int right = 0;
             for (int num : nums) {
                 right += num;
+                if (num == 0) {
+                    zero++;
+                }
             }
-            return dfs(nums, S, 0, 0, new Map[nums.length], right);
+            return dfs(nums, S, 0, 0, new Map[nums.length], right, zero);
         }
 
-        private int dfs(int[] nums, int S, int cur, int sum, Map<Integer, Integer>[] cache, int right) {
+        private int dfs(int[] nums, int S, int cur, int sum, Map<Integer, Integer>[] cache, int right, int zero) {
             if (cur == nums.length) {
                 return S == sum ? 1 : 0;
+            }
+            if (sum + right == S || sum - right == S) {
+                return (int) Math.pow(2, zero);
             }
             if (sum + right < S || sum - right > S) {
                 return 0;
@@ -96,8 +103,12 @@ public interface TargetSum {
             if ((res = cache[cur].get(sum)) != null) {
                 return res;
             }
-            res = dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur]) +
-                    dfs(nums, S, cur + 1, sum - nums[cur], cache, right - nums[cur]);
+            if (nums[cur] == 0) {
+                res = 2 * dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur], zero - 1);
+            } else {
+                res = dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur], zero) +
+                        dfs(nums, S, cur + 1, sum - nums[cur], cache, right - nums[cur], zero);
+            }
             cache[cur].put(sum, res);
             return res;
         }
