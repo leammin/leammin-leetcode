@@ -43,12 +43,9 @@ public interface ShuZuZhongDeNiXuDuiLcof {
                                          int key) {
             int low = fromIndex;
             int high = toIndex - 1;
-
             while (low <= high) {
                 int mid = (low + high) >>> 1;
-                int midVal = a[mid];
-
-                if (midVal <= key)
+                if (a[mid] <= key)
                     low = mid + 1;
                 else {
                     high = mid - 1;

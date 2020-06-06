@@ -29,13 +29,30 @@ package com.leammin.leetcode.easy;
  * @author Leammin
  * @date 2018-10-10
  */
-public interface ImplementStrStr {
+public interface ImplementStrstr {
     int strStr(String haystack, String needle);
 
-    class Solution implements ImplementStrStr {
+    class Solution implements ImplementStrstr {
         @Override
         public int strStr(String haystack, String needle) {
-            return haystack.indexOf(needle);
+            if (needle.isEmpty()) {
+                return 0;
+            }
+            for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+                if (haystack.charAt(i) == needle.charAt(0)) {
+                    boolean ret = true;
+                    for (int j = 1; j < needle.length(); j++) {
+                        if (haystack.charAt(i + j) != needle.charAt(j)) {
+                            ret = false;
+                            break;
+                        }
+                    }
+                    if (ret) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
         }
     }
 
