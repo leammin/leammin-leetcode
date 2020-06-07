@@ -1,7 +1,6 @@
 package com.leammin.leetcode.undone.medium;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 /**
  * 494. 目标和
@@ -77,42 +76,66 @@ public interface TargetSum {
         public int findTargetSumWays(int[] nums, int S) {
             int zero = 0;
             int right = 0;
-            for (int num : nums) {
-                right += num;
-                if (num == 0) {
-                    zero++;
+            for (int i = 0; i < nums.length; i++) {
+                right += nums[i];
+                if (nums[i] == 0) {
+                    nums[i] = nums[zero];
+                    nums[zero++] = 0;
                 }
             }
-            return dfs(nums, S, 0, 0, new Map[nums.length], right, zero);
+            if (zero == nums.length) {
+                return S == 0 ? (int) Math.pow(2, zero) : 0;
+            }
+            int[][] cache = new int[nums.length - zero][2 * right + 1];
+            for (int[] ints : cache) {
+                Arrays.fill(ints, Integer.MIN_VALUE);
+            }
+            return (int) Math.pow(2, zero) * dfs(nums, S, zero, 0, cache, right, zero);
         }
 
-        private int dfs(int[] nums, int S, int cur, int sum, Map<Integer, Integer>[] cache, int right, int zero) {
+        private int dfs(int[] nums, int S, int cur, int sum, int[][] cache, int right, int zero) {
             if (cur == nums.length) {
                 return S == sum ? 1 : 0;
             }
             if (sum + right == S || sum - right == S) {
-                return (int) Math.pow(2, zero);
+                return 1;
             }
             if (sum + right < S || sum - right > S) {
                 return 0;
             }
-            if (cache[cur] == null) {
-                cache[cur] = new HashMap<>();
-            }
-            Integer res;
-            if ((res = cache[cur].get(sum)) != null) {
+            int j = sum + cache[0].length / 2;
+            int res;
+            if ((res = cache[cur - zero][j]) != Integer.MIN_VALUE) {
                 return res;
             }
             if (nums[cur] == 0) {
-                res = 2 * dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur], zero - 1);
+                return cache[cur - zero][j] = 2 * dfs(nums, S, cur + 1, sum, cache, right, zero);
             } else {
-                res = dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur], zero) +
+                return cache[cur - zero][j] = dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur], zero) +
                         dfs(nums, S, cur + 1, sum - nums[cur], cache, right - nums[cur], zero);
             }
-            cache[cur].put(sum, res);
-            return res;
         }
     }
 
+    class Solution3 implements TargetSum {
+
+        @Override
+        public int findTargetSumWays(int[] nums, int S) {
+            int zero = 0;
+            int sum = 0;
+            for (int i = 0; i < nums.length; i++) {
+                sum += nums[i];
+                if (nums[i] == 0) {
+                    nums[i] = nums[zero];
+                    nums[zero++] = 0;
+                }
+            }
+            if (zero == nums.length) {
+                return S == 0 ? (int) Math.pow(2, zero) : 0;
+            }
+
+            return 0;
+        }
+    }
 
 }
