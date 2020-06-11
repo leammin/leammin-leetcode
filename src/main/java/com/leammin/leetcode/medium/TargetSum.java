@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.Arrays;
 
@@ -109,7 +109,7 @@ public interface TargetSum {
                 return res;
             }
             if (nums[cur] == 0) {
-                return cache[cur - zero][j] = 2 * dfs(nums, S, cur + 1, sum, cache, right, zero);
+                return cache[cur - zero][j] = 2 * dfs(nums, S, cur + 1, sum, cache, right, zero - 1);
             } else {
                 return cache[cur - zero][j] = dfs(nums, S, cur + 1, sum + nums[cur], cache, right - nums[cur], zero) +
                         dfs(nums, S, cur + 1, sum - nums[cur], cache, right - nums[cur], zero);
@@ -121,20 +121,22 @@ public interface TargetSum {
 
         @Override
         public int findTargetSumWays(int[] nums, int S) {
-            int zero = 0;
-            int sum = 0;
+            if (S > 1000 || S < -1000) {
+                return 0;
+            }
+            int[] sum = new int[2001];
+            sum[1000] = 1;
             for (int i = 0; i < nums.length; i++) {
-                sum += nums[i];
-                if (nums[i] == 0) {
-                    nums[i] = nums[zero];
-                    nums[zero++] = 0;
+                int[] newSum = new int[2001];
+                for (int j = 0; j < sum.length; j++) {
+                    if (sum[j] > 0) {
+                        newSum[j + nums[i]] += sum[j];
+                        newSum[j - nums[i]] += sum[j];
+                    }
                 }
+                sum = newSum;
             }
-            if (zero == nums.length) {
-                return S == 0 ? (int) Math.pow(2, zero) : 0;
-            }
-
-            return 0;
+            return sum[S + 1000];
         }
     }
 

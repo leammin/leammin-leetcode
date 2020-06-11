@@ -55,4 +55,26 @@ public interface LongestCommonPrefix {
             return res;
         }
     }
+
+    class Solution2 implements LongestCommonPrefix {
+
+        @Override
+        public String longestCommonPrefix(String[] strs) {
+            int index = 0;
+            char c = 0;
+            while (true) {
+                for (String str : strs) {
+                    if (str.length() <= index) {
+                        return str.substring(0, index);
+                    }
+                    if (c == 0) {
+                        c = str.charAt(index);
+                    } else if (c != str.charAt(index)) {
+                        return str.substring(0, index);
+                    }
+                }
+            }
+            return "";
+        }
+    }
 }

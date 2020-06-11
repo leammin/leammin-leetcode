@@ -32,11 +32,20 @@ package com.leammin.leetcode.undone.hard;
 public interface MedianOfTwoSortedArrays {
     double findMedianSortedArrays(int[] nums1, int[] nums2);
 
+    /**
+     * O(m+n)
+     */
     class Solution implements MedianOfTwoSortedArrays {
 
         @Override
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-            return 0;
+            int a = 0;
+            int b = 0;
+            for (int r = (nums1.length + nums2.length) / 2, i1 = 0, i2 = 0; r >=0 ; r--) {
+                a = b;
+                b = i1 < nums1.length && (i2 >= nums2.length || nums1[i1] <= nums2[i2]) ? nums1[i1++] : nums2[i2++];
+            }
+            return (nums1.length + nums2.length) % 2 == 0 ? (a + b) / 2.0 : b;
         }
     }
 }
