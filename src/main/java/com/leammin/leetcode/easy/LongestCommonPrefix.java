@@ -60,11 +60,13 @@ public interface LongestCommonPrefix {
 
         @Override
         public String longestCommonPrefix(String[] strs) {
-            int index = 0;
-            char c = 0;
-            while (true) {
+            if (strs.length == 0) {
+                return "";
+            }
+            for (int index = 0; ; index++) {
+                char c = 0;
                 for (String str : strs) {
-                    if (str.length() <= index) {
+                    if (index >= str.length()) {
                         return str.substring(0, index);
                     }
                     if (c == 0) {
@@ -74,7 +76,6 @@ public interface LongestCommonPrefix {
                     }
                 }
             }
-            return "";
         }
     }
 }
