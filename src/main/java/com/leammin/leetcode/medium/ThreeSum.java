@@ -6,21 +6,20 @@ import java.util.stream.IntStream;
 
 /**
  * 15. 三数之和
- * 
+ *
  * <p>给定一个包含 <em>n</em> 个整数的数组&nbsp;<code>nums</code>，判断&nbsp;<code>nums</code>&nbsp;中是否存在三个元素 <em>a，b，c ，</em>使得&nbsp;<em>a + b + c = </em>0 ？找出所有满足条件且不重复的三元组。</p>
- * 
+ *
  * <p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
- * 
+ *
  * <pre>例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
- * 
+ *
  * 满足要求的三元组集合为：
  * [
  *   [-1, 0, 1],
  *   [-1, -1, 2]
  * ]
  * </pre>
- * 
- * 
+ *
  * @author Leammin
  * @date 2019-08-21
  */
@@ -321,6 +320,54 @@ public interface ThreeSum {
                 }
             }
             return res;
+        }
+    }
+
+
+    /**
+     * 9%
+     */
+    class Solution4 implements ThreeSum {
+
+        @Override
+        public List<List<Integer>> threeSum(int[] nums) {
+            Map<Integer, Integer> count = new HashMap<>((int) (nums.length / 0.75 + 1.0));
+            for (int num : nums) {
+                count.compute(num, (k, v) -> v == null ? 1 : v + 1);
+            }
+            List<List<Integer>> res = new ArrayList<>();
+            Arrays.sort(nums);
+            for (int i = 0; i < nums.length - 2 && nums[i] <= 0; i++) {
+                int a = nums[i];
+                count.compute(a, (k, v) -> v - 1);
+                if (i > 0 && a == nums[i - 1]) {
+                    continue;
+                }
+                for (int j = i + 1; j < nums.length - 1 && nums[i] + nums[j] <= 0; j++) {
+                    int b = nums[j];
+                    count.compute(b, (k, v) -> v - 1);
+                    if (j > i + 1 && b == nums[j - 1]) {
+                        continue;
+                    }
+                    if (count.getOrDefault(-a - b, 0) > 0) {
+                        res.add(Arrays.asList(a, b, -a - b));
+                    }
+                }
+                for (int j = i + 1; j < nums.length - 1 && nums[i] + nums[j] <= 0; j++) {
+                    count.compute(nums[j], (k, v) -> v + 1);
+                }
+            }
+            return res;
+        }
+    }
+
+    class Solution5 implements ThreeSum {
+
+        @Override
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>();
+
+            return null;
         }
     }
 }
