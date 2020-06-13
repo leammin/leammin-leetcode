@@ -142,13 +142,13 @@ public final class Leetcoder {
         String key = sc.next();
 
         Question question = getQuestion(key);
+        System.out.println(question.getJavaCode());
         if (op == 0 || op == 2) {
             createTestFile(question);
         }
         if (op == 0 || op == 1) {
             createCodeFile(question);
         }
-        System.out.println(question.getJavaCode());
     }
 
 }

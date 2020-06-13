@@ -21,22 +21,19 @@ package com.leammin.leetcode.easy;
  * @date 2018-08-26
  */
 public interface ReverseString {
-    String reverseString(String s);
+    void reverseString(char[] s);
 
     class Solution implements ReverseString {
         @Override
-        public String reverseString(String s) {
-            if (s == null || s.length() == 0) {
-                return s;
+        public void reverseString(char[] s) {
+            int left = 0, right = s.length - 1;
+            while (left < right) {
+                char tmp = s[left];
+                s[left] = s[right];
+                s[right] = tmp;
+                left++;
+                right--;
             }
-            char[] chars = s.toCharArray();
-            int len = chars.length;
-            char[] newChars = new char[len];
-            for (int i = 0; i < len; i++) {
-                newChars[len - i - 1] = chars[i];
-            }
-
-            return new String(newChars);
         }
     }
 
