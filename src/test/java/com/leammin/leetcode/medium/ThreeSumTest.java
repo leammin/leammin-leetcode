@@ -18,16 +18,37 @@ class ThreeSumTest extends AbstractTest<ThreeSum> {
     protected Testsuite<ThreeSum> testsuite() {
         return Testsuite.<ThreeSum>builder()
                 .add(ExpectedTestcase.of(
-                        t -> sort(t.threeSum(new int[]{-1, 0, 1, 2, -1, -4})), sort(Lists.newArrayList(
+                        t -> sort(t.threeSum(new int[]{-1, 0, 1, 2, -1, -4})), sort(Lists.list(
                                 Lists.newArrayList(-1, 0, 1),
                                 Lists.newArrayList(-1, -1, 2)
                         ))
                 ))
                 .add(ExpectedTestcase.of(
-                        t -> sort(t.threeSum(new int[]{-2,-1, 0, 1, 2, -1, -4})), sort(Lists.newArrayList(
+                        t -> sort(t.threeSum(new int[]{-2, -1, 0, 1, 2, -1, -4})), sort(Lists.list(
                                 Lists.newArrayList(-1, 0, 1),
                                 Lists.newArrayList(-1, -1, 2),
                                 Lists.newArrayList(-2, 0, 2)
+                        ))
+                ))
+                .add(ExpectedTestcase.of(
+                        t -> sort(t.threeSum(new int[]{0, 0, 0})), sort(Lists.list(
+                                Lists.newArrayList(0, 0, 0)
+                        ))
+                ))
+                .add(ExpectedTestcase.of(
+                        t -> sort(t.threeSum(new int[]{0, 0, 0, 0})), sort(Lists.list(
+                                Lists.newArrayList(0, 0, 0)
+                        ))
+                ))
+                .add(ExpectedTestcase.of(
+                        t -> sort(t.threeSum(new int[]{-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0})), sort(Lists.list(
+                                // [[-5,1,4],[-4,0,4],[-4,1,3],[-2,-2,4],[-2,1,1],[0,0,0]]
+                                Lists.newArrayList(-5, 1, 4),
+                                Lists.newArrayList(-4, 0, 4),
+                                Lists.newArrayList(-4, 1, 3),
+                                Lists.newArrayList(-2, -2, 4),
+                                Lists.newArrayList(-2, 1, 1),
+                                Lists.newArrayList(0, 0, 0)
                         ))
                 ))
                 .build();

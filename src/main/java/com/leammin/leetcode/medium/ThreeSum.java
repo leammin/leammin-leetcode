@@ -365,9 +365,55 @@ public interface ThreeSum {
 
         @Override
         public List<List<Integer>> threeSum(int[] nums) {
+            if (nums.length < 3) {
+                return Collections.emptyList();
+            }
             List<List<Integer>> res = new ArrayList<>();
+            Arrays.sort(nums);
+            int m = nums[nums.length - 1] + nums[nums.length - 2];
+            for (int i = bs(nums, 0, nums.length, -m); i < nums.length - 2 && nums[i] <= 0; i++) {
+                if (i > 0 && nums[i] == nums[i - 1]) {
+                    continue;
+                }
+                int right = nums.length - 1;
+                int left = bs(nums, i + 1, right, -(nums[i] + nums[right]));
+                while (left < right) {
+                    if (nums[left] > -nums[i]) {
+                        break;
+                    }
+                    int s = nums[i] + nums[left] + nums[right];
+                    if(s == 0) {
+                        res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    }
+                    if (s >= 0) {
+                        right--;
+                        while (right > left && nums[right] == nums[right + 1]) {
+                            right--;
+                        }
+                    }
+                    if (s <= 0) {
+                        left++;
+                        while (left < right && nums[left - 1] == nums[left]) {
+                            left++;
+                        }
+                    }
+                }
+            }
+            return res;
+        }
 
-            return null;
+        private static int bs(int[] nums, int from, int to,  int key) {
+            int lo = from;
+            int hi = to;
+            while (lo < hi) {
+                int mid = (lo + hi) >> 1;
+                if (nums[mid] < key) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            return lo;
         }
     }
 }
