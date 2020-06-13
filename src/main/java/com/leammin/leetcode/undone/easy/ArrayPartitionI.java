@@ -32,7 +32,20 @@ public interface ArrayPartitionI {
 
         @Override
         public int arrayPairSum(int[] nums) {
-            return 0;
+            int[] count = new int[20001];
+            for (int num : nums) {
+                count[num + 10000]++;
+            }
+            int res = 0;
+            int l = 0;
+            for (int i = -10000; i <= 10000; i++) {
+                int c = count[i + 10000];
+                if (c > 0) {
+                    res += i * ((c + ((l & 1) == 0 ? 1 : 0)) / 2);
+                    l += c;
+                }
+            }
+            return res;
         }
     }
 }
