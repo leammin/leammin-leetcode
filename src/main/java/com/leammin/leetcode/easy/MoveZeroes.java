@@ -76,5 +76,21 @@ public interface MoveZeroes {
         }
     }
 
+    class Solution3 implements MoveZeroes {
 
+        @Override
+        public void moveZeroes(int[] nums) {
+            int zero = 0;
+            for (int fast = 0, slow = 0; fast < nums.length; fast++) {
+                if (nums[fast] == 0) {
+                    zero++;
+                } else {
+                    nums[slow++] = nums[fast];
+                }
+            }
+            for (int i = nums.length - zero; i < nums.length; i++) {
+                nums[i] = 0;
+            }
+        }
+    }
 }
