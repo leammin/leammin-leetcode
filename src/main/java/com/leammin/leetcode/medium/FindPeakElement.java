@@ -66,4 +66,29 @@ public interface FindPeakElement {
             return i >= 0 && i < nums.length && (i - 1 < 0 || nums[i - 1] < nums[i]) && (i + 1 >= nums.length || nums[i + 1] < nums[i]);
         }
     }
+
+    class Solution2 implements FindPeakElement {
+
+        @Override
+        public int findPeakElement(int[] nums) {
+            int lo = 0;
+            int hi = nums.length - 1;
+            while (lo <= hi) {
+                int mid = lo + (hi - lo) / 2;
+                if (isPeak(nums, mid)) {
+                    return mid;
+                }
+                if (nums[mid] < nums[mid + 1]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                }
+            }
+            return -1;
+        }
+
+        private boolean isPeak(int[] nums, int i) {
+            return (i == 0 || nums[i - 1] < nums[i]) && (i == nums.length - 1 || nums[i + 1] < nums[i]);
+        }
+    }
 }
