@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +77,39 @@ public interface CopyListWithRandomPointer {
                 }
                 node = node.next;
                 newNode = newNode.next;
+            }
+            return newHead;
+        }
+    }
+
+    class Solution2 implements CopyListWithRandomPointer {
+
+        @Override
+        public Node copyRandomList(Node head) {
+            if (head == null) {
+                return null;
+            }
+            Node node = head;
+            while (node != null) {
+                Node random = node.random;
+                node.random = new Node(node.val);
+                node.random.next = random;
+                node = node.next;
+            }
+            node = head;
+            while (node != null) {
+                if (node.random.next != null) {
+                    node.random.random = node.random.next.random;
+                }
+                node = node.next;
+            }
+            Node newHead = head.random;
+            node = head;
+            while (node != null) {
+                Node newNode = node.random;
+                node.random = newNode.next;
+                newNode.next = node.next != null ? node.next.random : null;
+                node = node.next;
             }
             return newHead;
         }
