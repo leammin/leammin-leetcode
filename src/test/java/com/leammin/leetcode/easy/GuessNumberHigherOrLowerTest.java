@@ -1,6 +1,5 @@
 package com.leammin.leetcode.easy;
 
-import com.leammin.leetcode.undone.easy.GuessNumberHigherOrLower;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
