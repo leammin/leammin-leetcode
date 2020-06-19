@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 /**
  * 367. 有效的完全平方数

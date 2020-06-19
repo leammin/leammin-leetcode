@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.ArrayList;
 import java.util.List;
