@@ -1,7 +1,4 @@
-package com.leammin.leetcode.undone.hard;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.leammin.leetcode.hard;
 
 /**
  * 10. 正则表达式匹配
@@ -74,14 +71,13 @@ public interface RegularExpressionMatching {
 
         @Override
         public boolean isMatch(String s, String p) {
-            Map<String, Boolean> cache = new HashMap<>();
+            int[][] cache = new int[s.length() + 1][p.length() + 1];
             return isMatch(s, p, 0, 0, cache);
         }
 
-        private boolean isMatch(String s, String p, int si, int pi, Map<String, Boolean> cache) {
-            String key = si + "_" + pi;
-            if (cache.containsKey(key)) {
-                return cache.get(key);
+        private boolean isMatch(String s, String p, int si, int pi, int[][] cache) {
+            if (cache[si][pi] != 0) {
+                return cache[si][pi] > 0;
             }
             while (si < s.length() && pi < p.length()) {
                 char sc = s.charAt(si);
@@ -89,12 +85,12 @@ public interface RegularExpressionMatching {
                 boolean star = pi < p.length() - 1 && p.charAt(pi + 1) == '*';
                 boolean equals = isEquals(sc, pc);
                 if (!equals && !star) {
-                    cache.put(key, false);
+                    cache[si][pi] = -1;
                     return false;
                 }
                 if (equals && star) {
                     boolean res = matchStar(s, p, si, pi, cache);
-                    cache.put(key, res);
+                    cache[si][pi] = res ? 1 : -1;
                     return res;
                 }
                 if (equals) {
@@ -105,7 +101,7 @@ public interface RegularExpressionMatching {
                 }
             }
             boolean res = si >= s.length() && (pi >= p.length() || afterAllStar(p, pi));
-            cache.put(key, res);
+            cache[si][pi] = res ? 1 : -1;
             return res;
         }
 
@@ -122,7 +118,7 @@ public interface RegularExpressionMatching {
             }
         }
 
-        private boolean matchStar(String s, String p, int si, int pi, Map<String, Boolean> cache) {
+        private boolean matchStar(String s, String p, int si, int pi, int[][] cache) {
             char pc = p.charAt(pi);
             if (pi + 2 >= p.length()) {
                 for (int i = si; i < s.length(); i++) {
