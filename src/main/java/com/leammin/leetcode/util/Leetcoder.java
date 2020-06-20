@@ -132,7 +132,8 @@ public final class Leetcoder {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in)
+                .useDelimiter("\n");
         System.out.println("0.生成全部");
         System.out.println("1.生成代码");
         System.out.println("2.生成测试");
