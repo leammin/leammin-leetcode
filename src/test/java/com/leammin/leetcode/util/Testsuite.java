@@ -39,8 +39,9 @@ public class Testsuite<PROBLEM> {
         long totalTime = 0;
         for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
             Testcase<PROBLEM> testcase = cases.get(i);
-            PROBLEM solution = testcase.solution(solutionClass);
-            long time = testcase.test(solution);
+            // 预热，先执行一遍，不做计时。
+            testcase.test(testcase.solution(solutionClass));
+            long time = testcase.test(testcase.solution(solutionClass));
             logger.debug("{} Testcase-{} Running Time: {}ms",
                     solutionClass.getSimpleName(),
                     String.format("%02d", i),
