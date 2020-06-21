@@ -16,6 +16,6 @@ class New21GameTest extends AbstractTest<New21Game> {
                 .add(ExpectedTestcase.of(t -> t.new21Game(10, 1, 10), 1.0))
                 .add(ExpectedTestcase.of(t -> t.new21Game(6, 1, 10), 0.6))
                 .add(ExpectedTestcase.of(t -> t.new21Game(21, 17, 10), 0.73278))
-                .build(-1);
+                .build();
     }
 }
