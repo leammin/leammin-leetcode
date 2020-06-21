@@ -34,10 +34,11 @@ public abstract class AbstractTest<PROBLEM> {
         if (!hasSolutionAnnotation) {
             return solutions;
         }
-        return solutions.stream()
+        List<Class<? extends PROBLEM>> executeSolution = solutions.stream()
                 .filter(s -> s.getDeclaredAnnotation(Execute.class) != null
                         && s.getDeclaredAnnotation(Execute.class).value())
                 .collect(Collectors.toList());
+        return executeSolution.isEmpty() ? solutions : executeSolution;
     }
 
     @Test
