@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,8 +36,10 @@ public abstract class AbstractTest<PROBLEM> {
             return solutions;
         }
         List<Class<? extends PROBLEM>> executeSolution = solutions.stream()
-                .filter(s -> s.getDeclaredAnnotation(Execute.class) != null
-                        && s.getDeclaredAnnotation(Execute.class).value())
+                .filter(s -> Optional.ofNullable(s.getDeclaredAnnotation(Execute.class))
+                        .map(Execute::value)
+                        .orElse(false)
+                )
                 .collect(Collectors.toList());
         return executeSolution.isEmpty() ? solutions : executeSolution;
     }
