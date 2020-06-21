@@ -25,10 +25,18 @@ public abstract class AbstractTest<PROBLEM> {
 
     protected List<Class<? extends PROBLEM>> solutions() {
         Class<PROBLEM> problem = problem();
-        return Stream.of(problem.getDeclaredClasses())
+        List<Class<? extends PROBLEM>> solutions = Stream.of(problem.getDeclaredClasses())
                 .filter(problem::isAssignableFrom)
                 .map((Function<Class<?>, Class<? extends PROBLEM>>) solution -> solution.asSubclass(problem))
-//                .sorted(Comparator.comparing(Class::getSimpleName))
+                .collect(Collectors.toList());
+        boolean hasSolutionAnnotation = solutions.stream()
+                .anyMatch(s -> s.getDeclaredAnnotation(Execute.class) != null);
+        if (!hasSolutionAnnotation) {
+            return solutions;
+        }
+        return solutions.stream()
+                .filter(s -> s.getDeclaredAnnotation(Execute.class) != null
+                        && s.getDeclaredAnnotation(Execute.class).value())
                 .collect(Collectors.toList());
     }
 
@@ -39,9 +47,6 @@ public abstract class AbstractTest<PROBLEM> {
             logger.warn("Testsuite is empty");
             return;
         }
-//        Assertions.assertThat(testsuite.isEmpty())
-//                .withFailMessage("Testsuite cannot be empty")
-//                .isFalse();
 
         List<Class<? extends PROBLEM>> solutions = solutions();
         Assertions.assertThat(solutions)
