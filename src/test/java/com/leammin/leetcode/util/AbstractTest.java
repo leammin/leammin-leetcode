@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,13 +34,9 @@ public abstract class AbstractTest<PROBLEM> {
         if (!hasSolutionAnnotation) {
             return solutions;
         }
-        List<Class<? extends PROBLEM>> executeSolution = solutions.stream()
-                .filter(s -> Optional.ofNullable(s.getDeclaredAnnotation(Execute.class))
-                        .map(Execute::value)
-                        .orElse(false)
-                )
+        return solutions.stream()
+                .filter(s -> s.getDeclaredAnnotation(Execute.class) != null)
                 .collect(Collectors.toList());
-        return executeSolution.isEmpty() ? solutions : executeSolution;
     }
 
     @Test
@@ -58,10 +53,22 @@ public abstract class AbstractTest<PROBLEM> {
                 .hasSizeGreaterThan(0);
 
         logger.info("Problem: {}", problem().getSimpleName());
-
         for (Class<? extends PROBLEM> solution : solutions) {
-            long time = testsuite.test(solution);
-            logger.info("{}-{} Running Time: {}ms", problem().getSimpleName(), solution.getSimpleName(), time / 1000000.0);
+            test(testsuite, solution);
         }
+    }
+
+    private void test(Testsuite<PROBLEM> testsuite, Class<? extends PROBLEM> solution) {
+        Execute execute = solution.getDeclaredAnnotation(Execute.class);
+        if (execute != null && !execute.value()) {
+            return;
+        }
+        long time;
+        if (execute == null) {
+            time = testsuite.test(solution);
+        } else {
+            time = testsuite.test(solution, execute.cases());
+        }
+        logger.info("{}-{} Running Time: {}ms", problem().getSimpleName(), solution.getSimpleName(), time / 1000000.0);
     }
 }

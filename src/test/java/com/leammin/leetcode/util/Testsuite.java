@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 测试套件，封装多个测试用例
@@ -19,14 +18,26 @@ public class Testsuite<PROBLEM> {
     private static final Logger logger = LoggerFactory.getLogger(Testsuite.class);
 
     private final List<Testcase<PROBLEM>> cases;
+    private final int[] defaultCaseIndexes;
+
+    /**
+     * 不允许直接实例化，请使用Builder
+     *  @param cases 测试用例
+     *
+     */
+    private Testsuite(List<Testcase<PROBLEM>> cases) {
+        this(cases, new int[0]);
+    }
 
     /**
      * 不允许直接实例化，请使用Builder
      *
      * @param cases 测试用例
+     * @param defaultIndexes 默认执行测试用例的下标，为空表示执行所有测试用例
      */
-    private Testsuite(List<Testcase<PROBLEM>> cases) {
+    private Testsuite(List<Testcase<PROBLEM>> cases, int[] defaultIndexes) {
         this.cases = ImmutableList.copyOf(cases);
+        this.defaultCaseIndexes = Arrays.copyOf(defaultIndexes, defaultIndexes.length);
     }
 
     /**
@@ -36,21 +47,61 @@ public class Testsuite<PROBLEM> {
      * @return 执行时间
      */
     public long test(Class<? extends PROBLEM> solutionClass) {
+        return test(solutionClass, defaultCaseIndexes);
+    }
+
+    /**
+     * 测试测试用例，并返回执行时间
+     *
+     * @param solutionClass 解法class对象
+     * @param caseIndexes 执行测试用例的下标，为空表示执行所有测试用例
+     * @return 执行时间
+     */
+    public long test(Class<? extends PROBLEM> solutionClass, int ... caseIndexes) {
+        if (isEmpty()) {
+            return 0;
+        }
+        Collection<Integer> caseSet = caseIndexes(caseIndexes);
         long totalTime = 0;
-        for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
-            Testcase<PROBLEM> testcase = cases.get(i);
-            // 预热，先执行一遍，不做计时。
-            testcase.test(testcase.solution(solutionClass));
-            long time = testcase.test(testcase.solution(solutionClass));
-            logger.debug("{} Testcase-{} Running Time: {}ms",
-                    solutionClass.getSimpleName(),
-                    String.format("%02d", i),
-                    BigDecimal.valueOf(time).divide(BigDecimal.valueOf(1000000), 6, RoundingMode.HALF_UP));
-            totalTime += time;
+        if (caseSet.isEmpty()) {
+            for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
+                long time = testCase(solutionClass, i);
+                totalTime += time;
+            }
+        } else {
+            for (int i : caseSet) {
+                long time = testCase(solutionClass, i);
+                totalTime += time;
+            }
         }
 
         return totalTime;
     }
+
+    private long testCase(Class<? extends PROBLEM> solutionClass, int i) {
+        Testcase<PROBLEM> testcase = cases.get(i);
+        // 预热，先执行一遍，不做计时。
+        testcase.test(testcase.solution(solutionClass));
+        long time = testcase.test(testcase.solution(solutionClass));
+        logger.debug("{} Testcase-{} Running Time: {}ms",
+                solutionClass.getSimpleName(),
+                String.format("%02d", i),
+                BigDecimal.valueOf(time).divide(BigDecimal.valueOf(1000000), 6, RoundingMode.HALF_UP));
+        return time;
+    }
+
+    private Collection<Integer> caseIndexes(int[] caseIndexes) {
+        if (caseIndexes == null || caseIndexes.length == 0) {
+            return Collections.emptyList();
+        }
+        List<Integer> caseSet = new ArrayList<>(caseIndexes.length);
+        int size = size();
+        for (int caseIndex : caseIndexes) {
+            caseSet.add((caseIndex % size + size) % size);
+        }
+        return caseSet;
+    }
+
 
     /**
      * @return 测试用例的数量
@@ -93,13 +144,7 @@ public class Testsuite<PROBLEM> {
 
         public Testsuite<PROBLEM> build(int... indexes) {
             List<Testcase<PROBLEM>> list = new ArrayList<>(indexes.length);
-            for (int index : indexes) {
-                if (index < 0) {
-                    index += cases.size();
-                }
-                list.add(cases.get(index));
-            }
-            return new Testsuite<>(list);
+            return new Testsuite<>(list, indexes);
         }
 
         /**
