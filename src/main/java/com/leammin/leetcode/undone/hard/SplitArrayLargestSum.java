@@ -1,7 +1,5 @@
 package com.leammin.leetcode.undone.hard;
 
-import com.leammin.leetcode.util.Execute;
-
 /**
  * 410. 分割数组的最大值
  *
@@ -67,7 +65,6 @@ public interface SplitArrayLargestSum {
     /**
      * dp[m][from] = min(max(dp[m - 1][from + i], sum(from, from +i)))
      */
-//    @Execute
     class Solution2 implements SplitArrayLargestSum {
 
         @Override
@@ -90,7 +87,6 @@ public interface SplitArrayLargestSum {
         }
     }
 
-    @Execute
     class Solution3 implements SplitArrayLargestSum {
 
         @Override
@@ -113,6 +109,43 @@ public interface SplitArrayLargestSum {
                 dp = next;
             }
             return dp[0];
+        }
+    }
+
+    class Solution4 implements SplitArrayLargestSum {
+
+        @Override
+        public int splitArray(int[] nums, int m) {
+            int[] sum = new int[nums.length];
+            sum[nums.length - 1] = nums[nums.length - 1];
+            for (int i = nums.length - 2; i >= 0; i--) {
+                sum[i] = nums[i] + sum[i + 1];
+            }
+            int[] dp = sum;
+            for (int i = 1; i < m; i++) {
+                int[] next = new int[nums.length];
+                for (int j = nums.length - 1 - i; j >= 0; j--) {
+                    next[j] = getMin(sum, dp, j, nums.length - i);
+                }
+                dp = next;
+            }
+            return dp[0];
+        }
+
+        private static int getMin(int[] sum, int[] dp, int j, int end) {
+            int lo = j + 1;
+            int hi = end;
+            while (lo < hi -1) {
+                int mid = lo + (hi - lo) / 2;
+                if (dp[mid] > sum[j] - sum[mid]) {
+                    lo = mid;
+                } else if (dp[mid] < sum[j] - sum[mid]) {
+                    hi = mid;
+                } else {
+                    return dp[mid];
+                }
+            }
+            return Math.min(Math.max(dp[lo], sum[j] - sum[lo]), Math.max(dp[hi], sum[j] - sum[hi]));
         }
     }
 }
