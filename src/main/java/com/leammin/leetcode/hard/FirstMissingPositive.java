@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.hard;
+package com.leammin.leetcode.hard;
 
 /**
  * 41. 缺失的第一个正数

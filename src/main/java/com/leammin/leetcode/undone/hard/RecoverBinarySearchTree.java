@@ -65,7 +65,7 @@ public interface RecoverBinarySearchTree {
 
         @Override
         public void recoverTree(TreeNode root) {
-
+            recoverNode(root);
         }
 
         public void recoverNode(TreeNode node) {
