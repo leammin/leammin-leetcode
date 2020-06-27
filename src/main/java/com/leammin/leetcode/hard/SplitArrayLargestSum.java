@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.hard;
+package com.leammin.leetcode.hard;
 
 /**
  * 410. 分割数组的最大值
@@ -28,7 +28,6 @@ package com.leammin.leetcode.undone.hard;
  * 其中最好的方式是将其分为<strong>[7,2,5]</strong> 和 <strong>[10,8]</strong>，
  * 因为此时这两个子数组各自的和的最大值为18，在所有情况中最小。
  * </pre>
- *
  *
  * @author Leammin
  * @date 2020-06-22
@@ -135,7 +134,7 @@ public interface SplitArrayLargestSum {
         private static int getMin(int[] sum, int[] dp, int j, int end) {
             int lo = j + 1;
             int hi = end;
-            while (lo < hi -1) {
+            while (lo < hi - 1) {
                 int mid = lo + (hi - lo) / 2;
                 if (dp[mid] > sum[j] - sum[mid]) {
                     lo = mid;
@@ -153,13 +152,67 @@ public interface SplitArrayLargestSum {
 
         @Override
         public int splitArray(int[] nums, int m) {
-            int[] sum = new int[nums.length];
-            sum[0] = nums[0];
-            for (int i = 1; i < nums.length; i++) {
-                sum[i] = nums[i] + sum[i - 1];
+            long[] sums = new long[nums.length];
+            long sum = 0;
+            int max = 0;
+            for (int i = 0; i < nums.length; i++) {
+                sums[i] = (sum += nums[i]);
+                max = Math.max(max, nums[i]);
+            }
+            if (m == 1) {
+                return (int) sum;
+            }
+            long lo = max;
+            long hi = sum;
+            int res = 0;
+            while (lo <= hi) {
+                long mid = lo + (hi - lo) / 2;
+                int[] split = splitSizeAndSplitMax(sums, mid);
+                int splitSize = split[0];
+                if (splitSize > m) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                    res = split[1];
+                }
+            }
+            return res;
+        }
+
+        private int[] splitSizeAndSplitMax(long[] sums, long target) {
+            int max = 0;
+            int size = 0;
+            int i = 0;
+            while (i < sums.length) {
+                long t = target + (i == 0 ? 0 : sums[i - 1]);
+                int bs = bs(sums, i, sums.length, t);
+                if (bs == i) {
+                    return new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE};
+                }
+                max = (int) Math.max(max, sums[bs - 1] - (i == 0 ? 0 : sums[i - 1]));
+                i = bs;
+                size++;
+            }
+            return new int[]{size, max};
+        }
+
+        private int bs(long[] sums, int from, int to, long key) {
+            int low = from;
+            int high = to - 1;
+
+            while (low <= high) {
+                int mid = (low + high) >>> 1;
+                long midVal = sums[mid];
+
+                if (midVal < key)
+                    low = mid + 1;
+                else if (midVal > key)
+                    high = mid - 1;
+                else
+                    return mid; // key found
             }
 
-            return 0;
+            return low;
         }
     }
 }
