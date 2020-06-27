@@ -37,14 +37,14 @@ import java.util.*;
  * @author Leammin
  * @date 2018-09-25
  */
-public interface IntersectionOfTwoArraysII {
+public interface IntersectionOfTwoArraysIi {
     int[] intersect(int[] nums1, int[] nums2);
 
     /**
      * nums1 大小比 nums2 小很多此方法更优
      * nums2 存储在此磁盘上也使用此方法 分多次读取磁盘数据
      */
-    class Solution implements IntersectionOfTwoArraysII {
+    class Solution implements IntersectionOfTwoArraysIi {
 
         @Override
         public int[] intersect(int[] nums1, int[] nums2) {
@@ -69,7 +69,7 @@ public interface IntersectionOfTwoArraysII {
         }
     }
 
-    class Solution1 implements IntersectionOfTwoArraysII {
+    class Solution1 implements IntersectionOfTwoArraysIi {
         @Override
         public int[] intersect(int[] nums1, int[] nums2) {
             List<Integer> resList = new ArrayList<>(nums1.length);
