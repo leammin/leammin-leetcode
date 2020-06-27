@@ -25,10 +25,10 @@ import java.util.Map;
  * @author Leammin
  * @date 2018-09-10
  */
-public interface FirstUniqueCharacterInString {
+public interface FirstUniqueCharacterInAString {
     int firstUniqChar(String s);
 
-    class Solution implements FirstUniqueCharacterInString {
+    class Solution implements FirstUniqueCharacterInAString {
         @Override
         public int firstUniqChar(String s) {
             Map<Character, Integer> map = new HashMap<>(s.length());
@@ -51,7 +51,7 @@ public interface FirstUniqueCharacterInString {
         }
     }
 
-    class Solution1 implements FirstUniqueCharacterInString {
+    class Solution1 implements FirstUniqueCharacterInAString {
         @Override
         public int firstUniqChar(String s) {
             int result = -1;
