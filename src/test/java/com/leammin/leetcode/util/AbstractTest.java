@@ -29,13 +29,15 @@ public abstract class AbstractTest<PROBLEM> {
                 .filter(problem::isAssignableFrom)
                 .map((Function<Class<?>, Class<? extends PROBLEM>>) solution -> solution.asSubclass(problem))
                 .collect(Collectors.toList());
-        boolean hasSolutionAnnotation = solutions.stream()
-                .anyMatch(s -> s.getDeclaredAnnotation(Execute.class) != null);
-        if (!hasSolutionAnnotation) {
-            return solutions;
-        }
+        boolean hasExecute = solutions.stream()
+                .map(s -> s.getDeclaredAnnotation(Execute.class))
+                .anyMatch(e -> e != null && e.value());
         return solutions.stream()
-                .filter(s -> s.getDeclaredAnnotation(Execute.class) != null)
+                .filter(s -> {
+                    Execute execute = s.getDeclaredAnnotation(Execute.class);
+                    return (!hasExecute && execute == null) ||
+                            (hasExecute && execute != null && execute.value());
+                })
                 .collect(Collectors.toList());
     }
 

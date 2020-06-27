@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.Execute;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,38 +97,39 @@ public interface SuperEggDrop {
         }
     }
 
-//    class Solution2 implements SuperEggDrop {
-//
-//        @Override
-//        public int superEggDrop(int K, int N) {
-//            if (K == 1 || N == 1 || N == 2) {
-//                return N;
-//            }
-//            int[][] dp = new int[K][N];
-//            for (int ni = 1; ni <= N; ni++) {
-//                dp[0][ni - 1] = ni;
-//            }
-//            for (int ki = 1; ki <= K; ki++) {
-//                dp[ki - 1][0] = 1;
-//                dp[ki - 1][1] = 2;
-//            }
-//            for (int ki = 2; ki <= K; ki++) {
-//                int di = ki - 1;
-//                int dj = 0;
-//                for (int ni = 3; ni <= N/2 + 1; ni++) {
-//                    dp[ki - 1][ni - 1] = dp[di][dj] + 1;
-//                    if ((ni & 1) == 1) {
-//                        di--;
-//                        dj++;
-//                    } else {
-//                        di++;
-//                    }
-//                }
-//            }
-//            System.out.println(Arrays.deepToString(dp));
-//            return dp[K - 1][N - 1];
-//        }
-//    }
+    @Execute(false)
+    class Solution2 implements SuperEggDrop {
+
+        @Override
+        public int superEggDrop(int K, int N) {
+            if (K == 1 || N == 1 || N == 2) {
+                return N;
+            }
+            int[][] dp = new int[K][N];
+            for (int ni = 1; ni <= N; ni++) {
+                dp[0][ni - 1] = ni;
+            }
+            for (int ki = 1; ki <= K; ki++) {
+                dp[ki - 1][0] = 1;
+                dp[ki - 1][1] = 2;
+            }
+            for (int ki = 2; ki <= K; ki++) {
+                int di = ki - 1;
+                int dj = 0;
+                for (int ni = 3; ni <= N/2 + 1; ni++) {
+                    dp[ki - 1][ni - 1] = dp[di][dj] + 1;
+                    if ((ni & 1) == 1) {
+                        di--;
+                        dj++;
+                    } else {
+                        di++;
+                    }
+                }
+            }
+            System.out.println(Arrays.deepToString(dp));
+            return dp[K - 1][N - 1];
+        }
+    }
 
     class Demo implements SuperEggDrop {
         public int superEggDrop(int K, int N) {
