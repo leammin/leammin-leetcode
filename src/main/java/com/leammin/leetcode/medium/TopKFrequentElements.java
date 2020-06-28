@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * 347. 前 K 个高频元素
@@ -30,12 +33,12 @@ import java.util.*;
  * @date 2020-03-28
  */
 public interface TopKFrequentElements {
-    List<Integer> topKFrequent(int[] nums, int k);
+    int[] topKFrequent(int[] nums, int k);
 
     class Solution implements TopKFrequentElements {
 
         @Override
-        public List<Integer> topKFrequent(int[] nums, int k) {
+        public int[] topKFrequent(int[] nums, int k) {
             Map<Integer, Integer> count = new HashMap<>();
             for (int num : nums) {
                 count.compute(num, (key, value) -> value == null ? 1 : value + 1);
@@ -47,7 +50,12 @@ public interface TopKFrequentElements {
                     queue.poll();
                 }
             }
-            return new ArrayList<>(queue);
+            int[] res = new int[queue.size()];
+            int i = 0;
+            for (Integer num : queue) {
+                res[i++] = num;
+            }
+            return res;
         }
     }
 }
