@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.*;
 
@@ -159,6 +159,48 @@ public interface PopulatingNextRightPointersInEachNodeIi {
             }
             if (!newList.isEmpty()) {
                 connect(newList);
+            }
+        }
+    }
+
+    class Solution4 implements PopulatingNextRightPointersInEachNodeIi {
+
+        @Override
+        public Node connect(Node root) {
+            connectNode(root);
+            return root;
+        }
+
+        private void connectNode(Node parent) {
+            Node next = null;
+            Node last = null;
+            while (parent != null) {
+                if (parent.left != null) {
+                    if (next == null) {
+                        next = parent.left;
+                    }
+                    if (last == null) {
+                        last = parent.left;
+                    } else {
+                        last.next = parent.left;
+                        last = parent.left;
+                    }
+                }
+                if (parent.right != null) {
+                    if (next == null) {
+                        next = parent.right;
+                    }
+                    if (last == null) {
+                        last = parent.right;
+                    } else {
+                        last.next = parent.right;
+                        last = parent.right;
+                    }
+                }
+                parent = parent.next;
+            }
+            if (next != null) {
+                connectNode(next);
             }
         }
     }
