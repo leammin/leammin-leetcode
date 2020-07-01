@@ -1,6 +1,5 @@
 package com.leammin.leetcode.hard;
 
-import com.leammin.leetcode.undone.hard.SplitArrayLargestSum;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
@@ -18,6 +17,7 @@ class SplitArrayLargestSumTest extends AbstractTest<SplitArrayLargestSum> {
                 .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2,3,4,5}, 5), 5))
                 .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,3,2,4,6}, 3), 6))
                 .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2147483646}, 1), 2147483647))
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2147483647}, 2), 2147483647))
                 .build();
     }
 
