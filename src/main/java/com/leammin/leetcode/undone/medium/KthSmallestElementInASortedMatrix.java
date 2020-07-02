@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.medium;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
  * 378. 有序矩阵中第K小的元素
  * 
@@ -33,7 +36,16 @@ public interface KthSmallestElementInASortedMatrix {
 
         @Override
         public int kthSmallest(int[][] matrix, int k) {
-            return 0;
+            PriorityQueue<Integer> queue = new PriorityQueue<>(k + 1, Comparator.reverseOrder());
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    queue.add(matrix[i][j]);
+                    if (queue.size() > k) {
+                        queue.poll();
+                    }
+                }
+            }
+            return queue.peek();
         }
     }
 }

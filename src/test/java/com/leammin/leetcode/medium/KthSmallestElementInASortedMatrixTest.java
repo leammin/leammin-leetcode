@@ -2,6 +2,7 @@ package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.undone.medium.KthSmallestElementInASortedMatrix;
 import com.leammin.leetcode.util.AbstractTest;
+import com.leammin.leetcode.util.ExpectedTestcase;
 import com.leammin.leetcode.util.Testsuite;
 
 /**
@@ -12,6 +13,11 @@ class KthSmallestElementInASortedMatrixTest extends AbstractTest<KthSmallestElem
     @Override
     protected Testsuite<KthSmallestElementInASortedMatrix> testsuite() {
         return Testsuite.<KthSmallestElementInASortedMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.kthSmallest(new int[][]{
+                        {1, 5, 9},
+                        {10, 11, 13},
+                        {12, 13, 15}
+                }, 8), 13))
                 .build();
     }
 }
