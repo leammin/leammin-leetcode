@@ -1,6 +1,7 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.Execute;
 
 /**
  * 450. 删除二叉搜索树中的节点
@@ -54,6 +55,7 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface DeleteNodeInABst {
     TreeNode deleteNode(TreeNode root, int key);
 
+    @Execute(cases = 0)
     class Solution implements DeleteNodeInABst {
 
         @Override
@@ -83,8 +85,20 @@ public interface DeleteNodeInABst {
                 }
                 return root;
             }
+            if (target.right.left == null) {
+                target.right.left = target.left;
+                if (parent == null) {
+                    return target.right;
+                }
+                if (parent.left == target) {
+                    parent.left = target.right;
+                } else {
+                    parent.right = target.right;
+                }
+                return root;
+            }
             TreeNode replaceParent = target;
-            TreeNode replace = target.right;
+            TreeNode replace = replaceParent.right;
             while (replace.left != null) {
                 replaceParent = replace;
                 replace = replace.left;

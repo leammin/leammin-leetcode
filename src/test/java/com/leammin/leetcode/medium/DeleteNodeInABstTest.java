@@ -1,7 +1,6 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
-import com.leammin.leetcode.undone.medium.DeleteNodeInABst;
 import com.leammin.leetcode.util.AbstractTest;
 import com.leammin.leetcode.util.Testsuite;
 import com.leammin.leetcode.util.VerifiableTestcase;
