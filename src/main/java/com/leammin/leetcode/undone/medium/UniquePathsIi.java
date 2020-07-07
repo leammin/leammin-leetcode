@@ -78,8 +78,37 @@ public interface UniquePathsIi {
 
         @Override
         public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+            int m = obstacleGrid.length;
+            int n = obstacleGrid[0].length;
+            if (obstacleGrid[m - 1][n - 1] == 1) {
+                return 0;
+            }
+            obstacleGrid[0][0]--;
+            for (int i = 0; i < obstacleGrid.length; i++) {
+                for (int j = 0; j < obstacleGrid[i].length; j++) {
 
+                }
+            }
 
+            for (int x = 1; x <= m + n - 2; x++) {
+                for (int i = 0; i < m; i++) {
+                    int j = x - i;
+                    if (j >= 0 && j < n && obstacleGrid[i][j] != 1) {
+                        obstacleGrid[i][j] += get(obstacleGrid, i, j - 1);
+                        obstacleGrid[i][j] += get(obstacleGrid, i - 1, j);
+                    }
+                }
+            }
+            return -obstacleGrid[m - 1][n - 1];
+        }
+
+        private int get(int[][] obstacleGrid, int i, int j) {
+            int m = obstacleGrid.length;
+            int n = obstacleGrid[0].length;
+            if (i >= 0 && i < m && j >= 0 && j < n && obstacleGrid[i][j] < 0) {
+                return obstacleGrid[i][j];
+            }
+            return 0;
         }
 
     }
