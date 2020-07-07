@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -86,14 +86,7 @@ public interface UniquePathsIi {
             obstacleGrid[0][0]--;
             for (int i = 0; i < obstacleGrid.length; i++) {
                 for (int j = 0; j < obstacleGrid[i].length; j++) {
-
-                }
-            }
-
-            for (int x = 1; x <= m + n - 2; x++) {
-                for (int i = 0; i < m; i++) {
-                    int j = x - i;
-                    if (j >= 0 && j < n && obstacleGrid[i][j] != 1) {
+                    if (obstacleGrid[i][j] != 1) {
                         obstacleGrid[i][j] += get(obstacleGrid, i, j - 1);
                         obstacleGrid[i][j] += get(obstacleGrid, i - 1, j);
                     }
