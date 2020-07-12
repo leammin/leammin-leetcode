@@ -14,6 +14,8 @@ class BestTimeToBuyAndSellStockWithCooldownTest extends AbstractTest<BestTimeToB
     protected Testsuite<BestTimeToBuyAndSellStockWithCooldown> testsuite() {
         return Testsuite.<BestTimeToBuyAndSellStockWithCooldown>builder()
                 .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{1, 2, 3, 0, 2}), 3))
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{}), 0))
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{1, 2, 4}), 3))
                 .build();
     }
 }
