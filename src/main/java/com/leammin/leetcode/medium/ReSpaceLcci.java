@@ -1,8 +1,6 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 面试题 17.13. 恢复空格
@@ -101,5 +99,50 @@ public interface ReSpaceLcci {
             return res;
         }
 
+    }
+
+    class Solution3 implements ReSpaceLcci {
+
+        @Override
+        public int respace(String[] dictionary, String sentence) {
+            Map<Integer, String> hashDir = new HashMap<>();
+            for (String s : dictionary) {
+                hashDir.put(hash(s), s);
+            }
+            int n = sentence.length();
+            int[] dp = new int[n + 1];
+            for (int i = n - 1; i >= 0; i--) {
+                int min = Integer.MAX_VALUE;
+                int hash = 0;
+                for (int j = i; j < n; j++) {
+                    hash += (hash * 31 + sentence.charAt(j) - 'a' + 1) % 1000000007;
+                    if (equals(hashDir.get(hash), sentence, i, j + 1)) {
+                        min = Math.min(min, dp[j + 1]);
+                    }
+                }
+                dp[i] = Math.min(min, dp[i + 1] + 1);
+            }
+            return dp[0];
+        }
+
+        private boolean equals(String s1, String s2, int from, int to) {
+            if (s1 == null || s1.length() != to - from) {
+                return false;
+            }
+            for (int i = 0; i < to - from; i++) {
+                if (s1.charAt(i) != s2.charAt(from + i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private int hash(String str) {
+            int hash = 0;
+            for (int i = 0; i < str.length(); i++) {
+                hash += (hash * 31 + str.charAt(i) - 'a' + 1) % 1000000007;
+            }
+            return hash;
+        }
     }
 }
