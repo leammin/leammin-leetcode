@@ -38,10 +38,11 @@ public interface Triangle {
             if (triangle == null || triangle.isEmpty()) {
                 return 0;
             }
-            if (triangle.size() == 1) {
-                return triangle.get(0).get(0);
+            int[] cache = new int[triangle.size()];
+            List<Integer> last = triangle.get(triangle.size() - 1);
+            for (int i = 0; i < last.size(); i++) {
+                cache[i] = last.get(i);
             }
-            Integer[] cache = triangle.get(triangle.size() - 1).toArray(new Integer[triangle.size()]);
             ListIterator<List<Integer>> iterator = triangle.listIterator(triangle.size() - 1);
             while (iterator.hasPrevious()) {
                 List<Integer> row = iterator.previous();
@@ -50,6 +51,28 @@ public interface Triangle {
                 }
             }
             return cache[0];
+        }
+    }
+
+    class Solution2 implements Triangle {
+
+        @Override
+        public int minimumTotal(List<List<Integer>> triangle) {
+            if (triangle.isEmpty()) {
+                return 0;
+            }
+            int[] dp = new int[triangle.size()];
+            List<Integer> last = triangle.get(triangle.size() - 1);
+            for (int i = 0; i < last.size(); i++) {
+                dp[i] = last.get(i);
+            }
+            for (int i = triangle.size() - 2; i >= 0; i--) {
+                List<Integer> row = triangle.get(i);
+                for (int j = 0; j < row.size(); j++) {
+                    dp[j] = row.get(j) + Math.min(dp[j], dp[j + 1]);
+                }
+            }
+            return dp[0];
         }
     }
 
