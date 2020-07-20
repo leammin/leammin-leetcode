@@ -38,7 +38,7 @@ public interface UniqueBinarySearchTreesII {
     List<TreeNode> generateTrees(int n);
 
     class Solution implements UniqueBinarySearchTreesII {
-        private Map<String, List<TreeNode>> dp = new HashMap<>();
+        private Map<Integer, List<TreeNode>> dp = new HashMap<>();
 
         @Override
         public List<TreeNode> generateTrees(int n) {
@@ -52,9 +52,10 @@ public interface UniqueBinarySearchTreesII {
             if (low > high) {
                 return Collections.singletonList(null);
             }
-            String key = low + "," + high;
-            if (dp.containsKey(key)) {
-                return dp.get(key);
+            Integer key = high * 100 + low;
+            List<TreeNode> dpv = dp.get(key);
+            if (dpv != null) {
+                return dpv;
             }
             if (low == high) {
                 List<TreeNode> result = Collections.singletonList(new TreeNode(low));
