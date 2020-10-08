@@ -1,4 +1,4 @@
-package com.leammin.leetcode.medium;
+package com.leammin.leetcode.undone.medium;
 
 /**
  * 343. 整数拆分
@@ -45,6 +45,24 @@ public interface IntegerBreak {
             }
 
             return dp[n];
+        }
+    }
+
+    class Solution2 implements IntegerBreak {
+
+        @Override
+        public int integerBreak(int n) {
+            if (n < 2) {
+                return 0;
+            }
+            if (n < 4) {
+                return n - 1;
+            }
+            int q = n / 3;
+            int r = n % 3;
+            int i = r == 1 ? q - 1 : q;
+            int j = r == 0 ? 1 : r == 1 ? 4 : 2;
+            return (int) Math.pow(3, i) * j;
         }
     }
 }
