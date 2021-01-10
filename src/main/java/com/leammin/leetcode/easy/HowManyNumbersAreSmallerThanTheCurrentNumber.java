@@ -1,4 +1,6 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
+
+import java.util.*;
 
 /**
  * 1365. 有多少小于当前数字的数字
@@ -49,8 +51,51 @@ package com.leammin.leetcode.undone.easy;
  * @date 2020-10-26
  */
 public interface HowManyNumbersAreSmallerThanTheCurrentNumber {
-    
+
+    int[] smallerNumbersThanCurrent(int[] nums);
+
     class Solution implements HowManyNumbersAreSmallerThanTheCurrentNumber {
-        
+
+        @Override
+        public int[] smallerNumbersThanCurrent(int[] nums) {
+            int[] cn = nums.clone();
+            Arrays.sort(cn);
+            Map<Integer, List<Integer>> map = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                map.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
+            }
+            int[] result = new int[nums.length];
+            for (int i = 0; i < cn.length; i++) {
+                if (i != 0 && cn[i - 1] == cn[i]) {
+                    continue;
+                }
+                for (Integer index : map.getOrDefault(cn[i], Collections.emptyList())) {
+                    result[index] = i;
+                }
+            }
+            return result;
+        }
+    }
+
+    class Solution2 implements HowManyNumbersAreSmallerThanTheCurrentNumber {
+
+        @Override
+        public int[] smallerNumbersThanCurrent(int[] nums) {
+            int[] b = new int[101];
+            for (int num : nums) {
+                b[num]++;
+            }
+            int c = 0;
+            for (int i = 0; i < b.length; i++) {
+                int t = b[i];
+                b[i] = c;
+                c += t;
+            }
+            int[] result = new int[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                result[i] = b[nums[i]];
+            }
+            return result;
+        }
     }
 }
