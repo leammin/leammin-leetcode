@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public abstract class AbstractTest<PROBLEM> {
-    private static final Logger logger = LoggerFactory.getLogger(AbstractTest.class);
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractTest.class);
 
     protected abstract Testsuite<PROBLEM> testsuite();
 
