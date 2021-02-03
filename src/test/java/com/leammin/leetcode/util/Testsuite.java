@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 测试套件，封装多个测试用例
@@ -22,8 +24,8 @@ public class Testsuite<PROBLEM> {
 
     /**
      * 不允许直接实例化，请使用Builder
-     *  @param cases 测试用例
      *
+     * @param cases 测试用例
      */
     private Testsuite(List<Testcase<PROBLEM>> cases) {
         this(cases, new int[0]);
@@ -32,7 +34,7 @@ public class Testsuite<PROBLEM> {
     /**
      * 不允许直接实例化，请使用Builder
      *
-     * @param cases 测试用例
+     * @param cases          测试用例
      * @param defaultIndexes 默认执行测试用例的下标，为空表示执行所有测试用例
      */
     private Testsuite(List<Testcase<PROBLEM>> cases, int[] defaultIndexes) {
@@ -54,22 +56,22 @@ public class Testsuite<PROBLEM> {
      * 测试测试用例，并返回执行时间
      *
      * @param solutionClass 解法class对象
-     * @param caseIndexes 执行测试用例的下标，为空表示执行所有测试用例
+     * @param caseIndexes   执行测试用例的下标，为空表示执行所有测试用例
      * @return 执行时间
      */
-    public long test(Class<? extends PROBLEM> solutionClass, int ... caseIndexes) {
+    public long test(Class<? extends PROBLEM> solutionClass, int... caseIndexes) {
         if (isEmpty()) {
             return 0;
         }
-        Collection<Integer> caseSet = caseIndexes(caseIndexes);
+        int[] indexes = caseIndexes(caseIndexes);
         long totalTime = 0;
-        if (caseSet.isEmpty()) {
+        if (indexes.length == 0) {
             for (int i = 0, casesSize = cases.size(); i < casesSize; i++) {
                 long time = testCase(solutionClass, i);
                 totalTime += time;
             }
         } else {
-            for (int i : caseSet) {
+            for (int i : indexes) {
                 long time = testCase(solutionClass, i);
                 totalTime += time;
             }
@@ -79,10 +81,9 @@ public class Testsuite<PROBLEM> {
     }
 
     private long testCase(Class<? extends PROBLEM> solutionClass, int i) {
-        Testcase<PROBLEM> testcase = cases.get(i);
         // 预热，先执行一遍，不做计时。
-        testcase.test(testcase.solution(solutionClass));
-        long time = testcase.test(testcase.solution(solutionClass));
+        runTest(solutionClass, i);
+        long time = runTest(solutionClass, i);
         logger.debug("{} Testcase-{} Running Time: {}ms",
                 solutionClass.getSimpleName(),
                 String.format("%02d", i),
@@ -90,16 +91,29 @@ public class Testsuite<PROBLEM> {
         return time;
     }
 
-    private Collection<Integer> caseIndexes(int[] caseIndexes) {
+    private long runTest(Class<? extends PROBLEM> solutionClass, int i) {
+        Testcase<PROBLEM> testcase = cases.get(i);
+        try {
+            return testcase.test(testcase.solution(solutionClass));
+        } catch (Error error) {
+            logger.error("{} Testcase-{} Running Error!",
+                    solutionClass.getSimpleName(),
+                    String.format("%02d", i)
+            );
+            throw error;
+        }
+    }
+
+    private int[] caseIndexes(int[] caseIndexes) {
         if (caseIndexes == null || caseIndexes.length == 0) {
-            return Collections.emptyList();
+            return new int[0];
         }
-        List<Integer> caseSet = new ArrayList<>(caseIndexes.length);
+        int[] indexes = new int[caseIndexes.length];
         int size = size();
-        for (int caseIndex : caseIndexes) {
-            caseSet.add((caseIndex % size + size) % size);
+        for (int i = 0; i < caseIndexes.length; i++) {
+            indexes[i] = (caseIndexes[i] % size + size) % size;
         }
-        return caseSet;
+        return indexes;
     }
 
 

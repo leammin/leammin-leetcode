@@ -1,7 +1,6 @@
 package com.leammin.leetcode.util;
 
 import com.google.common.reflect.TypeToken;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +49,9 @@ public abstract class AbstractTest<PROBLEM> {
         }
 
         List<Class<? extends PROBLEM>> solutions = solutions();
-        Assertions.assertThat(solutions)
-                .withFailMessage("Number of solutions must be greater than zero")
-                .hasSizeGreaterThan(0);
+        if (solutions.isEmpty()) {
+            throw new IllegalArgumentException("Number of solutions must be greater than zero");
+        }
 
         logger.info("Problem: {}", problem().getSimpleName());
         for (Class<? extends PROBLEM> solution : solutions) {
