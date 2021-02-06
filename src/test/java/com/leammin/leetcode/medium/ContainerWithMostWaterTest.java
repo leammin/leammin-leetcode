@@ -14,6 +14,7 @@ class ContainerWithMostWaterTest extends AbstractTest<ContainerWithMostWater> {
         return Testsuite.<ContainerWithMostWater>builder()
                 .add(ExpectedTestcase.of(t -> t.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}), 49))
                 .add(ExpectedTestcase.of(t -> t.maxArea(new int[]{2,1}), 1))
+                .add(ExpectedTestcase.of(t -> t.maxArea(new int[]{4,8,3,3,3,3,3}), 18))
                 .build();
     }
 }
