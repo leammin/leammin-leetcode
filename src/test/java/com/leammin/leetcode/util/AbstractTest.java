@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public abstract class AbstractTest<PROBLEM> {
                 .filter(problem::isAssignableFrom)
                 .map((Function<Class<?>, Class<? extends PROBLEM>>) solution -> solution.asSubclass(problem))
                 .collect(Collectors.toList());
+        Collections.reverse(solutions);
         boolean hasExecute = solutions.stream()
                 .map(s -> s.getDeclaredAnnotation(Execute.class))
                 .anyMatch(e -> e != null && e.value());
