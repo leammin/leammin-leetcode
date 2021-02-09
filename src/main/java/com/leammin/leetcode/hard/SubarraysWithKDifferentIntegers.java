@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.hard;
+package com.leammin.leetcode.hard;
 
 import java.util.Arrays;
 
