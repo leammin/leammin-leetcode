@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 /**
  * 566. 重塑矩阵
