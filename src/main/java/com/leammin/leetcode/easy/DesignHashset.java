@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 /**
  * 705. 设计哈希集合
@@ -63,6 +63,70 @@ public interface DesignHashset {
         @Override
         public boolean contains(int key) {
             return hash[key];
+        }
+    }
+    
+    class Solution2 implements DesignHashset {
+        class Node {
+            int key;
+            Node next;
+
+            public Node(int key) {
+                this.key = key;
+            }
+
+            public Node(int key, Node next) {
+                this.key = key;
+                this.next = next;
+            }
+        }
+
+        Node[] nodes = new Node[1021];
+
+        @Override
+        public void add(int key) {
+            int h = hash(key);
+            Node node = getNode(key);
+            if (node == null) {
+                nodes[h] = new Node(key, nodes[h]);
+            }
+        }
+
+        @Override
+        public boolean contains(int key) {
+            return getNode(key) != null;
+        }
+
+        private Node getNode(int key) {
+            int h = hash(key);
+            Node node = nodes[h];
+            while (node != null && node.key != key) {
+                node = node.next;
+            }
+            return node;
+        }
+
+        @Override
+        public void remove(int key) {
+            int h = hash(key);
+            Node prev = null;
+            Node node = nodes[h];
+            while (node != null && node.key != key) {
+                prev = node;
+                node = node.next;
+            }
+            if (node != null) {
+                if (prev != null) {
+                    prev.next = node.next;
+                } else {
+                    nodes[h] = node.next;
+                }
+                node.next = null;
+            }
+        }
+
+        private int hash(int key) {
+            return key * 33 % nodes.length;
         }
     }
 }

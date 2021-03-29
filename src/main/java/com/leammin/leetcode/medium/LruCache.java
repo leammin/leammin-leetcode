@@ -82,4 +82,28 @@ public abstract class LruCache {
             }
         }
     }
+
+    public static class Solution2 extends LruCache {
+        Map<Integer, Integer> map;
+
+        public Solution2(int capacity) {
+            super(capacity);
+            map = new LinkedHashMap<>((int) (capacity / 0.75 + 1), 0.75f, true) {
+                @Override
+                protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+                    return size() > capacity;
+                }
+            };
+        }
+
+        @Override
+        public int get(int key) {
+            return map.getOrDefault(key, -1);
+        }
+
+        @Override
+        public void put(int key, int value) {
+            map.put(key, value);
+        }
+    }
 }

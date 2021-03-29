@@ -21,6 +21,7 @@ class SuperEggDropTest extends AbstractTest<SuperEggDrop> {
                 .add(ExpectedTestcase.of(t -> t.superEggDrop(7, 1250), 11))
                 .add(ExpectedTestcase.of(t -> t.superEggDrop(4, 9), 4))
                 .add(ExpectedTestcase.of(t -> t.superEggDrop(3, 7), 3))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(2, 100), 14))
                 .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 8), 4))
                 .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 10), 4))
                 .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 11), 4))

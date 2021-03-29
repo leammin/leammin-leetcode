@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
@@ -70,6 +70,76 @@ public interface DesignHashmap {
         @Override
         public void remove(int key) {
             hash[key] = -1;
+        }
+    }
+
+    class Solution2 implements DesignHashmap {
+        class Node {
+            int key;
+            int value;
+            Node next;
+
+            public Node(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+
+            public Node(int key, int value, Node next) {
+                this.key = key;
+                this.value = value;
+                this.next = next;
+            }
+        }
+
+        Node[] nodes = new Node[1021];
+
+        @Override
+        public void put(int key, int value) {
+            int h = hash(key);
+            Node node = getNode(key);
+            if (node != null) {
+                node.value = value;
+            } else {
+                nodes[h] = new Node(key, value, nodes[h]);
+            }
+        }
+
+        @Override
+        public int get(int key) {
+            Node node = getNode(key);
+            return node == null ? -1 : node.value;
+        }
+
+        private Node getNode(int key) {
+            int h = hash(key);
+            Node node = nodes[h];
+            while (node != null && node.key != key) {
+                node = node.next;
+            }
+            return node;
+        }
+
+        @Override
+        public void remove(int key) {
+            int h = hash(key);
+            Node prev = null;
+            Node node = nodes[h];
+            while (node != null && node.key != key) {
+                prev = node;
+                node = node.next;
+            }
+            if (node != null) {
+                if (prev != null) {
+                    prev.next = node.next;
+                } else {
+                    nodes[h] = node.next;
+                }
+                node.next = null;
+            }
+        }
+
+        private int hash(int key) {
+            return key * 33 % nodes.length;
         }
     }
 }

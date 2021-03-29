@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.hard;
+package com.leammin.leetcode.hard;
 
 /**
  * 32. 最长有效括号
@@ -53,20 +53,38 @@ public interface LongestValidParentheses {
 
         @Override
         public int longestValidParentheses(String s) {
-            int max = 0;
-            int len = 0;
-            int flag = 0;
-            for (int i = 0; i < s.length(); i++) {
-                flag += s.charAt(i) == '(' ? 1 : -1;
-                len++;
-                if (flag == 0) {
-                    max = Math.max(max, len);
-                }
-                if (flag < 0) {
-                    flag = len = 0;
+            int from = 0, to = 0;
+            int p = 0;
+            for (int l = 0, r = 0; r < s.length(); r++) {
+                if (s.charAt(r) == '(') {
+                    p++;
+                } else if (p > 0) {
+                    p--;
+                    if (p == 0 && r - l + 1 > to - from) {
+                        from = l;
+                        to = r + 1;
+                    }
+                } else {
+                    l = r + 1;
+                    p = 0;
                 }
             }
-            return max;
+            p = 0;
+            for (int l = s.length() - 1, r = l; l >= 0; l--) {
+                if (s.charAt(l) == ')') {
+                    p++;
+                } else if (p > 0) {
+                    p--;
+                    if (p == 0 && r - l + 1 > to - from) {
+                        from = l;
+                        to = r + 1;
+                    }
+                } else {
+                    r = l - 1;
+                    p = 0;
+                }
+            }
+            return to - from;
         }
     }
 }
