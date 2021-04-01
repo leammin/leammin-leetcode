@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * 测试套件，封装多个测试用例
@@ -170,6 +171,10 @@ public class Testsuite<PROBLEM> {
         public TestsuiteBuilder<PROBLEM> add(Testcase<PROBLEM> testcase) {
             cases.add(testcase);
             return this;
+        }
+
+        public <OUTPUT> TestsuiteBuilder<PROBLEM> addExpected(Function<PROBLEM, OUTPUT> runner, OUTPUT expected) {
+            return add(ExpectedTestcase.of(runner, expected));
         }
     }
 }
