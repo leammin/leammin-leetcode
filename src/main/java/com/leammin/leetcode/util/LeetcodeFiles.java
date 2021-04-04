@@ -38,7 +38,7 @@ public class LeetcodeFiles {
     }
 
     public static List<Question> getAllQuestions() {
-        List<Question> questionsFromLeetcode = LeetcodeRequests.allQuestionsBeta();
+        List<Question> questionsFromLeetcode = LeetcodeRequests.problemsAll();
         List<Question> questionsFromFile = LeetcodeFiles.getAllQuestionsFromFile();
         Set<String> idsFromFile = questionsFromFile.stream()
                 .map(Question::getQuestionId)
@@ -48,12 +48,15 @@ public class LeetcodeFiles {
                 .filter(q -> !idsFromFile.contains(q.getQuestionId()))
                 .collect(Collectors.toList());
         questionsFromFile.addAll(fileNotExist);
-        for (Question question : questionsFromFile) {
-            if (question.needInit()) {
-                System.out.println("初始化中: " + question);
-                question.init();
-                LeetcodeFiles.writeLeetcodeFile(questionsFromFile);
+        try {
+            for (Question question : questionsFromFile) {
+                if (question.needInit()) {
+                    System.out.println("初始化中: " + question);
+                    question.init();
+                }
             }
+        } finally {
+            LeetcodeFiles.writeLeetcodeFile(questionsFromFile);
         }
         return questionsFromFile;
     }

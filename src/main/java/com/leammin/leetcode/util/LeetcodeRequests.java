@@ -9,9 +9,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LeetcodeRequests {
     private static final String LEETCODE_GRAPHQL_URL = "https://leetcode-cn.com/graphql";
+    private static final String LEETCODE_PROBLEMS_ALL_URL = "https://leetcode-cn.com/api/problems/all/";
     private static final String[] LEETCODE_REQUEST_HEADERS = new String[]{
             "content-type", "application/json",
             "accept-encoding", "deflate, br",
@@ -96,6 +98,27 @@ public class LeetcodeRequests {
                 "\\n  __typename" +
                 "\\n}\\n\"" +
                 "}";
+    }
+
+    public static List<Question> problemsAll() {
+        HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_PROBLEMS_ALL_URL))
+                .headers(LEETCODE_REQUEST_HEADERS)
+                .GET()
+                .build();
+
+        String body = sendRequest(request);
+        JSONObject jsonObject = JSONObject.parseObject(body);
+        JSONArray statStatusPairs = jsonObject.getJSONArray("stat_status_pairs");
+        return statStatusPairs.stream()
+                .map(pair -> ((JSONObject) pair).getJSONObject("stat"))
+                .map(stat -> {
+                    Question question = new Question();
+                    question.setQuestionId(stat.getString("question_id"));
+                    question.setTitle(stat.getString("question__title"));
+                    question.setTitleSlug(stat.getString("question__title_slug"));
+                    return question;
+                })
+                .collect(Collectors.toList());
     }
 
     public static Question questionData(String titleSlug) {
