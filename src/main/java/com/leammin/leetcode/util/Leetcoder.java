@@ -2,15 +2,14 @@ package com.leammin.leetcode.util;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
+import com.leammin.leetcode.util.leetcode.LeetcodeQuestions;
+import com.leammin.leetcode.util.leetcode.Question;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -21,25 +20,13 @@ import java.util.stream.Collectors;
 public final class Leetcoder {
 
 
-    private static Question getQuestion(String key) {
-        List<Question> allQuestions = LeetcodeFiles.getAllQuestionsFromFile();
-        return getQuestionByKey(allQuestions, key)
-                .or(() -> getQuestionByKey(LeetcodeFiles.getAllQuestions(), key))
-                .orElseThrow(() -> new RuntimeException("该 key 不存在: " + key));
-    }
-
-    private static Optional<Question> getQuestionByKey(List<Question> allQuestions, String key) {
-        return allQuestions.stream()
-                .filter(question -> Objects.equals(question.getQuestionFrontendId(), key) ||
-                        Objects.equals(question.getTitleSlug(), key) ||
-                        Objects.equals(question.getTitle(), key) ||
-                        Objects.equals(question.getTranslatedTitle(), key)
-                )
-                .findFirst().filter(q -> !q.needInit());
-    }
-
     private static String getClassName(Question question) {
-        return Streams.stream(Splitter.on('-').trimResults().omitEmptyStrings().split(question.getTitleSlug()))
+        String titleSlug = question.getTitleSlug();
+        char fst = titleSlug.charAt(0);
+        if (!Character.isLowerCase(fst) && !Character.isUpperCase(fst)) {
+            titleSlug = "L" + titleSlug;
+        }
+        return Streams.stream(Splitter.on('-').trimResults().omitEmptyStrings().split(titleSlug))
                 .map(t -> Character.toUpperCase(t.charAt(0)) + (t.length() > 1 ? t.substring(1) : ""))
                 .collect(Collectors.joining());
     }
@@ -142,7 +129,7 @@ public final class Leetcoder {
         System.out.print("请输入id/title: ");
         String key = sc.next();
 
-        Question question = getQuestion(key);
+        Question question = LeetcodeQuestions.getQuestion(key);
         System.out.println(question.getJavaCode());
         if (op == 0 || op == 2) {
             createTestFile(question);
