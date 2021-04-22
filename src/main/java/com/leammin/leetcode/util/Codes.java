@@ -10,7 +10,7 @@ public interface Codes {
     class BinarySearch {
         /**
          * 二分查找，查找到key后直接返回下标。<br>
-         * 若key不存在，则返回key到插入点：((-insertion point) - 1)。 <br>
+         * 若key不存在，则返回key的插入点：((-insertion point) - 1)。 <br>
          * 参考源码 {@link java.util.Arrays#binarySearch(int[], int, int, int)}
          */
         public int binarySearch(int[] nums, int from, int to, int key) {
