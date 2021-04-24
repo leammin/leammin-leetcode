@@ -1,5 +1,7 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.Execute;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +37,8 @@ import java.util.Map;
 public interface BurstBalloons {
     int maxCoins(int[] nums);
 
+    // 跑起来太耗时了
+    @Execute(value = false)
     class Solution implements BurstBalloons {
 
         @Override
