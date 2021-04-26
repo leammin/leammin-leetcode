@@ -176,5 +176,10 @@ public class Testsuite<PROBLEM> {
         public <OUTPUT> TestsuiteBuilder<PROBLEM> addExpected(Function<PROBLEM, OUTPUT> runner, OUTPUT expected) {
             return add(ExpectedTestcase.of(runner, expected));
         }
+
+
+        public <OUTPUT> TestsuiteBuilder<PROBLEM> addAnyExpected(Function<PROBLEM, OUTPUT> runner, Iterable<OUTPUT> anyExpected) {
+            return add(AnyExpectedTestcase.of(runner, anyExpected));
+        }
     }
 }
