@@ -1,5 +1,6 @@
 package com.leammin.leetcode.medium;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.TreeMap;
@@ -85,6 +86,41 @@ public interface DuiLieDeZuiDaZhiLcof {
                     return v - 1;
                 }
             });
+            return value;
+        }
+    }
+
+    class Solution2 implements DuiLieDeZuiDaZhiLcof {
+
+        Queue<Integer> queue = new LinkedList<>();
+        Deque<Integer> minToMaxDequeue = new LinkedList<>();
+
+        @Override
+        public int max_value() {
+            if (queue.isEmpty()) {
+                return -1;
+            }
+            return minToMaxDequeue.getLast();
+        }
+
+        @Override
+        public void push_back(int value) {
+            queue.add(value);
+            while (!minToMaxDequeue.isEmpty() && minToMaxDequeue.peekFirst() < value) {
+                minToMaxDequeue.removeFirst();
+            }
+            minToMaxDequeue.addFirst(value);
+        }
+
+        @Override
+        public int pop_front() {
+            if (queue.isEmpty()) {
+                return -1;
+            }
+            Integer value = queue.poll();
+            if (value.equals(minToMaxDequeue.peekLast())) {
+                minToMaxDequeue.removeLast();
+            }
             return value;
         }
     }

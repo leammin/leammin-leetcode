@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -175,6 +176,15 @@ public class Testsuite<PROBLEM> {
 
         public <OUTPUT> TestsuiteBuilder<PROBLEM> addExpected(Function<PROBLEM, OUTPUT> runner, OUTPUT expected) {
             return add(ExpectedTestcase.of(runner, expected));
+        }
+
+
+        public <OUTPUT> TestsuiteBuilder<PROBLEM> addAnyExpected(Function<PROBLEM, OUTPUT> runner, Iterable<OUTPUT> anyExpected) {
+            return add(AnyExpectedTestcase.of(runner, anyExpected));
+        }
+
+        public <OUTPUT> TestsuiteBuilder<PROBLEM> addConsumer(Function<PROBLEM, OUTPUT> runner, Consumer<OUTPUT> verifier) {
+            return add(VerifiableTestcase.ofConsumer(runner, verifier));
         }
     }
 }

@@ -114,6 +114,7 @@ public class LeetcodeRequests {
                 .map(stat -> {
                     Question question = new Question();
                     question.setQuestionId(stat.getString("question_id"));
+                    question.setQuestionFrontendId(stat.getString("frontend_question_id"));
                     question.setTitle(stat.getString("question__title"));
                     question.setTitleSlug(stat.getString("question__title_slug"));
                     return question;
@@ -209,8 +210,8 @@ public class LeetcodeRequests {
     }
 
     public static void main(String[] args) {
-        Question question = questionData("sort-an-array");
-        System.out.println(question);
+        List<Question> questions = problemsAll();
+        System.out.println();
 //        System.out.println("测试");
     }
 
