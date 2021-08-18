@@ -56,7 +56,7 @@ class ThreeSumTest extends AbstractTest<ThreeSum> {
     }
 
 
-    private <T extends Comparable<T>> List<? extends List<T>> sort(List<? extends List<T>> lists) {
+    private <T extends Comparable<T>> List<List<T>> sort(List<List<T>> lists) {
         for (List<T> list : lists) {
             Collections.sort(list);
         }
