@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 /**
  * 面试题13. 机器人的运动范围
@@ -37,9 +37,29 @@ public interface JiQiRenDeYunDongFanWeiLcof {
 
         @Override
         public int movingCount(int m, int n, int k) {
-            return 0;
+            return moving(new int[m][n], 0, 0, k);
         }
 
+        private int moving(int[][] matrix, int i, int j, int k) {
+            if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[i].length || matrix[i][j] != 0
+                    || digitsSum(i) + digitsSum(j) > k) {
+                return 0 ;
+            }
+            matrix[i][j] = 1;
+            return 1 + moving(matrix, i + 1, j, k)
+                    + moving(matrix, i - 1, j, k)
+                    + moving(matrix, i, j + 1, k)
+                    + moving(matrix, i, j - 1, k);
+        }
+
+        private int digitsSum(int num) {
+            int sum = 0;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            return sum;
+        }
     }
 
 }
