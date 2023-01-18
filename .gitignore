@@ -204,6 +204,7 @@ DerivedData/
 ### idea template
 # IntelliJ project files
 .idea
+.fleet
 *.iml
 out
 gen
