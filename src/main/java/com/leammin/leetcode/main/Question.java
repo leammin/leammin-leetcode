@@ -1,4 +1,4 @@
-package com.leammin.leetcode.util.leetcode;
+package com.leammin.leetcode.main;
 
 import org.apache.commons.lang3.StringUtils;
 

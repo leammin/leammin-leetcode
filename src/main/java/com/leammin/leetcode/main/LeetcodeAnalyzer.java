@@ -1,7 +1,4 @@
-package com.leammin.leetcode.util;
-
-import com.leammin.leetcode.util.leetcode.LeetcodeQuestions;
-import com.leammin.leetcode.util.leetcode.Question;
+package com.leammin.leetcode.main;
 
 import java.util.List;
 import java.util.Map;
@@ -17,5 +14,6 @@ public class LeetcodeAnalyzer {
         System.out.println("easy: " + map.remove("easy"));
         System.out.println("medium: " + map.remove("medium"));
         System.out.println("hard: " + map.remove("hard"));
+
     }
 }

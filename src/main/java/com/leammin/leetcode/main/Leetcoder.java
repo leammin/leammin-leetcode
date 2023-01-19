@@ -1,9 +1,7 @@
-package com.leammin.leetcode.util;
+package com.leammin.leetcode.main;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
-import com.leammin.leetcode.util.leetcode.LeetcodeQuestions;
-import com.leammin.leetcode.util.leetcode.Question;
 
 import java.io.*;
 import java.nio.file.Files;

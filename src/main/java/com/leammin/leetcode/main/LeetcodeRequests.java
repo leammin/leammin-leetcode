@@ -1,19 +1,22 @@
-package com.leammin.leetcode.util.leetcode;
+package com.leammin.leetcode.main;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Streams;
+import com.google.gson.*;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LeetcodeRequests {
-    private static final String LEETCODE_GRAPHQL_URL = "https://leetcode-cn.com/graphql";
-    private static final String LEETCODE_PROBLEMS_ALL_URL = "https://leetcode-cn.com/api/problems/all/";
+    private static final String LEETCODE_GRAPHQL_URL = "https://leetcode.cn/graphql";
+    private static final String LEETCODE_PROBLEMS_ALL_URL = "https://leetcode.cn/api/problems/all/";
     private static final String[] LEETCODE_REQUEST_HEADERS = new String[]{
             "content-type", "application/json",
             "accept-encoding", "deflate, br",
@@ -42,64 +45,6 @@ public class LeetcodeRequests {
 
     }
 
-    @Deprecated
-    public static List<Question> allQuestions() {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_GRAPHQL_URL))
-                .headers(LEETCODE_REQUEST_HEADERS)
-                .POST(HttpRequest.BodyPublishers.ofString(allQuestionsBody()))
-                .build();
-
-        String body = sendRequest(request);
-        return JSONObject.parseObject(body)
-                .getJSONObject("data")
-                .getJSONArray("allQuestions")
-                .toJavaList(Question.class);
-    }
-
-    @Deprecated
-    private static String allQuestionsBody() {
-        return "{\"operationName\": \"allQuestions\",\"variables\": {},\"query\": \"query allQuestions{ allQuestions{ " +
-                "...questionSummaryFields\\n__typename\\n } } fragment questionSummaryFields on QuestionNode{ " +
-                "title\\n titleSlug\\n translatedTitle\\n questionId\\n questionFrontendId\\n difficulty\\n translatedTitle\\n " +
-                "translatedContent\\n content\\n codeSnippets{ lang\\n code }\\n __typename }\"}";
-    }
-
-    public static List<Question> allQuestionsBeta() {
-        HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_GRAPHQL_URL))
-                .headers(LEETCODE_REQUEST_HEADERS)
-                .POST(HttpRequest.BodyPublishers.ofString(allQuestionsBetaBody()))
-                .build();
-
-        String body = sendRequest(request);
-        JSONObject jsonObject = JSONObject.parseObject(body);
-        JSONObject data = jsonObject.getJSONObject("data");
-        JSONArray allQuestionsBeta = data.getJSONArray("allQuestionsBeta");
-        List<Question> questions = allQuestionsBeta.toJavaList(Question.class);
-        return questions;
-    }
-
-    private static String allQuestionsBetaBody() {
-        return "{\"operationName\":\"allQuestions\",\"variables\":{}," +
-                "\"query\":\"query allQuestions {" +
-                "\\n  allQuestionsBeta {" +
-                "\\n    ...questionSummaryFields" +
-                "\\n    __typename" +
-                "\\n  }\\n}\\n\\n" +
-                "fragment questionSummaryFields on QuestionNode {" +
-                "\\n  title" +
-                "\\n  titleSlug" +
-                "\\n  translatedTitle" +
-                "\\n  questionId" +
-                "\\n  questionFrontendId" +
-//                "\\n  status" +
-                "\\n  difficulty" +
-                "\\n  isPaidOnly" +
-//                "\\n  categoryTitle" +
-                "\\n  __typename" +
-                "\\n}\\n\"" +
-                "}";
-    }
-
     public static List<Question> problemsAll() {
         HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_PROBLEMS_ALL_URL))
                 .headers(LEETCODE_REQUEST_HEADERS)
@@ -107,19 +52,22 @@ public class LeetcodeRequests {
                 .build();
 
         String body = sendRequest(request);
-        JSONObject jsonObject = JSONObject.parseObject(body);
-        JSONArray statStatusPairs = jsonObject.getJSONArray("stat_status_pairs");
-        return statStatusPairs.stream()
-                .map(pair -> ((JSONObject) pair).getJSONObject("stat"))
+        JsonArray statStatusPairs = JsonParser.parseString(body)
+                .getAsJsonObject()
+                .getAsJsonArray("stat_status_pairs");
+
+        return Streams.stream(statStatusPairs)
+                .map(JsonElement::getAsJsonObject)
+                .map(p -> p.getAsJsonObject("stat"))
                 .map(stat -> {
                     Question question = new Question();
-                    question.setQuestionId(stat.getString("question_id"));
-                    question.setQuestionFrontendId(stat.getString("frontend_question_id"));
-                    question.setTitle(stat.getString("question__title"));
-                    question.setTitleSlug(stat.getString("question__title_slug"));
+                    question.setQuestionId(stat.get("question_id").getAsString());
+                    question.setQuestionFrontendId(stat.get("frontend_question_id").getAsString());
+                    question.setTitle(stat.get("question__title").getAsString());
+                    question.setTitleSlug(stat.get("question__title_slug").getAsString());
                     return question;
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public static Question questionData(String titleSlug) {
@@ -129,9 +77,9 @@ public class LeetcodeRequests {
                 .build();
 
         String body = sendRequest(request);
-        JSONObject jsonObject = JSONObject.parseObject(body);
-        JSONObject data = jsonObject.getJSONObject("data");
-        return data.getObject("question", Question.class);
+        JsonObject data = JsonParser.parseString(body).getAsJsonObject()
+                .getAsJsonObject("data");
+        return new Gson().fromJson(data, Question.class);
     }
 
     private static String questionDataBody(String titleSlug) {
@@ -210,7 +158,7 @@ public class LeetcodeRequests {
     }
 
     public static void main(String[] args) {
-        List<Question> questions = problemsAll();
+//        List<Question> questions = problemsAll();
         System.out.println();
 //        System.out.println("测试");
     }
@@ -219,4 +167,66 @@ public class LeetcodeRequests {
     private LeetcodeRequests() {
 
     }
+
+    @Deprecated
+    public static List<Question> allQuestions() {
+        HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_GRAPHQL_URL))
+                .headers(LEETCODE_REQUEST_HEADERS)
+                .POST(HttpRequest.BodyPublishers.ofString(allQuestionsBody()))
+                .build();
+
+        String body = sendRequest(request);
+        JsonArray allQuestions = JsonParser.parseString(body).getAsJsonObject()
+                .getAsJsonObject("data")
+                .getAsJsonArray("allQuestions");
+        Question[] questions = new Gson().fromJson(allQuestions, Question[].class);
+        return Arrays.asList(questions);
+    }
+
+    @Deprecated
+    private static String allQuestionsBody() {
+        return "{\"operationName\": \"allQuestions\",\"variables\": {},\"query\": \"query allQuestions{ allQuestions{ " +
+                "...questionSummaryFields\\n__typename\\n } } fragment questionSummaryFields on QuestionNode{ " +
+                "title\\n titleSlug\\n translatedTitle\\n questionId\\n questionFrontendId\\n difficulty\\n translatedTitle\\n " +
+                "translatedContent\\n content\\n codeSnippets{ lang\\n code }\\n __typename }\"}";
+    }
+
+    @Deprecated
+    public static List<Question> allQuestionsBeta() {
+        HttpRequest request = HttpRequest.newBuilder(URI.create(LEETCODE_GRAPHQL_URL))
+                .headers(LEETCODE_REQUEST_HEADERS)
+                .POST(HttpRequest.BodyPublishers.ofString(allQuestionsBetaBody()))
+                .build();
+
+        String body = sendRequest(request);
+        JsonArray allQuestionsBeta = JsonParser.parseString(body).getAsJsonObject()
+                .getAsJsonObject("data")
+                .getAsJsonArray("allQuestionsBeta");
+        Question[] questions = new Gson().fromJson(allQuestionsBeta, Question[].class);
+        return Arrays.asList(questions);
+    }
+
+    @Deprecated
+    private static String allQuestionsBetaBody() {
+        return "{\"operationName\":\"allQuestions\",\"variables\":{}," +
+                "\"query\":\"query allQuestions {" +
+                "\\n  allQuestionsBeta {" +
+                "\\n    ...questionSummaryFields" +
+                "\\n    __typename" +
+                "\\n  }\\n}\\n\\n" +
+                "fragment questionSummaryFields on QuestionNode {" +
+                "\\n  title" +
+                "\\n  titleSlug" +
+                "\\n  translatedTitle" +
+                "\\n  questionId" +
+                "\\n  questionFrontendId" +
+//                "\\n  status" +
+                "\\n  difficulty" +
+                "\\n  isPaidOnly" +
+//                "\\n  categoryTitle" +
+                "\\n  __typename" +
+                "\\n}\\n\"" +
+                "}";
+    }
+
 }
