@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class LeetcodeQuestions {
@@ -73,12 +75,20 @@ public class LeetcodeQuestions {
     }
 
     public static Question getQuestion(String key) {
+        final String finalKey = handleKey(key);
         List<Question> allQuestions = getAllQuestionsFromFile();
-        return getQuestionByKey(allQuestions, key)
-                .or(() -> getQuestionByKey(getAllQuestions(), key))
-                .orElseThrow(() -> new RuntimeException("该 key 不存在: " + key));
+        return getQuestionByKey(allQuestions, finalKey)
+                .or(() -> getQuestionByKey(getAllQuestions(), finalKey))
+                .orElseThrow(() -> new RuntimeException("该 key 不存在: " + finalKey));
     }
 
-    public static void main(String[] args) {
+    private final static Pattern urlRegex = Pattern.compile(".*leetcode.cn/problems/([A-Za-z0-9-]+).*");
+    private static String handleKey(String key) {
+        // https://leetcode.cn/problems/count-nice-pairs-in-an-array/
+        Matcher matcher = urlRegex.matcher(key);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return key;
     }
 }
