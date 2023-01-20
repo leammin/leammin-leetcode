@@ -88,28 +88,28 @@ public final class Leetcoder {
     private static String generateTest(Question question) {
         String className = getClassName(question);
         return "package " + "com.leammin.leetcode." + question.getDifficulty().toLowerCase() + ";\n" +
-            "\n" +
-            "import " + getPackage(question) + "." + className + ";\n" +
-            "import com.leammin.leetcode.util.AbstractTest;\n" +
-            "import com.leammin.leetcode.util.Testsuite;\n" +
-            "\n" +
-            "/**\n" +
-            " * @author Leammin\n" +
-            " * @date " + LocalDate.now().toString() + "\n" +
-            " */\n" +
-            "class " + className + "Test extends AbstractTest<" + className + "> {\n" +
-            "    @Override\n" +
-            "    protected Testsuite<" + className + "> testsuite() {\n" +
-            "        return Testsuite.<" + className + ">builder()\n" +
-            "                .build();\n" +
-            "    }\n" +
-            "}";
+                "\n" +
+                "import " + getPackage(question) + "." + className + ";\n" +
+                "import com.leammin.leetcode.util.AbstractTest;\n" +
+                "import com.leammin.leetcode.util.Testsuite;\n" +
+                "\n" +
+                "/**\n" +
+                " * @author Leammin\n" +
+                " * @date " + LocalDate.now().toString() + "\n" +
+                " */\n" +
+                "class " + className + "Test extends AbstractTest<" + className + "> {\n" +
+                "    @Override\n" +
+                "    protected Testsuite<" + className + "> testsuite() {\n" +
+                "        return Testsuite.<" + className + ">builder()\n" +
+                "                .build();\n" +
+                "    }\n" +
+                "}";
     }
 
     private static Path getTestPath(Question question) {
         return Paths.get("src", "test", "java", "com", "leammin", "leetcode",
-            question.getDifficulty().toLowerCase(),
-            getClassName(question) + "Test.java");
+                question.getDifficulty().toLowerCase(),
+                getClassName(question) + "Test.java");
     }
 
     private static void createTestFile(Question question) {
@@ -118,24 +118,19 @@ public final class Leetcoder {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in)
-            .useDelimiter("\n");
-        System.out.println("0.生成全部");
-        System.out.println("1.生成代码");
-        System.out.println("2.生成测试");
-        System.out.print("请输入要执行的操作：");
-        int op = sc.nextInt();
-        System.out.print("请输入id/title: ");
+                .useDelimiter("\n");
+        System.out.print("请输入id/title/url: ");
         String key = sc.next();
 
         Question question = LeetcodeQuestions.getQuestion(key);
         System.out.println("\n" + getClassName(question));
         System.out.println(question.getJavaCode());
-        if (op == 0 || op == 2) {
+        try {
             createTestFile(question);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        if (op == 0 || op == 1) {
-            createCodeFile(question);
-        }
+        createCodeFile(question);
     }
 
 }
