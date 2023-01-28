@@ -78,7 +78,8 @@ public class LeetcodeRequests {
 
         String body = sendRequest(request);
         JsonObject data = JsonParser.parseString(body).getAsJsonObject()
-                .getAsJsonObject("data");
+                .getAsJsonObject("data")
+                .getAsJsonObject("question");
         return new Gson().fromJson(data, Question.class);
     }
 

@@ -9,11 +9,11 @@ public class LeetcodeAnalyzer {
         List<Question> allQuestions = LeetcodeQuestions.getAllQuestions();
         Map<String, Long> map = allQuestions.stream()
                 .map(Question::getDifficulty)
+                .map(d -> d == null ? "unknown" : d)
                 .map(String::toLowerCase)
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
-        System.out.println("easy: " + map.remove("easy"));
-        System.out.println("medium: " + map.remove("medium"));
-        System.out.println("hard: " + map.remove("hard"));
-
+        map.forEach((k ,v) -> {
+            System.out.println(k + ": " + v);
+        });
     }
 }
