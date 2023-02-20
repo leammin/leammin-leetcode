@@ -1,4 +1,4 @@
-package com.leammin.leetcode.medium;
+package com.leammin.leetcode.undone.medium;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -80,4 +80,6 @@ public interface ShuZuZhongShuZiChuXianDeCiShuLcof {
             return new int[]{a, b};
         }
     }
+
+
 }
