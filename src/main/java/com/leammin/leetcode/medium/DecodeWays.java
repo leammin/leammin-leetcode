@@ -1,6 +1,4 @@
-package com.leammin.leetcode.undone.medium;
-
-import com.leammin.leetcode.util.Execute;
+package com.leammin.leetcode.medium;
 
 /**
  * 91. 解码方法
