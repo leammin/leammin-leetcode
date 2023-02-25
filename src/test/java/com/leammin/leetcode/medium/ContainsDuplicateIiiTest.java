@@ -16,6 +16,9 @@ class ContainsDuplicateIiiTest extends AbstractTest<ContainsDuplicateIii> {
                 .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,0,1,1}, 1 , 2), true)
                 .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,5,9,1,5,9}, 2 , 3), false)
                 .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{-2147483648,2147483647}, 1 , 1), false)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,3,6,2}, 1 , 2), true)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,2,5,6,7,2,4}, 4 , 0), true)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{-3, 3}, 2 , 4), false)
                 .build();
     }
 }
