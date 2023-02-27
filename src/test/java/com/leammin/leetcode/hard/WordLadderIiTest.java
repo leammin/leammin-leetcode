@@ -2,8 +2,8 @@ package com.leammin.leetcode.hard;
 
 import com.leammin.leetcode.undone.hard.WordLadderIi;
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.Testsuite;
-import com.leammin.leetcode.util.VerifiableTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
 import org.assertj.core.api.Assertions;
 
 import java.util.List;

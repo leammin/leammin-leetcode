@@ -3,7 +3,7 @@ package com.leammin.leetcode.medium;
 import java.util.List;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.Testsuite;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * @author Leammin

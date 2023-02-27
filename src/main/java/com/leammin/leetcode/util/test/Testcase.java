@@ -1,4 +1,4 @@
-package com.leammin.leetcode.util;
+package com.leammin.leetcode.util.test;
 
 import java.util.Objects;
 import java.util.function.Function;

@@ -2,8 +2,8 @@ package com.leammin.leetcode.hard;
 
 import com.leammin.leetcode.undone.hard.BurstBalloons;
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.ExpectedTestcase;
-import com.leammin.leetcode.util.Testsuite;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * @author Leammin

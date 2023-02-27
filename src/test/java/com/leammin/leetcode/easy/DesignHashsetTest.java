@@ -1,8 +1,8 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.Testcase;
-import com.leammin.leetcode.util.Testsuite;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
 import org.assertj.core.api.Assertions;
 
 /**

@@ -1,4 +1,4 @@
-package com.leammin.leetcode.util;
+package com.leammin.leetcode.util.test;
 
 import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;

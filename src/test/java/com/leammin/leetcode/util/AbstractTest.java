@@ -1,10 +1,14 @@
 package com.leammin.leetcode.util;
 
 import com.google.common.reflect.TypeToken;
+import com.leammin.leetcode.util.test.Testsuite;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -14,7 +18,16 @@ import java.util.stream.Stream;
 public abstract class AbstractTest<PROBLEM> {
     protected static final Logger logger = LoggerFactory.getLogger(AbstractTest.class);
 
-    protected abstract Testsuite<PROBLEM> testsuite();
+    @SuppressWarnings("unchecked")
+    protected Testsuite<PROBLEM> testsuite() {
+        Class<PROBLEM> problem = problem();
+        try {
+            MethodHandle testsuiteMethod = MethodHandles.lookup().findStatic(problem, "testsuite", MethodType.methodType(Testsuite.class));
+            return (Testsuite<PROBLEM>) testsuiteMethod.invoke();
+        } catch (Throwable e) {
+            return (Testsuite<PROBLEM>) Testsuite.builder().build();
+        }
+    }
 
     @SuppressWarnings("unchecked")
     protected Class<PROBLEM> problem() {

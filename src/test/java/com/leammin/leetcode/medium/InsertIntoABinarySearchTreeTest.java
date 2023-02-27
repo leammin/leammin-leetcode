@@ -2,9 +2,9 @@ package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.Testsuite;
+import com.leammin.leetcode.util.test.Testsuite;
 import com.leammin.leetcode.util.TreeNodeUtils;
-import com.leammin.leetcode.util.VerifiableTestcase;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
 
 import java.util.Objects;
 import java.util.Set;

@@ -1,5 +1,6 @@
-package com.leammin.leetcode.util;
+package com.leammin.leetcode.util.test;
 
+import com.leammin.leetcode.util.ClassUtils;
 import org.assertj.core.api.Assertions;
 
 import java.util.Objects;

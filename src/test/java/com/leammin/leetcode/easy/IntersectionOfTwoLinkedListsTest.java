@@ -2,9 +2,9 @@ package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.ExpectedTestcase;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
 import com.leammin.leetcode.util.ListNodeUtils;
-import com.leammin.leetcode.util.Testsuite;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * @author Leammin

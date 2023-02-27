@@ -2,8 +2,8 @@ package com.leammin.leetcode.easy;
 
 import com.google.common.primitives.Ints;
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.Testsuite;
-import com.leammin.leetcode.util.VerifiableTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
 import org.assertj.core.api.Assertions;
 
 /**

@@ -1,9 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.AbstractTest;
-import com.leammin.leetcode.util.Testsuite;
+import com.leammin.leetcode.util.test.Testsuite;
 import com.leammin.leetcode.util.TreeNodeUtils;
-import com.leammin.leetcode.util.VerifiableTestcase;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
 
 /**
  * @author Leammin
