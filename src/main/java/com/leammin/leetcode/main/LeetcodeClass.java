@@ -31,6 +31,8 @@ public class LeetcodeClass {
         String className = getClassName(question);
         return "package " + getPackage(question) + ";\n" +
                 "\n" +
+                "import com.leammin.leetcode.util.test.Testsuite;\n" +
+                "\n" +
                 "/**\n" +
                 " * " + question.getQuestionFrontendId() + ". " + question.getTranslatedTitle() + "\n" +
                 " * \n" +
@@ -41,6 +43,11 @@ public class LeetcodeClass {
                 " */\n" +
                 "public interface " + className + " {\n" +
                 "    \n" +
+                "    static Testsuite<" + className + "> testsuite() {\n" +
+                "        return Testsuite.<" + className + ">builder()\n" +
+                "                .build();\n" +
+                "    }\n" +
+                "\n" +
                 "    class Solution implements " + className + " {\n" +
                 "        \n" +
                 "    }\n" +
@@ -88,11 +95,6 @@ public class LeetcodeClass {
                 " * @date " + LocalDate.now() + "\n" +
                 " */\n" +
                 "class " + className + "Test extends AbstractTest<" + className + "> {\n" +
-                "    @Override\n" +
-                "    protected Testsuite<" + className + "> testsuite() {\n" +
-                "        return Testsuite.<" + className + ">builder()\n" +
-                "                .build();\n" +
-                "    }\n" +
                 "}";
     }
 
