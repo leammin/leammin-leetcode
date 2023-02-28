@@ -1,6 +1,5 @@
 package com.leammin.leetcode.easy;
 
-import com.leammin.leetcode.undone.easy.MergeSimilarItems;
 import com.leammin.leetcode.util.AbstractTest;
 
 /**

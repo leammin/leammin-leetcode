@@ -1,4 +1,4 @@
-package com.leammin.leetcode.util.arg;
+package com.leammin.leetcode.util.convert;
 
 public class ConvertException extends RuntimeException {
 

@@ -88,7 +88,6 @@ public class LeetcodeClass {
                 "\n" +
                 "import " + getPackage(question) + "." + className + ";\n" +
                 "import com.leammin.leetcode.util.AbstractTest;\n" +
-                "import com.leammin.leetcode.util.test.Testsuite;\n" +
                 "\n" +
                 "/**\n" +
                 " * @author Leammin\n" +

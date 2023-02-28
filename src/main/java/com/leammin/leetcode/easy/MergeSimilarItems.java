@@ -1,27 +1,32 @@
-package com.leammin.leetcode.undone.easy;
+package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.convert.IntMatrixConverter;
+import com.leammin.leetcode.util.convert.IntegerListListConverter;
 import com.leammin.leetcode.util.test.Testsuite;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * 2363. 合并相似的物品
- * 
+ *
  * <p>给你两个二维整数数组&nbsp;<code>items1</code> 和&nbsp;<code>items2</code>&nbsp;，表示两个物品集合。每个数组&nbsp;<code>items</code>&nbsp;有以下特质：</p>
- * 
+ *
  * <ul>
  * 	<li><code>items[i] = [value<sub>i</sub>, weight<sub>i</sub>]</code> 其中&nbsp;<code>value<sub>i</sub></code>&nbsp;表示第&nbsp;<code>i</code>&nbsp;件物品的&nbsp;<strong>价值</strong>&nbsp;，<code>weight<sub>i</sub></code>&nbsp;表示第 <code>i</code>&nbsp;件物品的 <strong>重量</strong>&nbsp;。</li>
  * 	<li><code>items</code>&nbsp;中每件物品的价值都是 <strong>唯一的</strong>&nbsp;。</li>
  * </ul>
- * 
+ *
  * <p>请你返回一个二维数组&nbsp;<code>ret</code>，其中&nbsp;<code>ret[i] = [value<sub>i</sub>, weight<sub>i</sub>]</code>，&nbsp;<code>weight<sub>i</sub></code>&nbsp;是所有价值为&nbsp;<code>value<sub>i</sub></code><sub>&nbsp;</sub>物品的&nbsp;<strong>重量之和</strong>&nbsp;。</p>
- * 
+ *
  * <p><strong>注意：</strong><code>ret</code>&nbsp;应该按价值 <strong>升序</strong>&nbsp;排序后返回。</p>
- * 
+ *
  * <p>&nbsp;</p>
- * 
+ *
  * <p><strong>示例 1：</strong></p>
- * 
+ *
  * <pre>
  * <b>输入：</b>items1 = [[1,1],[4,5],[3,8]], items2 = [[3,1],[1,5]]
  * <b>输出：</b>[[1,6],[3,9],[4,5]]
@@ -31,9 +36,9 @@ import java.util.List;
  * value = 4 的物品在 items1 中 weight = 5 ，总重量为 5 。
  * 所以，我们返回 [[1,6],[3,9],[4,5]] 。
  * </pre>
- * 
+ *
  * <p><strong>示例 2：</strong></p>
- * 
+ *
  * <pre>
  * <b>输入：</b>items1 = [[1,1],[3,2],[2,3]], items2 = [[2,1],[3,2],[1,3]]
  * <b>输出：</b>[[1,4],[2,4],[3,4]]
@@ -42,9 +47,9 @@ import java.util.List;
  * value = 2 的物品在 items1 中 weight = 3 ，在 items2 中 weight = 1 ，总重量为 3 + 1 = 4 。
  * value = 3 的物品在 items1 中 weight = 2 ，在 items2 中 weight = 2 ，总重量为 2 + 2 = 4 。
  * 所以，我们返回 [[1,4],[2,4],[3,4]] 。</pre>
- * 
+ *
  * <p><strong>示例 3：</strong></p>
- * 
+ *
  * <pre>
  * <b>输入：</b>items1 = [[1,3],[2,2]], items2 = [[7,1],[2,2],[1,4]]
  * <b>输出：</b>[[1,7],[2,4],[7,1]]
@@ -54,11 +59,11 @@ import java.util.List;
  * value = 7 的物品在 items2 中 weight = 1 ，总重量为 1 。
  * 所以，我们返回 [[1,7],[2,4],[7,1]] 。
  * </pre>
- * 
+ *
  * <p>&nbsp;</p>
- * 
+ *
  * <p><strong>提示：</strong></p>
- * 
+ *
  * <ul>
  * 	<li><code>1 &lt;= items1.length, items2.length &lt;= 1000</code></li>
  * 	<li><code>items1[i].length == items2[i].length == 2</code></li>
@@ -66,8 +71,7 @@ import java.util.List;
  * 	<li><code>items1</code>&nbsp;中每个 <code>value<sub>i</sub></code>&nbsp;都是 <b>唯一的</b>&nbsp;。</li>
  * 	<li><code>items2</code>&nbsp;中每个 <code>value<sub>i</sub></code>&nbsp;都是 <b>唯一的</b>&nbsp;。</li>
  * </ul>
- * 
- * 
+ *
  * @author Leammin
  * @date 2023-02-28
  */
@@ -76,6 +80,10 @@ public interface MergeSimilarItems {
 
     static Testsuite<MergeSimilarItems> testsuite() {
         return Testsuite.<MergeSimilarItems>builder()
+                .addExpected(t -> t.mergeSimilarItems(new IntMatrixConverter().convert("[[1,1],[4,5],[3,8]]"),
+                        new IntMatrixConverter().convert("[[3,1],[1,5]]")),
+                        new IntegerListListConverter().convert("[[1,6],[3,9],[4,5]]")
+                )
                 .build();
     }
 
@@ -83,7 +91,26 @@ public interface MergeSimilarItems {
 
         @Override
         public List<List<Integer>> mergeSimilarItems(int[][] items1, int[][] items2) {
-            return null;
+            Arrays.sort(items1, Comparator.comparingInt(a -> a[0]));
+            Arrays.sort(items2, Comparator.comparingInt(a -> a[0]));
+            int i1 = 0, i2 = 0;
+            List<List<Integer>> res = new ArrayList<>(items1.length + items2.length);
+            while (i1 < items1.length || i2 < items2.length) {
+                int v1 = i1 < items1.length ? items1[i1][0] : Integer.MAX_VALUE;
+                int v2 = i2 < items2.length ? items2[i2][0] : Integer.MAX_VALUE;
+                if (v1 < v2) {
+                    res.add(List.of(v1, items1[i1][1]));
+                    i1++;
+                } else if (v2 < v1) {
+                    res.add(List.of(v2, items2[i2][1]));
+                    i2++;
+                } else {
+                    res.add(List.of(v1, items1[i1][1] + items2[i2][1]));
+                    i1++;
+                    i2++;
+                }
+            }
+            return res;
         }
     }
 }
