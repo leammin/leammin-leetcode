@@ -30,9 +30,7 @@ public class LeetcodeQuestions {
         try {
             String questionStr = Files.readString(LEETCODE_FILE_PATH);
             Question[] questions = new GsonBuilder().create().fromJson(questionStr, Question[].class);
-            return Arrays.stream(questions)
-                    .filter(q -> !q.needInit())
-                    .toList();
+            return Arrays.asList(questions);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -41,20 +39,45 @@ public class LeetcodeQuestions {
     public static List<Question> getAllQuestions() {
         List<Question> questionsFromLeetcode = LeetcodeRequests.problemsAll();
         List<Question> questionsFromFile = LeetcodeQuestions.getAllQuestionsFromFile();
-        Set<String> idsFromFile = questionsFromFile.stream()
-                .map(Question::getQuestionId)
+        Set<String> titleFromFile = questionsFromFile.stream()
+                .map(Question::getTitleSlug)
+                .collect(Collectors.toSet());
+        Set<String> titleFromLeetcode = questionsFromLeetcode.stream()
+                .map(Question::getTitleSlug)
                 .collect(Collectors.toSet());
 
-        Stream<Question> fileNotExist = questionsFromLeetcode.stream().filter(q -> !idsFromFile.contains(q.getQuestionId()));
+        Stream<Question> fileNotExist = questionsFromLeetcode.stream().filter(q -> !titleFromFile.contains(q.getTitleSlug()));
         List<Question> allQuestions = Stream.concat(questionsFromFile.stream(), fileNotExist)
-                .toList();
+                .filter(q -> {
+                    boolean inLeetcode = titleFromLeetcode.contains(q.getTitleSlug());
+                    if (!inLeetcode) {
+                        System.out.println("删除: " + q.getTitleSlug());
+                    }
+                    return inLeetcode;
+                })
+                .sorted(Comparator.comparingInt(q -> Integer.parseInt(q.getQuestionId())))
+                .collect(Collectors.toList());
         try {
-            allQuestions.stream()
-                    .filter(Question::needInit)
-                    .forEach(q -> {
-                        System.out.println("初始化中: " + q);
-                        q.init();
-                    });
+            int initCount = 0;
+            for (int i = 0; i < allQuestions.size(); i++) {
+                Question q = allQuestions.get(i);
+                if (q.needInit()) {
+                    if (initCount != 0) {
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    System.out.printf("初始化中(%d): %s\n", i, q.getTitleSlug());
+                    Question nq = LeetcodeRequests.questionData(q.getTitleSlug());
+                    allQuestions.set(i, nq);
+                    initCount++;
+                    if (initCount % 10 == 0) {
+                        LeetcodeQuestions.writeLeetcodeFile(allQuestions);
+                    }
+                }
+            }
         } finally {
             LeetcodeQuestions.writeLeetcodeFile(allQuestions);
         }

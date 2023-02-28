@@ -6,6 +6,7 @@ import com.google.common.base.Splitter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class IntegerListListConverter implements Converter<List<List<Integer>>> {
 
@@ -40,6 +41,6 @@ public class IntegerListListConverter implements Converter<List<List<Integer>>> 
                         .stream()
                         .map(Integer::parseInt)
                         .toList())
-                .toList();
+                .collect(Collectors.toList());
     }
 }

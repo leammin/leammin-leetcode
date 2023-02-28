@@ -5,6 +5,7 @@ import com.google.common.base.Splitter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IntegerListConverter implements Converter<List<Integer>> {
 
@@ -28,6 +29,6 @@ public class IntegerListConverter implements Converter<List<Integer>> {
         return Splitter.on(',').trimResults().splitToList(str)
                 .stream()
                 .map(Integer::parseInt)
-                .toList();
+                .collect(Collectors.toList());
     }
 }

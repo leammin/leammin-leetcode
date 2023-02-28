@@ -154,7 +154,10 @@ public class LeetcodeRequests {
 //                "\\n    dailyRecordStatus" +
 //                "\\n    editorType" +
 //                "\\n    ugcQuestionId" +
+                "\\n    exampleTestcases" +
+                "\\n    jsonExampleTestcases" +
                 "\\n    __typename" +
+
                 "\\n  }\\n}\\n\"}";
     }
 

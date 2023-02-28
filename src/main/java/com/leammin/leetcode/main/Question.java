@@ -13,6 +13,8 @@ public class Question {
     private String titleSlug;
     private String translatedTitle;
     private String translatedContent;
+    private String exampleTestcases;
+    private String jsonExampleTestcases;
     private Boolean isPaidOnly;
     private List<CodeSnippet> codeSnippets;
 
@@ -63,6 +65,16 @@ public class Question {
                 .orElse(null);
     }
 
+    public boolean needInit() {
+        if (isPaidOnly != null && isPaidOnly) {
+            return false;
+        }
+        return codeSnippets == null || codeSnippets.isEmpty()
+                || StringUtils.isEmpty(translatedContent)
+                || StringUtils.isEmpty(jsonExampleTestcases)
+                ;
+    }
+
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
@@ -99,35 +111,28 @@ public class Question {
         this.codeSnippets = codeSnippets;
     }
 
-    public boolean needInit() {
-        if (isPaidOnly != null && isPaidOnly) {
-            return false;
-        }
-        return codeSnippets == null || codeSnippets.isEmpty() || StringUtils.isEmpty(translatedContent);
-    }
-
-    public void init() {
-        if (StringUtils.isEmpty(titleSlug)) {
-            throw new RuntimeException("titleSlug is empty");
-        }
-        Question question = LeetcodeRequests.questionData(titleSlug);
-        this.codeSnippets = question.codeSnippets;
-        this.questionId = question.questionId;
-        this.questionFrontendId = question.questionFrontendId;
-        this.content = question.content;
-        this.difficulty = question.difficulty;
-        this.title = question.title;
-        this.translatedTitle = question.translatedTitle;
-        this.translatedContent = question.translatedContent;
-        this.isPaidOnly = question.isPaidOnly;
-    }
-
     public Boolean getIsPaidOnly() {
         return isPaidOnly;
     }
 
     public void setIsPaidOnly(Boolean paidOnly) {
         isPaidOnly = paidOnly;
+    }
+
+    public String getExampleTestcases() {
+        return exampleTestcases;
+    }
+
+    public void setExampleTestcases(String exampleTestcases) {
+        this.exampleTestcases = exampleTestcases;
+    }
+
+    public String getJsonExampleTestcases() {
+        return jsonExampleTestcases;
+    }
+
+    public void setJsonExampleTestcases(String jsonExampleTestcases) {
+        this.jsonExampleTestcases = jsonExampleTestcases;
     }
 
     public static class CodeSnippet {
