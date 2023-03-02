@@ -1,6 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.undone.medium.RemoveSubFoldersFromTheFilesystem;
 import com.leammin.leetcode.util.AbstractTest;
 
 /**

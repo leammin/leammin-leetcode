@@ -43,7 +43,7 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
     ) {
         Objects.requireNonNull(solutionProducer, "solutionProducer cannot be null");
         Objects.requireNonNull(runner, "runner cannot be null");
-        return new ExpectedTestcase<PROBLEM, OUTPUT>() {
+        return new ExpectedTestcase<>() {
             @Override
             public PROBLEM solution(Class<? extends PROBLEM> clazz) {
                 return solutionProducer.apply(clazz);
@@ -56,6 +56,7 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
 
             @Override
             public OUTPUT run(PROBLEM problem) {
+
                 return runner.apply(problem);
             }
         };
