@@ -34,7 +34,7 @@ public class LeetcodeClass {
                 "import com.leammin.leetcode.util.test.Testsuite;\n" +
                 "\n" +
                 "/**\n" +
-                " * " + question.getQuestionFrontendId() + ". " + question.getTranslatedTitle() + "\n" +
+                " * <a href=\"https://leetcode.cn/problems/" + question.getTitleSlug() + "/\">" + question.getQuestionFrontendId() + ". " + question.getTranslatedTitle() + "</a>\n" +
                 " * \n" +
                 " * " + commentContent(question.getTranslatedContent()) + "\n" +
                 " * \n" +
