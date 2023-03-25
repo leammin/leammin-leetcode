@@ -16,7 +16,7 @@ public interface Testcase<PROBLEM> {
      * @param clazz 解法的class对象
      * @return 解法实例
      */
-    PROBLEM solution(Class<? extends PROBLEM> clazz);
+    PROBLEM solution(Class<? extends PROBLEM> clazz) throws ReflectiveOperationException;
 
     /**
      * 测试解法

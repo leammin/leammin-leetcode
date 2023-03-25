@@ -96,13 +96,22 @@ public class Testsuite<PROBLEM> {
     private long runTest(Class<? extends PROBLEM> solutionClass, int i) {
         Testcase<PROBLEM> testcase = cases.get(i);
         try {
-            return testcase.test(testcase.solution(solutionClass));
+            long before = System.nanoTime();
+            PROBLEM solution = testcase.solution(solutionClass);
+            long time = System.nanoTime() - before;
+            return time + testcase.test(solution);
         } catch (Error error) {
             logger.error("{} Testcase-{} Running Error!",
                     solutionClass.getSimpleName(),
                     String.format("%02d", i)
             );
             throw error;
+        } catch (ReflectiveOperationException e) {
+            logger.error("{} Testcase-{} Init Error!",
+                    solutionClass.getSimpleName(),
+                    String.format("%02d", i)
+            );
+            throw new RuntimeException(e);
         }
     }
 

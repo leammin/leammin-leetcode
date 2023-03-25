@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -22,8 +23,9 @@ public abstract class AbstractTest<PROBLEM> {
     protected Testsuite<PROBLEM> testsuite() {
         Class<PROBLEM> problem = problem();
         try {
-            MethodHandle testsuiteMethod = MethodHandles.lookup().findStatic(problem, "testsuite", MethodType.methodType(Testsuite.class));
-            return (Testsuite<PROBLEM>) testsuiteMethod.invoke();
+            Method method = problem.getDeclaredMethod("testsuite");
+            method.setAccessible(true);
+            return (Testsuite<PROBLEM>) method.invoke(null);
         } catch (Throwable e) {
             return (Testsuite<PROBLEM>) Testsuite.builder().build();
         }
