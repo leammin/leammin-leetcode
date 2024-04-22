@@ -56,7 +56,6 @@ public interface ExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> {
 
             @Override
             public OUTPUT run(PROBLEM problem) {
-
                 return runner.apply(problem);
             }
         };

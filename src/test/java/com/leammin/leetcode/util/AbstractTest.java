@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
@@ -26,8 +23,8 @@ public abstract class AbstractTest<PROBLEM> {
             Method method = problem.getDeclaredMethod("testsuite");
             method.setAccessible(true);
             return (Testsuite<PROBLEM>) method.invoke(null);
-        } catch (Throwable e) {
-            return (Testsuite<PROBLEM>) Testsuite.builder().build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

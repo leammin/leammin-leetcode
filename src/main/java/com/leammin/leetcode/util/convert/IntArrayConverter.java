@@ -18,7 +18,7 @@ public class IntArrayConverter implements Converter<int[]> {
             throw new ConvertException("int array must be end with ']'");
         }
         str = str.substring(1, str.length() - 1);
-        if (str.equals("")) {
+        if (str.isEmpty()) {
             return new int[0];
         }
 

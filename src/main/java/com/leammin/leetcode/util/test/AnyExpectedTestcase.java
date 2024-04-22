@@ -26,12 +26,11 @@ public interface AnyExpectedTestcase<PROBLEM, OUTPUT> extends Testcase<PROBLEM> 
     OUTPUT run(PROBLEM solution);
 
     default long test(PROBLEM solution) {
-        Iterable<OUTPUT> anyExpected = anyExpected();
-
         long before = System.nanoTime();
         OUTPUT output = run(solution);
         long time = System.nanoTime() - before;
 
+        Iterable<OUTPUT> anyExpected = anyExpected();
         Assertions.assertThat(output).as(ClassUtils.getName(solution)).isIn(anyExpected);
 
         return time;
