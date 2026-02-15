@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 190. 颠倒二进制位
  *
@@ -22,7 +25,20 @@ package com.leammin.leetcode.easy;
 public interface ReverseBits {
     int reverseBits(int n);
 
+    static Testsuite<ReverseBits> testsuite() {
+        return Testsuite.<ReverseBits>builder()
+            // 00000010100101000001111010011100 -> 00111001011110000010100101000000
+            .addExpected(t -> t.reverseBits(43261596), 964176192)
+            // 11111111111111111111111111111101 -> 10111111111111111111111111111111
+            .addExpected(
+                t -> t.reverseBits(0b11111111111111111111111111111101),
+                0b10111111111111111111111111111111
+            )
+            .build();
+    }
+
     class Solution implements ReverseBits {
+
         @Override
         public int reverseBits(int n) {
             int result = 0;
@@ -36,4 +52,20 @@ public interface ReverseBits {
             return result;
         }
     }
+
+    class Solution2 implements ReverseBits {
+        @Override
+        public int reverseBits(int n) {
+            int result = 0;
+            for (int i = 0; i < 32; i++) {
+                int x = 1 << i;
+                if ((n & x) != 0) {
+                    result = (result | (1 << (31 - i)));
+                }
+            } 
+            return result;
+        }
+    }
 }
+
+class ReverseBitsTest extends AbstractTest<ReverseBits> {}

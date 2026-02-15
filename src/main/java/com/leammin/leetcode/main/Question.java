@@ -1,10 +1,10 @@
 package com.leammin.leetcode.main;
 
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
-
 public class Question {
+
     private String questionId;
     private String questionFrontendId;
     private String content;
@@ -58,21 +58,24 @@ public class Question {
         if (codeSnippets == null) {
             return null;
         }
-        return codeSnippets.stream()
-                .filter(cs -> "Java".equalsIgnoreCase(cs.getLang()))
-                .findAny()
-                .map(CodeSnippet::getCode)
-                .orElse(null);
+        return codeSnippets
+            .stream()
+            .filter(cs -> "Java".equalsIgnoreCase(cs.getLang()))
+            .findAny()
+            .map(CodeSnippet::getCode)
+            .orElse(null);
     }
 
     public boolean needInit() {
         if (isPaidOnly != null && isPaidOnly) {
             return false;
         }
-        return codeSnippets == null || codeSnippets.isEmpty()
-                || StringUtils.isEmpty(translatedContent)
-                || StringUtils.isEmpty(jsonExampleTestcases)
-                ;
+        return (
+            codeSnippets == null ||
+            codeSnippets.isEmpty() ||
+            StringUtils.isEmpty(translatedContent) ||
+            StringUtils.isEmpty(jsonExampleTestcases)
+        );
     }
 
     public void setQuestionId(String questionId) {
@@ -136,6 +139,7 @@ public class Question {
     }
 
     public static class CodeSnippet {
+
         private String lang;
         private String code;
 
@@ -157,27 +161,52 @@ public class Question {
 
         @Override
         public String toString() {
-            return "CodeSnippet{" +
-                    "lang='" + lang + '\'' +
-                    ", code='" + code + '\'' +
-                    '}';
+            return (
+                "CodeSnippet{" +
+                "lang='" +
+                lang +
+                '\'' +
+                ", code='" +
+                code +
+                '\'' +
+                '}'
+            );
         }
     }
 
     @Override
     public String toString() {
-        return "Question{" +
-                "questionId='" + questionId + '\'' +
-                ", questionFrontendId='" + questionFrontendId + '\'' +
-                ", content='" + content + '\'' +
-                ", difficulty='" + difficulty + '\'' +
-                ", title='" + title + '\'' +
-                ", titleSlug='" + titleSlug + '\'' +
-                ", translatedTitle='" + translatedTitle + '\'' +
-                ", translatedContent='" + translatedContent + '\'' +
-                ", isPaidOnly=" + isPaidOnly +
-                ", codeSnippets=" + codeSnippets +
-                '}';
+        return (
+            "Question{" +
+            "questionId='" +
+            questionId +
+            '\'' +
+            ", questionFrontendId='" +
+            questionFrontendId +
+            '\'' +
+            ", content='" +
+            content +
+            '\'' +
+            ", difficulty='" +
+            difficulty +
+            '\'' +
+            ", title='" +
+            title +
+            '\'' +
+            ", titleSlug='" +
+            titleSlug +
+            '\'' +
+            ", translatedTitle='" +
+            translatedTitle +
+            '\'' +
+            ", translatedContent='" +
+            translatedContent +
+            '\'' +
+            ", isPaidOnly=" +
+            isPaidOnly +
+            ", codeSnippets=" +
+            codeSnippets +
+            '}'
+        );
     }
 }
-

@@ -1,6 +1,7 @@
 package com.leammin.leetcode.undone.hard;
 
 import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -38,17 +39,21 @@ import com.leammin.leetcode.util.test.Testsuite;
  * @date 2025-06-09
  */
 public interface KThSmallestInLexicographicalOrder {
-    int findKthNumber();
+    int findKthNumber(int n, int k);
 
     static Testsuite<KThSmallestInLexicographicalOrder> testsuite() {
         return Testsuite.<KThSmallestInLexicographicalOrder>builder()
+                .add(ExpectedTestcase.of(t -> t.findKthNumber(13, 2), 10))
+                .add(ExpectedTestcase.of(t -> t.findKthNumber(1, 1), 1))
+                .add(ExpectedTestcase.of(t -> t.findKthNumber(100, 10), 17))
+                .add(ExpectedTestcase.of(t -> t.findKthNumber(681692778, 351251360), 416126219))
                 .build();
     }
 
     class Solution implements KThSmallestInLexicographicalOrder {
 
         @Override
-        public int findKthNumber() {
+        public int findKthNumber(int n, int k) {
             return 0;
         }
     }

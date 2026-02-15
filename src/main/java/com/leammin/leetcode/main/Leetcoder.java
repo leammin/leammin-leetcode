@@ -23,5 +23,4 @@ public final class Leetcoder {
         System.out.println(question.getJavaCode());
         LeetcodeClass.createCodeFile(question);
     }
-
 }

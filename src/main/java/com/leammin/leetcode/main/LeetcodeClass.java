@@ -31,7 +31,7 @@ public class LeetcodeClass {
         String className = getClassName(question);
         return "package " + getPackage(question) + ";\n" +
                 "\n" +
-                "import com.leammin.leetcode.test.AbstractTest;\n" +
+                "import com.leammin.leetcode.util.test.AbstractTest;\n" +
                 "import com.leammin.leetcode.util.test.Testsuite;\n" +
                 "\n" +
                 "/**\n" +
