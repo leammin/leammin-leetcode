@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1014. 最佳观光组合
  * 
@@ -34,6 +38,13 @@ package com.leammin.leetcode.medium;
 public interface BestSightseeingPair {
     int maxScoreSightseeingPair(int[] A);
 
+    static Testsuite<BestSightseeingPair> testsuite() {
+        return Testsuite.<BestSightseeingPair>builder()
+                .add(ExpectedTestcase.of(t -> t.maxScoreSightseeingPair(new int[]{8,1,5,2,6}), 11))
+                .build();
+    }
+
+
     class Solution implements BestSightseeingPair {
 
         @Override
@@ -46,4 +57,7 @@ public interface BestSightseeingPair {
             return res;
         }
     }
+}
+
+class BestSightseeingPairTest extends AbstractTest<BestSightseeingPair> {
 }

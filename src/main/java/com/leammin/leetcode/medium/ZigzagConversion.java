@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 6. Z 字形变换
  *
@@ -41,6 +44,16 @@ package com.leammin.leetcode.medium;
 public interface ZigzagConversion {
     String convert(String s, int numRows);
 
+    static Testsuite<ZigzagConversion> testsuite() {
+        return Testsuite.<ZigzagConversion>builder()
+                .addExpected(t -> t.convert("PAYPALISHIRING", 3), "PAHNAPLSIIGYIR")
+                .addExpected(t -> t.convert("PAYPALISHIRING", 4), "PINALSIGYAHRPI")
+                .addExpected(t -> t.convert("ABC", 1), "ABC")
+                .addExpected(t -> t.convert("ABC", 2), "ACB")
+                .build();
+    }
+
+
     class Solution implements ZigzagConversion {
 
         @Override
@@ -60,4 +73,7 @@ public interface ZigzagConversion {
             return sb.toString();
         }
     }
+}
+
+class ZigzagConversionTest extends AbstractTest<ZigzagConversion> {
 }

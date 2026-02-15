@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 129. 求根到叶子节点数字之和
@@ -47,6 +50,14 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface SumRootToLeafNumbers {
     int sumNumbers(TreeNode root);
 
+    static Testsuite<SumRootToLeafNumbers> testsuite() {
+        return Testsuite.<SumRootToLeafNumbers>builder()
+                .add(ExpectedTestcase.of(t -> t.sumNumbers(TreeNode.of(1, 2, 3)), 25))
+                .add(ExpectedTestcase.of(t -> t.sumNumbers(TreeNode.of(4, 9, 0, 5, 1)), 1026))
+                .build();
+    }
+
+
     class Solution implements SumRootToLeafNumbers {
         int sum = 0;
 
@@ -72,4 +83,7 @@ public interface SumRootToLeafNumbers {
             }
         }
     }
+}
+
+class SumRootToLeafNumbersTest extends AbstractTest<SumRootToLeafNumbers> {
 }

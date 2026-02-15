@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 151. 翻转字符串里的单词
  * 
@@ -50,6 +54,15 @@ package com.leammin.leetcode.medium;
 public interface ReverseWordsInAString {
     String reverseWords(String s);
 
+    static Testsuite<ReverseWordsInAString> testsuite() {
+        return Testsuite.<ReverseWordsInAString>builder()
+                .add(ExpectedTestcase.of(t->t.reverseWords("the sky is blue"), "blue is sky the"))
+                .add(ExpectedTestcase.of(t->t.reverseWords("  hello world!  "), "world! hello"))
+                .add(ExpectedTestcase.of(t->t.reverseWords("a good   example"), "example good a"))
+                .build();
+    }
+
+
     class Solution implements ReverseWordsInAString {
 
         @Override
@@ -79,4 +92,7 @@ public interface ReverseWordsInAString {
             return String.valueOf(res, resIndex, n - resIndex);
         }
     }
+}
+
+class ReverseWordsInAStringTest extends AbstractTest<ReverseWordsInAString> {
 }

@@ -3,6 +3,9 @@ package com.leammin.leetcode.easy;
 import java.util.Collections;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 559. N叉树的最大深度
  * 
@@ -32,6 +35,20 @@ import java.util.List;
  */
 public interface MaximumDepthOfNAryTree {
     int maxDepth(Node root);
+
+    static Testsuite<MaximumDepthOfNAryTree> testsuite() {
+        MaximumDepthOfNAryTree.Node root = new MaximumDepthOfNAryTree.Node(1,
+                List.of(new MaximumDepthOfNAryTree.Node(3,
+                                List.of(new MaximumDepthOfNAryTree.Node(5),
+                                        new MaximumDepthOfNAryTree.Node(6))),
+                        new MaximumDepthOfNAryTree.Node(2),
+                        new MaximumDepthOfNAryTree.Node(4)));
+
+        return Testsuite.<MaximumDepthOfNAryTree>builder()
+                .addExpected(t -> t.maxDepth(root), 3)
+                .build();
+    }
+
 
     class Solution implements MaximumDepthOfNAryTree {
 
@@ -66,4 +83,7 @@ public interface MaximumDepthOfNAryTree {
             children = _children;
         }
     }
+}
+
+class MaximumDepthOfNAryTreeTest extends AbstractTest<MaximumDepthOfNAryTree> {
 }

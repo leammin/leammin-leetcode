@@ -1,5 +1,6 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.Arrays;
@@ -89,4 +90,7 @@ public interface LongestSubsequenceWithLimitedSum {
         }
 
     }
+}
+
+class LongestSubsequenceWithLimitedSumTest extends AbstractTest<LongestSubsequenceWithLimitedSum> {
 }

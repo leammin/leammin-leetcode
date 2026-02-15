@@ -4,6 +4,10 @@ import com.leammin.leetcode.struct.TreeNode;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 101. 对称二叉树
  *
@@ -41,6 +45,14 @@ public interface SymmetricTree {
     /**
      * 递归
      */
+
+    static Testsuite<SymmetricTree> testsuite() {
+        return Testsuite.<SymmetricTree>builder()
+                .add(ExpectedTestcase.of(t -> t.isSymmetric(TreeNode.of(1,2,2,null,3,null,3)), false))
+                .add(ExpectedTestcase.of(t -> t.isSymmetric(TreeNode.of(1,2,2,3,4,4,3)), true))
+                .build();
+    }
+
     class SolutionRecursively implements SymmetricTree {
         @Override
         public boolean isSymmetric(TreeNode root) {
@@ -136,4 +148,7 @@ public interface SymmetricTree {
             return (a == b) || (a != null && b != null && a.val == b.val);
         }
     }
+}
+
+class SymmetricTreeTest extends AbstractTest<SymmetricTree> {
 }

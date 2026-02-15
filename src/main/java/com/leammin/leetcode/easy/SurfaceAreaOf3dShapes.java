@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 892. 三维形体的表面积
  *
@@ -59,6 +63,17 @@ package com.leammin.leetcode.easy;
 public interface SurfaceAreaOf3dShapes {
     int surfaceArea(int[][] grid);
 
+    static Testsuite<SurfaceAreaOf3dShapes> testsuite() {
+        return Testsuite.<SurfaceAreaOf3dShapes>builder()
+                .add(ExpectedTestcase.of(t -> t.surfaceArea(new int[][]{{1, 2}, {3, 4}}), 34))
+                .add(ExpectedTestcase.of(t -> t.surfaceArea(new int[][]{{2}}), 10))
+                .add(ExpectedTestcase.of(t -> t.surfaceArea(new int[][]{{1, 0}, {0, 2}}), 16))
+                .add(ExpectedTestcase.of(t -> t.surfaceArea(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}), 32))
+                .add(ExpectedTestcase.of(t -> t.surfaceArea(new int[][]{{2, 2, 2}, {2, 1, 2}, {2, 2, 2}}), 46))
+                .build();
+    }
+
+
     class Solution implements SurfaceAreaOf3dShapes {
 
         @Override
@@ -82,4 +97,7 @@ public interface SurfaceAreaOf3dShapes {
             return i >= 0 && j >= 0 && i < grid.length && j < grid[i].length ? grid[i][j] : 0;
         }
     }
+}
+
+class SurfaceAreaOf3dShapesTest extends AbstractTest<SurfaceAreaOf3dShapes> {
 }

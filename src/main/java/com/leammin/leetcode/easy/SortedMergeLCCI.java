@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 10.01. 合并排序的数组
  *
@@ -21,6 +25,21 @@ package com.leammin.leetcode.easy;
 public interface SortedMergeLCCI {
     void merge(int[] a, int m, int[] b, int n);
 
+    static Testsuite<SortedMergeLCCI> testsuite() {
+        return Testsuite.<SortedMergeLCCI>builder()
+                .add(ExpectedTestcase.of(s -> {
+                    int[] a = {1, 2, 3, 0, 0, 0};
+                    s.merge(a, 3, new int[]{2, 5, 6}, 3);
+                    return a;
+                }, new int[]{1, 2, 2, 3, 5, 6})).add(ExpectedTestcase.of(s -> {
+                    int[] a = {0};
+                    s.merge(a, 0, new int[]{1}, 1);
+                    return a;
+                }, new int[]{1}))
+                .build();
+    }
+
+
     class Solution implements SortedMergeLCCI {
         @Override
         public void merge(int[] a, int m, int[] b, int n) {
@@ -29,4 +48,7 @@ public interface SortedMergeLCCI {
             }
         }
     }
+}
+
+class SortedMergeLCCITest extends AbstractTest<SortedMergeLCCI> {
 }

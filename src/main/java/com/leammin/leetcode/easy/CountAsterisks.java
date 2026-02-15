@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2315. 统计星号
  * 
@@ -50,6 +53,15 @@ package com.leammin.leetcode.easy;
 public interface CountAsterisks {
     int countAsterisks(String s);
 
+    static Testsuite<CountAsterisks> testsuite() {
+        return Testsuite.<CountAsterisks>builder()
+                .addExpected(t -> t.countAsterisks("l|*e*et|c**o|*de|"), 2)
+                .addExpected(t -> t.countAsterisks("iamprogrammer"), 0)
+                .addExpected(t -> t.countAsterisks("yo|uar|e**|b|e***au|tifu|l"), 5)
+                .build();
+    }
+
+
     class Solution implements CountAsterisks {
 
         @Override
@@ -67,4 +79,7 @@ public interface CountAsterisks {
             return r;
         }
     }
+}
+
+class CountAsterisksTest extends AbstractTest<CountAsterisks> {
 }

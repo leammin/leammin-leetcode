@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 263. 丑数
  * 
@@ -40,6 +43,16 @@ package com.leammin.leetcode.easy;
 public interface UglyNumber {
     boolean isUgly(int num);
 
+    static Testsuite<UglyNumber> testsuite() {
+        return Testsuite.<UglyNumber>builder()
+                .addExpected(t -> t.isUgly(8), true)
+                .addExpected(t -> t.isUgly(6), true)
+                .addExpected(t -> t.isUgly(1), true)
+                .addExpected(t -> t.isUgly(14), false)
+                .build();
+    }
+
+
     class Solution implements UglyNumber {
 
         @Override
@@ -58,4 +71,7 @@ public interface UglyNumber {
             return num == 1;
         }
     }
+}
+
+class UglyNumberTest extends AbstractTest<UglyNumber> {
 }

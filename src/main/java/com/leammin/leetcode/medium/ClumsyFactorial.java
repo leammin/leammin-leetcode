@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1006. 笨阶乘
  * 
@@ -44,6 +47,16 @@ package com.leammin.leetcode.medium;
  */
 public interface ClumsyFactorial {
     int clumsy(int N);
+
+    static Testsuite<ClumsyFactorial> testsuite() {
+        return Testsuite.<ClumsyFactorial>builder()
+                .addExpected(t -> t.clumsy(4), 7)
+                .addExpected(t -> t.clumsy(10), 12)
+                .addExpected(t -> t.clumsy(8), 9)
+                .addExpected(t -> t.clumsy(7), 6)
+                .build();
+    }
+
 
     class Solution implements ClumsyFactorial {
 
@@ -94,4 +107,7 @@ public interface ClumsyFactorial {
             return head + mid + tail;
         }
     }
+}
+
+class ClumsyFactorialTest extends AbstractTest<ClumsyFactorial> {
 }

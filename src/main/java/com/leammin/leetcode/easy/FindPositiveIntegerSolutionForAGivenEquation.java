@@ -3,6 +3,9 @@ package com.leammin.leetcode.easy;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1237. 找出给定方程的正整数解
  *
@@ -61,6 +64,12 @@ public interface FindPositiveIntegerSolutionForAGivenEquation {
 
     List<List<Integer>> findSolution(CustomFunction customfunction, int z);
 
+    static Testsuite<FindPositiveIntegerSolutionForAGivenEquation> testsuite() {
+        return Testsuite.<FindPositiveIntegerSolutionForAGivenEquation>builder()
+                .build();
+    }
+
+
     class Solution implements FindPositiveIntegerSolutionForAGivenEquation {
 
         @Override
@@ -89,4 +98,7 @@ interface CustomFunction {
     // Note that f(x, y) is increasing with respect to both x and y.
     // i.e. f(x, y) < f(x + 1, y), f(x, y) < f(x, y + 1)
     int f(int x, int y);
+}
+
+class FindPositiveIntegerSolutionForAGivenEquationTest extends AbstractTest<FindPositiveIntegerSolutionForAGivenEquation> {
 }

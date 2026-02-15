@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 752. 打开转盘锁
  *
@@ -68,6 +72,16 @@ import java.util.Queue;
 public interface OpenTheLock {
     int openLock(String[] deadends, String target);
 
+    static Testsuite<OpenTheLock> testsuite() {
+        return Testsuite.<OpenTheLock>builder()
+                .add(ExpectedTestcase.of(t -> t.openLock(new String[]{"0201","0101","0102","1212","2002"}, "0202"), 6))
+                .add(ExpectedTestcase.of(t -> t.openLock(new String[]{"8888"}, "0009"), 1))
+                .add(ExpectedTestcase.of(t -> t.openLock(new String[]{"8887","8889","8878","8898","8788","8988","7888","9888"}, "8888"), -1))
+                .add(ExpectedTestcase.of(t -> t.openLock(new String[]{"0000"}, "8888"), -1))
+                .build();
+    }
+
+
     class Solution implements OpenTheLock {
 
         @Override
@@ -116,4 +130,7 @@ public interface OpenTheLock {
             return lock - a * dig + b * dig;
         }
     }
+}
+
+class OpenTheLockTest extends AbstractTest<OpenTheLock> {
 }

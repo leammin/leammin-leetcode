@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 01.09. 字符串轮转
  * 
@@ -38,6 +41,14 @@ package com.leammin.leetcode.easy;
  */
 public interface StringRotationLcci {
     boolean isFlipedString(String s1, String s2);
+
+    static Testsuite<StringRotationLcci> testsuite() {
+        return Testsuite.<StringRotationLcci>builder()
+                .addExpected(t -> t.isFlipedString("waterbottle", "erbottlewat"), true)
+                .addExpected(t -> t.isFlipedString("aa", "ab"), false)
+                .build();
+    }
+
 
     class Solution implements StringRotationLcci {
 
@@ -81,4 +92,7 @@ public interface StringRotationLcci {
             return (s2 + s2).contains(s1);
         }
     }
+}
+
+class StringRotationLcciTest extends AbstractTest<StringRotationLcci> {
 }

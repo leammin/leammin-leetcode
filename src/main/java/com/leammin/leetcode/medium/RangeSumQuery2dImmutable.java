@@ -1,5 +1,10 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.ClassUtils;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 304. 二维区域和检索 - 矩阵不可变
  * 
@@ -65,4 +70,24 @@ public abstract class RangeSumQuery2dImmutable {
             return getSum(row2, col2) - getSum(row2, col1 - 1) - getSum(row1 - 1, col2) + getSum(row1 - 1, col1 - 1);
         }
     }
+
+    static Testsuite<RangeSumQuery2dImmutable> testsuite() {
+        return Testsuite.<RangeSumQuery2dImmutable>builder()
+                .add(ExpectedTestcase.create(clazz -> ClassUtils.newInstance(clazz, (Object) new int[][]{
+                                {3, 0, 1, 4, 2},
+                                {5, 6, 3, 2, 1},
+                                {1, 2, 0, 1, 5},
+                                {4, 1, 0, 1, 7},
+                                {1, 0, 3, 0, 5}
+                        }), t -> new int[]{
+                                t.sumRegion(2, 1, 4, 3),
+                                t.sumRegion(1, 1, 2, 2),
+                                t.sumRegion(1, 2, 2, 4),
+                        }, new int[]{8, 11, 12})
+                )
+                .build();
+    }
+}
+
+class RangeSumQuery2dImmutableTest extends AbstractTest<RangeSumQuery2dImmutable> {
 }

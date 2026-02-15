@@ -3,6 +3,9 @@ package com.leammin.leetcode.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 133. 克隆图
  * 
@@ -40,6 +43,12 @@ import java.util.List;
 public interface CloneGraph {
     Node cloneGraph(Node node);
 
+    static Testsuite<CloneGraph> testsuite() {
+        return Testsuite.<CloneGraph>builder()
+                .build();
+    }
+
+
     class Solution implements CloneGraph {
 
         @Override
@@ -71,4 +80,7 @@ public interface CloneGraph {
             neighbors = new ArrayList<Node>();
         }
     }
+}
+
+class CloneGraphTest extends AbstractTest<CloneGraph> {
 }

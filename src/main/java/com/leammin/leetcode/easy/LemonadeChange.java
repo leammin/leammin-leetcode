@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 860. 柠檬水找零
  * 
@@ -63,6 +67,16 @@ package com.leammin.leetcode.easy;
 public interface LemonadeChange {
     boolean lemonadeChange(int[] bills);
 
+    static Testsuite<LemonadeChange> testsuite() {
+        return Testsuite.<LemonadeChange>builder()
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{5,5,5,10,20}), true))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{5,5,10}), true))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{10,10}), false))
+                .add(ExpectedTestcase.of(t -> t.lemonadeChange(new int[]{5,5,10,10,20}), false))
+                .build();
+    }
+
+
     class Solution implements LemonadeChange {
         @Override
         public boolean lemonadeChange(int[] bills) {
@@ -92,4 +106,7 @@ public interface LemonadeChange {
             return true;
         }
     }
+}
+
+class LemonadeChangeTest extends AbstractTest<LemonadeChange> {
 }

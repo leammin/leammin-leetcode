@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1365. 有多少小于当前数字的数字
  * 
@@ -54,6 +58,15 @@ public interface HowManyNumbersAreSmallerThanTheCurrentNumber {
 
     int[] smallerNumbersThanCurrent(int[] nums);
 
+    static Testsuite<HowManyNumbersAreSmallerThanTheCurrentNumber> testsuite() {
+        return Testsuite.<HowManyNumbersAreSmallerThanTheCurrentNumber>builder()
+                .add(ExpectedTestcase.of(t -> t.smallerNumbersThanCurrent(new int[]{8,1,2,2,3}), new int[]{4,0,1,1,3}))
+                .add(ExpectedTestcase.of(t -> t.smallerNumbersThanCurrent(new int[]{6,5,4,8}), new int[]{2,1,0,3}))
+                .add(ExpectedTestcase.of(t -> t.smallerNumbersThanCurrent(new int[]{7,7,7,7}), new int[]{0,0,0,0}))
+                .build();
+    }
+
+
     class Solution implements HowManyNumbersAreSmallerThanTheCurrentNumber {
 
         @Override
@@ -98,4 +111,7 @@ public interface HowManyNumbersAreSmallerThanTheCurrentNumber {
             return result;
         }
     }
+}
+
+class HowManyNumbersAreSmallerThanTheCurrentNumberTest extends AbstractTest<HowManyNumbersAreSmallerThanTheCurrentNumber> {
 }

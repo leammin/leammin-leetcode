@@ -3,6 +3,11 @@ package com.leammin.leetcode.easy;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 1. 两数之和
  *
@@ -25,6 +30,14 @@ import java.util.Map;
 public interface TwoSum {
     int[] twoSum(int[] nums, int target);
 
+    static Testsuite<TwoSum> testsuite() {
+        return Testsuite.<TwoSum>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.twoSum(new int[]{2, 7, 11, 15}, 9),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder(0, 1)))
+                .build();
+    }
+
+
     class Solution implements TwoSum {
         @Override
         public int[] twoSum(int[] nums, int target) {
@@ -42,4 +55,7 @@ public interface TwoSum {
             return null;
         }
     }
+}
+
+class TwoSumTest extends AbstractTest<TwoSum> {
 }

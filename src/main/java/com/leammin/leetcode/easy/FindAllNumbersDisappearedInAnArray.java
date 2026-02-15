@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 448. 找到所有数组中消失的数字
  * 
@@ -29,6 +33,13 @@ import java.util.List;
 public interface FindAllNumbersDisappearedInAnArray {
     List<Integer> findDisappearedNumbers(int[] nums);
 
+    static Testsuite<FindAllNumbersDisappearedInAnArray> testsuite() {
+        return Testsuite.<FindAllNumbersDisappearedInAnArray>builder()
+                .add(ExpectedTestcase.of(t -> t.findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}), List.of(5, 6)))
+                .build();
+    }
+
+
     class Solution implements FindAllNumbersDisappearedInAnArray {
 
         @Override
@@ -54,4 +65,7 @@ public interface FindAllNumbersDisappearedInAnArray {
             return res;
         }
     }
+}
+
+class FindAllNumbersDisappearedInAnArrayTest extends AbstractTest<FindAllNumbersDisappearedInAnArray> {
 }

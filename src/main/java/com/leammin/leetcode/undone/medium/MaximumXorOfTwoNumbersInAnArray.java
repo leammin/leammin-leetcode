@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 421. 数组中两个数的最大异或值
  * 
@@ -26,6 +29,13 @@ package com.leammin.leetcode.undone.medium;
 public interface MaximumXorOfTwoNumbersInAnArray {
     int findMaximumXOR(int[] nums);
 
+    static Testsuite<MaximumXorOfTwoNumbersInAnArray> testsuite() {
+        return Testsuite.<MaximumXorOfTwoNumbersInAnArray>builder()
+            .addExpected(t -> t.findMaximumXOR(new int[]{3, 10, 5, 25, 2, 8}), 28)
+            .build();
+    }
+
+
     class Solution implements MaximumXorOfTwoNumbersInAnArray {
 
         @Override
@@ -39,4 +49,7 @@ public interface MaximumXorOfTwoNumbersInAnArray {
             return max;
         }
     }
+}
+
+class MaximumXorOfTwoNumbersInAnArrayTest extends AbstractTest<MaximumXorOfTwoNumbersInAnArray> {
 }

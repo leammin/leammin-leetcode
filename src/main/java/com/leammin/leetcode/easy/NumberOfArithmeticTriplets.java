@@ -1,5 +1,6 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -75,4 +76,7 @@ public interface NumberOfArithmeticTriplets {
             return res;
         }
     }
+}
+
+class NumberOfArithmeticTripletsTest extends AbstractTest<NumberOfArithmeticTriplets> {
 }

@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 114. 二叉树展开为链表
@@ -36,6 +39,19 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface FlattenBinaryTreeToLinkedList {
     void flatten(TreeNode root);
 
+    static Testsuite<FlattenBinaryTreeToLinkedList> testsuite() {
+        return Testsuite.<FlattenBinaryTreeToLinkedList>builder()
+                .add(ExpectedTestcase.of(
+                        t -> {
+                            TreeNode root = TreeNode.of(1, 2, 5, 3, 4, null, 6);
+                            t.flatten(root);
+                            return root;
+                        }, TreeNode.of(1, null, 2, null, 3, null, 4, null, 5, null, 6)
+                ))
+                .build();
+    }
+
+
     class Solution implements FlattenBinaryTreeToLinkedList {
 
         @Override
@@ -57,4 +73,7 @@ public interface FlattenBinaryTreeToLinkedList {
             return rightTail == null ? leftTail == null ? root : leftTail : rightTail;
         }
     }
+}
+
+class FlattenBinaryTreeToLinkedListTest extends AbstractTest<FlattenBinaryTreeToLinkedList> {
 }

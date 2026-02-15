@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 733. 图像渲染
  *
@@ -41,6 +45,21 @@ import java.util.Queue;
  */
 public interface FloodFill {
     int[][] floodFill(int[][] image, int sr, int sc, int newColor);
+
+    static Testsuite<FloodFill> testsuite() {
+        return Testsuite.<FloodFill>builder()
+                .add(ExpectedTestcase.of(t -> t.floodFill(new int[][]{
+                        {1, 1, 1},
+                        {1, 1, 0},
+                        {1, 0, 1},
+                }, 1, 1, 2), new int[][]{
+                        {2, 2, 2},
+                        {2, 2, 0},
+                        {2, 0, 1},
+                }))
+                .build();
+    }
+
 
     class Solution implements FloodFill {
 
@@ -96,4 +115,7 @@ public interface FloodFill {
             }
         }
     }
+}
+
+class FloodFillTest extends AbstractTest<FloodFill> {
 }

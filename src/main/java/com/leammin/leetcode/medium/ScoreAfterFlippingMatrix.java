@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 861. 翻转矩阵后的得分
  * 
@@ -41,6 +45,17 @@ package com.leammin.leetcode.medium;
 public interface ScoreAfterFlippingMatrix {
     int matrixScore(int[][] a);
 
+    static Testsuite<ScoreAfterFlippingMatrix> testsuite() {
+        return Testsuite.<ScoreAfterFlippingMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.matrixScore(new int[][]{
+                        new int[]{0, 0, 1, 1},
+                        new int[]{1, 0, 1, 0},
+                        new int[]{1, 1, 0, 0},
+                }), 39))
+                .build();
+    }
+
+
     class Solution implements ScoreAfterFlippingMatrix {
         @Override
         public int matrixScore(int[][] a) {
@@ -57,4 +72,7 @@ public interface ScoreAfterFlippingMatrix {
             return res;
         }
     }
+}
+
+class ScoreAfterFlippingMatrixTest extends AbstractTest<ScoreAfterFlippingMatrix> {
 }

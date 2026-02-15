@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题64. 求1+2+…+n
  *
@@ -32,6 +36,14 @@ package com.leammin.leetcode.medium;
  */
 public interface Qiu12nLcof {
     int sumNums(int n);
+
+    static Testsuite<Qiu12nLcof> testsuite() {
+        return Testsuite.<Qiu12nLcof>builder()
+                .add(ExpectedTestcase.of(t -> t.sumNums(3), 6))
+                .add(ExpectedTestcase.of(t -> t.sumNums(9), 45))
+                .build();
+    }
+
 
     class Solution implements Qiu12nLcof {
 
@@ -108,4 +120,7 @@ public interface Qiu12nLcof {
             return ans >> 1;
         }
     }
+}
+
+class Qiu12nLcofTest extends AbstractTest<Qiu12nLcof> {
 }

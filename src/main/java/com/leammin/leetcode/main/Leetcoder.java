@@ -9,19 +9,18 @@ import java.util.Scanner;
 public final class Leetcoder {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in)
-                .useDelimiter("\n");
-        System.out.print("请输入id/title/url: ");
-        String key = sc.next();
+        String key;
+        if (args.length > 0) {
+            key = args[0];
+        } else {
+            Scanner sc = new Scanner(System.in).useDelimiter("\n");
+            System.out.print("请输入id/title/url: ");
+            key = sc.next();
+        }
 
         Question question = LeetcodeQuestions.getQuestion(key);
         System.out.println("\n" + LeetcodeClass.getClassName(question));
         System.out.println(question.getJavaCode());
-        try {
-            LeetcodeClass.createTestFile(question);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
         LeetcodeClass.createCodeFile(question);
     }
 

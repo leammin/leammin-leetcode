@@ -1,6 +1,8 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 1669. 合并两个链表
@@ -49,6 +51,14 @@ import com.leammin.leetcode.struct.ListNode;
 public interface MergeInBetweenLinkedLists {
     ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2);
 
+    static Testsuite<MergeInBetweenLinkedLists> testsuite() {
+        return Testsuite.<MergeInBetweenLinkedLists>builder()
+                .addExpected(t -> t.mergeInBetween(ListNode.of(0,1,2,3,4,5), 3, 4, ListNode.of(1000000,1000001,1000002)), ListNode.of(0,1,2,1000000,1000001,1000002,5))
+                .addExpected(t -> t.mergeInBetween(ListNode.of(0,1,2,3,4,5,6), 2, 5, ListNode.of(1000000,1000001,1000002,1000003,1000004)), ListNode.of(0,1,1000000,1000001,1000002,1000003,1000004,6))
+                .build();
+    }
+
+
     class Solution implements MergeInBetweenLinkedLists {
 
         @Override
@@ -74,4 +84,7 @@ public interface MergeInBetweenLinkedLists {
             return list;
         }
     }
+}
+
+class MergeInBetweenLinkedListsTest extends AbstractTest<MergeInBetweenLinkedLists> {
 }

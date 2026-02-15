@@ -1,5 +1,6 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.Arrays;
@@ -64,4 +65,7 @@ public interface WidestVerticalAreaBetweenTwoPointsContainingNoPoints {
             return max;
         }
     }
+}
+
+class WidestVerticalAreaBetweenTwoPointsContainingNoPointsTest extends AbstractTest<WidestVerticalAreaBetweenTwoPointsContainingNoPoints> {
 }

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 554. 砖墙
  *
@@ -47,6 +50,15 @@ import java.util.Map;
 public interface BrickWall {
     int leastBricks(List<List<Integer>> wall);
 
+    static Testsuite<BrickWall> testsuite() {
+        return Testsuite.<BrickWall>builder()
+            .addExpected(t -> t.leastBricks(
+                List.of(List.of(1, 2, 2, 1), List.of(3, 1, 2), List.of(1, 3, 2), List.of(2, 4), List.of(3, 1, 2),
+                    List.of(1, 3, 1, 1))), 2)
+            .build();
+    }
+
+
     class Solution implements BrickWall {
 
         @Override
@@ -66,4 +78,7 @@ public interface BrickWall {
             return wall.size() - max;
         }
     }
+}
+
+class BrickWallTest extends AbstractTest<BrickWall> {
 }

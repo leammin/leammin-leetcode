@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 557. 反转字符串中的单词 III
  * 
@@ -21,6 +25,13 @@ package com.leammin.leetcode.easy;
 public interface ReverseWordsInAStringIii {
     String reverseWords(String s);
 
+    static Testsuite<ReverseWordsInAStringIii> testsuite() {
+        return Testsuite.<ReverseWordsInAStringIii>builder()
+                .add(ExpectedTestcase.of(t -> t.reverseWords("Let's take LeetCode contest"), "s'teL ekat edoCteeL tsetnoc"))
+                .build();
+    }
+
+
     class Solution implements ReverseWordsInAStringIii {
 
         @Override
@@ -41,4 +52,7 @@ public interface ReverseWordsInAStringIii {
             return res.toString();
         }
     }
+}
+
+class ReverseWordsInAStringIiiTest extends AbstractTest<ReverseWordsInAStringIii> {
 }

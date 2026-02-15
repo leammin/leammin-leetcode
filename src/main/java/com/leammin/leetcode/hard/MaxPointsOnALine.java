@@ -3,6 +3,9 @@ package com.leammin.leetcode.hard;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 149. 直线上最多的点数
  * 
@@ -43,6 +46,15 @@ import java.util.Map;
 public interface MaxPointsOnALine {
     int maxPoints(int[][] points);
 
+    static Testsuite<MaxPointsOnALine> testsuite() {
+        return Testsuite.<MaxPointsOnALine>builder()
+                .addExpected(t -> t.maxPoints(new int[][]{{1, 1}, {2, 2}, {3, 3}}), 3)
+                .addExpected(t -> t.maxPoints(new int[][]{{1, 1}, {3, 2}, {5, 3}, {4, 1}, {2, 3}, {1, 4}}), 4)
+                .addExpected(t -> t.maxPoints(new int[][]{{2, 3}, {3, 3}, {-5, 3}}), 3)
+                .build();
+    }
+
+
     class Solution implements MaxPointsOnALine {
 
         @Override
@@ -67,4 +79,7 @@ public interface MaxPointsOnALine {
             return max;
         }
     }
+}
+
+class MaxPointsOnALineTest extends AbstractTest<MaxPointsOnALine> {
 }

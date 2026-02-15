@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 91. 解码方法
  * 
@@ -34,6 +37,17 @@ package com.leammin.leetcode.medium;
 public interface DecodeWays {
     int numDecodings(String s);
 
+    static Testsuite<DecodeWays> testsuite() {
+        return Testsuite.<DecodeWays>builder()
+            .addExpected(t -> t.numDecodings("12"), 2)
+            .addExpected(t -> t.numDecodings("226"), 3)
+            .addExpected(t -> t.numDecodings("0"), 0)
+            .addExpected(t -> t.numDecodings("100"), 0)
+            .addExpected(t -> t.numDecodings("2101"), 1)
+            .build();
+    }
+
+
     class Solution implements DecodeWays {
 
         @Override
@@ -62,4 +76,7 @@ public interface DecodeWays {
         }
 
     }
+}
+
+class DecodeWaysTest extends AbstractTest<DecodeWays> {
 }

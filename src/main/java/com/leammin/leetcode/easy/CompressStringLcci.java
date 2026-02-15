@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 01.06. 字符串压缩
  * 
@@ -33,6 +37,14 @@ package com.leammin.leetcode.easy;
 public interface CompressStringLcci {
     String compressString(String S);
 
+    static Testsuite<CompressStringLcci> testsuite() {
+        return Testsuite.<CompressStringLcci>builder()
+                .add(ExpectedTestcase.of(t -> t.compressString("aabcccccaaa"), "a2b1c5a3"))
+                .add(ExpectedTestcase.of(t -> t.compressString("abbccd"), "abbccd"))
+                .build();
+    }
+
+
     class Solution implements CompressStringLcci {
 
         @Override
@@ -57,4 +69,7 @@ public interface CompressStringLcci {
             return builder.length() >= S.length() ? S : builder.toString();
         }
     }
+}
+
+class CompressStringLcciTest extends AbstractTest<CompressStringLcci> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 153. 寻找旋转排序数组中的最小值
  * 
@@ -28,6 +32,18 @@ package com.leammin.leetcode.medium;
 public interface FindMinimumInRotatedSortedArray {
     int findMin(int[] nums);
 
+    static Testsuite<FindMinimumInRotatedSortedArray> testsuite() {
+        return Testsuite.<FindMinimumInRotatedSortedArray>builder()
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{3,4,5,1,2}), 1))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{4,5,6,7,0,1,2}), 0))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{1,2,3,4,5}), 1))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,1}), 1))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{3,4,5,1,2}), 1))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{1}), 1))
+                .build();
+    }
+
+
     class Solution implements FindMinimumInRotatedSortedArray {
 
         @Override
@@ -54,4 +70,7 @@ public interface FindMinimumInRotatedSortedArray {
             return nums[lo];
         }
     }
+}
+
+class FindMinimumInRotatedSortedArrayTest extends AbstractTest<FindMinimumInRotatedSortedArray> {
 }

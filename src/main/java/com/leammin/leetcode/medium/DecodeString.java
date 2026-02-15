@@ -5,6 +5,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 394. 字符串解码
  * 
@@ -30,6 +34,16 @@ import java.util.List;
  */
 public interface DecodeString {
     String decodeString(String s);
+
+    static Testsuite<DecodeString> testsuite() {
+        return Testsuite.<DecodeString>builder()
+                .add(ExpectedTestcase.of(t -> t.decodeString("3[a]2[bc]"), "aaabcbc"))
+                .add(ExpectedTestcase.of(t -> t.decodeString("3[a2[c]]"), "accaccacc"))
+                .add(ExpectedTestcase.of(t -> t.decodeString("2[abc]3[cd]ef"), "abcabccdcdcdef"))
+                .add(ExpectedTestcase.of(t -> t.decodeString("100[leetcode]"), "leetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcodeleetcode"))
+                .build();
+    }
+
 
     class Solution implements DecodeString {
 
@@ -67,4 +81,7 @@ public interface DecodeString {
             return res.toString();
         }
     }
+}
+
+class DecodeStringTest extends AbstractTest<DecodeString> {
 }

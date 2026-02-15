@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 367. 有效的完全平方数
  * 
@@ -25,6 +29,15 @@ package com.leammin.leetcode.easy;
 public interface ValidPerfectSquare {
     boolean isPerfectSquare(int num);
 
+    static Testsuite<ValidPerfectSquare> testsuite() {
+        return Testsuite.<ValidPerfectSquare>builder()
+                .add(ExpectedTestcase.of(t -> t.isPerfectSquare(16), true))
+                .add(ExpectedTestcase.of(t -> t.isPerfectSquare(14), false))
+                .add(ExpectedTestcase.of(t -> t.isPerfectSquare(2147483647), false))
+                .build();
+    }
+
+
     class Solution implements ValidPerfectSquare {
 
         @Override
@@ -45,4 +58,7 @@ public interface ValidPerfectSquare {
             return false;
         }
     }
+}
+
+class ValidPerfectSquareTest extends AbstractTest<ValidPerfectSquare> {
 }

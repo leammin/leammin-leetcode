@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1139. 最大的以 1 为边界的正方形
  *
@@ -35,6 +38,16 @@ package com.leammin.leetcode.medium;
 public interface Largest1BorderedSquare {
     int largest1BorderedSquare(int[][] grid);
 
+    static Testsuite<Largest1BorderedSquare> testsuite() {
+        return Testsuite.<Largest1BorderedSquare>builder()
+                .addExpected(t -> t.largest1BorderedSquare(new int[][]{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}), 9)
+                .addExpected(t -> t.largest1BorderedSquare(new int[][]{{1, 1, 0, 0}}), 1)
+                .addExpected(t -> t.largest1BorderedSquare(new int[][]{{0, 0, 0, 0}}), 0)
+                .addExpected(t -> t.largest1BorderedSquare(new int[][]{{1, 1, 0}, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}}), 9)
+                .build();
+    }
+
+
     class Solution implements Largest1BorderedSquare {
 
         @Override
@@ -69,4 +82,7 @@ public interface Largest1BorderedSquare {
             return res * res;
         }
     }
+}
+
+class Largest1BorderedSquareTest extends AbstractTest<Largest1BorderedSquare> {
 }

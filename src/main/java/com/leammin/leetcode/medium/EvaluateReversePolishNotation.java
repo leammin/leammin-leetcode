@@ -4,6 +4,10 @@ import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.function.IntBinaryOperator;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 150. 逆波兰表达式求值
  *
@@ -51,6 +55,15 @@ import java.util.function.IntBinaryOperator;
 public interface EvaluateReversePolishNotation {
     int evalRPN(String[] tokens);
 
+    static Testsuite<EvaluateReversePolishNotation> testsuite() {
+        return Testsuite.<EvaluateReversePolishNotation>builder()
+                .add(ExpectedTestcase.of(t -> t.evalRPN(new String[]{"2", "1", "+", "3", "*"}), 9))
+                .add(ExpectedTestcase.of(t -> t.evalRPN(new String[]{"4", "13", "5", "/", "+"}), 6))
+                .add(ExpectedTestcase.of(t -> t.evalRPN(new String[]{"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"}), 22))
+                .build();
+    }
+
+
     class Solution implements EvaluateReversePolishNotation {
 
         @Override
@@ -73,4 +86,7 @@ public interface EvaluateReversePolishNotation {
             return stack.poll();
         }
     }
+}
+
+class EvaluateReversePolishNotationTest extends AbstractTest<EvaluateReversePolishNotation> {
 }

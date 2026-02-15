@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 345. 反转字符串中的元音字母
  *
@@ -25,6 +29,14 @@ package com.leammin.leetcode.easy;
  */
 public interface ReverseVowelsOfAString {
     String reverseVowels(String s);
+
+    static Testsuite<ReverseVowelsOfAString> testsuite() {
+        return Testsuite.<ReverseVowelsOfAString>builder()
+                .add(ExpectedTestcase.of(t -> t.reverseVowels("hello"), "holle"))
+                .add(ExpectedTestcase.of(t -> t.reverseVowels("leetcode"), "leotcede"))
+                .build();
+    }
+
 
     class Solution implements ReverseVowelsOfAString {
         // 'a','e','i','o','u','A','E','I','O','U'
@@ -64,4 +76,7 @@ public interface ReverseVowelsOfAString {
             return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
         }
     }
+}
+
+class ReverseVowelsOfAStringTest extends AbstractTest<ReverseVowelsOfAString> {
 }

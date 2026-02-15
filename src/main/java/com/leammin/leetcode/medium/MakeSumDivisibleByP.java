@@ -1,5 +1,6 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.HashMap;
@@ -171,4 +172,7 @@ public interface MakeSumDivisibleByP {
             return res == nums.length ? -1 : res;
         }
     }
+}
+
+class MakeSumDivisibleByPTest extends AbstractTest<MakeSumDivisibleByP> {
 }

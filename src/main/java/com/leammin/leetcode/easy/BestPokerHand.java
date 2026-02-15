@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2347. 最好的扑克手牌
  * 
@@ -61,6 +64,13 @@ package com.leammin.leetcode.easy;
 public interface BestPokerHand {
     String bestHand(int[] ranks, char[] suits);
 
+    static Testsuite<BestPokerHand> testsuite() {
+        return Testsuite.<BestPokerHand>builder()
+                .addExpected(t -> t.bestHand(new int[]{13,2,3,1,9}, new char[]{'a', 'a', 'a', 'a', 'a'}), "Flush")
+                .build();
+    }
+
+
     class Solution implements BestPokerHand {
 
         @Override
@@ -89,4 +99,7 @@ public interface BestPokerHand {
             return pair ? "Pair" : "High Card";
         }
     }
+}
+
+class BestPokerHandTest extends AbstractTest<BestPokerHand> {
 }

@@ -1,5 +1,6 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.HashMap;
@@ -109,4 +110,7 @@ public interface CountSubarraysWithMedianK {
             return res;
         }
     }
+}
+
+class CountSubarraysWithMedianKTest extends AbstractTest<CountSubarraysWithMedianK> {
 }

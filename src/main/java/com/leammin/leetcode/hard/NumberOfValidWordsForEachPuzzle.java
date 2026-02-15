@@ -5,6 +5,11 @@ import com.leammin.leetcode.util.Execute;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.List;
+
 /**
  * 1178. 猜字谜
  * 
@@ -56,6 +61,24 @@ import java.util.stream.Collectors;
  */
 public interface NumberOfValidWordsForEachPuzzle {
     List<Integer> findNumOfValidWords(String[] words, String[] puzzles);
+
+    static Testsuite<NumberOfValidWordsForEachPuzzle> testsuite() {
+        return Testsuite.<NumberOfValidWordsForEachPuzzle>builder()
+                .add(ExpectedTestcase.of(t -> t.findNumOfValidWords(
+                        new String[]{"aaaa", "asas", "able", "ability", "actt", "actor", "access"},
+                        new String[]{"aboveyz", "abrodyz", "abslute", "absoryz", "actresz", "gaswxyz"}),
+                        List.of(1, 1, 3, 2, 4, 0)))
+                .add(ExpectedTestcase.of(t -> t.findNumOfValidWords(
+                        new String[]{"apple", "pleas", "please"},
+                        new String[]{"aelwxyz", "aelpxyz", "aelpsxy", "saelpxy", "xaelpsy"}),
+                        List.of(0, 1, 3, 2, 0)))
+                .add(ExpectedTestcase.of(t -> t.findNumOfValidWords(
+                        new String[]{"kkaz", "kaaz", "aazk", "aaaz", "abcdefghijklmnopqrstuvwxyz", "kkka", "kkkz", "aaaa", "kkkk", "zzzz"},
+                        new String[]{"kazxyuv"}),
+                        List.of(6)))
+                .build();
+    }
+
 
     class Solution implements NumberOfValidWordsForEachPuzzle {
 
@@ -187,4 +210,7 @@ public interface NumberOfValidWordsForEachPuzzle {
             WordTree[] next = new WordTree[26];
         }
     }
+}
+
+class NumberOfValidWordsForEachPuzzleTest extends AbstractTest<NumberOfValidWordsForEachPuzzle> {
 }

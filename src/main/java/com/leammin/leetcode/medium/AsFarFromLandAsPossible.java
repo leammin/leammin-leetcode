@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1162. 地图分析
  *
@@ -48,6 +52,14 @@ import java.util.Queue;
  */
 public interface AsFarFromLandAsPossible {
     int maxDistance(int[][] grid);
+
+    static Testsuite<AsFarFromLandAsPossible> testsuite() {
+        return Testsuite.<AsFarFromLandAsPossible>builder()
+                .add(ExpectedTestcase.of(t -> t.maxDistance(new int[][]{{1, 0, 1}, {0, 0, 0}, {1, 0, 1}}), 2))
+                .add(ExpectedTestcase.of(t -> t.maxDistance(new int[][]{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}}), 4))
+                .build();
+    }
+
 
     class Solution implements AsFarFromLandAsPossible {
 
@@ -134,4 +146,7 @@ public interface AsFarFromLandAsPossible {
             return f ? res - 1 : -1;
         }
     }
+}
+
+class AsFarFromLandAsPossibleTest extends AbstractTest<AsFarFromLandAsPossible> {
 }

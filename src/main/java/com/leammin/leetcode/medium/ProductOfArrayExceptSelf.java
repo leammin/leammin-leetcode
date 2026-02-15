@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 238. 除自身以外数组的乘积
  * 
@@ -22,6 +26,13 @@ package com.leammin.leetcode.medium;
 public interface ProductOfArrayExceptSelf {
     int[] productExceptSelf(int[] nums);
 
+    static Testsuite<ProductOfArrayExceptSelf> testsuite() {
+        return Testsuite.<ProductOfArrayExceptSelf>builder()
+                .add(ExpectedTestcase.of(t -> t.productExceptSelf(new int[]{1, 2, 3, 4}), new int[]{24, 12, 8, 6}))
+                .build();
+    }
+
+
     class Solution implements ProductOfArrayExceptSelf {
 
         @Override
@@ -39,4 +50,7 @@ public interface ProductOfArrayExceptSelf {
             return res;
         }
     }
+}
+
+class ProductOfArrayExceptSelfTest extends AbstractTest<ProductOfArrayExceptSelf> {
 }

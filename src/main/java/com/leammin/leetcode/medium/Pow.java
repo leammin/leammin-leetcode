@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 50. Pow(x, n)
  *
@@ -36,6 +40,17 @@ package com.leammin.leetcode.medium;
 public interface Pow {
     double myPow(double x, int n);
 
+    static Testsuite<Pow> testsuite() {
+
+        return Testsuite.<Pow>builder()
+                .add(ExpectedTestcase.of(t->t.myPow(2.00000, 10), 1024.00))
+//                .add(ExpectedTestcase.of(9.26100, t->t.myPow(2.10000, 3)))
+                .add(ExpectedTestcase.of(t->t.myPow(1, 2147483647), 1.0))
+                .add(ExpectedTestcase.of(t->t.myPow(0.00001, 2147483647), 0.0))
+                .build();
+    }
+
+
     class Solution implements Pow {
         @Override
         public double myPow(double x, int n) {
@@ -71,4 +86,7 @@ public interface Pow {
             }
         }
     }
+}
+
+class PowTest extends AbstractTest<Pow> {
 }

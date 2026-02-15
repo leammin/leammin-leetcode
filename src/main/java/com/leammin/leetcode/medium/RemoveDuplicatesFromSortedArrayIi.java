@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 80. 删除排序数组中的重复项 II
  * 
@@ -48,6 +52,16 @@ package com.leammin.leetcode.medium;
 public interface RemoveDuplicatesFromSortedArrayIi {
     int removeDuplicates(int[] nums);
 
+    static Testsuite<RemoveDuplicatesFromSortedArrayIi> testsuite() {
+        return Testsuite.<RemoveDuplicatesFromSortedArrayIi>builder()
+                .add(ExpectedTestcase.of(t -> t.removeDuplicates(new int[]{1,1,1,2,2,3}), 5))
+                .add(ExpectedTestcase.of(t -> t.removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}), 7))
+                .add(ExpectedTestcase.of(t -> t.removeDuplicates(new int[]{0}), 1))
+                .add(ExpectedTestcase.of(t -> t.removeDuplicates(new int[]{0, 0}), 2))
+                .build();
+    }
+
+
     class Solution implements RemoveDuplicatesFromSortedArrayIi {
 
         @Override
@@ -61,4 +75,7 @@ public interface RemoveDuplicatesFromSortedArrayIi {
             return Math.min(nums.length, l + 1);
         }
     }
+}
+
+class RemoveDuplicatesFromSortedArrayIiTest extends AbstractTest<RemoveDuplicatesFromSortedArrayIi> {
 }

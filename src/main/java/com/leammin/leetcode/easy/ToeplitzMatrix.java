@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 766. 托普利茨矩阵
  * 
@@ -56,6 +60,17 @@ package com.leammin.leetcode.easy;
 public interface ToeplitzMatrix {
     boolean isToeplitzMatrix(int[][] matrix);
 
+    static Testsuite<ToeplitzMatrix> testsuite() {
+        return Testsuite.<ToeplitzMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.isToeplitzMatrix(new int[][]{
+                        {1, 2, 3, 4},
+                        {5, 1, 2, 3},
+                        {9, 5, 1, 2}
+                }), true))
+                .build();
+    }
+
+
     class Solution implements ToeplitzMatrix {
 
         @Override
@@ -70,4 +85,7 @@ public interface ToeplitzMatrix {
             return true;
         }
     }
+}
+
+class ToeplitzMatrixTest extends AbstractTest<ToeplitzMatrix> {
 }

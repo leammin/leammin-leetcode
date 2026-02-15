@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 872. 叶子相似的树
@@ -33,6 +35,14 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface LeafSimilarTrees {
     boolean leafSimilar(TreeNode root1, TreeNode root2);
 
+    static Testsuite<LeafSimilarTrees> testsuite() {
+        return Testsuite.<LeafSimilarTrees>builder()
+            .addExpected(t -> t.leafSimilar(TreeNode.of(3, 5, 1, 6, 2, 9, 8, null, null, 7, 4),
+                TreeNode.of(3, 5, 1, 6, 7, 4, 2, null, null, null, null, null, null, 9, 8)), true)
+            .build();
+    }
+
+
     class Solution implements LeafSimilarTrees {
 
         @Override
@@ -58,4 +68,7 @@ public interface LeafSimilarTrees {
             leaves(root.right, leaves);
         }
     }
+}
+
+class LeafSimilarTreesTest extends AbstractTest<LeafSimilarTrees> {
 }

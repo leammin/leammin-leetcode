@@ -3,6 +3,11 @@ package com.leammin.leetcode.easy;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+
 /**
  * 232. 用栈实现队列
  * 
@@ -47,6 +52,21 @@ public interface ImplementQueueUsingStacks {
 
     boolean empty();
 
+    static Testsuite<ImplementQueueUsingStacks> testsuite() {
+        return Testsuite.<ImplementQueueUsingStacks>builder()
+                .add(Testcase.of(queue -> {
+                    long before = System.nanoTime();
+                    queue.push(1);
+                    queue.push(2);
+                    Assertions.assertThat(queue.peek()).isEqualTo(1);
+                    Assertions.assertThat(queue.pop()).isEqualTo(1);
+                    Assertions.assertThat(queue.empty()).isFalse();
+                    return System.nanoTime() - before;
+                }))
+                .build();
+    }
+
+
     class Solution implements ImplementQueueUsingStacks {
         Deque<Integer> pushStack = new LinkedList<>();
         Deque<Integer> popStack = new LinkedList<>();
@@ -80,4 +100,7 @@ public interface ImplementQueueUsingStacks {
             return pushStack.isEmpty() && popStack.isEmpty();
         }
     }
+}
+
+class ImplementQueueUsingStacksTest extends AbstractTest<ImplementQueueUsingStacks> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 76. 最小覆盖子串
  * 
@@ -23,6 +27,13 @@ package com.leammin.leetcode.hard;
  */
 public interface MinimumWindowSubstring {
     String minWindow(String s, String t);
+
+    static Testsuite<MinimumWindowSubstring> testsuite() {
+        return Testsuite.<MinimumWindowSubstring>builder()
+                .add(ExpectedTestcase.of(t -> t.minWindow("ADOBECODEBANC", "ABC"), "BANC"))
+                .build();
+    }
+
 
     class Solution implements MinimumWindowSubstring {
 
@@ -65,4 +76,7 @@ public interface MinimumWindowSubstring {
             return c >= 'a' && c <= 'z' ? c - 'a' : c - 'A' + 26;
         }
     }
+}
+
+class MinimumWindowSubstringTest extends AbstractTest<MinimumWindowSubstring> {
 }

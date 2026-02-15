@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 820. 单词的压缩编码
  *
@@ -36,6 +40,18 @@ package com.leammin.leetcode.medium;
 public interface ShortEncodingOfWords {
     int minimumLengthEncoding(String[] words);
 
+    static Testsuite<ShortEncodingOfWords> testsuite() {
+        return Testsuite.<ShortEncodingOfWords>builder()
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"a", "b"}), 4))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"a", "bc", "dc"}), 8))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"time", "me", "bell"}), 10))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"times", "me", "bell"}), 14))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"abcdefg", "defg", "fg"}), 8))
+                .add(ExpectedTestcase.of(t -> t.minimumLengthEncoding(new String[]{"time", "atime", "btime"}), 12))
+                .build();
+    }
+
+
     class Solution implements ShortEncodingOfWords {
         @Override
         public int minimumLengthEncoding(String[] words) {
@@ -70,4 +86,7 @@ public interface ShortEncodingOfWords {
             return new int[]{Math.max(sum, 1), Math.max(leaf, 1)};
         }
     }
+}
+
+class ShortEncodingOfWordsTest extends AbstractTest<ShortEncodingOfWords> {
 }

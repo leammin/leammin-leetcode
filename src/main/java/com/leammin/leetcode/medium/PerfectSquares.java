@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 279. 完全平方数
  *
@@ -23,6 +27,14 @@ package com.leammin.leetcode.medium;
  */
 public interface PerfectSquares {
     int numSquares(int n);
+
+    static Testsuite<PerfectSquares> testsuite() {
+        return Testsuite.<PerfectSquares>builder()
+                .add(ExpectedTestcase.of(s -> s.numSquares(12), 3))
+                .add(ExpectedTestcase.of(s -> s.numSquares(13), 2))
+                .build();
+    }
+
 
     class Solution1 implements PerfectSquares {
 
@@ -95,4 +107,7 @@ public interface PerfectSquares {
             return 3;
         }
     }
+}
+
+class PerfectSquaresTest extends AbstractTest<PerfectSquares> {
 }

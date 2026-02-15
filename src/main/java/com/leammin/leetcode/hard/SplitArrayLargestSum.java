@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 410. 分割数组的最大值
  *
@@ -34,6 +38,18 @@ package com.leammin.leetcode.hard;
  */
 public interface SplitArrayLargestSum {
     int splitArray(int[] nums, int m);
+
+    static Testsuite<SplitArrayLargestSum> testsuite() {
+        return Testsuite.<SplitArrayLargestSum>builder()
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{7,2,5,10,8}, 2), 18))
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2,3,4,5}, 5), 5))
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2,3,4,5}, 5), 5))
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,3,2,4,6}, 3), 6))
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2147483646}, 1), 2147483647))
+                .add(ExpectedTestcase.of(t -> t.splitArray(new int[]{1,2147483647}, 2), 2147483647))
+                .build();
+    }
+
 
     class Solution implements SplitArrayLargestSum {
 
@@ -215,4 +231,7 @@ public interface SplitArrayLargestSum {
             return low;
         }
     }
+}
+
+class SplitArrayLargestSumTest extends AbstractTest<SplitArrayLargestSum> {
 }

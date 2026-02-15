@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 658. 找到 K 个最接近的元素
  * 
@@ -45,6 +49,16 @@ import java.util.List;
  */
 public interface FindKClosestElements {
     List<Integer> findClosestElements(int[] arr, int k, int x);
+
+    static Testsuite<FindKClosestElements> testsuite() {
+        return Testsuite.<FindKClosestElements>builder()
+                .add(ExpectedTestcase.of(t -> t.findClosestElements(new int[]{1, 2, 3, 4, 5}, 4, 3), List.of(1, 2, 3, 4)))
+                .add(ExpectedTestcase.of(t -> t.findClosestElements(new int[]{1, 2, 3, 4, 5}, 4, -1), List.of(1, 2, 3, 4)))
+                .add(ExpectedTestcase.of(t -> t.findClosestElements(new int[]{1,2,5,6}, 1, 4), List.of(5)))
+                .add(ExpectedTestcase.of(t -> t.findClosestElements(new int[]{1,2,5,6}, 1, 3), List.of(2)))
+                .build();
+    }
+
 
     class Solution implements FindKClosestElements {
 
@@ -90,4 +104,7 @@ public interface FindKClosestElements {
             return lo;
         }
     }
+}
+
+class FindKClosestElementsTest extends AbstractTest<FindKClosestElements> {
 }

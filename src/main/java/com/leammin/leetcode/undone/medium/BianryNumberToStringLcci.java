@@ -1,5 +1,6 @@
 package com.leammin.leetcode.undone.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -65,4 +66,7 @@ public interface BianryNumberToStringLcci {
             return sb.toString();
         }
     }
+}
+
+class BianryNumberToStringLcciTest extends AbstractTest<BianryNumberToStringLcci> {
 }

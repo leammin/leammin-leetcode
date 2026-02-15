@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 999. 车的可用捕获量
  *
@@ -56,6 +60,21 @@ package com.leammin.leetcode.easy;
 public interface AvailableCapturesForRook {
     int numRookCaptures(char[][] board);
 
+    static Testsuite<AvailableCapturesForRook> testsuite() {
+        return Testsuite.<AvailableCapturesForRook>builder()
+                .add(ExpectedTestcase.of(t -> t.numRookCaptures(new char[][]{
+                        {'.', '.', '.', '.', '.', '.', '.', '.'},
+                        {'.', '.', '.', 'p', '.', '.', '.', '.'},
+                        {'.', '.', '.', 'p', '.', '.', '.', '.'},
+                        {'p', 'p', '.', 'R', '.', 'p', 'B', '.'},
+                        {'.', '.', '.', '.', '.', '.', '.', '.'},
+                        {'.', '.', '.', 'B', '.', '.', '.', '.'},
+                        {'.', '.', '.', 'p', '.', '.', '.', '.'},
+                        {'.', '.', '.', '.', '.', '.', '.', '.'}}), 3))
+                .build();
+    }
+
+
     class Solution implements AvailableCapturesForRook {
 
         @Override
@@ -95,4 +114,7 @@ public interface AvailableCapturesForRook {
             return ans;
         }
     }
+}
+
+class AvailableCapturesForRookTest extends AbstractTest<AvailableCapturesForRook> {
 }

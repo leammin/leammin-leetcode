@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1071. 字符串的最大公因子
  *
@@ -43,6 +47,15 @@ package com.leammin.leetcode.easy;
 public interface GreatestCommonDivisorOfStrings {
     String gcdOfStrings(String str1, String str2);
 
+    static Testsuite<GreatestCommonDivisorOfStrings> testsuite() {
+        return Testsuite.<GreatestCommonDivisorOfStrings>builder()
+                .add(ExpectedTestcase.of(t -> t.gcdOfStrings("ABCABC", "ABC"), "ABC"))
+                .add(ExpectedTestcase.of(t -> t.gcdOfStrings("ABABAB", "ABAB"), "AB"))
+                .add(ExpectedTestcase.of(t -> t.gcdOfStrings("LEET", "CODE"), ""))
+                .build();
+    }
+
+
     class Solution implements GreatestCommonDivisorOfStrings {
 
         @Override
@@ -83,4 +96,7 @@ public interface GreatestCommonDivisorOfStrings {
             return gcd(n, m % n);
         }
     }
+}
+
+class GreatestCommonDivisorOfStringsTest extends AbstractTest<GreatestCommonDivisorOfStrings> {
 }

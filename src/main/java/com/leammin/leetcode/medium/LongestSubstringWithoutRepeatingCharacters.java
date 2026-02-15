@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 3. 无重复字符的最长子串
  *
@@ -42,6 +46,17 @@ public interface LongestSubstringWithoutRepeatingCharacters {
      * 接近标准答案，但仍有缺陷
      * 可以将set和map结合起来，而且没必要删掉元素，直接通过map拿到下标，然后比较下标就ok了。
      */
+
+    static Testsuite<LongestSubstringWithoutRepeatingCharacters> testsuite() {
+        return Testsuite.<LongestSubstringWithoutRepeatingCharacters>builder()
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("abcabcbb"), 3))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("bbbbb"), 1))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("pwwkew"), 3))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring("umvejcuuk"), 6))
+                .add(ExpectedTestcase.of(s -> s.lengthOfLongestSubstring(" "), 1))
+                .build();
+    }
+
     class Solution implements LongestSubstringWithoutRepeatingCharacters {
 
         @Override
@@ -91,4 +106,7 @@ public interface LongestSubstringWithoutRepeatingCharacters {
         }
     }
 
+}
+
+class LongestSubstringWithoutRepeatingCharactersTest extends AbstractTest<LongestSubstringWithoutRepeatingCharacters> {
 }

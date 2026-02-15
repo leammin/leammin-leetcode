@@ -3,6 +3,9 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 17.09. 第 k 个数
  *
@@ -20,6 +23,14 @@ import java.util.PriorityQueue;
  */
 public interface GetKthMagicNumberLcci {
     int getKthMagicNumber(int k);
+
+    static Testsuite<GetKthMagicNumberLcci> testsuite() {
+        return Testsuite.<GetKthMagicNumberLcci>builder()
+                .addExpected(t -> t.getKthMagicNumber(5), 9)
+                .addExpected(t -> t.getKthMagicNumber(9), 27)
+                .build();
+    }
+
 
     class Solution implements GetKthMagicNumberLcci {
 
@@ -61,4 +72,7 @@ public interface GetKthMagicNumberLcci {
             return ugly[k - 1];
         }
     }
+}
+
+class GetKthMagicNumberLcciTest extends AbstractTest<GetKthMagicNumberLcci> {
 }

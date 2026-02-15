@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 697. 数组的度
  * 
@@ -43,6 +47,14 @@ import java.util.Map;
 public interface DegreeOfAnArray {
     int findShortestSubArray(int[] nums);
 
+    static Testsuite<DegreeOfAnArray> testsuite() {
+        return Testsuite.<DegreeOfAnArray>builder()
+                .add(ExpectedTestcase.of(t -> t.findShortestSubArray(new int[]{1, 2, 2, 3, 1}), 2))
+                .add(ExpectedTestcase.of(t -> t.findShortestSubArray(new int[]{1,2,2,3,1,4,2}), 6))
+                .build();
+    }
+
+
     class Solution implements DegreeOfAnArray {
 
         @Override
@@ -78,4 +90,7 @@ public interface DegreeOfAnArray {
             return res;
         }
     }
+}
+
+class DegreeOfAnArrayTest extends AbstractTest<DegreeOfAnArray> {
 }

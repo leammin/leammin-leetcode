@@ -3,6 +3,9 @@ package com.leammin.leetcode.undone.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5727. 找出游戏的获胜者
  * 
@@ -61,6 +64,14 @@ import java.util.List;
 public interface FindTheWinnerOfTheCircularGame {
     int findTheWinner(int n, int k);
 
+    static Testsuite<FindTheWinnerOfTheCircularGame> testsuite() {
+        return Testsuite.<FindTheWinnerOfTheCircularGame>builder()
+                .addExpected(t -> t.findTheWinner(5, 2), 3)
+                .addExpected(t -> t.findTheWinner(6, 5), 1)
+                .build();
+    }
+
+
     class Solution implements FindTheWinnerOfTheCircularGame {
 
         @Override
@@ -84,4 +95,7 @@ public interface FindTheWinnerOfTheCircularGame {
             return n == 1 ? 1 : ((findTheWinner(n - 1, k) + k - 1) % n + 1);
         }
     }
+}
+
+class FindTheWinnerOfTheCircularGameTest extends AbstractTest<FindTheWinnerOfTheCircularGame> {
 }

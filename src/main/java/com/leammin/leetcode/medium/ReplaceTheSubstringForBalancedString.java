@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1234. 替换子串得到平衡字符串
  *
@@ -62,6 +65,16 @@ package com.leammin.leetcode.medium;
 public interface ReplaceTheSubstringForBalancedString {
     int balancedString(String s);
 
+    static Testsuite<ReplaceTheSubstringForBalancedString> testsuite() {
+        return Testsuite.<ReplaceTheSubstringForBalancedString>builder()
+                .addExpected(t -> t.balancedString("QWER"), 0)
+                .addExpected(t -> t.balancedString("QQWE"), 1)
+                .addExpected(t -> t.balancedString("QQQW"), 2)
+                .addExpected(t -> t.balancedString("QQQQ"), 3)
+                .build();
+    }
+
+
     class Solution implements ReplaceTheSubstringForBalancedString {
         @Override
         public int balancedString(String s) {
@@ -101,4 +114,7 @@ public interface ReplaceTheSubstringForBalancedString {
             return -1;
         }
     }
+}
+
+class ReplaceTheSubstringForBalancedStringTest extends AbstractTest<ReplaceTheSubstringForBalancedString> {
 }

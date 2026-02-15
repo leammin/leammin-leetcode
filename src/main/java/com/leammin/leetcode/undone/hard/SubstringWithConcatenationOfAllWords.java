@@ -2,6 +2,9 @@ package com.leammin.leetcode.undone.hard;
 
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 30. 串联所有单词的子串
  * 
@@ -37,6 +40,12 @@ import java.util.List;
 public interface SubstringWithConcatenationOfAllWords {
     List<Integer> findSubstring(String s, String[] words);
 
+    static Testsuite<SubstringWithConcatenationOfAllWords> testsuite() {
+        return Testsuite.<SubstringWithConcatenationOfAllWords>builder()
+                .build();
+    }
+
+
     class Solution implements SubstringWithConcatenationOfAllWords {
 
         @Override
@@ -45,4 +54,7 @@ public interface SubstringWithConcatenationOfAllWords {
             return null;
         }
     }
+}
+
+class SubstringWithConcatenationOfAllWordsTest extends AbstractTest<SubstringWithConcatenationOfAllWords> {
 }

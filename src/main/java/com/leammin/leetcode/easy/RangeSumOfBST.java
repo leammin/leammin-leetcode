@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 938. 二叉搜索树的范围和
@@ -39,6 +42,14 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface RangeSumOfBST {
     int rangeSumBST(TreeNode root, int L, int R);
 
+    static Testsuite<RangeSumOfBST> testsuite() {
+        return Testsuite.<RangeSumOfBST>builder()
+                .add(ExpectedTestcase.of(s -> s.rangeSumBST(TreeNode.of(10, 5, 15, 3, 7, null, 18), 7, 15), 32))
+                .add(ExpectedTestcase.of(s -> s.rangeSumBST(TreeNode.of(10, 5, 15, 3, 7, 13, 18, 1, null, 6), 6, 10), 23))
+                .build();
+    }
+
+
     class Solution implements RangeSumOfBST {
 
         @Override
@@ -52,4 +63,7 @@ public interface RangeSumOfBST {
             return (root.val >= l && root.val <= r ? root.val : 0) + rangeSumBST(root.left, l, r) + rangeSumBST(root.right, l, r);
         }
     }
+}
+
+class RangeSumOfBSTTest extends AbstractTest<RangeSumOfBST> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 134. 加油站
  * 
@@ -57,6 +61,14 @@ package com.leammin.leetcode.medium;
 public interface GasStation {
     int canCompleteCircuit(int[] gas, int[] cost);
 
+    static Testsuite<GasStation> testsuite() {
+        return Testsuite.<GasStation>builder()
+                .add(ExpectedTestcase.of(t -> t.canCompleteCircuit(new int[]{1, 2, 3, 4, 5}, new int[]{3, 4, 5, 1, 2}), 3))
+                .add(ExpectedTestcase.of(t -> t.canCompleteCircuit(new int[]{2, 3, 4}, new int[]{3, 4, 3}), -1))
+                .build();
+    }
+
+
     class Solution implements GasStation {
         @Override
         public int canCompleteCircuit(int[] gas, int[] cost) {
@@ -73,4 +85,7 @@ public interface GasStation {
             return sum < 0 ? -1 : maxIndex;
         }
     }
+}
+
+class GasStationTest extends AbstractTest<GasStation> {
 }

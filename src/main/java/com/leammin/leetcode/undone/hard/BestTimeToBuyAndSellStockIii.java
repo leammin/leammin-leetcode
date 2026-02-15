@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 123. 买卖股票的最佳时机 III
  * 
@@ -38,6 +41,12 @@ package com.leammin.leetcode.undone.hard;
 public interface BestTimeToBuyAndSellStockIii {
     int maxProfit(int[] prices);
 
+    static Testsuite<BestTimeToBuyAndSellStockIii> testsuite() {
+        return Testsuite.<BestTimeToBuyAndSellStockIii>builder()
+                .build();
+    }
+
+
     class Solution implements BestTimeToBuyAndSellStockIii {
 
         @Override
@@ -45,4 +54,7 @@ public interface BestTimeToBuyAndSellStockIii {
             return 0;
         }
     }
+}
+
+class BestTimeToBuyAndSellStockIiiTest extends AbstractTest<BestTimeToBuyAndSellStockIii> {
 }

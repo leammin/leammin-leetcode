@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1473. 给房子涂色 III
  * 
@@ -70,6 +73,12 @@ package com.leammin.leetcode.undone.hard;
 public interface PaintHouseIii {
     int minCost(int[] houses, int[][] cost, int m, int n, int target);
 
+    static Testsuite<PaintHouseIii> testsuite() {
+        return Testsuite.<PaintHouseIii>builder()
+                .build();
+    }
+
+
     class Solution implements PaintHouseIii {
 
         @Override
@@ -77,4 +86,7 @@ public interface PaintHouseIii {
             return 0;
         }
     }
+}
+
+class PaintHouseIiiTest extends AbstractTest<PaintHouseIii> {
 }

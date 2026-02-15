@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题62. 圆圈中最后剩下的数字
  * 
@@ -40,6 +44,14 @@ import java.util.List;
 public interface YuanQuanZhongZuiHouShengXiaDeShuZiLcof {
     int lastRemaining(int n, int m);
 
+    static Testsuite<YuanQuanZhongZuiHouShengXiaDeShuZiLcof> testsuite() {
+        return Testsuite.<YuanQuanZhongZuiHouShengXiaDeShuZiLcof>builder()
+                .add(ExpectedTestcase.of(t -> t.lastRemaining(5, 3), 3))
+                .add(ExpectedTestcase.of(t -> t.lastRemaining(10, 17), 2))
+                .build();
+    }
+
+
     class Solution implements YuanQuanZhongZuiHouShengXiaDeShuZiLcof {
 
         @Override
@@ -67,4 +79,7 @@ public interface YuanQuanZhongZuiHouShengXiaDeShuZiLcof {
             return f;
         }
     }
+}
+
+class YuanQuanZhongZuiHouShengXiaDeShuZiLcofTest extends AbstractTest<YuanQuanZhongZuiHouShengXiaDeShuZiLcof> {
 }

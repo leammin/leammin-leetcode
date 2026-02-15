@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题10- II. 青蛙跳台阶问题
  * 
@@ -36,6 +39,14 @@ package com.leammin.leetcode.easy;
 public interface QingWaTiaoTaiJieWenTiLcof {
     int numWays(int n);
 
+    static Testsuite<QingWaTiaoTaiJieWenTiLcof> testsuite() {
+        return Testsuite.<QingWaTiaoTaiJieWenTiLcof>builder()
+                .addExpected(t -> t.numWays(2), 2)
+                .addExpected(t -> t.numWays(7), 21)
+                .build();
+    }
+
+
     class Solution implements QingWaTiaoTaiJieWenTiLcof {
 
         @Override
@@ -50,4 +61,7 @@ public interface QingWaTiaoTaiJieWenTiLcof {
             return b;
         }
     }
+}
+
+class QingWaTiaoTaiJieWenTiLcofTest extends AbstractTest<QingWaTiaoTaiJieWenTiLcof> {
 }

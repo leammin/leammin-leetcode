@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 200. 岛屿数量
  *
@@ -35,6 +39,24 @@ import java.util.Queue;
  */
 public interface NumberOfIslands {
     int numIslands(char[][] grid);
+
+    static Testsuite<NumberOfIslands> testsuite() {
+        return Testsuite.<NumberOfIslands>builder()
+                .add(ExpectedTestcase.of(t -> t.numIslands(new char[][]{
+                        {'1', '1', '1', '1', '0'},
+                        {'1', '1', '0', '1', '0'},
+                        {'1', '1', '0', '0', '0'},
+                        {'0', '0', '0', '0', '0'},
+                }), 1))
+                .add(ExpectedTestcase.of(t -> t.numIslands(new char[][]{
+                        {'1', '1', '0', '0', '0'},
+                        {'1', '1', '0', '0', '0'},
+                        {'0', '0', '1', '0', '0'},
+                        {'0', '0', '0', '1', '1'},
+                }), 3))
+                .build();
+    }
+
 
     class Solution implements NumberOfIslands {
 
@@ -101,4 +123,7 @@ public interface NumberOfIslands {
             return true;
         }
     }
+}
+
+class NumberOfIslandsTest extends AbstractTest<NumberOfIslands> {
 }

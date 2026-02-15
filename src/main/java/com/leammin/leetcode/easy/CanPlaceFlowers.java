@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 605. 种花问题
  * 
@@ -36,6 +40,14 @@ package com.leammin.leetcode.easy;
 public interface CanPlaceFlowers {
     boolean canPlaceFlowers(int[] flowerbed, int n);
 
+    static Testsuite<CanPlaceFlowers> testsuite() {
+        return Testsuite.<CanPlaceFlowers>builder()
+                .add(ExpectedTestcase.of(t -> t.canPlaceFlowers(new int[]{1,0,0,0,1}, 1), true))
+                .add(ExpectedTestcase.of(t -> t.canPlaceFlowers(new int[]{1,0,0,0,1}, 2), false))
+                .build();
+    }
+
+
     class Solution implements CanPlaceFlowers {
 
         @Override
@@ -56,4 +68,7 @@ public interface CanPlaceFlowers {
             return flower + count / 2 >= n;
         }
     }
+}
+
+class CanPlaceFlowersTest extends AbstractTest<CanPlaceFlowers> {
 }

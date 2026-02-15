@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 740. 删除与获得点数
  * 
@@ -44,6 +47,14 @@ package com.leammin.leetcode.medium;
 public interface DeleteAndEarn {
     int deleteAndEarn(int[] nums);
 
+    static Testsuite<DeleteAndEarn> testsuite() {
+        return Testsuite.<DeleteAndEarn>builder()
+            .addExpected(t -> t.deleteAndEarn(new int[]{3, 4, 2}), 6)
+            .addExpected(t -> t.deleteAndEarn(new int[]{2, 2, 3, 3, 3, 4}), 9)
+                .build();
+    }
+
+
     class Solution implements DeleteAndEarn {
 
         @Override
@@ -61,4 +72,7 @@ public interface DeleteAndEarn {
             return b;
         }
     }
+}
+
+class DeleteAndEarnTest extends AbstractTest<DeleteAndEarn> {
 }

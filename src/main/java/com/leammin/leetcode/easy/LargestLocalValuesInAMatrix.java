@@ -1,6 +1,7 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.convert.IntMatrixConverter;
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -85,4 +86,7 @@ public interface LargestLocalValuesInAMatrix {
             return res;
         }
     }
+}
+
+class LargestLocalValuesInAMatrixTest extends AbstractTest<LargestLocalValuesInAMatrix> {
 }

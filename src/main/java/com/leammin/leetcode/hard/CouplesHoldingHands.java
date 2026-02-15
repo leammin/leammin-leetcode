@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 765. 情侣牵手
  * 
@@ -39,6 +43,14 @@ package com.leammin.leetcode.hard;
 public interface CouplesHoldingHands {
     int minSwapsCouples(int[] row);
 
+    static Testsuite<CouplesHoldingHands> testsuite() {
+        return Testsuite.<CouplesHoldingHands>builder()
+                .add(ExpectedTestcase.of(t -> t.minSwapsCouples(new int[]{0, 2, 1, 3}), 1))
+                .add(ExpectedTestcase.of(t -> t.minSwapsCouples(new int[]{3, 2, 0, 1}), 0))
+                .build();
+    }
+
+
     class Solution implements CouplesHoldingHands {
 
         @Override
@@ -64,4 +76,7 @@ public interface CouplesHoldingHands {
             return swaps;
         }
     }
+}
+
+class CouplesHoldingHandsTest extends AbstractTest<CouplesHoldingHands> {
 }

@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5726. 数组元素积的符号
  * 
@@ -57,6 +60,13 @@ package com.leammin.leetcode.easy;
 public interface SignOfTheProductOfAnArray {
     int arraySign(int[] nums);
 
+    static Testsuite<SignOfTheProductOfAnArray> testsuite() {
+        return Testsuite.<SignOfTheProductOfAnArray>builder()
+                .addExpected(t -> t.arraySign(new int[]{-1,-2,-3,-4,3,2,1}), 1)
+                .build();
+    }
+
+
     class Solution implements SignOfTheProductOfAnArray {
 
         @Override
@@ -73,4 +83,7 @@ public interface SignOfTheProductOfAnArray {
             return c;
         }
     }
+}
+
+class SignOfTheProductOfAnArrayTest extends AbstractTest<SignOfTheProductOfAnArray> {
 }

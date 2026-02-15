@@ -1,6 +1,8 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 面试题18. 删除链表的节点
@@ -41,6 +43,14 @@ import com.leammin.leetcode.struct.ListNode;
 public interface ShanChuLianBiaoDeJieDianLcof {
     ListNode deleteNode(ListNode head, int val);
 
+    static Testsuite<ShanChuLianBiaoDeJieDianLcof> testsuite() {
+        return Testsuite.<ShanChuLianBiaoDeJieDianLcof>builder()
+                .addExpected(t -> t.deleteNode(ListNode.of(4, 5, 1, 9), 5), ListNode.of(4, 1, 9))
+                .addExpected(t -> t.deleteNode(ListNode.of(4, 5, 1, 9), 1), ListNode.of(4, 5, 9))
+                .build();
+    }
+
+
     class Solution implements ShanChuLianBiaoDeJieDianLcof {
 
         @Override
@@ -64,4 +74,7 @@ public interface ShanChuLianBiaoDeJieDianLcof {
             return head;
         }
     }
+}
+
+class ShanChuLianBiaoDeJieDianLcofTest extends AbstractTest<ShanChuLianBiaoDeJieDianLcof> {
 }

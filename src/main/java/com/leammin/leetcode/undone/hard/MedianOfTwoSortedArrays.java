@@ -2,6 +2,10 @@ package com.leammin.leetcode.undone.hard;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 4. 寻找两个有序数组的中位数
  *
@@ -36,6 +40,19 @@ public interface MedianOfTwoSortedArrays {
     /**
      * O(m+n)
      */
+
+    static Testsuite<MedianOfTwoSortedArrays> testsuite() {
+        return Testsuite.<MedianOfTwoSortedArrays>builder()
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{1, 3}, new int[]{2}), 2.0))
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}), 2.5))
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{0, 1, 2, 3}, new int[]{1, 2, 3, 4, 5}), 2.0))
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{0, 1, 2, 3}, new int[]{2, 3, 4, 5}), 2.5))
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{0, 1, 2, 3, 4}, new int[]{2, 3, 4, 5}), 3.0))
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{1, 3}, new int[]{2, 7}), 2.5))
+                .add(ExpectedTestcase.of(t -> t.findMedianSortedArrays(new int[]{1, 2}, new int[]{1, 2}), 1.5))
+                .build();
+    }
+
     class Solution implements MedianOfTwoSortedArrays {
 
         @Override
@@ -113,4 +130,7 @@ public interface MedianOfTwoSortedArrays {
             return as;
         }
     }
+}
+
+class MedianOfTwoSortedArraysTest extends AbstractTest<MedianOfTwoSortedArrays> {
 }

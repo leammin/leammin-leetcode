@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 887. 鸡蛋掉落
  *
@@ -63,6 +67,30 @@ import java.util.Map;
  */
 public interface SuperEggDrop {
     int superEggDrop(int K, int N);
+
+    static Testsuite<SuperEggDrop> testsuite() {
+        return Testsuite.<SuperEggDrop>builder()
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1, 2), 2))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(2, 6), 3))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(3, 14), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(8, 10000), 14))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(2, 11), 5))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(7, 1250), 11))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(4, 9), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(3, 7), 3))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(2, 100), 14))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 8), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 10), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 11), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 12), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 14), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 15), 4))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 16), 5))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 32), 6))
+                .add(ExpectedTestcase.of(t -> t.superEggDrop(1000, 35), 6))
+                .build();
+    }
+
 
     class Solution implements SuperEggDrop {
 
@@ -170,4 +198,7 @@ public interface SuperEggDrop {
             return memo.get(N * 100 + K);
         }
     }
+}
+
+class SuperEggDropTest extends AbstractTest<SuperEggDrop> {
 }

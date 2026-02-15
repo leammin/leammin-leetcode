@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1046. 最后一块石头的重量
  * 
@@ -32,6 +36,17 @@ import java.util.Arrays;
 public interface LastStoneWeight {
     int lastStoneWeight(int[] stones);
 
+    static Testsuite<LastStoneWeight> testsuite() {
+        return Testsuite.<LastStoneWeight>builder()
+                .add(ExpectedTestcase.of(t -> t.lastStoneWeight(new int[]{2, 2}), 0))
+                .add(ExpectedTestcase.of(t -> t.lastStoneWeight(new int[]{10, 2}), 8))
+                .add(ExpectedTestcase.of(t -> t.lastStoneWeight(new int[]{2, 10, 2}), 6))
+                .add(ExpectedTestcase.of(t -> t.lastStoneWeight(new int[]{10, 2, 2, 10}), 0))
+                .add(ExpectedTestcase.of(t -> t.lastStoneWeight(new int[]{10, 2, 2, 10, 15}), 1))
+                .build();
+    }
+
+
     class Solution implements LastStoneWeight {
         @Override
         public int lastStoneWeight(int[] stones) {
@@ -57,4 +72,7 @@ public interface LastStoneWeight {
             }
         }
     }
+}
+
+class LastStoneWeightTest extends AbstractTest<LastStoneWeight> {
 }

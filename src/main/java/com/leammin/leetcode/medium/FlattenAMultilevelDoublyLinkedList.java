@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 430. 扁平化多级双向链表
  * 
@@ -50,6 +53,12 @@ public interface FlattenAMultilevelDoublyLinkedList {
 
     Node flatten(Node head);
 
+    static Testsuite<FlattenAMultilevelDoublyLinkedList> testsuite() {
+        return Testsuite.<FlattenAMultilevelDoublyLinkedList>builder()
+                .build();
+    }
+
+
     class Solution implements FlattenAMultilevelDoublyLinkedList {
 
         @Override
@@ -81,4 +90,7 @@ public interface FlattenAMultilevelDoublyLinkedList {
             return last;
         }
     }
+}
+
+class FlattenAMultilevelDoublyLinkedListTest extends AbstractTest<FlattenAMultilevelDoublyLinkedList> {
 }

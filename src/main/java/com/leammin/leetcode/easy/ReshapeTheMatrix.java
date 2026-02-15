@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 566. 重塑矩阵
  * 
@@ -54,6 +58,14 @@ package com.leammin.leetcode.easy;
 public interface ReshapeTheMatrix {
     int[][] matrixReshape(int[][] nums, int r, int c);
 
+    static Testsuite<ReshapeTheMatrix> testsuite() {
+        return Testsuite.<ReshapeTheMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4), new int[][]{{1, 2, 3, 4}}))
+                .add(ExpectedTestcase.of(t -> t.matrixReshape(new int[][]{{1, 2}, {3, 4}}, 2, 4), new int[][]{{1, 2}, {3, 4}}))
+                .build();
+    }
+
+
     class Solution implements ReshapeTheMatrix {
 
         @Override
@@ -69,4 +81,7 @@ public interface ReshapeTheMatrix {
             return res;
         }
     }
+}
+
+class ReshapeTheMatrixTest extends AbstractTest<ReshapeTheMatrix> {
 }

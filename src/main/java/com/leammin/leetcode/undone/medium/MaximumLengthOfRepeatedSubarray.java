@@ -3,6 +3,10 @@ package com.leammin.leetcode.undone.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 718. 最长重复子数组
  * 
@@ -32,6 +36,13 @@ import java.util.List;
  */
 public interface MaximumLengthOfRepeatedSubarray {
     int findLength(int[] A, int[] B);
+
+    static Testsuite<MaximumLengthOfRepeatedSubarray> testsuite() {
+        return Testsuite.<MaximumLengthOfRepeatedSubarray>builder()
+                .add(ExpectedTestcase.of(t -> t.findLength(new int[]{1,2,3,2,1}, new int[]{3,2,1,4,7}), 3))
+                .build();
+    }
+
 
     class Solution implements MaximumLengthOfRepeatedSubarray {
 
@@ -64,4 +75,7 @@ public interface MaximumLengthOfRepeatedSubarray {
             return max;
         }
     }
+}
+
+class MaximumLengthOfRepeatedSubarrayTest extends AbstractTest<MaximumLengthOfRepeatedSubarray> {
 }

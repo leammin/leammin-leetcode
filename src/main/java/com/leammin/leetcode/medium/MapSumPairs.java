@@ -1,5 +1,10 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 677. 键值映射
  * 
@@ -26,6 +31,20 @@ public interface MapSumPairs {
     void insert(String key, int val);
 
     int sum(String prefix);
+
+    static Testsuite<MapSumPairs> testsuite() {
+        return Testsuite.<MapSumPairs>builder()
+                .addExpected(t -> {
+                    List<Integer> res = new ArrayList<>();
+                    t.insert("apple", 3);
+                    res.add(t.sum("ap"));
+                    t.insert("app", 2);
+                    res.add(t.sum("ap"));
+                    return res;
+                }, List.of(3, 5))
+                .build();
+    }
+
 
     class Solution implements MapSumPairs {
         Object[] trie = new Object[27];
@@ -115,4 +134,7 @@ public interface MapSumPairs {
             return node.sum;
         }
     }
+}
+
+class MapSumPairsTest extends AbstractTest<MapSumPairs> {
 }

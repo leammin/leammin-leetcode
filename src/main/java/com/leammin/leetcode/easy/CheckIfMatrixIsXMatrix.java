@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2319. 判断矩阵是否是一个 X 矩阵
  *
@@ -48,6 +51,14 @@ package com.leammin.leetcode.easy;
 public interface CheckIfMatrixIsXMatrix {
     boolean checkXMatrix(int[][] grid);
 
+    static Testsuite<CheckIfMatrixIsXMatrix> testsuite() {
+        return Testsuite.<CheckIfMatrixIsXMatrix>builder()
+                .addExpected(t -> t.checkXMatrix(new int[][]{{2,0,0,1},{0,3,1,0},{0,5,2,0},{4,0,0,2}}), true)
+                .addExpected(t -> t.checkXMatrix(new int[][]{{5,7,0},{0,3,1},{0,5,0}}), false)
+                .build();
+    }
+
+
     class Solution implements CheckIfMatrixIsXMatrix {
         @Override
         public boolean checkXMatrix(int[][] grid) {
@@ -65,4 +76,7 @@ public interface CheckIfMatrixIsXMatrix {
             return true;
         }
     }
+}
+
+class CheckIfMatrixIsXMatrixTest extends AbstractTest<CheckIfMatrixIsXMatrix> {
 }

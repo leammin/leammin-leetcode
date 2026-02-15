@@ -5,6 +5,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.TreeMap;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+
 /**
  * 面试题59 - II. 队列的最大值
  *
@@ -47,6 +52,36 @@ public interface DuiLieDeZuiDaZhiLcof {
     void push_back(int value);
 
     int pop_front();
+
+    static Testsuite<DuiLieDeZuiDaZhiLcof> testsuite() {
+        return Testsuite.<DuiLieDeZuiDaZhiLcof>builder()
+                .add(Testcase.of(t -> {
+                    long before = System.nanoTime();
+                    t.push_back(1);
+                    t.push_back(2);
+                    int r1 = t.max_value();
+                    int r2 = t.pop_front();
+                    int r3 = t.max_value();
+                    long after = System.nanoTime();
+
+                    Assertions.assertThat(r1).isEqualTo(2);
+                    Assertions.assertThat(r2).isEqualTo(1);
+                    Assertions.assertThat(r3).isEqualTo(2);
+                    return after - before;
+                }))
+                .add(Testcase.of(t -> {
+                    long before = System.nanoTime();
+                    int r1 = t.pop_front();
+                    int r2 = t.max_value();
+                    long after = System.nanoTime();
+
+                    Assertions.assertThat(r1).isEqualTo(-1);
+                    Assertions.assertThat(r2).isEqualTo(-1);
+                    return after - before;
+                }))
+                .build();
+    }
+
 
     class Solution implements DuiLieDeZuiDaZhiLcof {
 
@@ -124,4 +159,7 @@ public interface DuiLieDeZuiDaZhiLcof {
             return value;
         }
     }
+}
+
+class DuiLieDeZuiDaZhiLcofTest extends AbstractTest<DuiLieDeZuiDaZhiLcof> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 338. 比特位计数
  *
@@ -29,6 +33,15 @@ package com.leammin.leetcode.medium;
  */
 public interface CountingBits {
     int[] countBits(int num);
+
+    static Testsuite<CountingBits> testsuite() {
+        return Testsuite.<CountingBits>builder()
+                .add(ExpectedTestcase.of(t -> t.countBits(5), new int[]{0, 1, 1, 2, 1, 2}))
+                .add(ExpectedTestcase.of(t -> t.countBits(2), new int[]{0, 1, 1}))
+                .add(ExpectedTestcase.of(t -> t.countBits(0), new int[]{0}))
+                .build();
+    }
+
 
     class Solution implements CountingBits {
         @Override
@@ -61,4 +74,7 @@ public interface CountingBits {
             return res;
         }
     }
+}
+
+class CountingBitsTest extends AbstractTest<CountingBits> {
 }

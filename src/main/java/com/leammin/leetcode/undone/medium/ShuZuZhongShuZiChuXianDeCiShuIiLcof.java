@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题56 - II. 数组中数字出现的次数 II
  * 
@@ -36,6 +39,12 @@ package com.leammin.leetcode.undone.medium;
 public interface ShuZuZhongShuZiChuXianDeCiShuIiLcof {
     int singleNumber(int[] nums);
 
+    static Testsuite<ShuZuZhongShuZiChuXianDeCiShuIiLcof> testsuite() {
+        return Testsuite.<ShuZuZhongShuZiChuXianDeCiShuIiLcof>builder()
+                .build();
+    }
+
+
     class Solution implements ShuZuZhongShuZiChuXianDeCiShuIiLcof {
 
         @Override
@@ -43,4 +52,7 @@ public interface ShuZuZhongShuZiChuXianDeCiShuIiLcof {
             return 0;
         }
     }
+}
+
+class ShuZuZhongShuZiChuXianDeCiShuIiLcofTest extends AbstractTest<ShuZuZhongShuZiChuXianDeCiShuIiLcof> {
 }

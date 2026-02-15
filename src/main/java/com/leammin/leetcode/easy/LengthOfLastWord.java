@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 58. 最后一个单词的长度
  * 
@@ -22,6 +25,16 @@ package com.leammin.leetcode.easy;
 public interface LengthOfLastWord {
     int lengthOfLastWord(String s);
 
+    static Testsuite<LengthOfLastWord> testsuite() {
+        return Testsuite.<LengthOfLastWord>builder()
+                .addExpected(t -> t.lengthOfLastWord("Hello World"), 5)
+                .addExpected(t -> t.lengthOfLastWord("HelloWorld"), 10)
+                .addExpected(t -> t.lengthOfLastWord("HelloWorld "), 10)
+                .addExpected(t -> t.lengthOfLastWord(" HelloWorld"), 10)
+                .build();
+    }
+
+
     class Solution implements LengthOfLastWord {
 
         @Override
@@ -40,4 +53,7 @@ public interface LengthOfLastWord {
             return size;
         }
     }
+}
+
+class LengthOfLastWordTest extends AbstractTest<LengthOfLastWord> {
 }

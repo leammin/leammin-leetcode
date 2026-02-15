@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题05. 替换空格
  * 
@@ -25,6 +28,12 @@ package com.leammin.leetcode.easy;
 public interface TiHuanKongGeLcof {
     String replaceSpace(String s);
 
+    static Testsuite<TiHuanKongGeLcof> testsuite() {
+        return Testsuite.<TiHuanKongGeLcof>builder()
+                .build();
+    }
+
+
     class Solution implements TiHuanKongGeLcof {
         public String replaceSpace(String s) {
             StringBuilder sb = new StringBuilder(s.length());
@@ -39,4 +48,7 @@ public interface TiHuanKongGeLcof {
             return sb.toString();
         }
     }
+}
+
+class TiHuanKongGeLcofTest extends AbstractTest<TiHuanKongGeLcof> {
 }

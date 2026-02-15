@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 51. N皇后
  * 
@@ -40,6 +46,16 @@ import java.util.List;
  */
 public interface NQueens {
     List<List<String>> solveNQueens(int n);
+
+    static Testsuite<NQueens> testsuite() {
+        return Testsuite.<NQueens>builder()
+                .add(ExpectedTestcase.of(t -> new HashSet<>(t.solveNQueens(4)), Set.of(
+                        List.of(".Q..","...Q","Q...","..Q."),
+                        List.of("..Q.","Q...","...Q",".Q..")
+                )))
+                .build();
+    }
+
 
     class Solution implements NQueens {
         List<List<String>> res;
@@ -91,4 +107,7 @@ public interface NQueens {
             return true;
         }
     }
+}
+
+class NQueensTest extends AbstractTest<NQueens> {
 }

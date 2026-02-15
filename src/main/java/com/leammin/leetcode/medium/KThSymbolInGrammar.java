@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 779. 第K个语法符号
  * 
@@ -44,6 +47,16 @@ package com.leammin.leetcode.medium;
 public interface KThSymbolInGrammar {
     int kthGrammar(int N, int K);
 
+    static Testsuite<KThSymbolInGrammar> testsuite() {
+        return Testsuite.<KThSymbolInGrammar>builder()
+                .addExpected(t -> t.kthGrammar(1, 1), 0)
+                .addExpected(t -> t.kthGrammar(2, 1), 0)
+                .addExpected(t -> t.kthGrammar(2, 2), 1)
+                .addExpected(t -> t.kthGrammar(4, 5), 1)
+                .build();
+    }
+
+
     class Solution implements KThSymbolInGrammar {
 
         @Override
@@ -53,4 +66,5 @@ public interface KThSymbolInGrammar {
     }
 }
 
-
+class KThSymbolInGrammarTest extends AbstractTest<KThSymbolInGrammar> {
+}

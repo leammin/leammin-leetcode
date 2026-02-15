@@ -5,6 +5,13 @@ import com.leammin.leetcode.util.Execute;
 import java.util.Arrays;
 import java.util.TreeMap;
 
+import com.leammin.leetcode.util.ClassUtils;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 5729. 求出 MK 平均值
  * 
@@ -243,4 +250,39 @@ public abstract class FindingMkAverage {
             return (int) (mid.sum() / mid.count());
         }
     }
+
+    static Testsuite<FindingMkAverage> testsuite() {
+        return Testsuite.<FindingMkAverage>builder()
+                .add(ExpectedTestcase.create(c -> ClassUtils.newInstance(c, 3, 1), t -> {
+                    List<Integer> res = new ArrayList<>();
+                    t.addElement(3);
+                    t.addElement(1);
+                    res.add(t.calculateMKAverage());
+                    t.addElement(10);
+                    res.add(t.calculateMKAverage());
+                    t.addElement(5);
+                    t.addElement(5);
+                    t.addElement(5);
+                    res.add(t.calculateMKAverage());
+                    return res;
+                }, List.of(-1, 3, 5)))
+                .add(ExpectedTestcase.create(c -> ClassUtils.newInstance(c, 3, 1), t -> {
+                    List<Integer> res = new ArrayList<>();
+                    t.addElement(17612);
+                    t.addElement(74607);
+                    res.add(t.calculateMKAverage());
+                    t.addElement(8272);
+                    t.addElement(33433);
+                    res.add(t.calculateMKAverage());
+                    t.addElement(15456);
+                    t.addElement(64938);
+                    res.add(t.calculateMKAverage());
+                    t.addElement(99741);
+                    return res;
+                }, List.of(-1, 33433, 33433)))
+                .build();
+    }
+}
+
+class FindingMkAverageTest extends AbstractTest<FindingMkAverage> {
 }

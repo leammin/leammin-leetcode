@@ -1,6 +1,8 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 2331. 计算布尔二叉树的值
@@ -63,6 +65,14 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface EvaluateBooleanBinaryTree {
     boolean evaluateTree(TreeNode root);
 
+    static Testsuite<EvaluateBooleanBinaryTree> testsuite() {
+        return Testsuite.<EvaluateBooleanBinaryTree>builder()
+                .addExpected(t -> t.evaluateTree(TreeNode.of(2,1,3,null,null,0,1)), true)
+                .addExpected(t -> t.evaluateTree(TreeNode.of(0)), false)
+                .build();
+    }
+
+
     class Solution implements EvaluateBooleanBinaryTree {
 
         @Override
@@ -77,4 +87,7 @@ public interface EvaluateBooleanBinaryTree {
             }
         }
     }
+}
+
+class EvaluateBooleanBinaryTreeTest extends AbstractTest<EvaluateBooleanBinaryTree> {
 }

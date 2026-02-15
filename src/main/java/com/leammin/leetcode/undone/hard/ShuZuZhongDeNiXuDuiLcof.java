@@ -1,5 +1,9 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题51. 数组中的逆序对
  *
@@ -23,6 +27,13 @@ package com.leammin.leetcode.undone.hard;
  */
 public interface ShuZuZhongDeNiXuDuiLcof {
     int reversePairs(int[] nums);
+
+    static Testsuite<ShuZuZhongDeNiXuDuiLcof> testsuite() {
+        return Testsuite.<ShuZuZhongDeNiXuDuiLcof>builder()
+                .add(ExpectedTestcase.of(t -> t.reversePairs(new int[]{7,5,6,4}), 5))
+                .build();
+    }
+
 
     class Solution implements ShuZuZhongDeNiXuDuiLcof {
 
@@ -54,4 +65,7 @@ public interface ShuZuZhongDeNiXuDuiLcof {
             return low;
         }
     }
+}
+
+class ShuZuZhongDeNiXuDuiLcofTest extends AbstractTest<ShuZuZhongDeNiXuDuiLcof> {
 }

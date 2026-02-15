@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.stream.IntStream;
+
 /**
  * 895. 最大频率栈
  * 
@@ -68,6 +73,22 @@ public interface MaximumFrequencyStack {
 
     int pop();
 
+    static Testsuite<MaximumFrequencyStack> testsuite() {
+        return Testsuite.<MaximumFrequencyStack>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    t.push(5);
+                    t.push(7);
+                    t.push(5);
+                    t.push(7);
+                    t.push(4);
+                    t.push(5);
+                    return IntStream.range(0, 4).map(i -> t.pop())
+                            .toArray();
+                }, new int[]{5, 7, 5, 4}))
+                .build();
+    }
+
+
     class Solution implements MaximumFrequencyStack {
         Map<Integer, Integer> numToCount = new HashMap<>();
         List<List<Integer>> countToNum = new ArrayList<>();
@@ -97,4 +118,7 @@ public interface MaximumFrequencyStack {
             return num;
         }
     }
+}
+
+class MaximumFrequencyStackTest extends AbstractTest<MaximumFrequencyStack> {
 }

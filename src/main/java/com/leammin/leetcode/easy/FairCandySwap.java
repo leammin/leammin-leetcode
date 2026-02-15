@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 888. 公平的糖果交换
  * 
@@ -57,6 +60,12 @@ package com.leammin.leetcode.easy;
 public interface FairCandySwap {
     int[] fairCandySwap(int[] A, int[] B);
 
+    static Testsuite<FairCandySwap> testsuite() {
+        return Testsuite.<FairCandySwap>builder()
+                .build();
+    }
+
+
     class Solution implements FairCandySwap {
 
         @Override
@@ -85,4 +94,7 @@ public interface FairCandySwap {
             return sum;
         }
     }
+}
+
+class FairCandySwapTest extends AbstractTest<FairCandySwap> {
 }

@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 1008. 先序遍历构造二叉树
@@ -34,6 +37,13 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface ConstructBinarySearchTreeFromPreorderTraversal {
     TreeNode bstFromPreorder(int[] preorder);
 
+    static Testsuite<ConstructBinarySearchTreeFromPreorderTraversal> testsuite() {
+        return Testsuite.<ConstructBinarySearchTreeFromPreorderTraversal>builder()
+                .add(ExpectedTestcase.of(s -> s.bstFromPreorder(new int[]{8, 5, 1, 7, 10, 12}), TreeNode.of(8, 5, 10, 1, 7, null, 12)))
+                .build();
+    }
+
+
     class Solution implements ConstructBinarySearchTreeFromPreorderTraversal {
 
         @Override
@@ -61,4 +71,7 @@ public interface ConstructBinarySearchTreeFromPreorderTraversal {
             return root;
         }
     }
+}
+
+class ConstructBinarySearchTreeFromPreorderTraversalTest extends AbstractTest<ConstructBinarySearchTreeFromPreorderTraversal> {
 }

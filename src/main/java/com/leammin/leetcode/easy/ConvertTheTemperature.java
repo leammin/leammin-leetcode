@@ -1,5 +1,6 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -60,4 +61,7 @@ public interface ConvertTheTemperature {
             return new double[]{celsius + 273.15, celsius * 1.80 + 32.00};
         }
     }
+}
+
+class ConvertTheTemperatureTest extends AbstractTest<ConvertTheTemperature> {
 }

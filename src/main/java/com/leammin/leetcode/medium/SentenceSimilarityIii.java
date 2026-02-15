@@ -2,6 +2,9 @@ package com.leammin.leetcode.medium;
 
 import java.util.Objects;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5706. 句子相似性 III
  *
@@ -56,6 +59,16 @@ import java.util.Objects;
 public interface SentenceSimilarityIii {
     boolean areSentencesSimilar(String sentence1, String sentence2);
 
+    static Testsuite<SentenceSimilarityIii> testsuite() {
+        return Testsuite.<SentenceSimilarityIii>builder()
+                .addExpected(t -> t.areSentencesSimilar("My name is Haley", "My Haley"), true)
+                .addExpected(t -> t.areSentencesSimilar("of", "A lot of words"), false)
+                .addExpected(t -> t.areSentencesSimilar("Eating right now", "Eating"), true)
+                .addExpected(t -> t.areSentencesSimilar("Luky", "Lucccky"), false)
+                .build();
+    }
+
+
     class Solution implements SentenceSimilarityIii {
 
         @Override
@@ -85,4 +98,7 @@ public interface SentenceSimilarityIii {
             return true;
         }
     }
+}
+
+class SentenceSimilarityIiiTest extends AbstractTest<SentenceSimilarityIii> {
 }

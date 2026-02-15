@@ -2,6 +2,11 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.List;
+import java.util.Set;
+
 /**
  * 368. 最大整除子集
  *
@@ -28,6 +33,14 @@ import java.util.*;
  */
 public interface LargestDivisibleSubset {
     List<Integer> largestDivisibleSubset(int[] nums);
+
+    static Testsuite<LargestDivisibleSubset> testsuite() {
+        return Testsuite.<LargestDivisibleSubset>builder()
+                .addAnyExpected(t -> Set.copyOf(t.largestDivisibleSubset(new int[]{1,2,3})), List.of(Set.of(1, 2), Set.of(1,3)))
+                .addAnyExpected(t -> Set.copyOf(t.largestDivisibleSubset(new int[]{2,3,4,9,8})), List.of(Set.of(2,4,8)))
+                .build();
+    }
+
 
     class Solution implements LargestDivisibleSubset {
 
@@ -96,4 +109,7 @@ public interface LargestDivisibleSubset {
             Node next;
         }
     }
+}
+
+class LargestDivisibleSubsetTest extends AbstractTest<LargestDivisibleSubset> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 990. 等式方程的可满足性
  *
@@ -61,6 +65,19 @@ package com.leammin.leetcode.medium;
  */
 public interface SatisfiabilityOfEqualityEquations {
     boolean equationsPossible(String[] equations);
+
+    static Testsuite<SatisfiabilityOfEqualityEquations> testsuite() {
+        return Testsuite.<SatisfiabilityOfEqualityEquations>builder()
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"a==b", "b!=a"}), false))
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"b==a","a==b"}), true))
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"a==b","b==c"}), true))
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"a==b","b!=c","c==a"}), false))
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"c==c","b==d","x!=z"}), true))
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"a!=a"}), false))
+                .add(ExpectedTestcase.of(t -> t.equationsPossible(new String[]{"a==b","e==c","b==c","a!=e"}), false))
+                .build();
+    }
+
 
     class Solution implements SatisfiabilityOfEqualityEquations {
 
@@ -136,4 +153,7 @@ public interface SatisfiabilityOfEqualityEquations {
             return i;
         }
     }
+}
+
+class SatisfiabilityOfEqualityEquationsTest extends AbstractTest<SatisfiabilityOfEqualityEquations> {
 }

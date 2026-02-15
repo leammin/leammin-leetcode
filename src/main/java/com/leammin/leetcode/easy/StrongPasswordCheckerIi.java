@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2299. 强密码检验器 II
  * 
@@ -54,6 +57,15 @@ package com.leammin.leetcode.easy;
 public interface StrongPasswordCheckerIi {
     boolean strongPasswordCheckerII(String password);
 
+    static Testsuite<StrongPasswordCheckerIi> testsuite() {
+        return Testsuite.<StrongPasswordCheckerIi>builder()
+                .addExpected(t -> t.strongPasswordCheckerII("IloveLe3tcode!"), true)
+                .addExpected(t -> t.strongPasswordCheckerII("Me+You--IsMyDream"), false)
+                .addExpected(t -> t.strongPasswordCheckerII("1aB!"), false)
+                .build();
+    }
+
+
     class Solution implements StrongPasswordCheckerIi {
 
         @Override
@@ -90,4 +102,7 @@ public interface StrongPasswordCheckerIi {
             return hasLower && hasUpper && hasNum && hasSymbol;
         }
     }
+}
+
+class StrongPasswordCheckerIiTest extends AbstractTest<StrongPasswordCheckerIi> {
 }

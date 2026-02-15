@@ -1,5 +1,9 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 329. 矩阵中的最长递增路径
  *
@@ -35,6 +39,22 @@ package com.leammin.leetcode.undone.hard;
  */
 public interface LongestIncreasingPathInAMatrix {
     int longestIncreasingPath(int[][] matrix);
+
+    static Testsuite<LongestIncreasingPathInAMatrix> testsuite() {
+        return Testsuite.<LongestIncreasingPathInAMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.longestIncreasingPath(new int[][]{
+                        {9, 9, 4},
+                        {6, 6, 8},
+                        {2, 1, 1}
+                }), 4))
+                .add(ExpectedTestcase.of(t -> t.longestIncreasingPath(new int[][]{
+                        {3, 4, 5},
+                        {3, 2, 6},
+                        {2, 2, 1}
+                }), 4))
+                .build();
+    }
+
 
     class Solution implements LongestIncreasingPathInAMatrix {
 
@@ -73,4 +93,7 @@ public interface LongestIncreasingPathInAMatrix {
             return dp[x][y] = max;
         }
     }
+}
+
+class LongestIncreasingPathInAMatrixTest extends AbstractTest<LongestIncreasingPathInAMatrix> {
 }

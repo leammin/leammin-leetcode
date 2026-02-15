@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5708. 统计一个数组中好对子的数目
  *
@@ -48,6 +51,14 @@ import java.util.Set;
 public interface CountNicePairsInAnArray {
     int countNicePairs(int[] nums);
 
+    static Testsuite<CountNicePairsInAnArray> testsuite() {
+        return Testsuite.<CountNicePairsInAnArray>builder()
+                .addExpected(t -> t.countNicePairs(new int[]{42,11,1,97}), 2)
+                .addExpected(t -> t.countNicePairs(new int[]{13,10,35,24,76}), 4)
+                .build();
+    }
+
+
     class Solution implements CountNicePairsInAnArray {
 
         @Override
@@ -75,4 +86,7 @@ public interface CountNicePairsInAnArray {
             return r;
         }
     }
+}
+
+class CountNicePairsInAnArrayTest extends AbstractTest<CountNicePairsInAnArray> {
 }

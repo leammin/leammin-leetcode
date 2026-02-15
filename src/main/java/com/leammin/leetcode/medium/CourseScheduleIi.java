@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 210. 课程表 II
  *
@@ -53,6 +57,15 @@ import java.util.Set;
 public interface CourseScheduleIi {
     int[] findOrder(int numCourses, int[][] prerequisites);
 
+    static Testsuite<CourseScheduleIi> testsuite() {
+        return Testsuite.<CourseScheduleIi>builder()
+                .add(ExpectedTestcase.of(t -> t.findOrder(2, new int[][]{{1, 0}}), new int[]{0, 1}))
+                .add(ExpectedTestcase.of(t -> t.findOrder(4, new int[][]{{1, 0}, {2, 0}, {3, 1}, {3, 2}}), new int[]{0, 1, 2, 3}))
+                .add(ExpectedTestcase.of(t -> t.findOrder(2, new int[][]{{1, 0}, {0, 1}}), new int[0]))
+                .build();
+    }
+
+
     class Solution implements CourseScheduleIi {
         int[] res;
         int size;
@@ -98,4 +111,7 @@ public interface CourseScheduleIi {
             return true;
         }
     }
+}
+
+class CourseScheduleIiTest extends AbstractTest<CourseScheduleIi> {
 }

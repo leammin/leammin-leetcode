@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 38. 报数
  *
@@ -41,6 +45,17 @@ package com.leammin.leetcode.easy;
 public interface CountAndSay {
     String countAndSay(int n);
 
+    static Testsuite<CountAndSay> testsuite() {
+        return Testsuite.<CountAndSay>builder()
+                .add(ExpectedTestcase.of(t->t.countAndSay(1), "1"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(2), "11"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(3), "21"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(4), "1211"))
+                .add(ExpectedTestcase.of(t->t.countAndSay(5), "111221"))
+                .build();
+    }
+
+
     class Solution implements CountAndSay {
         @Override
         public String countAndSay(int n) {
@@ -63,4 +78,7 @@ public interface CountAndSay {
         }
     }
 
+}
+
+class CountAndSayTest extends AbstractTest<CountAndSay> {
 }

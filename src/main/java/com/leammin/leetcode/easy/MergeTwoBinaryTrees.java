@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 617. 合并二叉树
@@ -36,6 +39,14 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface MergeTwoBinaryTrees {
     TreeNode mergeTrees(TreeNode t1, TreeNode t2);
 
+    static Testsuite<MergeTwoBinaryTrees> testsuite() {
+        return Testsuite.<MergeTwoBinaryTrees>builder()
+                .add(ExpectedTestcase.of(s -> s.mergeTrees(TreeNode.of(1, 3, 2, 5), TreeNode.of(2, 1, 3, null, 4, null, 7)), TreeNode.of(3, 4, 5, 5, 4, null, 7)
+                ))
+                .build();
+    }
+
+
     class Solution implements MergeTwoBinaryTrees {
 
         @Override
@@ -52,4 +63,7 @@ public interface MergeTwoBinaryTrees {
             return t;
         }
     }
+}
+
+class MergeTwoBinaryTreesTest extends AbstractTest<MergeTwoBinaryTrees> {
 }

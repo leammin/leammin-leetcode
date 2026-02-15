@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 292. Nim 游戏
  * 
@@ -22,6 +26,15 @@ package com.leammin.leetcode.easy;
 public interface NimGame {
     boolean canWinNim(int n);
 
+    static Testsuite<NimGame> testsuite() {
+        return Testsuite.<NimGame>builder()
+                .add(ExpectedTestcase.of(t -> t.canWinNim(4), false))
+                .add(ExpectedTestcase.of(t -> t.canWinNim(1), true))
+                .add(ExpectedTestcase.of(t -> t.canWinNim(2), true))
+                .build();
+    }
+
+
     class Solution implements NimGame {
 
         @Override
@@ -29,4 +42,7 @@ public interface NimGame {
             return n % 4 != 0;
         }
     }
+}
+
+class NimGameTest extends AbstractTest<NimGame> {
 }

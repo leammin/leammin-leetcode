@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 111. 二叉树的最小深度
  * 
@@ -81,5 +85,21 @@ public interface MinimumDepthOfBinaryTree {
             }
             return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
         }
+    }
+}
+
+class MinimumDepthOfBinaryTreeTest extends AbstractTest<MinimumDepthOfBinaryTree> {
+
+    @Override
+    protected List<Class<? extends MinimumDepthOfBinaryTree>> solutions() {
+        return Collections.singletonList(MinimumDepthOfBinaryTree.Solution2.class);
+    }
+
+    @Override
+    protected Testsuite<MinimumDepthOfBinaryTree> testsuite() {
+        return Testsuite.<MinimumDepthOfBinaryTree>builder()
+                .add(ExpectedTestcase.of(t -> t.minDepth(TreeNode.of(3, 9, 20, null, null, 15, 7)), 2))
+                .add(ExpectedTestcase.of(t -> t.minDepth(TreeNode.of(1,2)), 2))
+                .build();
     }
 }

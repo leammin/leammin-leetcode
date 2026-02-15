@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 226. 翻转二叉树
@@ -36,6 +39,13 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface InvertBinaryTree {
     TreeNode invertTree(TreeNode root);
 
+    static Testsuite<InvertBinaryTree> testsuite() {
+        return Testsuite.<InvertBinaryTree>builder()
+                .add(ExpectedTestcase.of(s -> s.invertTree(TreeNode.of(4, 2, 7, 1, 3, 6, 9)), TreeNode.of(4, 7, 2, 9, 6, 3, 1)))
+                .build();
+    }
+
+
     class Solution implements InvertBinaryTree {
 
         @Override
@@ -51,4 +61,7 @@ public interface InvertBinaryTree {
             return root;
         }
     }
+}
+
+class InvertBinaryTreeTest extends AbstractTest<InvertBinaryTree> {
 }

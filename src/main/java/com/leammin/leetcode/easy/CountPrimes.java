@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.TreeSet;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 204. 计数质数
  *
@@ -20,6 +24,14 @@ import java.util.TreeSet;
  */
 public interface CountPrimes {
     int countPrimes(int n);
+
+    static Testsuite<CountPrimes> testsuite() {
+        return Testsuite.<CountPrimes>builder()
+                .add(ExpectedTestcase.of(t -> t.countPrimes(10), 4))
+                .add(ExpectedTestcase.of(t -> t.countPrimes(10000), 1229))
+                .build();
+    }
+
 
     class Solution implements CountPrimes {
         @Override
@@ -81,4 +93,7 @@ public interface CountPrimes {
             return primes.size();
         }
     }
+}
+
+class CountPrimesTest extends AbstractTest<CountPrimes> {
 }

@@ -1,5 +1,6 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -135,4 +136,7 @@ public interface MinimumDeletionsToMakeStringBalanced {
         }
     }
 
+}
+
+class MinimumDeletionsToMakeStringBalancedTest extends AbstractTest<MinimumDeletionsToMakeStringBalanced> {
 }

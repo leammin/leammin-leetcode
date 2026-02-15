@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5723. 查找用户活跃分钟数
  * 
@@ -61,6 +64,14 @@ import java.util.Set;
 public interface FindingTheUsersActiveMinutes {
     int[] findingUsersActiveMinutes(int[][] logs, int k);
 
+    static Testsuite<FindingTheUsersActiveMinutes> testsuite() {
+        return Testsuite.<FindingTheUsersActiveMinutes>builder()
+                .addExpected(t -> t.findingUsersActiveMinutes(new int[][]{{0,5},{1,2},{0,2},{0,5},{1,3}}, 5), new int[]{0,2,0,0,0})
+                .addExpected(t -> t.findingUsersActiveMinutes(new int[][]{{1,1},{2,2},{2,3}}, 4), new int[]{1,1,0,0})
+                .build();
+    }
+
+
     class Solution implements FindingTheUsersActiveMinutes {
 
         @Override
@@ -76,4 +87,7 @@ public interface FindingTheUsersActiveMinutes {
             return res;
         }
     }
+}
+
+class FindingTheUsersActiveMinutesTest extends AbstractTest<FindingTheUsersActiveMinutes> {
 }

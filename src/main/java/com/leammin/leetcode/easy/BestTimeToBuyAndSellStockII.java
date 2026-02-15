@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 122. 买卖股票的最佳时机 II
  *
@@ -38,6 +42,15 @@ package com.leammin.leetcode.easy;
  */
 public interface BestTimeToBuyAndSellStockII {
     int maxProfit(int[] prices);
+
+    static Testsuite<BestTimeToBuyAndSellStockII> testsuite() {
+        return Testsuite.<BestTimeToBuyAndSellStockII>builder()
+                .add(ExpectedTestcase.of(solution -> solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4}), 7))
+                .add(ExpectedTestcase.of(solution -> solution.maxProfit(new int[]{1, 2, 3, 4, 5}), 4))
+                .add(ExpectedTestcase.of(solution -> solution.maxProfit(new int[]{7, 6, 4, 3, 1}), 0))
+                .build();
+    }
+
 
     class Solution implements BestTimeToBuyAndSellStockII {
         @Override
@@ -85,4 +98,7 @@ public interface BestTimeToBuyAndSellStockII {
             return profit;
         }
     }
+}
+
+class BestTimeToBuyAndSellStockIITest extends AbstractTest<BestTimeToBuyAndSellStockII> {
 }

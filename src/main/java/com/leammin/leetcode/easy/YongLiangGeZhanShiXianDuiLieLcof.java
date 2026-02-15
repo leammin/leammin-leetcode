@@ -3,6 +3,11 @@ package com.leammin.leetcode.easy;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+
 /**
  * 面试题09. 用两个栈实现队列
  * 
@@ -43,6 +48,28 @@ public interface YongLiangGeZhanShiXianDuiLieLcof {
 
     int deleteHead();
 
+    static Testsuite<YongLiangGeZhanShiXianDuiLieLcof> testsuite() {
+        return Testsuite.<YongLiangGeZhanShiXianDuiLieLcof>builder()
+                .add(Testcase.of(queue -> {
+                    long before = System.nanoTime();
+                    queue.appendTail(3);
+                    Assertions.assertThat(queue.deleteHead()).isEqualTo(3);
+                    Assertions.assertThat(queue.deleteHead()).isEqualTo(-1);
+                    return System.nanoTime() - before;
+                }))
+                .add(Testcase.of(queue -> {
+                    long before = System.nanoTime();
+                    Assertions.assertThat(queue.deleteHead()).isEqualTo(-1);
+                    queue.appendTail(5);
+                    queue.appendTail(2);
+                    Assertions.assertThat(queue.deleteHead()).isEqualTo(5);
+                    Assertions.assertThat(queue.deleteHead()).isEqualTo(2);
+                    return System.nanoTime() - before;
+                }))
+                .build();
+    }
+
+
     class Solution implements YongLiangGeZhanShiXianDuiLieLcof {
 
         Deque<Integer> stack1 = new LinkedList<>();
@@ -63,4 +90,7 @@ public interface YongLiangGeZhanShiXianDuiLieLcof {
             return stack2.isEmpty() ? -1 : stack2.pop();
         }
     }
+}
+
+class YongLiangGeZhanShiXianDuiLieLcofTest extends AbstractTest<YongLiangGeZhanShiXianDuiLieLcof> {
 }

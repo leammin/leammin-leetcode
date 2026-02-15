@@ -5,6 +5,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 451. 根据字符出现频率排序
  * 
@@ -59,6 +62,13 @@ import java.util.Map;
 public interface SortCharactersByFrequency {
     String frequencySort(String s);
 
+    static Testsuite<SortCharactersByFrequency> testsuite() {
+        return Testsuite.<SortCharactersByFrequency>builder()
+                .addExpected(t -> t.frequencySort("baaccc"), "cccaab")
+                .build();
+    }
+
+
     class Solution implements SortCharactersByFrequency {
 
         @Override
@@ -81,4 +91,7 @@ public interface SortCharactersByFrequency {
             return new String(res);
         }
     }
+}
+
+class SortCharactersByFrequencyTest extends AbstractTest<SortCharactersByFrequency> {
 }

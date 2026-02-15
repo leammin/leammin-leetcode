@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 113. 路径总和 II
  * 
@@ -40,6 +44,18 @@ import java.util.List;
 public interface PathSumII {
     List<List<Integer>> pathSum(TreeNode root, int sum);
 
+    static Testsuite<PathSumII> testsuite() {
+        return Testsuite.<PathSumII>builder()
+                .add(ExpectedTestcase.of(
+                        t -> t.pathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1), 22), List.of(
+                                List.of(5, 4, 11, 2),
+                                List.of(5, 8, 4, 5)
+                        )
+                ))
+                .build();
+    }
+
+
     class Solution implements PathSumII {
         @Override
         public List<List<Integer>> pathSum(TreeNode root, int sum) {
@@ -69,4 +85,7 @@ public interface PathSumII {
             return result;
         }
     }
+}
+
+class PathSumIITest extends AbstractTest<PathSumII> {
 }

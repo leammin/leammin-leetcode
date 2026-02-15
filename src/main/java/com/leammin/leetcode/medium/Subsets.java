@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 78. 子集
  * 
@@ -33,6 +38,22 @@ import java.util.List;
 public interface Subsets {
     List<List<Integer>> subsets(int[] nums);
 
+    static Testsuite<Subsets> testsuite() {
+        return Testsuite.<Subsets>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.subsets(new int[]{1, 2, 3}), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                        List.of(3),
+                        List.of(1),
+                        List.of(2),
+                        List.of(1, 2, 3),
+                        List.of(1, 3),
+                        List.of(2, 3),
+                        List.of(1, 2),
+                        List.of())
+                ))
+                .build();
+    }
+
+
     class Solution implements Subsets {
 
         @Override
@@ -51,4 +72,7 @@ public interface Subsets {
             }
         }
     }
+}
+
+class SubsetsTest extends AbstractTest<Subsets> {
 }

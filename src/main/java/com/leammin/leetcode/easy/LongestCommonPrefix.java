@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 14. 最长公共前缀
  *
@@ -30,6 +34,14 @@ package com.leammin.leetcode.easy;
  */
 public interface LongestCommonPrefix {
     String longestCommonPrefix(String[] strs);
+
+    static Testsuite<LongestCommonPrefix> testsuite() {
+        return Testsuite.<LongestCommonPrefix>builder()
+                .add(ExpectedTestcase.of(t -> t.longestCommonPrefix(new String[]{"flower","flow","flight"}), "fl"))
+                .add(ExpectedTestcase.of(t -> t.longestCommonPrefix(new String[]{"dog","racecar","car"}), ""))
+                .build();
+    }
+
 
     class Solution implements LongestCommonPrefix {
         @Override
@@ -78,4 +90,7 @@ public interface LongestCommonPrefix {
             }
         }
     }
+}
+
+class LongestCommonPrefixTest extends AbstractTest<LongestCommonPrefix> {
 }

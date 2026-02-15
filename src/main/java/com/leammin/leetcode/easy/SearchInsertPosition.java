@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 35. 搜索插入位置
  * 
@@ -38,6 +42,16 @@ package com.leammin.leetcode.easy;
 public interface SearchInsertPosition {
     int searchInsert(int[] nums, int target);
 
+    static Testsuite<SearchInsertPosition> testsuite() {
+        return Testsuite.<SearchInsertPosition>builder()
+                .add(ExpectedTestcase.of(t -> t.searchInsert(new int[]{1, 3, 5, 6}, 5), 2))
+                .add(ExpectedTestcase.of(t -> t.searchInsert(new int[]{1, 3, 5, 6}, 2), 1))
+                .add(ExpectedTestcase.of(t -> t.searchInsert(new int[]{1, 3, 5, 6}, 7), 4))
+                .add(ExpectedTestcase.of(t -> t.searchInsert(new int[]{1, 3, 5, 6}, 0), 0))
+                .build();
+    }
+
+
     class Solution implements SearchInsertPosition {
 
         @Override
@@ -57,4 +71,7 @@ public interface SearchInsertPosition {
             return lo;
         }
     }
+}
+
+class SearchInsertPositionTest extends AbstractTest<SearchInsertPosition> {
 }

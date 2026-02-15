@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 67. 二进制求和
  *
@@ -23,6 +27,13 @@ package com.leammin.leetcode.easy;
 public interface AddBinary {
     String addBinary(String a, String b);
 
+    static Testsuite<AddBinary> testsuite() {
+        return Testsuite.<AddBinary>builder()
+                .add(ExpectedTestcase.of(t -> t.addBinary("11", "1"), "100"))
+                .add(ExpectedTestcase.of(t -> t.addBinary("1010", "1011"), "10101"))
+                .build();
+    }
+    
     class Solution implements AddBinary {
 
         @Override
@@ -42,4 +53,8 @@ public interface AddBinary {
             return new String(res, carry ? 0 : 1, carry ? res.length : res.length - 1);
         }
     }
+}
+
+class AddBinaryTest extends AbstractTest<AddBinary> {
+    
 }

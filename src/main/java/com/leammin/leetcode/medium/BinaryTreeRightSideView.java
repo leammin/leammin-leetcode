@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 199. 二叉树的右视图
  * 
@@ -31,6 +35,13 @@ import java.util.List;
  */
 public interface BinaryTreeRightSideView {
     List<Integer> rightSideView(TreeNode root);
+
+    static Testsuite<BinaryTreeRightSideView> testsuite() {
+        return Testsuite.<BinaryTreeRightSideView>builder()
+                .add(ExpectedTestcase.of(t -> t.rightSideView(TreeNode.of(1, 2, 3, null, 5, null, 4)), List.of(1, 3, 4)))
+                .build();
+    }
+
 
     class Solution implements BinaryTreeRightSideView {
 
@@ -58,4 +69,7 @@ public interface BinaryTreeRightSideView {
             return ans;
         }
     }
+}
+
+class BinaryTreeRightSideViewTest extends AbstractTest<BinaryTreeRightSideView> {
 }

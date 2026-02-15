@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 28. 实现strStr()
  *
@@ -32,6 +36,15 @@ package com.leammin.leetcode.easy;
 public interface ImplementStrstr {
     int strStr(String haystack, String needle);
 
+    static Testsuite<ImplementStrstr> testsuite() {
+        return Testsuite.<ImplementStrstr>builder()
+                .add(ExpectedTestcase.of(t -> t.strStr("hello",  "ll"), 2))
+                .add(ExpectedTestcase.of(t -> t.strStr("aaaaa",  "bba"), -1))
+                .add(ExpectedTestcase.of(t -> t.strStr("a",  "a"), 0))
+                .build();
+    }
+
+
     class Solution implements ImplementStrstr {
         @Override
         public int strStr(String haystack, String needle) {
@@ -56,4 +69,7 @@ public interface ImplementStrstr {
         }
     }
 
+}
+
+class ImplementStrstrTest extends AbstractTest<ImplementStrstr> {
 }

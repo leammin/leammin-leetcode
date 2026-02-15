@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 49. 字母异位词分组
  *
@@ -33,6 +39,24 @@ import java.util.List;
 public interface GroupAnagrams {
     List<List<String>> groupAnagrams(String[] strs);
 
+    static Testsuite<GroupAnagrams> testsuite() {
+        return Testsuite.<GroupAnagrams>builder()
+                .add(VerifiableTestcase.of(t -> t.groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}), r -> {
+                    Set<Set<String>> exp = new HashSet<>();
+                    exp.add(Set.of("ate", "eat", "tea"));
+                    exp.add(Set.of("nat", "tan"));
+                    exp.add(Set.of("bat"));
+                    for (List<String> l : r) {
+                        if (!exp.remove(Set.copyOf(l))) {
+                            return false;
+                        }
+                    }
+                    return exp.isEmpty();
+                }))
+                .build();
+    }
+
+
     class Solution implements GroupAnagrams {
         @Override
         public List<List<String>> groupAnagrams(String[] strs) {
@@ -51,4 +75,7 @@ public interface GroupAnagrams {
             return new ArrayList<>(map.values());
         }
     }
+}
+
+class GroupAnagramsTest extends AbstractTest<GroupAnagrams> {
 }

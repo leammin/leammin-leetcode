@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 11. 盛最多水的容器
  * 
@@ -24,6 +28,15 @@ package com.leammin.leetcode.medium;
  */
 public interface ContainerWithMostWater {
     int maxArea(int[] height);
+
+    static Testsuite<ContainerWithMostWater> testsuite() {
+        return Testsuite.<ContainerWithMostWater>builder()
+                .add(ExpectedTestcase.of(t -> t.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7}), 49))
+                .add(ExpectedTestcase.of(t -> t.maxArea(new int[]{2,1}), 1))
+                .add(ExpectedTestcase.of(t -> t.maxArea(new int[]{4,8,3,3,3,3,3}), 18))
+                .build();
+    }
+
 
     class Solution implements ContainerWithMostWater {
 
@@ -117,4 +130,7 @@ public interface ContainerWithMostWater {
             return ans;
         }
     }
+}
+
+class ContainerWithMostWaterTest extends AbstractTest<ContainerWithMostWater> {
 }

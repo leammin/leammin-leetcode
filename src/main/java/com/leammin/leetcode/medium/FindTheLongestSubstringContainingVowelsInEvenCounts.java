@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1371. 每个元音包含偶数次的最长子字符串
  *
@@ -48,6 +52,24 @@ import java.util.Arrays;
 public interface FindTheLongestSubstringContainingVowelsInEvenCounts {
     int findTheLongestSubstring(String s);
 
+    static Testsuite<FindTheLongestSubstringContainingVowelsInEvenCounts> testsuite() {
+        return Testsuite.<FindTheLongestSubstringContainingVowelsInEvenCounts>builder()
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("eae"), 0))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("eaea"), 4))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("eaaaa"), 4))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("exxxx"), 4))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("eleetminicoworoep"), 13))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("leetcodeisgreat"), 5))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("bcbcbc"), 6))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("ixzhsdka"), 6))
+                .add(ExpectedTestcase.of(t -> t.findTheLongestSubstring("qnplnlarrtztkotazhufrsfczrzibvccaoayyihid" +
+                        "ztfljcffiqfviuwjowkppdajmknzgidixqgtnahamebxfowqvnrhuzwqohquamvszkvunbxjegbjccjjxfnsiearbsgs" +
+                        "ofywtqbmgldgsvnsgpdvmjqpaktmjafgkzszekngivdmrlvrpyrhcxbceffrgiyktqilkkdjhtywpesrydkbncmzeekd" +
+                        "tszmcsrhsciljsrdoidzbjatvacndzbghzsnfdofvhfxdnmzrjriwpkdgukbaazjxtkomkmccktodig"), 295))
+                .build();
+    }
+
+
     class Solution implements FindTheLongestSubstringContainingVowelsInEvenCounts {
 
         @Override
@@ -85,4 +107,7 @@ public interface FindTheLongestSubstringContainingVowelsInEvenCounts {
             }
         }
     }
+}
+
+class FindTheLongestSubstringContainingVowelsInEvenCountsTest extends AbstractTest<FindTheLongestSubstringContainingVowelsInEvenCounts> {
 }

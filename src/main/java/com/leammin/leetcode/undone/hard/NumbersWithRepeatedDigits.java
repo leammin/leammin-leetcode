@@ -1,5 +1,6 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.Arrays;
@@ -96,4 +97,7 @@ public interface NumbersWithRepeatedDigits {
             return Arrays.copyOf(res, len);
         }
     }
+}
+
+class NumbersWithRepeatedDigitsTest extends AbstractTest<NumbersWithRepeatedDigits> {
 }

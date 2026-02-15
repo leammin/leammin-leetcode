@@ -2,6 +2,9 @@ package com.leammin.leetcode.easy;
 
 import java.util.HashMap;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1640. 能否连接形成数组
  * 
@@ -68,6 +71,15 @@ import java.util.HashMap;
 public interface CheckArrayFormationThroughConcatenation {
     boolean canFormArray(int[] arr, int[][] pieces);
 
+    static Testsuite<CheckArrayFormationThroughConcatenation> testsuite() {
+        return Testsuite.<CheckArrayFormationThroughConcatenation>builder()
+                .addExpected(t -> t.canFormArray(new int[]{15, 88}, new int[][]{{88}, {15}}), true)
+                .addExpected(t -> t.canFormArray(new int[]{49, 18, 16}, new int[][]{{16, 18, 49}}), false)
+                .addExpected(t -> t.canFormArray(new int[]{91, 4, 64, 78}, new int[][]{{78}, {4, 64}, {91}}), true)
+                .build();
+    }
+
+
     class Solution implements CheckArrayFormationThroughConcatenation {
 
         @Override
@@ -91,4 +103,7 @@ public interface CheckArrayFormationThroughConcatenation {
             return true;
         }
     }
+}
+
+class CheckArrayFormationThroughConcatenationTest extends AbstractTest<CheckArrayFormationThroughConcatenation> {
 }

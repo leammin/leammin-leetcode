@@ -4,6 +4,11 @@ import com.leammin.leetcode.struct.TreeNode;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.List;
+
 /**
  * 145. 二叉树的后序遍历
  *
@@ -31,6 +36,14 @@ public interface BinaryTreePostorderTraversal {
     /**
      * 递归写法
      */
+
+    static Testsuite<BinaryTreePostorderTraversal> testsuite() {
+        return Testsuite.<BinaryTreePostorderTraversal>builder()
+                .add(ExpectedTestcase.of(t -> t.postorderTraversal(TreeNode.of(1, null, 2, 3)), List.of(3, 2, 1)))
+                .add(ExpectedTestcase.of(t -> t.postorderTraversal(TreeNode.of(3, 1, 2)), List.of(1,2,3)))
+                .build();
+    }
+
     class Solution implements BinaryTreePostorderTraversal {
 
         @Override
@@ -113,4 +126,7 @@ public interface BinaryTreePostorderTraversal {
             return res;
         }
     }
+}
+
+class BinaryTreePostorderTraversalTest extends AbstractTest<BinaryTreePostorderTraversal> {
 }

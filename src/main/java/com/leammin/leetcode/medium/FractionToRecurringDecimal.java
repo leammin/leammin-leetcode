@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 166. 分数到小数
  *
@@ -32,6 +36,19 @@ import java.util.Map;
  */
 public interface FractionToRecurringDecimal {
     String fractionToDecimal(int numerator, int denominator);
+
+    static Testsuite<FractionToRecurringDecimal> testsuite() {
+        return Testsuite.<FractionToRecurringDecimal>builder()
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(1, 2), "0.5"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(2, 1), "2"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(2, 3), "0.(6)"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(4, 333), "0.(012)"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(1, 6), "0.1(6)"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(7, -12), "-0.58(3)"))
+                .add(ExpectedTestcase.of(t -> t.fractionToDecimal(-1, -2147483648), "0.0000000004656612873077392578125"))
+                .build();
+    }
+
 
     class Solution implements FractionToRecurringDecimal {
 
@@ -68,4 +85,7 @@ public interface FractionToRecurringDecimal {
             return builder.insert(start, "(").append(')').toString();
         }
     }
+}
+
+class FractionToRecurringDecimalTest extends AbstractTest<FractionToRecurringDecimal> {
 }

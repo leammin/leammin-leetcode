@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 172. 阶乘后的零
  * 
@@ -26,6 +30,14 @@ package com.leammin.leetcode.easy;
 public interface FactorialTrailingZeroes {
     int trailingZeroes(int n);
 
+    static Testsuite<FactorialTrailingZeroes> testsuite() {
+        return Testsuite.<FactorialTrailingZeroes>builder()
+                .add(ExpectedTestcase.of(t -> t.trailingZeroes(3), 0))
+                .add(ExpectedTestcase.of(t -> t.trailingZeroes(5), 1))
+                .build();
+    }
+
+
     class Solution implements FactorialTrailingZeroes {
 
         @Override
@@ -38,4 +50,7 @@ public interface FactorialTrailingZeroes {
             return ans;
         }
     }
+}
+
+class FactorialTrailingZeroesTest extends AbstractTest<FactorialTrailingZeroes> {
 }

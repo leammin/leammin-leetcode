@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 211. 添加与搜索单词 - 数据结构设计
  * 
@@ -47,6 +50,49 @@ public interface AddAndSearchWordDataStructureDesign {
      */
     boolean search(String word);
 
+    static Testsuite<AddAndSearchWordDataStructureDesign> testsuite() {
+        return Testsuite.<AddAndSearchWordDataStructureDesign>builder()
+                .addExpected(t -> {
+                    t.addWord("bad");
+                    t.addWord("dad");
+                    t.addWord("mad");
+                    return new boolean[]{
+                            t.search("pad"),
+                            t.search("bad"),
+                            t.search(".ad"),
+                            t.search("b..")
+                    };
+                }, new boolean[]{
+                        false,
+                        true,
+                        true,
+                        true
+                })
+                .addExpected(t -> {
+//                    ["WordDictionary","addWord","addWord","search","search","search","search","search","search"]
+//                    [[],["a"],["a"],["."],["a"],["aa"],["a"],[".a"],["a."]]
+                    t.addWord("a");
+                    t.addWord("a");
+                    return new boolean[]{
+                            t.search("."),
+                            t.search("a"),
+                            t.search("aa"),
+                            t.search("a"),
+                            t.search(".a"),
+                            t.search("a."),
+                    };
+                }, new boolean[]{
+                        true,
+                        true,
+                        false,
+                        true,
+                        false,
+                        false,
+                })
+                .build();
+    }
+
+
     class Solution implements AddAndSearchWordDataStructureDesign {
         static class TrieNode {
             boolean end;
@@ -90,4 +136,7 @@ public interface AddAndSearchWordDataStructureDesign {
             return node != null && node.end;
         }
     }
+}
+
+class AddAndSearchWordDataStructureDesignTest extends AbstractTest<AddAndSearchWordDataStructureDesign> {
 }

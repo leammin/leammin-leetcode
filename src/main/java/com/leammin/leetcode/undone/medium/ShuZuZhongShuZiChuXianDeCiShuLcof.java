@@ -4,6 +4,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 面试题56 - I. 数组中数字出现的次数
  * 
@@ -38,6 +43,16 @@ import java.util.Set;
  */
 public interface ShuZuZhongShuZiChuXianDeCiShuLcof {
     int[] singleNumbers(int[] nums);
+
+    static Testsuite<ShuZuZhongShuZiChuXianDeCiShuLcof> testsuite() {
+        return Testsuite.<ShuZuZhongShuZiChuXianDeCiShuLcof>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.singleNumbers(new int[]{4, 1, 4, 6}),
+                        res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1, 6)))
+                .add(VerifiableTestcase.ofConsumer(t -> t.singleNumbers(new int[]{1, 2, 10, 4, 1, 4, 3, 3}),
+                        res -> Assertions.assertThat(res).containsExactlyInAnyOrder(2, 10)))
+                .build();
+    }
+
 
     class Solution implements ShuZuZhongShuZiChuXianDeCiShuLcof {
 
@@ -82,4 +97,7 @@ public interface ShuZuZhongShuZiChuXianDeCiShuLcof {
     }
 
 
+}
+
+class ShuZuZhongShuZiChuXianDeCiShuLcofTest extends AbstractTest<ShuZuZhongShuZiChuXianDeCiShuLcof> {
 }

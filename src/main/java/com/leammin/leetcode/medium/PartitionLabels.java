@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 763. 划分字母区间
  * 
@@ -33,6 +37,13 @@ import java.util.List;
  */
 public interface PartitionLabels {
     List<Integer> partitionLabels(String s);
+
+    static Testsuite<PartitionLabels> testsuite() {
+        return Testsuite.<PartitionLabels>builder()
+                .add(ExpectedTestcase.of(t->t.partitionLabels("ababcbacadefegdehijhklij"), Arrays.asList(9,7,8)))
+                .build();
+    }
+
 
     class Solution implements PartitionLabels {
         @Override
@@ -72,4 +83,7 @@ public interface PartitionLabels {
             }
         }
     }
+}
+
+class PartitionLabelsTest extends AbstractTest<PartitionLabels> {
 }

@@ -2,6 +2,9 @@ package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 235. 二叉搜索树的最近公共祖先
@@ -45,7 +48,17 @@ import com.leammin.leetcode.util.Execute;
 public interface LowestCommonAncestorOfABinarySearchTree {
     TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q);
 
+    static Testsuite<LowestCommonAncestorOfABinarySearchTree> testsuite() {
+        return Testsuite.<LowestCommonAncestorOfABinarySearchTree>builder()
+                .add(ExpectedTestcase.of(t -> t.lowestCommonAncestor(TreeNode.of(6, 2, 8, 0, 4, 7, 9, null, null, 3, 5),
+                        TreeNode.of(2), TreeNode.of(8)).val, 6))
+                .add(ExpectedTestcase.of(t -> t.lowestCommonAncestor(TreeNode.of(6, 2, 8, 0, 4, 7, 9, null, null, 3, 5),
+                        TreeNode.of(2), TreeNode.of(4)).val, 2))
+                .build();
+    }
     @Execute(cases = 1)
+
+
     class Solution implements LowestCommonAncestorOfABinarySearchTree {
 
         @Override
@@ -58,4 +71,7 @@ public interface LowestCommonAncestorOfABinarySearchTree {
             return root;
         }
     }
+}
+
+class LowestCommonAncestorOfABinarySearchTreeTest extends AbstractTest<LowestCommonAncestorOfABinarySearchTree> {
 }

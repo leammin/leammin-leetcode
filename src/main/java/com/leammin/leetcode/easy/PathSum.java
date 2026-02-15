@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 112. 路径总和
@@ -30,6 +33,14 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface PathSum {
     boolean hasPathSum(TreeNode root, int sum);
 
+    static Testsuite<PathSum> testsuite() {
+        return Testsuite.<PathSum>builder()
+                .add(ExpectedTestcase.of(t -> t.hasPathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1), 22), true))
+                .add(ExpectedTestcase.of(t -> t.hasPathSum(TreeNode.of(1,2), 1), false))
+                .build();
+    }
+
+
     class Solution implements PathSum {
         @Override
         public boolean hasPathSum(TreeNode root, int sum) {
@@ -48,4 +59,7 @@ public interface PathSum {
             return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
         }
     }
+}
+
+class PathSumTest extends AbstractTest<PathSum> {
 }

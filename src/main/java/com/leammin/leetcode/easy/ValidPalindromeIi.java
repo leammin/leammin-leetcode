@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 680. 验证回文字符串 Ⅱ
  * 
@@ -33,6 +37,18 @@ package com.leammin.leetcode.easy;
 public interface ValidPalindromeIi {
     boolean validPalindrome(String s);
 
+    static Testsuite<ValidPalindromeIi> testsuite() {
+        return Testsuite.<ValidPalindromeIi>builder()
+                .add(ExpectedTestcase.of(t -> t.validPalindrome("aba"), true))
+                .add(ExpectedTestcase.of(t -> t.validPalindrome("abca"), true))
+                .add(ExpectedTestcase.of(t -> t.validPalindrome("abcca"), true))
+                .add(ExpectedTestcase.of(t -> t.validPalindrome("abcca"), true))
+                .add(ExpectedTestcase.of(t -> t.validPalindrome("abcaca"), true))
+                .add(ExpectedTestcase.of(t -> t.validPalindrome("abccaca"), false))
+                .build();
+    }
+
+
     class Solution implements ValidPalindromeIi {
 
         @Override
@@ -65,4 +81,7 @@ public interface ValidPalindromeIi {
             return true;
         }
     }
+}
+
+class ValidPalindromeIiTest extends AbstractTest<ValidPalindromeIi> {
 }

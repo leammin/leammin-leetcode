@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 804. 唯一摩尔斯密码词
  * 
@@ -46,6 +50,13 @@ import java.util.Set;
 public interface UniqueMorseCodeWords {
     int uniqueMorseRepresentations(String[] words);
 
+    static Testsuite<UniqueMorseCodeWords> testsuite() {
+        return Testsuite.<UniqueMorseCodeWords>builder()
+                .add(ExpectedTestcase.of(t -> t.uniqueMorseRepresentations(new String[]{"gin", "zen", "gig", "msg"}), 2))
+                .build();
+    }
+
+
     class Solution implements UniqueMorseCodeWords {
         @Override
         public int uniqueMorseRepresentations(String[] words) {
@@ -64,4 +75,7 @@ public interface UniqueMorseCodeWords {
             return morseCodeSet.size();
         }
     }
+}
+
+class UniqueMorseCodeWordsTest extends AbstractTest<UniqueMorseCodeWords> {
 }

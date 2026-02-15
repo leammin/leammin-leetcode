@@ -1,5 +1,6 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -84,4 +85,7 @@ public interface DivisibleAndNonDivisibleSumsDifference {
             return sumn - 2*summ;
         }
     }
+}
+
+class DivisibleAndNonDivisibleSumsDifferenceTest extends AbstractTest<DivisibleAndNonDivisibleSumsDifference> {
 }

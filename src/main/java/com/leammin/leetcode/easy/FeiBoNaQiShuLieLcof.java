@@ -1,6 +1,8 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 面试题10- I. 斐波那契数列
@@ -45,7 +47,17 @@ import com.leammin.leetcode.util.Execute;
 public interface FeiBoNaQiShuLieLcof {
     int fib(int n);
 
+    static Testsuite<FeiBoNaQiShuLieLcof> testsuite() {
+        return Testsuite.<FeiBoNaQiShuLieLcof>builder()
+                .addExpected(t -> t.fib(2), 1)
+                .addExpected(t -> t.fib(5), 5)
+                .addExpected(t -> t.fib(36), 14930352)
+                .addExpected(t -> t.fib(72), 8390086)
+                .build();
+    }
     @Execute(cases = -1)
+
+
     class Solution implements FeiBoNaQiShuLieLcof {
 
         @Override
@@ -60,4 +72,7 @@ public interface FeiBoNaQiShuLieLcof {
             return a;
         }
     }
+}
+
+class FeiBoNaQiShuLieLcofTest extends AbstractTest<FeiBoNaQiShuLieLcof> {
 }

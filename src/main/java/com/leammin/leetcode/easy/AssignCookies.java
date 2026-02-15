@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 455. 分发饼干
  * 
@@ -50,6 +54,14 @@ public interface AssignCookies {
      * s.length = m
      * 时间复杂度: m * log(m) + n * m
      */
+
+    static Testsuite<AssignCookies> testsuite() {
+        return Testsuite.<AssignCookies>builder()
+                .add(ExpectedTestcase.of(t -> t.findContentChildren(new int[]{1, 2, 3}, new int[]{1, 1}), 1))
+                .add(ExpectedTestcase.of(t -> t.findContentChildren(new int[]{1, 2}, new int[]{1, 2, 3}), 2))
+                .build();
+    }
+
     class Solution implements AssignCookies {
         @Override
         public int findContentChildren(int[] g, int[] s) {
@@ -101,4 +113,7 @@ public interface AssignCookies {
             return res;
         }
     }
+}
+
+class AssignCookiesTest extends AbstractTest<AssignCookies> {
 }

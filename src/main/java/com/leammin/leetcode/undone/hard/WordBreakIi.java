@@ -3,6 +3,12 @@ package com.leammin.leetcode.undone.hard;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+import java.util.Arrays;
+
 /**
  * 140. 单词拆分 II
  * 
@@ -56,6 +62,24 @@ import java.util.List;
  */
 public interface WordBreakIi {
     List<String> wordBreak(String s, List<String> wordDict);
+
+    static Testsuite<WordBreakIi> testsuite() {
+        return Testsuite.<WordBreakIi>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.wordBreak("catsanddog", Arrays.asList("cat", "cats", "and", "sand", "dog")),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder("cats and dog", "cat sand dog")))
+                .add(VerifiableTestcase.ofConsumer(t -> t.wordBreak("pineapplepenapple", Arrays.asList("apple", "pen", "applepen", "pine", "pineapple")),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder(
+                                "pine apple pen apple",
+                                "pineapple pen apple",
+                                "pine applepen apple")))
+                .add(VerifiableTestcase.ofConsumer(t -> t.wordBreak("catsandog", Arrays.asList("cats", "dog", "sand", "and", "cat")),
+                        r -> Assertions.assertThat(r).isEmpty()))
+                .add(VerifiableTestcase.ofConsumer(t -> t.wordBreak("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                        Arrays.asList("a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa")),
+                        r -> Assertions.assertThat(r).isEmpty()))
+                .build();
+    }
+
 
     class Solution implements WordBreakIi {
 
@@ -117,4 +141,7 @@ public interface WordBreakIi {
             return c >= 'a' ? c - 'a' + 26 : c - 'A';
         }
     }
+}
+
+class WordBreakIiTest extends AbstractTest<WordBreakIi> {
 }

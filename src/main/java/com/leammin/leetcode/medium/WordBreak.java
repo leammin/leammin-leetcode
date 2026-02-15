@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 139. 单词拆分
  *
@@ -42,6 +46,16 @@ import java.util.Set;
  */
 public interface WordBreak {
     boolean wordBreak(String s, List<String> wordDict);
+
+    static Testsuite<WordBreak> testsuite() {
+        return Testsuite.<WordBreak>builder()
+                .add(ExpectedTestcase.of(t -> t.wordBreak("leetcode", List.of("leet", "code")), true))
+                .add(ExpectedTestcase.of(t -> t.wordBreak("applepenapple", List.of("apple", "pen")), true))
+                .add(ExpectedTestcase.of(t -> t.wordBreak("catsandog", List.of("cats", "dog", "sand", "and", "cat")), false))
+                .add(ExpectedTestcase.of(t -> t.wordBreak("bb", List.of("a","b","bbb","bbbb")), true))
+                .build();
+    }
+
 
     class Solution implements WordBreak {
 
@@ -114,4 +128,7 @@ public interface WordBreak {
             return words.contains(s.substring(from, to));
         }
     }
+}
+
+class WordBreakTest extends AbstractTest<WordBreak> {
 }

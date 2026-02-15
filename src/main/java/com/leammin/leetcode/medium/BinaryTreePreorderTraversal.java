@@ -7,6 +7,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 144. 二叉树的前序遍历
  * 
@@ -32,6 +36,14 @@ import java.util.List;
  */
 public interface BinaryTreePreorderTraversal {
     List<Integer> preorderTraversal(TreeNode root);
+
+    static Testsuite<BinaryTreePreorderTraversal> testsuite() {
+        return Testsuite.<BinaryTreePreorderTraversal>builder()
+                .add(ExpectedTestcase.of(t -> t.preorderTraversal(TreeNode.of(1, null, 2, 3)), List.of(1, 2, 3)))
+                .add(ExpectedTestcase.of(t -> t.preorderTraversal(TreeNode.of(1,4,3,2)), List.of(1,4,2,3)))
+                .build();
+    }
+
 
     class Solution implements BinaryTreePreorderTraversal {
         @Override
@@ -69,4 +81,7 @@ public interface BinaryTreePreorderTraversal {
             return result;
         }
     }
+}
+
+class BinaryTreePreorderTraversalTest extends AbstractTest<BinaryTreePreorderTraversal> {
 }

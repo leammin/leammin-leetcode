@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 61. 旋转链表
@@ -33,6 +36,15 @@ import com.leammin.leetcode.struct.ListNode;
 public interface RotateList {
     ListNode rotateRight(ListNode head, int k);
 
+    static Testsuite<RotateList> testsuite() {
+        return Testsuite.<RotateList>builder()
+                .add(ExpectedTestcase.of(t -> t.rotateRight(ListNode.of(1, 2, 3, 4, 5), 2), ListNode.of(4, 5, 1, 2, 3)))
+                .add(ExpectedTestcase.of(t -> t.rotateRight(ListNode.of(1, 2, 3, 4, 5), 5), ListNode.of(1, 2, 3, 4, 5)))
+                .add(ExpectedTestcase.of(t -> t.rotateRight(ListNode.of(0, 1, 2), 4), ListNode.of(2, 0, 1)))
+                .build();
+    }
+
+
     class Solution implements RotateList {
 
         @Override
@@ -64,4 +76,7 @@ public interface RotateList {
 
 
     }
+}
+
+class RotateListTest extends AbstractTest<RotateList> {
 }

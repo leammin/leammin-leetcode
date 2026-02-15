@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1111. 有效括号的嵌套深度
  * 
@@ -58,6 +62,14 @@ package com.leammin.leetcode.medium;
 public interface MaximumNestingDepthOfTwoValidParenthesesStrings {
     int[] maxDepthAfterSplit(String seq);
 
+    static Testsuite<MaximumNestingDepthOfTwoValidParenthesesStrings> testsuite() {
+        return Testsuite.<MaximumNestingDepthOfTwoValidParenthesesStrings>builder()
+                .add(ExpectedTestcase.of(t->t.maxDepthAfterSplit("(()())"), new int[]{0,1,1,1,1,0}))
+                .add(ExpectedTestcase.of(t->t.maxDepthAfterSplit("()(())()"), new int[]{0,0,0,1,1,0,0,0}))
+                .build();
+    }
+
+
     class Solution implements MaximumNestingDepthOfTwoValidParenthesesStrings {
 
         @Override
@@ -78,4 +90,7 @@ public interface MaximumNestingDepthOfTwoValidParenthesesStrings {
             return left;
         }
     }
+}
+
+class MaximumNestingDepthOfTwoValidParenthesesStringsTest extends AbstractTest<MaximumNestingDepthOfTwoValidParenthesesStrings> {
 }

@@ -1,5 +1,6 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.*;
@@ -183,4 +184,7 @@ public interface BraceExpansionIi {
             return res;
         }
     }
+}
+
+class BraceExpansionIiTest extends AbstractTest<BraceExpansionIi> {
 }

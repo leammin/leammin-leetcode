@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1160. 拼写单词
  * 
@@ -46,6 +50,14 @@ package com.leammin.leetcode.easy;
 public interface FindWordsThatCanBeFormedByCharacters {
     int countCharacters(String[] words, String chars);
 
+    static Testsuite<FindWordsThatCanBeFormedByCharacters> testsuite() {
+        return Testsuite.<FindWordsThatCanBeFormedByCharacters>builder()
+                .add(ExpectedTestcase.of(t -> t.countCharacters(new String[]{"cat", "bt", "hat", "tree"}, "atach"), 6))
+                .add(ExpectedTestcase.of(t -> t.countCharacters(new String[]{"hello", "world", "leetcode"}, "welldonehoneyr"), 10))
+                .build();
+    }
+
+
     class Solution implements FindWordsThatCanBeFormedByCharacters {
 
         @Override
@@ -74,4 +86,7 @@ public interface FindWordsThatCanBeFormedByCharacters {
             return result;
         }
     }
+}
+
+class FindWordsThatCanBeFormedByCharactersTest extends AbstractTest<FindWordsThatCanBeFormedByCharacters> {
 }

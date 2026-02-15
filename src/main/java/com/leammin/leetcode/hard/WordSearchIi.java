@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+
 /**
  * 212. 单词搜索 II
  * 
@@ -41,6 +45,16 @@ import java.util.Map;
  */
 public interface WordSearchIi {
     List<String> findWords(char[][] board, String[] words);
+
+    static Testsuite<WordSearchIi> testsuite() {
+        return Testsuite.<WordSearchIi>builder()
+            .addConsumer(t -> t.findWords(
+                new char[][] {{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}},
+                new String[] {"oath", "pea", "eat", "rain"}),
+                out -> Assertions.assertThat(out).containsExactlyInAnyOrder("oath", "eat"))
+            .build();
+    }
+
 
     class Solution implements WordSearchIi {
         class DictTreeNode {
@@ -105,4 +119,7 @@ public interface WordSearchIi {
             board[i][j] = c;
         }
     }
+}
+
+class WordSearchIiTest extends AbstractTest<WordSearchIi> {
 }

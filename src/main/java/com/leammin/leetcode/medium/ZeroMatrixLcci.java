@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 01.08. 零矩阵
  *
@@ -44,6 +48,38 @@ package com.leammin.leetcode.medium;
  */
 public interface ZeroMatrixLcci {
     void setZeroes(int[][] matrix);
+
+    static Testsuite<ZeroMatrixLcci> testsuite() {
+        return Testsuite.<ZeroMatrixLcci>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    int[][] matrix = new int[][]{
+                            {1, 1, 1},
+                            {1, 0, 1},
+                            {1, 1, 1}
+                    };
+                    t.setZeroes(matrix);
+                    return matrix;
+                }, new int[][]{
+                        {1, 0, 1},
+                        {0, 0, 0},
+                        {1, 0, 1}
+                }))
+                .add(ExpectedTestcase.of(t -> {
+                    int[][] matrix = new int[][]{
+                            {0, 1, 2, 0},
+                            {3, 4, 5, 2},
+                            {1, 3, 1, 5}
+                    };
+                    t.setZeroes(matrix);
+                    return matrix;
+                }, new int[][]{
+                        {0, 0, 0, 0},
+                        {0, 4, 5, 0},
+                        {0, 3, 1, 0}
+                }))
+                .build();
+    }
+
 
     class Solution implements ZeroMatrixLcci {
 
@@ -97,4 +133,7 @@ public interface ZeroMatrixLcci {
             }
         }
     }
+}
+
+class ZeroMatrixLcciTest extends AbstractTest<ZeroMatrixLcci> {
 }

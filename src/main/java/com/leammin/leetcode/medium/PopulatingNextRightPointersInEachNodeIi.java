@@ -2,6 +2,9 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 117. 填充每个节点的下一个右侧节点指针 II
  * 
@@ -57,6 +60,12 @@ import java.util.*;
  */
 public interface PopulatingNextRightPointersInEachNodeIi {
     Node connect(Node root);
+
+    static Testsuite<PopulatingNextRightPointersInEachNodeIi> testsuite() {
+        return Testsuite.<PopulatingNextRightPointersInEachNodeIi>builder()
+                .build();
+    }
+
 
     class Solution implements PopulatingNextRightPointersInEachNodeIi {
 
@@ -224,4 +233,7 @@ public interface PopulatingNextRightPointersInEachNodeIi {
             next = _next;
         }
     }
+}
+
+class PopulatingNextRightPointersInEachNodeIiTest extends AbstractTest<PopulatingNextRightPointersInEachNodeIi> {
 }

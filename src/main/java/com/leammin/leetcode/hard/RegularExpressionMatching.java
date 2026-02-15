@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 10. 正则表达式匹配
  *
@@ -66,6 +70,22 @@ package com.leammin.leetcode.hard;
  */
 public interface RegularExpressionMatching {
     boolean isMatch(String s, String p);
+
+    static Testsuite<RegularExpressionMatching> testsuite() {
+        return Testsuite.<RegularExpressionMatching>builder()
+                .add(ExpectedTestcase.of(t -> t.isMatch("aa", "a"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aa", "a*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("ab", ".*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aab", "c*a*b"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("mississippi", "mis*is*p*."), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("a", ".*..a*"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("bba", "bba*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("", "c*c*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("abbabaaaaaaacaa", "a*.*b.a.*c*b*a*c*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("a", ".*c*"), true))
+                .build();
+    }
+
 
     class Solution implements RegularExpressionMatching {
 
@@ -141,4 +161,7 @@ public interface RegularExpressionMatching {
             return pc == '.' || pc == sc;
         }
     }
+}
+
+class RegularExpressionMatchingTest extends AbstractTest<RegularExpressionMatching> {
 }

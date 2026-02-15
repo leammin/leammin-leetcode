@@ -4,6 +4,11 @@ import com.leammin.leetcode.struct.TreeNode;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 652. 寻找重复的子树
  *
@@ -41,6 +46,16 @@ import java.util.*;
  */
 public interface FindDuplicateSubtrees {
     List<TreeNode> findDuplicateSubtrees(TreeNode root);
+
+    static Testsuite<FindDuplicateSubtrees> testsuite() {
+        return Testsuite.<FindDuplicateSubtrees>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.findDuplicateSubtrees(TreeNode.of(1, 2, 3, 4, null, 2, 4, null, null, 4)),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder(TreeNode.of(2, 4), TreeNode.of(4))))
+                .add(VerifiableTestcase.ofConsumer(t -> t.findDuplicateSubtrees(TreeNode.of(0, 0, 0, 0, null, null, 0, null, null, null, 0)),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder(TreeNode.of(0))))
+                .build();
+    }
+
 
     class Solution implements FindDuplicateSubtrees {
 
@@ -99,4 +114,7 @@ public interface FindDuplicateSubtrees {
             return key;
         }
     }
+}
+
+class FindDuplicateSubtreesTest extends AbstractTest<FindDuplicateSubtrees> {
 }

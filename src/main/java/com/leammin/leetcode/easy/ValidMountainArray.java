@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 941. 有效的山脉数组
  * 
@@ -56,6 +60,15 @@ package com.leammin.leetcode.easy;
 public interface ValidMountainArray {
     boolean validMountainArray(int[] A);
 
+    static Testsuite<ValidMountainArray> testsuite() {
+        return Testsuite.<ValidMountainArray>builder()
+                .add(ExpectedTestcase.of(t -> t.validMountainArray(new int[]{2, 1}), false))
+                .add(ExpectedTestcase.of(t -> t.validMountainArray(new int[]{3, 5, 5}), false))
+                .add(ExpectedTestcase.of(t -> t.validMountainArray(new int[]{0, 3, 2, 1}), true))
+                .build();
+    }
+
+
     class Solution implements ValidMountainArray {
 
         @Override
@@ -81,4 +94,7 @@ public interface ValidMountainArray {
             return down;
         }
     }
+}
+
+class ValidMountainArrayTest extends AbstractTest<ValidMountainArray> {
 }

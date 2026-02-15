@@ -1,6 +1,10 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.ListNodeUtils;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 142. 环形链表 II
@@ -52,6 +56,19 @@ import com.leammin.leetcode.struct.ListNode;
 public interface LinkedListCycleIi {
     ListNode detectCycle(ListNode head);
 
+    static Testsuite<LinkedListCycleIi> testsuite() {
+        return Testsuite.<LinkedListCycleIi>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    ListNode list = ListNode.of(2, 0, -4);
+                    ListNodeUtils.tail(list).next = list;
+                    ListNode head = ListNode.of(3);
+                    head.next = list;
+                    return t.detectCycle(head).val;
+                }, 2))
+                .build();
+    }
+
+
     class Solution implements LinkedListCycleIi {
 
         @Override
@@ -79,4 +96,7 @@ public interface LinkedListCycleIi {
             return slow;
         }
     }
+}
+
+class LinkedListCycleIiTest extends AbstractTest<LinkedListCycleIi> {
 }

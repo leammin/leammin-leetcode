@@ -1,5 +1,6 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -51,4 +52,7 @@ public interface KThSmallestInLexicographicalOrder {
             return 0;
         }
     }
+}
+
+class KThSmallestInLexicographicalOrderTest extends AbstractTest<KThSmallestInLexicographicalOrder> {
 }

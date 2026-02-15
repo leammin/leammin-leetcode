@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2293. 极大极小游戏
  *
@@ -57,6 +60,14 @@ package com.leammin.leetcode.easy;
 public interface MinMaxGame {
     int minMaxGame(int[] nums);
 
+    static Testsuite<MinMaxGame> testsuite() {
+        return Testsuite.<MinMaxGame>builder()
+                .addExpected(t -> t.minMaxGame(new int[]{1,3,5,2,4,8,2,2}), 1)
+                .addExpected(t -> t.minMaxGame(new int[]{3}), 3)
+                .build();
+    }
+
+
     class Solution implements MinMaxGame {
 
         @Override
@@ -78,4 +89,7 @@ public interface MinMaxGame {
             return Math.max(min(nums, l, (r + l) / 2), max(nums, (r + l) / 2, r));
         }
     }
+}
+
+class MinMaxGameTest extends AbstractTest<MinMaxGame> {
 }

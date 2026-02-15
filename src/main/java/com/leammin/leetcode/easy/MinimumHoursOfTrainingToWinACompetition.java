@@ -1,5 +1,6 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -86,4 +87,7 @@ public interface MinimumHoursOfTrainingToWinACompetition {
             return res;
         }
     }
+}
+
+class MinimumHoursOfTrainingToWinACompetitionTest extends AbstractTest<MinimumHoursOfTrainingToWinACompetition> {
 }

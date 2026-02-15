@@ -4,6 +4,12 @@ import com.leammin.leetcode.struct.TreeNode;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 894. 所有可能的满二叉树
  * 
@@ -40,6 +46,24 @@ import java.util.*;
 public interface AllPossibleFullBinaryTrees {
     List<TreeNode> allPossibleFBT(int n);
 
+    static Testsuite<AllPossibleFullBinaryTrees> testsuite() {
+        return Testsuite.<AllPossibleFullBinaryTrees>builder()
+                .add(VerifiableTestcase.of(
+                        s -> s.allPossibleFBT(7), output -> {
+                            Set<TreeNode> expected = Set.of(
+                                    TreeNode.of(0, 0, 0, null, null, 0, 0, null, null, 0, 0),
+                                    TreeNode.of(0, 0, 0, null, null, 0, 0, 0, 0),
+                                    TreeNode.of(0, 0, 0, 0, 0, 0, 0),
+                                    TreeNode.of(0, 0, 0, 0, 0, null, null, null, null, 0, 0),
+                                    TreeNode.of(0, 0, 0, 0, 0, null, null, 0, 0)
+                            );
+                            return expected.size() == output.size() && expected.equals(new HashSet<>(output));
+                        }
+                ))
+                .build();
+    }
+
+
     class Solution implements AllPossibleFullBinaryTrees {
         private Map<Integer, List<TreeNode>> map = new HashMap<>();
         private static final List<TreeNode> ONE = Collections.singletonList(new TreeNode(0));
@@ -72,4 +96,7 @@ public interface AllPossibleFullBinaryTrees {
             return result;
         }
     }
+}
+
+class AllPossibleFullBinaryTreesTest extends AbstractTest<AllPossibleFullBinaryTrees> {
 }

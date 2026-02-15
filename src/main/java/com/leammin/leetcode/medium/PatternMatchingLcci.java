@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 16.18. 模式匹配
  *
@@ -33,6 +37,17 @@ package com.leammin.leetcode.medium;
  */
 public interface PatternMatchingLcci {
     boolean patternMatching(String pattern, String value);
+
+    static Testsuite<PatternMatchingLcci> testsuite() {
+        return Testsuite.<PatternMatchingLcci>builder()
+                .add(ExpectedTestcase.of(t -> t.patternMatching("abba", "dogcatcatdog"), true))
+                .add(ExpectedTestcase.of(t -> t.patternMatching("abba", "dogcatcatfish"), false))
+                .add(ExpectedTestcase.of(t -> t.patternMatching("aaaa", "dogcatcatdog"), false))
+                .add(ExpectedTestcase.of(t -> t.patternMatching("abba", "dogdogdogdog"), true))
+                .add(ExpectedTestcase.of(t -> t.patternMatching("aaaa", "dogdogdogdog"), true))
+                .build();
+    }
+
 
     class Solution implements PatternMatchingLcci {
 
@@ -108,4 +123,7 @@ public interface PatternMatchingLcci {
             return true;
         }
     }
+}
+
+class PatternMatchingLcciTest extends AbstractTest<PatternMatchingLcci> {
 }

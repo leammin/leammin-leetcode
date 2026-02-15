@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 16.11. 跳水板
  * 
@@ -25,6 +29,15 @@ package com.leammin.leetcode.easy;
 public interface DivingBoardLcci {
     int[] divingBoard(int shorter, int longer, int k);
 
+    static Testsuite<DivingBoardLcci> testsuite() {
+        return Testsuite.<DivingBoardLcci>builder()
+                .add(ExpectedTestcase.of(t -> t.divingBoard(1, 2, 3), new int[]{3, 4, 5, 6}))
+                .add(ExpectedTestcase.of(t -> t.divingBoard(1, 1, 0), new int[]{}))
+                .add(ExpectedTestcase.of(t -> t.divingBoard(1, 1, 100000), new int[]{100000}))
+                .build();
+    }
+
+
     class Solution implements DivingBoardLcci {
 
         @Override
@@ -42,4 +55,7 @@ public interface DivingBoardLcci {
             return res;
         }
     }
+}
+
+class DivingBoardLcciTest extends AbstractTest<DivingBoardLcci> {
 }

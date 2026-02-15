@@ -2,6 +2,9 @@ package com.leammin.leetcode.medium;
 
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 648. 单词替换
  * 
@@ -35,6 +38,15 @@ import java.util.List;
  */
 public interface ReplaceWords {
     String replaceWords(List<String> dict, String sentence);
+
+    static Testsuite<ReplaceWords> testsuite() {
+        return Testsuite.<ReplaceWords>builder()
+                .addExpected(t -> t.replaceWords(List.of("cat", "bat", "rat"),
+                        "the cattle was rattled by the battery"),
+                        "the cat was rat by the bat")
+                .build();
+    }
+
 
     class Solution implements ReplaceWords {
         static class TrieNode {
@@ -73,4 +85,7 @@ public interface ReplaceWords {
             return String.join(" ", words);
         }
     }
+}
+
+class ReplaceWordsTest extends AbstractTest<ReplaceWords> {
 }

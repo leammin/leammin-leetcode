@@ -3,6 +3,9 @@ package com.leammin.leetcode.medium;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1238. 循环码排列
  *
@@ -46,6 +49,14 @@ import java.util.List;
 public interface CircularPermutationInBinaryRepresentation {
     List<Integer> circularPermutation(int n, int start);
 
+    static Testsuite<CircularPermutationInBinaryRepresentation> testsuite() {
+        return Testsuite.<CircularPermutationInBinaryRepresentation>builder()
+//                .addExpected(t -> t.circularPermutation(2, 3), List.of(3,2,0,1))
+                .addExpected(t -> t.circularPermutation(3, 2), List.of(2, 3, 1, 0, 4, 5, 7, 6))
+                .build();
+    }
+
+
     class Solution implements CircularPermutationInBinaryRepresentation {
 //        0000 0
 //        0001 1
@@ -83,4 +94,7 @@ public interface CircularPermutationInBinaryRepresentation {
             return res;
         }
     }
+}
+
+class CircularPermutationInBinaryRepresentationTest extends AbstractTest<CircularPermutationInBinaryRepresentation> {
 }

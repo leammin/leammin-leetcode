@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题03. 数组中重复的数字
  * 
@@ -27,6 +30,13 @@ package com.leammin.leetcode.easy;
  */
 public interface ShuZuZhongZhongFuDeShuZiLcof {
     int findRepeatNumber(int[] nums);
+
+    static Testsuite<ShuZuZhongZhongFuDeShuZiLcof> testsuite() {
+        return Testsuite.<ShuZuZhongZhongFuDeShuZiLcof>builder()
+                .addExpected(t -> t.findRepeatNumber(new int[]{2, 3, 1, 0, 2, 5, 3}), 2)
+                .build();
+    }
+
     
     class Solution implements ShuZuZhongZhongFuDeShuZiLcof {
 
@@ -46,4 +56,7 @@ public interface ShuZuZhongZhongFuDeShuZiLcof {
         }
         
     }
+}
+
+class ShuZuZhongZhongFuDeShuZiLcofTest extends AbstractTest<ShuZuZhongZhongFuDeShuZiLcof> {
 }

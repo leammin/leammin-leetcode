@@ -1,6 +1,9 @@
 package com.leammin.leetcode.hard;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 124. 二叉树中的最大路径和
@@ -39,6 +42,16 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface BinaryTreeMaximumPathSum {
     int maxPathSum(TreeNode root);
 
+    static Testsuite<BinaryTreeMaximumPathSum> testsuite() {
+        return Testsuite.<BinaryTreeMaximumPathSum>builder()
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(1, 2, 3)), 6))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(-10, 9, 20, null, null, 15, 7)), 42))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(-3)), -3))
+                .add(ExpectedTestcase.of(t -> t.maxPathSum(TreeNode.of(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1)), 48))
+                .build();
+    }
+
+
     class Solution implements BinaryTreeMaximumPathSum {
         int max = Integer.MIN_VALUE;
 
@@ -64,4 +77,7 @@ public interface BinaryTreeMaximumPathSum {
             return Math.max(Math.max(a, b), c);
         }
     }
+}
+
+class BinaryTreeMaximumPathSumTest extends AbstractTest<BinaryTreeMaximumPathSum> {
 }

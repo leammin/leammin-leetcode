@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 542. 01 矩阵
  * 
@@ -56,6 +60,37 @@ package com.leammin.leetcode.medium;
 public interface ZeroOneMatrix {
     int[][] updateMatrix(int[][] matrix);
 
+    static Testsuite<ZeroOneMatrix> testsuite() {
+        return Testsuite.<ZeroOneMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.updateMatrix(new int[][]{
+                        {0, 0, 0},
+                        {0, 1, 0},
+                        {0, 0, 0}
+                }), new int[][]{
+                        {0, 0, 0},
+                        {0, 1, 0},
+                        {0, 0, 0}
+                }))
+                .add(ExpectedTestcase.of(t -> t.updateMatrix(new int[][]{
+                        {0, 0, 0},
+                        {0, 1, 0},
+                        {1, 1, 1}
+                }), new int[][]{
+                        {0, 0, 0},
+                        {0, 1, 0},
+                        {1, 2, 1}
+                }))
+                .add(ExpectedTestcase.of(t -> t.updateMatrix(new int[][]{
+                        {0},
+                        {1}
+                }), new int[][]{
+                        {0},
+                        {1}
+                }))
+                .build();
+    }
+
+
     class Solution implements ZeroOneMatrix {
 
         @Override
@@ -91,4 +126,7 @@ public interface ZeroOneMatrix {
             return matrix;
         }
     }
+}
+
+class ZeroOneMatrixTest extends AbstractTest<ZeroOneMatrix> {
 }

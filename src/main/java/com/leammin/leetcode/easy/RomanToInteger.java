@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.HashMap;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 13. 罗马数字转整数
  *
@@ -63,6 +67,16 @@ import java.util.HashMap;
 public interface RomanToInteger {
     int romanToInt(String s);
 
+    static Testsuite<RomanToInteger> testsuite() {
+        return Testsuite.<RomanToInteger>builder()
+                .add(ExpectedTestcase.of(t -> t.romanToInt("III"), 3))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("IV"), 4))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("LVIII"), 58))
+                .add(ExpectedTestcase.of(t -> t.romanToInt("MCMXCIV"), 1994))
+                .build();
+    }
+
+
     class Solution implements RomanToInteger {
         @Override
         public int romanToInt(String s) {
@@ -116,4 +130,7 @@ public interface RomanToInteger {
         }
     }
 
+}
+
+class RomanToIntegerTest extends AbstractTest<RomanToInteger> {
 }

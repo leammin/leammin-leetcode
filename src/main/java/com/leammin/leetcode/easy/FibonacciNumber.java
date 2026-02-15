@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 509. 斐波那契数
  * 
@@ -49,6 +52,15 @@ package com.leammin.leetcode.easy;
 public interface FibonacciNumber {
     int fib(int N);
 
+    static Testsuite<FibonacciNumber> testsuite() {
+        return Testsuite.<FibonacciNumber>builder()
+                .addExpected(t -> t.fib(2), 1)
+                .addExpected(t -> t.fib(3), 2)
+                .addExpected(t -> t.fib(4), 3)
+                .build();
+    }
+
+
     class Solution implements FibonacciNumber {
 
         @Override
@@ -62,4 +74,7 @@ public interface FibonacciNumber {
             return a;
         }
     }
+}
+
+class FibonacciNumberTest extends AbstractTest<FibonacciNumber> {
 }

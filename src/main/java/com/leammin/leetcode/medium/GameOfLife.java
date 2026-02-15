@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 289. 生命游戏
  *
@@ -46,6 +50,27 @@ package com.leammin.leetcode.medium;
 public interface GameOfLife {
     void gameOfLife(int[][] board);
 
+    static Testsuite<GameOfLife> testsuite() {
+        return Testsuite.<GameOfLife>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    int[][] board = {
+                            {0, 1, 0},
+                            {0, 0, 1},
+                            {1, 1, 1},
+                            {0, 0, 0}
+                    };
+                    t.gameOfLife(board);
+                    return board;
+                }, new int[][]{
+                        {0, 0, 0},
+                        {1, 0, 1},
+                        {0, 1, 1},
+                        {0, 1, 0}
+                }))
+                .build();
+    }
+
+
     class Solution implements GameOfLife {
 
         @Override
@@ -82,4 +107,7 @@ public interface GameOfLife {
             }
         }
     }
+}
+
+class GameOfLifeTest extends AbstractTest<GameOfLife> {
 }

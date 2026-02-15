@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.BitSet;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 287. 寻找重复数
  *
@@ -33,6 +37,14 @@ import java.util.BitSet;
  */
 public interface FindTheDuplicateNumber {
     int findDuplicate(int[] nums);
+
+    static Testsuite<FindTheDuplicateNumber> testsuite() {
+        return Testsuite.<FindTheDuplicateNumber>builder()
+                .add(ExpectedTestcase.of(t -> t.findDuplicate(new int[]{1, 3, 4, 2, 2}), 2))
+                .add(ExpectedTestcase.of(t -> t.findDuplicate(new int[]{3, 1, 3, 4, 2}), 3))
+                .build();
+    }
+
 
     class Solution implements FindTheDuplicateNumber {
 
@@ -66,4 +78,7 @@ public interface FindTheDuplicateNumber {
             return fast;
         }
     }
+}
+
+class FindTheDuplicateNumberTest extends AbstractTest<FindTheDuplicateNumber> {
 }

@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2341. 数组能形成多少数对
  * 
@@ -56,6 +59,15 @@ package com.leammin.leetcode.easy;
 public interface MaximumNumberOfPairsInArray {
     int[] numberOfPairs(int[] nums);
 
+    static Testsuite<MaximumNumberOfPairsInArray> testsuite() {
+        return Testsuite.<MaximumNumberOfPairsInArray>builder()
+                .addExpected(t -> t.numberOfPairs(new int[]{1,3,2,1,3,2,2}), new int[]{3, 1})
+                .addExpected(t -> t.numberOfPairs(new int[]{1,1}), new int[]{1,0})
+                .addExpected(t -> t.numberOfPairs(new int[]{0}), new int[]{0,1})
+                .build();
+    }
+
+
     class Solution implements MaximumNumberOfPairsInArray {
 
         @Override
@@ -91,4 +103,7 @@ public interface MaximumNumberOfPairsInArray {
             return new int[]{a, b};
         }
     }
+}
+
+class MaximumNumberOfPairsInArrayTest extends AbstractTest<MaximumNumberOfPairsInArray> {
 }

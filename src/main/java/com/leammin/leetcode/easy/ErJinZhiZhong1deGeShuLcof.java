@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题15. 二进制中1的个数
  * 
@@ -36,6 +39,15 @@ package com.leammin.leetcode.easy;
 public interface ErJinZhiZhong1deGeShuLcof {
     public int hammingWeight(int n);
 
+    static Testsuite<ErJinZhiZhong1deGeShuLcof> testsuite() {
+        return Testsuite.<ErJinZhiZhong1deGeShuLcof>builder()
+                .addExpected(t -> t.hammingWeight(0b00000000000000000000000010000000), 1)
+                .addExpected(t -> t.hammingWeight(0b00000000000000000000000000001011), 3)
+                .addExpected(t -> t.hammingWeight(0b11111111111111111111111111111101), 31)
+                .build();
+    }
+
+
     class Solution implements ErJinZhiZhong1deGeShuLcof {
 
         @Override
@@ -50,4 +62,7 @@ public interface ErJinZhiZhong1deGeShuLcof {
             return r;
         }
     }
+}
+
+class ErJinZhiZhong1deGeShuLcofTest extends AbstractTest<ErJinZhiZhong1deGeShuLcof> {
 }

@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5728. 最少侧跳次数
  * 
@@ -66,6 +69,15 @@ package com.leammin.leetcode.medium;
 public interface MinimumSidewayJumps {
     int minSideJumps(int[] obstacles);
 
+    static Testsuite<MinimumSidewayJumps> testsuite() {
+        return Testsuite.<MinimumSidewayJumps>builder()
+                .addExpected(t -> t.minSideJumps(new int[]{0,1,2,3,0}), 2)
+                .addExpected(t -> t.minSideJumps(new int[]{0,1,1,3,3,0}), 0)
+                .addExpected(t -> t.minSideJumps(new int[]{0,2,1,0,3,0}), 2)
+                .build();
+    }
+
+
     class Solution implements MinimumSidewayJumps {
 
         @Override
@@ -89,4 +101,7 @@ public interface MinimumSidewayJumps {
             return dp[1];
         }
     }
+}
+
+class MinimumSidewayJumpsTest extends AbstractTest<MinimumSidewayJumps> {
 }

@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 695. 岛屿的最大面积
  *
@@ -40,6 +44,41 @@ import java.util.Queue;
  */
 public interface MaxAreaOfIsland {
     int maxAreaOfIsland(int[][] grid);
+
+    static Testsuite<MaxAreaOfIsland> testsuite() {
+        return Testsuite.<MaxAreaOfIsland>builder()
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
+                        {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                        {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+                }), 6))
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
+                        {0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                        {0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0},
+                        {0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0}
+                }), 6))
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
+                        {0,0,0,0,0,0,0,0},
+                }), 0))
+                .add(ExpectedTestcase.of(t -> t.maxAreaOfIsland(new int[][]{
+                        {1, 1, 0, 0, 0},
+                        {1, 1, 0, 0, 0},
+                        {0, 0, 0, 1, 1},
+                        {0, 0, 0, 1, 1}
+                }), 4))
+                .build();
+    }
+
 
     class Solution implements MaxAreaOfIsland {
 
@@ -80,4 +119,7 @@ public interface MaxAreaOfIsland {
             return ans;
         }
     }
+}
+
+class MaxAreaOfIslandTest extends AbstractTest<MaxAreaOfIsland> {
 }

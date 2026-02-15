@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 32. 最长有效括号
  * 
@@ -25,6 +29,18 @@ package com.leammin.leetcode.hard;
  */
 public interface LongestValidParentheses {
     int longestValidParentheses(String s);
+
+    static Testsuite<LongestValidParentheses> testsuite() {
+        return Testsuite.<LongestValidParentheses>builder()
+                .add(ExpectedTestcase.of(t -> t.longestValidParentheses("(()"), 2))
+                .add(ExpectedTestcase.of(t -> t.longestValidParentheses(")()())"), 4))
+                .add(ExpectedTestcase.of(t -> t.longestValidParentheses("(()())"), 6))
+                .add(ExpectedTestcase.of(t -> t.longestValidParentheses("(()()"), 4))
+                .add(ExpectedTestcase.of(t -> t.longestValidParentheses("()())"), 4))
+                .add(ExpectedTestcase.of(t -> t.longestValidParentheses(""), 0))
+                .build();
+    }
+
 
     class Solution implements LongestValidParentheses {
 
@@ -87,4 +103,7 @@ public interface LongestValidParentheses {
             return to - from;
         }
     }
+}
+
+class LongestValidParenthesesTest extends AbstractTest<LongestValidParentheses> {
 }

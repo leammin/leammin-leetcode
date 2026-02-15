@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 167. 两数之和 II - 输入有序数组
  * 
@@ -27,6 +31,13 @@ package com.leammin.leetcode.easy;
 public interface TwoSumIiInputArrayIsSorted {
     int[] twoSum(int[] numbers, int target);
 
+    static Testsuite<TwoSumIiInputArrayIsSorted> testsuite() {
+        return Testsuite.<TwoSumIiInputArrayIsSorted>builder()
+                .add(ExpectedTestcase.of(t -> t.twoSum(new int[]{2, 7, 11, 15}, 9), new int[]{1, 2}))
+                .build();
+    }
+
+
     class Solution implements TwoSumIiInputArrayIsSorted {
 
         @Override
@@ -45,4 +56,7 @@ public interface TwoSumIiInputArrayIsSorted {
             return null;
         }
     }
+}
+
+class TwoSumIiInputArrayIsSortedTest extends AbstractTest<TwoSumIiInputArrayIsSorted> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5. 最长回文子串
  *
@@ -23,6 +27,14 @@ package com.leammin.leetcode.medium;
  */
 public interface LongestPalindromicSubstring {
     String longestPalindrome(String s);
+
+    static Testsuite<LongestPalindromicSubstring> testsuite() {
+        return Testsuite.<LongestPalindromicSubstring>builder()
+                .add(ExpectedTestcase.of(t -> t.longestPalindrome("babad").length(), 3))
+                .add(ExpectedTestcase.of(t -> t.longestPalindrome("cbbd").length(), 2))
+                .build();
+    }
+
 
     class Solution implements LongestPalindromicSubstring {
         // 0 unknown 1 true -1 false
@@ -114,4 +126,7 @@ public interface LongestPalindromicSubstring {
 //            return null;
 //        }
 //    }
+}
+
+class LongestPalindromicSubstringTest extends AbstractTest<LongestPalindromicSubstring> {
 }

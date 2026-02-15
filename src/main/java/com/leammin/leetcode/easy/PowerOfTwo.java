@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 231. 2的幂
  * 
@@ -29,6 +33,15 @@ package com.leammin.leetcode.easy;
 public interface PowerOfTwo {
     boolean isPowerOfTwo(int n);
 
+    static Testsuite<PowerOfTwo> testsuite() {
+        return Testsuite.<PowerOfTwo>builder()
+                .add(ExpectedTestcase.of(t -> t.isPowerOfTwo(1), true))
+                .add(ExpectedTestcase.of(t -> t.isPowerOfTwo(16), true))
+                .add(ExpectedTestcase.of(t -> t.isPowerOfTwo(218), false))
+                .build();
+    }
+
+
     class Solution implements PowerOfTwo {
 
         @Override
@@ -53,4 +66,7 @@ public interface PowerOfTwo {
             return n > 0 && (n & (n - 1)) == 0;
         }
     }
+}
+
+class PowerOfTwoTest extends AbstractTest<PowerOfTwo> {
 }

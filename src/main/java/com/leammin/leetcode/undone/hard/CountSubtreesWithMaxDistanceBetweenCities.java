@@ -2,6 +2,7 @@ package com.leammin.leetcode.undone.hard;
 
 import com.leammin.leetcode.util.Execute;
 import com.leammin.leetcode.util.convert.IntMatrixConverter;
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -103,3 +104,5 @@ public interface CountSubtreesWithMaxDistanceBetweenCities {
     }
 }
 
+class CountSubtreesWithMaxDistanceBetweenCitiesTest extends AbstractTest<CountSubtreesWithMaxDistanceBetweenCities> {
+}

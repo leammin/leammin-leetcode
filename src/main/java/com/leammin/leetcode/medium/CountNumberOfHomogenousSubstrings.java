@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1759. 统计同构子字符串的数目
  *
@@ -52,6 +55,15 @@ package com.leammin.leetcode.medium;
 public interface CountNumberOfHomogenousSubstrings {
     int countHomogenous(String s);
 
+    static Testsuite<CountNumberOfHomogenousSubstrings> testsuite() {
+        return Testsuite.<CountNumberOfHomogenousSubstrings>builder()
+                .addExpected(t -> t.countHomogenous("abbcccaa"), 13)
+                .addExpected(t -> t.countHomogenous("xy"), 2)
+                .addExpected(t -> t.countHomogenous("zzzzz"), 15)
+                .build();
+    }
+
+
     class Solution implements CountNumberOfHomogenousSubstrings {
         @Override
         public int countHomogenous(String s) {
@@ -76,4 +88,7 @@ public interface CountNumberOfHomogenousSubstrings {
             return (int) (r % 1000_000_007);
         }
     }
+}
+
+class CountNumberOfHomogenousSubstringsTest extends AbstractTest<CountNumberOfHomogenousSubstrings> {
 }

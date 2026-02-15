@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 283. 移动零
  *
@@ -23,6 +27,17 @@ package com.leammin.leetcode.easy;
  */
 public interface MoveZeroes {
     void moveZeroes(int[] nums);
+
+    static Testsuite<MoveZeroes> testsuite() {
+        return Testsuite.<MoveZeroes>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    int[] nums = {0, 1, 0, 3, 12};
+                    t.moveZeroes(nums);
+                    return nums;
+                }, new int[]{1, 3, 12, 0, 0}))
+                .build();
+    }
+
 
     class Solution implements MoveZeroes {
         @Override
@@ -93,4 +108,7 @@ public interface MoveZeroes {
             }
         }
     }
+}
+
+class MoveZeroesTest extends AbstractTest<MoveZeroes> {
 }

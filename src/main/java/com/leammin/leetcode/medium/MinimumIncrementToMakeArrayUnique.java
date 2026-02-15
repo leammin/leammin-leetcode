@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 945. 使数组唯一的最小增量
  * 
@@ -35,6 +39,14 @@ package com.leammin.leetcode.medium;
 public interface MinimumIncrementToMakeArrayUnique {
     int minIncrementForUnique(int[] A);
 
+    static Testsuite<MinimumIncrementToMakeArrayUnique> testsuite() {
+        return Testsuite.<MinimumIncrementToMakeArrayUnique>builder()
+                .add(ExpectedTestcase.of(t -> t.minIncrementForUnique(new int[]{1, 2, 2}), 1))
+                .add(ExpectedTestcase.of(t -> t.minIncrementForUnique(new int[]{3, 2, 1, 2, 1, 7}), 6))
+                .build();
+    }
+
+
     class Solution implements MinimumIncrementToMakeArrayUnique {
 
         @Override
@@ -54,4 +66,7 @@ public interface MinimumIncrementToMakeArrayUnique {
             return res;
         }
     }
+}
+
+class MinimumIncrementToMakeArrayUniqueTest extends AbstractTest<MinimumIncrementToMakeArrayUnique> {
 }

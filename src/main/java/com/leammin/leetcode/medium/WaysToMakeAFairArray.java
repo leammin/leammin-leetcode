@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1664. 生成平衡数组的方案数
  * 
@@ -63,6 +66,15 @@ package com.leammin.leetcode.medium;
  */
 public interface WaysToMakeAFairArray {
     int waysToMakeFair(int[] nums);
+
+    static Testsuite<WaysToMakeAFairArray> testsuite() {
+        return Testsuite.<WaysToMakeAFairArray>builder()
+                .addExpected(t -> t.waysToMakeFair(new int[]{2,1,6,4}), 1)
+                .addExpected(t -> t.waysToMakeFair(new int[]{1,1,1}), 3)
+                .addExpected(t -> t.waysToMakeFair(new int[]{1,2,3}), 0)
+                .build();
+    }
+
     class Solution implements WaysToMakeAFairArray {
 
         @Override
@@ -93,4 +105,7 @@ public interface WaysToMakeAFairArray {
             return r;
         }
     }
+}
+
+class WaysToMakeAFairArrayTest extends AbstractTest<WaysToMakeAFairArray> {
 }

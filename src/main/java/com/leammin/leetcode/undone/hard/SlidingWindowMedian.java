@@ -2,6 +2,10 @@ package com.leammin.leetcode.undone.hard;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 480. 滑动窗口中位数
  * 
@@ -45,6 +49,15 @@ public interface SlidingWindowMedian {
     /**
      * O(n*k) 有更优 O(n*logn)
      */
+
+    static Testsuite<SlidingWindowMedian> testsuite() {
+        return Testsuite.<SlidingWindowMedian>builder()
+                .add(ExpectedTestcase.of(t -> t.medianSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3), new double[]{1, -1, -1, 3, 5, 6}))
+                .add(ExpectedTestcase.of(t -> t.medianSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 1), new double[]{1, 3, -1, -3, 5, 3, 6, 7}))
+                .add(ExpectedTestcase.of(t -> t.medianSlidingWindow(new int[]{2147483647, 2147483647}, 2), new double[]{2147483647.0}))
+                .build();
+    }
+
     class Solution implements SlidingWindowMedian {
 
         @Override
@@ -88,4 +101,7 @@ public interface SlidingWindowMedian {
             }
         }
     }
+}
+
+class SlidingWindowMedianTest extends AbstractTest<SlidingWindowMedian> {
 }

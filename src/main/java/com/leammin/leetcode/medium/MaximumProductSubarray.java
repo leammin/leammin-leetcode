@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 152. 乘积最大子序列
  *
@@ -23,6 +27,16 @@ package com.leammin.leetcode.medium;
  */
 public interface MaximumProductSubarray {
     int maxProduct(int[] nums);
+
+    static Testsuite<MaximumProductSubarray> testsuite() {
+        return Testsuite.<MaximumProductSubarray>builder()
+                .add(ExpectedTestcase.of(t -> t.maxProduct(new int[]{2, 3, -2, 4}), 6))
+                .add(ExpectedTestcase.of(t -> t.maxProduct(new int[]{-2, 0, -1}), 0))
+                .add(ExpectedTestcase.of(t -> t.maxProduct(new int[]{2, 2, -2, 2, -2, -2}), 32))
+                .add(ExpectedTestcase.of(t -> t.maxProduct(new int[]{2, -5, -2, -4, 3}), 24))
+                .build();
+    }
+
 
     class Solution implements MaximumProductSubarray {
 
@@ -67,4 +81,7 @@ public interface MaximumProductSubarray {
             return p;
         }
     }
+}
+
+class MaximumProductSubarrayTest extends AbstractTest<MaximumProductSubarray> {
 }

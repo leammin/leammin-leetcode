@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 221. 最大正方形
  * 
@@ -22,6 +26,18 @@ package com.leammin.leetcode.medium;
  */
 public interface MaximalSquare {
     int maximalSquare(char[][] matrix);
+
+    static Testsuite<MaximalSquare> testsuite() {
+        return Testsuite.<MaximalSquare>builder()
+                .add(ExpectedTestcase.of(t -> t.maximalSquare(new char[][]{
+                        {'1', '0', '1', '0', '0'},
+                        {'1', '0', '1', '1', '1'},
+                        {'1', '1', '1', '1', '1'},
+                        {'1', '0', '0', '1', '0'}
+                }), 4))
+                .build();
+    }
+
 
     class Solution implements MaximalSquare {
 
@@ -57,4 +73,7 @@ public interface MaximalSquare {
             return true;
         }
     }
+}
+
+class MaximalSquareTest extends AbstractTest<MaximalSquare> {
 }

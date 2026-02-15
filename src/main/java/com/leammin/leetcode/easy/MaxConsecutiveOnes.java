@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 485. 最大连续1的个数
  * 
@@ -27,6 +31,13 @@ package com.leammin.leetcode.easy;
 public interface MaxConsecutiveOnes {
     int findMaxConsecutiveOnes(int[] nums);
 
+    static Testsuite<MaxConsecutiveOnes> testsuite() {
+        return Testsuite.<MaxConsecutiveOnes>builder()
+                .add(ExpectedTestcase.of(t -> t.findMaxConsecutiveOnes(new int[]{1,1,0,1,1,1}), 3))
+                .build();
+    }
+
+
     class Solution implements MaxConsecutiveOnes {
 
         @Override
@@ -45,4 +56,7 @@ public interface MaxConsecutiveOnes {
             return res;
         }
     }
+}
+
+class MaxConsecutiveOnesTest extends AbstractTest<MaxConsecutiveOnes> {
 }

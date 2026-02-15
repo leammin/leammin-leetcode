@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 560. 和为K的子数组
  * 
@@ -27,6 +31,15 @@ import java.util.*;
  */
 public interface SubarraySumEqualsK {
     int subarraySum(int[] nums, int k);
+
+    static Testsuite<SubarraySumEqualsK> testsuite() {
+        return Testsuite.<SubarraySumEqualsK>builder()
+                .add(ExpectedTestcase.of(t -> t.subarraySum(new int[]{1,1,1}, 2), 2))
+                .add(ExpectedTestcase.of(t -> t.subarraySum(new int[]{1}, 0), 0))
+                .add(ExpectedTestcase.of(t -> t.subarraySum(new int[]{1,1}, 0), 0))
+                .build();
+    }
+
 
     class Solution implements SubarraySumEqualsK {
 
@@ -75,4 +88,7 @@ public interface SubarraySumEqualsK {
             return res;
         }
     }
+}
+
+class SubarraySumEqualsKTest extends AbstractTest<SubarraySumEqualsK> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1208. 尽可能使字符串相等
  * 
@@ -52,6 +56,15 @@ package com.leammin.leetcode.medium;
 public interface GetEqualSubstringsWithinBudget {
     int equalSubstring(String s, String t, int maxCost);
 
+    static Testsuite<GetEqualSubstringsWithinBudget> testsuite() {
+        return Testsuite.<GetEqualSubstringsWithinBudget>builder()
+                .add(ExpectedTestcase.of(t -> t.equalSubstring("abcd", "bcdf", 3), 3))
+                .add(ExpectedTestcase.of(t -> t.equalSubstring("abcd", "cdef", 3), 1))
+                .add(ExpectedTestcase.of(t -> t.equalSubstring("abcd", "acde", 0), 1))
+                .build();
+    }
+
+
     class Solution implements GetEqualSubstringsWithinBudget {
 
         @Override
@@ -72,4 +85,7 @@ public interface GetEqualSubstringsWithinBudget {
             return maxLen;
         }
     }
+}
+
+class GetEqualSubstringsWithinBudgetTest extends AbstractTest<GetEqualSubstringsWithinBudget> {
 }

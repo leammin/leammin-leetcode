@@ -2,6 +2,11 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 import java.util.Random;
+import com.google.common.primitives.Ints;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
 
 /**
  * 面试题40. 最小的k个数
@@ -35,6 +40,24 @@ import java.util.Random;
  */
 public interface ZuiXiaoDeKgeShuLcof {
     int[] getLeastNumbers(int[] arr, int k);
+
+    static Testsuite<ZuiXiaoDeKgeShuLcof> testsuite() {
+        return Testsuite.<ZuiXiaoDeKgeShuLcof>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.getLeastNumbers(new int[]{3, 2, 1}, 2), res -> Assertions.assertThat(Ints.asList(res)).containsExactlyInAnyOrder(1, 2)
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.getLeastNumbers(new int[]{0, 1, 2, 1}, 1), res -> Assertions.assertThat(Ints.asList(res)).containsExactlyInAnyOrder(0)
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.getLeastNumbers(new int[]{0, 1, 2, 1}, 3), res -> Assertions.assertThat(Ints.asList(res)).containsExactlyInAnyOrder(0, 1, 1)
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.getLeastNumbers(new int[]{0, 0, 0, 2, 0, 5}, 0), res -> Assertions.assertThat(Ints.asList(res)).containsExactlyInAnyOrder()
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.getLeastNumbers(new int[]{0, 0, 1, 2, 4, 2, 2, 3, 1, 4}, 8), res -> Assertions.assertThat(Ints.asList(res)).containsExactlyInAnyOrder(0, 0, 1, 1, 2, 2, 2, 3)
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.getLeastNumbers(new int[]{3, 2, 1}, 2), res -> Assertions.assertThat(Ints.asList(res)).containsExactlyInAnyOrder(1, 2)
+                ))
+                .build();
+    }
+
 
     class Solution implements ZuiXiaoDeKgeShuLcof {
 
@@ -98,4 +121,7 @@ public interface ZuiXiaoDeKgeShuLcof {
             return new Random().nextInt(end - start) + start;
         }
     }
+}
+
+class ZuiXiaoDeKgeShuLcofTest extends AbstractTest<ZuiXiaoDeKgeShuLcof> {
 }

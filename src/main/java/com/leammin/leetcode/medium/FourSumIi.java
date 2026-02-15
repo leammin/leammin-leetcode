@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 454. 四数相加 II
  *
@@ -33,6 +37,13 @@ import java.util.Map;
  */
 public interface FourSumIi {
     int fourSumCount(int[] A, int[] B, int[] C, int[] D);
+
+    static Testsuite<FourSumIi> testsuite() {
+        return Testsuite.<FourSumIi>builder()
+                .add(ExpectedTestcase.of(t -> t.fourSumCount(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}), 2))
+                .build();
+    }
+
 
     class Solution implements FourSumIi {
 
@@ -167,4 +178,7 @@ public interface FourSumIi {
             return map;
         }
     }
+}
+
+class FourSumIiTest extends AbstractTest<FourSumIi> {
 }

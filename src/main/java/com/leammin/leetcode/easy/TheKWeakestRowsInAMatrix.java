@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1337. 方阵中战斗力最弱的 K 行
  * 
@@ -75,6 +78,27 @@ import java.util.TreeMap;
 public interface TheKWeakestRowsInAMatrix {
     int[] kWeakestRows(int[][] mat, int k);
 
+    static Testsuite<TheKWeakestRowsInAMatrix> testsuite() {
+        return Testsuite.<TheKWeakestRowsInAMatrix>builder()
+                .addExpected(t -> t.kWeakestRows(
+                        new int[][]{
+                                {1, 1, 0, 0, 0},
+                                {1, 1, 1, 1, 0},
+                                {1, 0, 0, 0, 0},
+                                {1, 1, 0, 0, 0},
+                                {1, 1, 1, 1, 1}
+                        }, 3), new int[]{2, 0, 3})
+                .addExpected(t -> t.kWeakestRows(
+                        new int[][]{
+                                {1, 0, 0, 0},
+                                {1, 1, 1, 1},
+                                {1, 0, 0, 0},
+                                {1, 0, 0, 0}
+                        }, 2), new int[]{0,2})
+                .build();
+    }
+
+
     class Solution implements TheKWeakestRowsInAMatrix {
 
         @Override
@@ -99,4 +123,7 @@ public interface TheKWeakestRowsInAMatrix {
             return result;
         }
     }
+}
+
+class TheKWeakestRowsInAMatrixTest extends AbstractTest<TheKWeakestRowsInAMatrix> {
 }

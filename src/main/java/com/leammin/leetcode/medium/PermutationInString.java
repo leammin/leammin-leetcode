@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 567. 字符串的排列
  * 
@@ -40,6 +44,14 @@ package com.leammin.leetcode.medium;
 public interface PermutationInString {
     boolean checkInclusion(String s1, String s2);
 
+    static Testsuite<PermutationInString> testsuite() {
+        return Testsuite.<PermutationInString>builder()
+                .add(ExpectedTestcase.of(t -> t.checkInclusion("ab", "eidbaooo"), true))
+                .add(ExpectedTestcase.of(t -> t.checkInclusion("ab", "eidboaoo"), false))
+                .build();
+    }
+
+
     class Solution implements PermutationInString {
 
         @Override
@@ -77,4 +89,7 @@ public interface PermutationInString {
             return false;
         }
     }
+}
+
+class PermutationInStringTest extends AbstractTest<PermutationInString> {
 }

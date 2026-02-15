@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 17.13. 恢复空格
  *
@@ -33,6 +37,19 @@ import java.util.*;
  */
 public interface ReSpaceLcci {
     int respace(String[] dictionary, String sentence);
+
+    static Testsuite<ReSpaceLcci> testsuite() {
+        return Testsuite.<ReSpaceLcci>builder()
+                .add(ExpectedTestcase.of(t -> t.respace(new String[]{"looked", "just", "like", "her", "brother"},
+                        "jesslookedjustliketimherbrother"), 7))
+                .add(ExpectedTestcase.of(t -> t.respace(new String[]{"axxpxakkxktpa", "aappk", "kddxxp", "p", "atxtdtpkt",
+                        "ptxkatdakp", "padpatxaptpaatkadaxka", "xd", "xa", "kptkaxxpptpkxaxtx", "t",
+                        "atdxkttpppakkxkxpxdxxapakaadaxkakapxptdpkxkaadtx", "kp", "xa", "pkkataxkakkxxktxxdptatkkxta",
+                        "dxttapxpxkxttkktpkx", "tat", "txpdakdxpaa", "axxkaxkxkkkdpkpttxdkpaaakkakdkkdxatd", "paxaa"},
+                        "ppkaxpxddkpaatttxtpdtaxtadxaxatxtdtpktdxpppkaxpxddkpaatttxtpdtaxtadx"), 28))
+                .build();
+    }
+
 
     class Solution implements ReSpaceLcci {
 
@@ -145,4 +162,7 @@ public interface ReSpaceLcci {
             return hash;
         }
     }
+}
+
+class ReSpaceLcciTest extends AbstractTest<ReSpaceLcci> {
 }

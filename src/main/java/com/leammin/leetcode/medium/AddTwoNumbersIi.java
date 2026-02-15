@@ -5,6 +5,10 @@ import com.leammin.leetcode.struct.ListNode;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 445. 两数相加 II
  * 
@@ -31,6 +35,17 @@ import java.util.List;
  */
 public interface AddTwoNumbersIi {
     ListNode addTwoNumbers(ListNode l1, ListNode l2);
+
+    static Testsuite<AddTwoNumbersIi> testsuite() {
+        return Testsuite.<AddTwoNumbersIi>builder()
+                .add(ExpectedTestcase.of(t->t.addTwoNumbers(ListNode.of(7,2,4,3), ListNode.of(5,6,4)), ListNode.of(7,8,0,7)))
+                .add(ExpectedTestcase.of(t->t.addTwoNumbers(ListNode.of(1,9,9,9), ListNode.of(1)), ListNode.of(2,0,0,0)))
+                .add(ExpectedTestcase.of(t->t.addTwoNumbers(ListNode.of(9,9,9,9), ListNode.of(1)), ListNode.of(1,0,0,0,0)))
+                .add(ExpectedTestcase.of(t->t.addTwoNumbers(ListNode.of(0), ListNode.of(0)), ListNode.of(0)))
+                .add(ExpectedTestcase.of(t->t.addTwoNumbers(ListNode.of(1,0), ListNode.of(0)), ListNode.of(1,0)))
+                .build();
+    }
+
 
     class Solution implements AddTwoNumbersIi {
 
@@ -110,4 +125,7 @@ public interface AddTwoNumbersIi {
             return res;
         }
     }
+}
+
+class AddTwoNumbersIiTest extends AbstractTest<AddTwoNumbersIi> {
 }

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 102. 二叉树的层次遍历
  *
@@ -37,6 +41,19 @@ import java.util.List;
 public interface BinaryTreeLevelOrderTraversal {
     List<List<Integer>> levelOrder(TreeNode root);
 
+    static Testsuite<BinaryTreeLevelOrderTraversal> testsuite() {
+        return Testsuite.<BinaryTreeLevelOrderTraversal>builder()
+                .add(ExpectedTestcase.of(
+                        t -> t.levelOrder(TreeNode.of(3, 9, 20, null, null, 15, 7)), List.of(
+                                List.of(3),
+                                List.of(9,20),
+                                List.of(15,7)
+                        )
+                ))
+                .build();
+    }
+
+
     class Solution implements BinaryTreeLevelOrderTraversal {
         @Override
         public List<List<Integer>> levelOrder(TreeNode root) {
@@ -65,4 +82,7 @@ public interface BinaryTreeLevelOrderTraversal {
             return res;
         }
     }
+}
+
+class BinaryTreeLevelOrderTraversalTest extends AbstractTest<BinaryTreeLevelOrderTraversal> {
 }

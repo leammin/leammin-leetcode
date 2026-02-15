@@ -1,6 +1,7 @@
 package com.leammin.leetcode.undone.hard;
 
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 import org.assertj.core.api.Assertions;
 
@@ -221,4 +222,7 @@ public interface TriplesWithBitwiseAndEqualToZero {
         }
 
     }
+}
+
+class TriplesWithBitwiseAndEqualToZeroTest extends AbstractTest<TriplesWithBitwiseAndEqualToZero> {
 }

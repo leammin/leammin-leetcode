@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 面试题 02.01. 移除重复节点
@@ -38,6 +41,14 @@ import com.leammin.leetcode.struct.ListNode;
  */
 public interface RemoveDuplicateNodeLcci {
     ListNode removeDuplicateNodes(ListNode head);
+
+    static Testsuite<RemoveDuplicateNodeLcci> testsuite() {
+        return Testsuite.<RemoveDuplicateNodeLcci>builder()
+                .add(ExpectedTestcase.of(t -> t.removeDuplicateNodes(ListNode.of(1, 2, 3, 3, 2, 1)), ListNode.of(1, 2, 3)))
+                .add(ExpectedTestcase.of(t -> t.removeDuplicateNodes(ListNode.of(1, 1, 1, 1, 2)), ListNode.of(1, 2)))
+                .build();
+    }
+
 
     class Solution implements RemoveDuplicateNodeLcci {
 
@@ -88,4 +99,7 @@ public interface RemoveDuplicateNodeLcci {
             return head;
         }
     }
+}
+
+class RemoveDuplicateNodeLcciTest extends AbstractTest<RemoveDuplicateNodeLcci> {
 }

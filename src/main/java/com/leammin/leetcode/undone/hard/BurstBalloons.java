@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 312. 戳气球
  * 
@@ -38,6 +42,15 @@ public interface BurstBalloons {
     int maxCoins(int[] nums);
 
     // 跑起来太耗时了
+    static Testsuite<BurstBalloons> testsuite() {
+        return Testsuite.<BurstBalloons>builder()
+                .add(ExpectedTestcase.of(t -> t.maxCoins(new int[]{3, 1, 5, 8}), 167))
+                .add(ExpectedTestcase.of(t -> t.maxCoins(new int[]{7, 9, 8, 0, 7, 1, 3, 5, 5, 2, 3, 3}), 1717))
+                .add(ExpectedTestcase.of(t -> t.maxCoins(new int[]{8, 3, 4, 3, 5, 0, 5, 6, 6, 2, 8, 5, 6, 2, 3, 8, 3, 5, 1, 0, 2}), 3394))
+                .build();
+    }
+
+
     @Execute(value = false)
     class Solution implements BurstBalloons {
 
@@ -99,4 +112,7 @@ public interface BurstBalloons {
             }
         }
     }
+}
+
+class BurstBalloonsTest extends AbstractTest<BurstBalloons> {
 }

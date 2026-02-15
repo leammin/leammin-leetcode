@@ -4,6 +4,10 @@ import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 841. 钥匙和房间
  * 
@@ -54,6 +58,25 @@ import java.util.Queue;
 public interface KeysAndRooms {
     boolean canVisitAllRooms(List<List<Integer>> rooms);
 
+    static Testsuite<KeysAndRooms> testsuite() {
+        return Testsuite.<KeysAndRooms>builder()
+                .add(ExpectedTestcase.of(t -> t.canVisitAllRooms(List.of(List.of())), true))
+                .add(ExpectedTestcase.of(t -> t.canVisitAllRooms(List.of(
+                        List.of(1),
+                        List.of(2),
+                        List.of(3),
+                        List.of()
+                )), true))
+                .add(ExpectedTestcase.of(t -> t.canVisitAllRooms(List.of(
+                        List.of(1,3),
+                        List.of(3,0,1),
+                        List.of(2),
+                        List.of(0)
+                )), false))
+                .build();
+    }
+
+
     class Solution implements KeysAndRooms {
 
         @Override
@@ -102,4 +125,7 @@ public interface KeysAndRooms {
             }
         }
     }
+}
+
+class KeysAndRoomsTest extends AbstractTest<KeysAndRooms> {
 }

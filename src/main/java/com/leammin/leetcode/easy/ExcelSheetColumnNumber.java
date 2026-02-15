@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 171. Excel表列序号
  * 
@@ -44,6 +48,15 @@ package com.leammin.leetcode.easy;
 public interface ExcelSheetColumnNumber {
     int titleToNumber(String s);
 
+    static Testsuite<ExcelSheetColumnNumber> testsuite() {
+        return Testsuite.<ExcelSheetColumnNumber>builder()
+                .add(ExpectedTestcase.of(t->t.titleToNumber("A"), 1))
+                .add(ExpectedTestcase.of(t->t.titleToNumber("AB"), 28))
+                .add(ExpectedTestcase.of(t->t.titleToNumber("ZY"), 701))
+                .build();
+    }
+
+
     class Solution implements ExcelSheetColumnNumber {
 
         @Override
@@ -58,4 +71,7 @@ public interface ExcelSheetColumnNumber {
             return ans;
         }
     }
+}
+
+class ExcelSheetColumnNumberTest extends AbstractTest<ExcelSheetColumnNumber> {
 }

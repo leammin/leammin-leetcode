@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1138. 字母板上的路径
  * 
@@ -48,6 +51,15 @@ package com.leammin.leetcode.medium;
  */
 public interface AlphabetBoardPath {
     String alphabetBoardPath(String target);
+
+    static Testsuite<AlphabetBoardPath> testsuite() {
+        return Testsuite.<AlphabetBoardPath>builder()
+                .addExpected(t -> t.alphabetBoardPath("leet"), "DDR!UURRR!!DDD!")
+                .addExpected(t -> t.alphabetBoardPath("code"), "RR!DDRR!UUL!R!")
+                .addExpected(t -> t.alphabetBoardPath("zb"), "DDDDD!UUUUUR!")
+                .build();
+    }
+
     class Solution implements AlphabetBoardPath {
         @Override
         public String alphabetBoardPath(String target) {
@@ -87,4 +99,7 @@ public interface AlphabetBoardPath {
             return result.toString();
         }
     }
+}
+
+class AlphabetBoardPathTest extends AbstractTest<AlphabetBoardPath> {
 }

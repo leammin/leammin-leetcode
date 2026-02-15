@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1140. 石子游戏 II
  *
@@ -40,6 +43,14 @@ package com.leammin.leetcode.medium;
 public interface StoneGameIi {
     int stoneGameII(int[] piles);
 
+    static Testsuite<StoneGameIi> testsuite() {
+        return Testsuite.<StoneGameIi>builder()
+                .addExpected(t -> t.stoneGameII(new int[]{2,7,9,4,4}), 10)
+                .addExpected(t -> t.stoneGameII(new int[]{1,2,3,4,5,100}), 104)
+                .build();
+    }
+
+
     class Solution implements StoneGameIi {
 
         @Override
@@ -66,4 +77,7 @@ public interface StoneGameIi {
             return dp[start][m];
         }
     }
+}
+
+class StoneGameIiTest extends AbstractTest<StoneGameIi> {
 }

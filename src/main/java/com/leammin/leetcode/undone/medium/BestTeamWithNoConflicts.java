@@ -1,6 +1,7 @@
 package com.leammin.leetcode.undone.medium;
 
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.*;
@@ -139,4 +140,7 @@ public interface BestTeamWithNoConflicts {
             return 0;
         }
     }
+}
+
+class BestTeamWithNoConflictsTest extends AbstractTest<BestTeamWithNoConflicts> {
 }

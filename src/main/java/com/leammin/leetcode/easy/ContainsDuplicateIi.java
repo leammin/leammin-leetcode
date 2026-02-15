@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 219. 存在重复元素 II
  *
@@ -29,6 +33,15 @@ import java.util.Map;
 public interface ContainsDuplicateIi {
     boolean containsNearbyDuplicate(int[] nums, int k);
 
+    static Testsuite<ContainsDuplicateIi> testsuite() {
+        return Testsuite.<ContainsDuplicateIi>builder()
+                .add(ExpectedTestcase.of(t -> t.containsNearbyDuplicate(new int[]{1,2,3,1}, 3), true))
+                .add(ExpectedTestcase.of(t -> t.containsNearbyDuplicate(new int[]{1,0,1,1}, 1), true))
+                .add(ExpectedTestcase.of(t -> t.containsNearbyDuplicate(new int[]{1,2,3,1,2,3}, 2), false))
+                .build();
+    }
+
+
     class Solution implements ContainsDuplicateIi {
 
         @Override
@@ -43,4 +56,7 @@ public interface ContainsDuplicateIi {
             return false;
         }
     }
+}
+
+class ContainsDuplicateIiTest extends AbstractTest<ContainsDuplicateIi> {
 }

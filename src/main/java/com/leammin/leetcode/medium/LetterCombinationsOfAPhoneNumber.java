@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 17. 电话号码的字母组合
  * 
@@ -28,6 +34,14 @@ import java.util.List;
  */
 public interface LetterCombinationsOfAPhoneNumber {
     List<String> letterCombinations(String digits);
+
+    static Testsuite<LetterCombinationsOfAPhoneNumber> testsuite() {
+        return Testsuite.<LetterCombinationsOfAPhoneNumber>builder()
+                .add(ExpectedTestcase.of(t -> new HashSet<>(t.letterCombinations("23")), Set.of("ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf")
+                ))
+                .build();
+    }
+
 
     class Solution implements LetterCombinationsOfAPhoneNumber {
 
@@ -118,4 +132,7 @@ public interface LetterCombinationsOfAPhoneNumber {
             }
         }
     }
+}
+
+class LetterCombinationsOfAPhoneNumberTest extends AbstractTest<LetterCombinationsOfAPhoneNumber> {
 }

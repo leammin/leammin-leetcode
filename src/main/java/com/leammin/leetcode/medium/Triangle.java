@@ -4,6 +4,10 @@ package com.leammin.leetcode.medium;
 import java.util.List;
 import java.util.ListIterator;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 120. 三角形最小路径和
  *
@@ -31,6 +35,18 @@ import java.util.ListIterator;
  */
 public interface Triangle {
     int minimumTotal(List<List<Integer>> triangle);
+
+    static Testsuite<Triangle> testsuite() {
+        return Testsuite.<Triangle>builder()
+                .add(ExpectedTestcase.of(t -> t.minimumTotal(List.of(
+                        List.of(2),
+                        List.of(3,4),
+                        List.of(6,5,7),
+                        List.of(4,1,8,3)
+                )), 11))
+                .build();
+    }
+
 
     class Solution implements Triangle {
         @Override
@@ -76,4 +92,7 @@ public interface Triangle {
         }
     }
 
+}
+
+class TriangleTest extends AbstractTest<Triangle> {
 }

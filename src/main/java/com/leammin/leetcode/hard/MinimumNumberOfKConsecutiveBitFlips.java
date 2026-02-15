@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 995. K 连续位的最小翻转次数
  *
@@ -49,6 +53,15 @@ package com.leammin.leetcode.hard;
 public interface MinimumNumberOfKConsecutiveBitFlips {
     int minKBitFlips(int[] A, int K);
 
+    static Testsuite<MinimumNumberOfKConsecutiveBitFlips> testsuite() {
+        return Testsuite.<MinimumNumberOfKConsecutiveBitFlips>builder()
+                .add(ExpectedTestcase.of(t -> t.minKBitFlips(new int[]{0,1,0}, 1), 2))
+                .add(ExpectedTestcase.of(t -> t.minKBitFlips(new int[]{1,1,0}, 2), -1))
+                .add(ExpectedTestcase.of(t -> t.minKBitFlips(new int[]{0,0,0,1,0,1,1,0}, 3), 3))
+                .build();
+    }
+
+
     class Solution implements MinimumNumberOfKConsecutiveBitFlips {
 
         @Override
@@ -90,4 +103,7 @@ public interface MinimumNumberOfKConsecutiveBitFlips {
             return res;
         }
     }
+}
+
+class MinimumNumberOfKConsecutiveBitFlipsTest extends AbstractTest<MinimumNumberOfKConsecutiveBitFlips> {
 }

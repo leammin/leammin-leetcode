@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 42. 接雨水
  *
@@ -19,6 +23,13 @@ package com.leammin.leetcode.hard;
  */
 public interface TrappingRainWater {
     int trap(int[] height);
+
+    static Testsuite<TrappingRainWater> testsuite() {
+        return Testsuite.<TrappingRainWater>builder()
+                .add(ExpectedTestcase.of(t -> t.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}), 6))
+                .build();
+    }
+
 
     class Solution implements TrappingRainWater {
 
@@ -80,4 +91,7 @@ public interface TrappingRainWater {
             return ans;
         }
     }
+}
+
+class TrappingRainWaterTest extends AbstractTest<TrappingRainWater> {
 }

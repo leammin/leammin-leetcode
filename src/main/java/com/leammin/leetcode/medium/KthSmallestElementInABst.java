@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 230. 二叉搜索树中第K小的元素
@@ -40,6 +43,14 @@ import com.leammin.leetcode.struct.TreeNode;
  */
 public interface KthSmallestElementInABst {
     int kthSmallest(TreeNode root, int k);
+
+    static Testsuite<KthSmallestElementInABst> testsuite() {
+        return Testsuite.<KthSmallestElementInABst>builder()
+                .add(ExpectedTestcase.of(t -> t.kthSmallest(TreeNode.of(3, 1, 4, null, 2), 1), 1))
+                .add(ExpectedTestcase.of(t -> t.kthSmallest(TreeNode.of(5, 3, 6, 2, 4, null, null, 1), 3), 3))
+                .build();
+    }
+
 
     class Solution implements KthSmallestElementInABst {
         int[] sequentialVal;
@@ -89,4 +100,7 @@ public interface KthSmallestElementInABst {
             }
         }
     }
+}
+
+class KthSmallestElementInABstTest extends AbstractTest<KthSmallestElementInABst> {
 }

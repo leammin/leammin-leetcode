@@ -3,6 +3,11 @@ package com.leammin.leetcode.medium;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.data.Offset;
+
 /**
  * 1792. 最大平均通过率
  *
@@ -48,6 +53,16 @@ import java.util.PriorityQueue;
 public interface MaximumAveragePassRatio {
     double maxAverageRatio(int[][] classes, int extraStudents);
 
+    static Testsuite<MaximumAveragePassRatio> testsuite() {
+        return Testsuite.<MaximumAveragePassRatio>builder()
+                .addConsumer(t -> t.maxAverageRatio(new int[][]{{1, 2}, {3, 5}, {2, 2}}, 2),
+                        output -> Assertions.assertThat(output).isCloseTo(0.78333, Offset.offset(0.00001)))
+                .addConsumer(t -> t.maxAverageRatio(new int[][]{{2, 4}, {3, 9}, {4, 5}, {2, 10}}, 4),
+                        output -> Assertions.assertThat(output).isCloseTo(0.53485, Offset.offset(0.00001)))
+                .build();
+    }
+
+
     class Solution implements MaximumAveragePassRatio {
 
         @Override
@@ -74,4 +89,7 @@ public interface MaximumAveragePassRatio {
             return sumRate / classes.length;
         }
     }
+}
+
+class MaximumAveragePassRatioTest extends AbstractTest<MaximumAveragePassRatio> {
 }

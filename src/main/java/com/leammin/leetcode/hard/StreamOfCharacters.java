@@ -1,5 +1,6 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testcase;
 import com.leammin.leetcode.util.test.Testsuite;
 import org.assertj.core.api.Assertions;
@@ -146,4 +147,7 @@ public abstract class StreamOfCharacters {
             return false;
         }
     }
+}
+
+class StreamOfCharactersTest extends AbstractTest<StreamOfCharacters> {
 }

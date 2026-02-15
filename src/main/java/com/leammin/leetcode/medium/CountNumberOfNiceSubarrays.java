@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1248. 统计「优美子数组」
  *
@@ -49,6 +53,16 @@ import java.util.Queue;
  */
 public interface CountNumberOfNiceSubarrays {
     int numberOfSubarrays(int[] nums, int k);
+
+    static Testsuite<CountNumberOfNiceSubarrays> testsuite() {
+        return Testsuite.<CountNumberOfNiceSubarrays>builder()
+                .add(ExpectedTestcase.of(t -> t.numberOfSubarrays(new int[]{1, 1, 2, 1, 1}, 3), 2))
+                .add(ExpectedTestcase.of(t -> t.numberOfSubarrays(new int[]{2,4,6}, 1), 0))
+                .add(ExpectedTestcase.of(t -> t.numberOfSubarrays(new int[]{2,2,2,1,2,2,1,2,2,2}, 2), 16))
+                .add(ExpectedTestcase.of(t -> t.numberOfSubarrays(new int[]{1,1,1,1,1}, 1), 5))
+                .build();
+    }
+
 
 
     class Solution implements CountNumberOfNiceSubarrays {
@@ -111,4 +125,7 @@ public interface CountNumberOfNiceSubarrays {
             return ans;
         }
     }
+}
+
+class CountNumberOfNiceSubarraysTest extends AbstractTest<CountNumberOfNiceSubarrays> {
 }

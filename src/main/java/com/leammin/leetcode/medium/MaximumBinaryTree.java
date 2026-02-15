@@ -1,6 +1,9 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 654. 最大二叉树
@@ -46,6 +49,13 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface MaximumBinaryTree {
     TreeNode constructMaximumBinaryTree(int[] nums);
 
+    static Testsuite<MaximumBinaryTree> testsuite() {
+        return Testsuite.<MaximumBinaryTree>builder()
+                .add(ExpectedTestcase.of(s -> s.constructMaximumBinaryTree(new int[]{3, 2, 1, 6, 0, 5}), TreeNode.of(6, 3, 5, null, 2, 0, null, null, 1)))
+                .build();
+    }
+
+
     class Solution implements MaximumBinaryTree {
 
         @Override
@@ -77,4 +87,7 @@ public interface MaximumBinaryTree {
             return root;
         }
     }
+}
+
+class MaximumBinaryTreeTest extends AbstractTest<MaximumBinaryTree> {
 }

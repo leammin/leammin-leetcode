@@ -1,5 +1,9 @@
 package com.leammin.leetcode.undone.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 837. 新21点
  *
@@ -42,6 +46,15 @@ package com.leammin.leetcode.undone.medium;
 public interface New21Game {
     double new21Game(int N, int K, int W);
 
+    static Testsuite<New21Game> testsuite() {
+        return Testsuite.<New21Game>builder()
+                .add(ExpectedTestcase.of(t -> t.new21Game(10, 1, 10), 1.0))
+                .add(ExpectedTestcase.of(t -> t.new21Game(6, 1, 10), 0.6))
+                .add(ExpectedTestcase.of(t -> t.new21Game(21, 17, 10), 0.73278))
+                .build();
+    }
+
+
     class Solution implements New21Game {
         // score >= K stop
         // score <= N p
@@ -50,4 +63,7 @@ public interface New21Game {
             return 0;
         }
     }
+}
+
+class New21GameTest extends AbstractTest<New21Game> {
 }

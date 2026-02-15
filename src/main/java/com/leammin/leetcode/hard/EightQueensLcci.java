@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 面试题 08.12. 八皇后
  *
@@ -34,6 +40,16 @@ import java.util.List;
  */
 public interface EightQueensLcci {
     List<List<String>> solveNQueens(int n);
+
+    static Testsuite<EightQueensLcci> testsuite() {
+        return Testsuite.<EightQueensLcci>builder()
+                .add(ExpectedTestcase.of(t -> new HashSet<>(t.solveNQueens(4)), Set.of(
+                        List.of(".Q..","...Q","Q...","..Q."),
+                        List.of("..Q.","Q...","...Q",".Q..")
+                )))
+                .build();
+    }
+
 
     class Solution implements EightQueensLcci {
         List<List<String>> res;
@@ -85,4 +101,7 @@ public interface EightQueensLcci {
             return true;
         }
     }
+}
+
+class EightQueensLcciTest extends AbstractTest<EightQueensLcci> {
 }

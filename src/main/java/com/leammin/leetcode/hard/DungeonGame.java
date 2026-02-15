@@ -3,6 +3,10 @@ package com.leammin.leetcode.hard;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 174. 地下城游戏
  *
@@ -58,6 +62,27 @@ import java.util.Queue;
 public interface DungeonGame {
     int calculateMinimumHP(int[][] dungeon);
 
+    static Testsuite<DungeonGame> testsuite() {
+        return Testsuite.<DungeonGame>builder()
+                .add(ExpectedTestcase.of(t -> t.calculateMinimumHP(new int[][]{
+                        {-2, -3, 3},
+                        {-5, -10, 1},
+                        {10, 30, -5}
+                }), 7))
+                .add(ExpectedTestcase.of(t -> t.calculateMinimumHP(new int[][]{
+                        {-2, -3, 10000},
+                        {-5, -10, 1},
+                        {10, 30, -5}
+                }), 6))
+                .add(ExpectedTestcase.of(t -> t.calculateMinimumHP(new int[][]{
+                        {2, 3, 10000},
+                        {-5, -10, 1},
+                        {10, 30, -5}
+                }), 1))
+                .build();
+    }
+
+
     class Solution implements DungeonGame {
 
         @Override
@@ -111,4 +136,7 @@ public interface DungeonGame {
         }
 
     }
+}
+
+class DungeonGameTest extends AbstractTest<DungeonGame> {
 }

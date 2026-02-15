@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 599. 两个列表的最小索引总和
  * 
@@ -46,6 +50,18 @@ import java.util.Map;
 public interface MinimumIndexSumOfTwoLists {
     String[] findRestaurant(String[] list1, String[] list2);
 
+    static Testsuite<MinimumIndexSumOfTwoLists> testsuite() {
+        return Testsuite.<MinimumIndexSumOfTwoLists>builder()
+                .add(ExpectedTestcase.of(t -> t.findRestaurant(new String[]{"Shogun", "Tapioca Express", "Burger King", "KFC"},
+                        new String[]{"Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"}), new String[]{"Shogun"}))
+                .add(ExpectedTestcase.of(t -> t.findRestaurant(new String[]{"Shogun", "Tapioca Express", "Burger King", "KFC"},
+                        new String[]{"KFC", "Shogun", "Burger King"}), new String[]{"Shogun"}))
+                .add(ExpectedTestcase.of(t -> t.findRestaurant(new String[]{"Shogun", "Tapioca Express", "Burger King", "KFC"},
+                        new String[]{"KFC", "Burger King", "Tapioca Express", "Shogun"}), new String[]{"KFC", "Burger King", "Tapioca Express", "Shogun"}))
+                .build();
+    }
+
+
     class Solution implements MinimumIndexSumOfTwoLists {
 
         @Override
@@ -69,4 +85,7 @@ public interface MinimumIndexSumOfTwoLists {
             return res.toArray(String[]::new);
         }
     }
+}
+
+class MinimumIndexSumOfTwoListsTest extends AbstractTest<MinimumIndexSumOfTwoLists> {
 }

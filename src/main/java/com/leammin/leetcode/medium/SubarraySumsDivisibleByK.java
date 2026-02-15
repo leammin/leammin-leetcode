@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 974. 和可被 K 整除的子数组
  * 
@@ -33,6 +37,14 @@ package com.leammin.leetcode.medium;
 public interface SubarraySumsDivisibleByK {
     int subarraysDivByK(int[] A, int K);
 
+    static Testsuite<SubarraySumsDivisibleByK> testsuite() {
+        return Testsuite.<SubarraySumsDivisibleByK>builder()
+                .add(ExpectedTestcase.of(t -> t.subarraysDivByK(new int[]{4,5,0,-2,-3,1}, 5), 7))
+                .add(ExpectedTestcase.of(t -> t.subarraysDivByK(new int[]{-2}, 6), 0))
+                .build();
+    }
+
+
     class Solution implements SubarraySumsDivisibleByK {
 
         @Override
@@ -47,4 +59,7 @@ public interface SubarraySumsDivisibleByK {
             return res;
         }
     }
+}
+
+class SubarraySumsDivisibleByKTest extends AbstractTest<SubarraySumsDivisibleByK> {
 }

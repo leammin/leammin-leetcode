@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 22. 括号生成
  *
@@ -25,6 +30,21 @@ import java.util.List;
  */
 public interface GenerateParentheses {
     List<String> generateParenthesis(int n);
+
+    static Testsuite<GenerateParentheses> testsuite() {
+        return Testsuite.<GenerateParentheses>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.generateParenthesis(3), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                        "((()))", "(()())", "(())()", "()(())", "()()()"
+                        )
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.generateParenthesis(4), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                        "(((())))", "((()()))", "((())())", "((()))()", "(()(()))", "(()()())", "(()())()", "(())(())",
+                        "(())()()", "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"
+                        )
+                ))
+                .build();
+    }
+
 
     class Solution implements GenerateParentheses {
         List<char[]> res;
@@ -57,4 +77,7 @@ public interface GenerateParentheses {
             generateParenthesis(chars, left + 1, right);
         }
     }
+}
+
+class GenerateParenthesesTest extends AbstractTest<GenerateParentheses> {
 }

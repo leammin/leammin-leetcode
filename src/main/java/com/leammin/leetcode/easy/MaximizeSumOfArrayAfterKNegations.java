@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1005. K 次取反后最大化的数组和
  * 
@@ -49,6 +53,15 @@ import java.util.Arrays;
 public interface MaximizeSumOfArrayAfterKNegations {
     int largestSumAfterKNegations(int[] a, int k);
 
+    static Testsuite<MaximizeSumOfArrayAfterKNegations> testsuite() {
+        return Testsuite.<MaximizeSumOfArrayAfterKNegations>builder()
+                .add(ExpectedTestcase.of(t -> t.largestSumAfterKNegations(new int[]{4, 2, 3}, 1), 5))
+                .add(ExpectedTestcase.of(t -> t.largestSumAfterKNegations(new int[]{3, -1, 0, 2}, 3), 6))
+                .add(ExpectedTestcase.of(t -> t.largestSumAfterKNegations(new int[]{2, -3, -1, 5, -4}, 2), 13))
+                .build();
+    }
+
+
     class Solution implements MaximizeSumOfArrayAfterKNegations {
         @Override
         public int largestSumAfterKNegations(int[] a, int k) {
@@ -70,4 +83,7 @@ public interface MaximizeSumOfArrayAfterKNegations {
             return sum;
         }
     }
+}
+
+class MaximizeSumOfArrayAfterKNegationsTest extends AbstractTest<MaximizeSumOfArrayAfterKNegations> {
 }

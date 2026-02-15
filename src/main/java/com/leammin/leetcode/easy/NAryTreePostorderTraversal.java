@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 590. N叉树的后序遍历
  * 
@@ -28,6 +31,20 @@ import java.util.List;
  */
 public interface NAryTreePostorderTraversal {
     List<Integer> postorder(Node root);
+
+    static Testsuite<NAryTreePostorderTraversal> testsuite() {
+        NAryTreePostorderTraversal.Node root = new NAryTreePostorderTraversal.Node(1,
+                List.of(new NAryTreePostorderTraversal.Node(3,
+                                List.of(new NAryTreePostorderTraversal.Node(5),
+                                        new NAryTreePostorderTraversal.Node(6))),
+                        new NAryTreePostorderTraversal.Node(2),
+                        new NAryTreePostorderTraversal.Node(4)));
+
+        return Testsuite.<NAryTreePostorderTraversal>builder()
+                .addExpected(t -> t.postorder(root), List.of(5,6,3,2,4,1))
+                .build();
+    }
+
 
     class Solution implements NAryTreePostorderTraversal {
 
@@ -66,4 +83,7 @@ public interface NAryTreePostorderTraversal {
             children = _children;
         }
     }
+}
+
+class NAryTreePostorderTraversalTest extends AbstractTest<NAryTreePostorderTraversal> {
 }

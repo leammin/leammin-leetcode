@@ -3,6 +3,9 @@ package com.leammin.leetcode.undone.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 137. 只出现一次的数字 II
  * 
@@ -30,6 +33,12 @@ import java.util.Map;
 public interface SingleNumberIi {
     int singleNumber(int[] nums);
 
+    static Testsuite<SingleNumberIi> testsuite() {
+        return Testsuite.<SingleNumberIi>builder()
+                .build();
+    }
+
+
     class Solution implements SingleNumberIi {
 
         @Override
@@ -46,4 +55,7 @@ public interface SingleNumberIi {
             return 0;
         }
     }
+}
+
+class SingleNumberIiTest extends AbstractTest<SingleNumberIi> {
 }

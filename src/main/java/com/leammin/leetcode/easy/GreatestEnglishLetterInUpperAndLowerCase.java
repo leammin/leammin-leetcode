@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2309. 兼具大小写的最好英文字母
  * 
@@ -54,6 +57,15 @@ package com.leammin.leetcode.easy;
 public interface GreatestEnglishLetterInUpperAndLowerCase {
     String greatestLetter(String s);
 
+    static Testsuite<GreatestEnglishLetterInUpperAndLowerCase> testsuite() {
+        return Testsuite.<GreatestEnglishLetterInUpperAndLowerCase>builder()
+                .addExpected(t -> t.greatestLetter("lEeTcOdE"), "E")
+                .addExpected(t -> t.greatestLetter("arRAzFif"), "R")
+                .addExpected(t -> t.greatestLetter("AbCdEfGhIjK"), "")
+                .build();
+    }
+
+
     class Solution implements GreatestEnglishLetterInUpperAndLowerCase {
 
         @Override
@@ -75,4 +87,7 @@ public interface GreatestEnglishLetterInUpperAndLowerCase {
             return "";
         }
     }
+}
+
+class GreatestEnglishLetterInUpperAndLowerCaseTest extends AbstractTest<GreatestEnglishLetterInUpperAndLowerCase> {
 }

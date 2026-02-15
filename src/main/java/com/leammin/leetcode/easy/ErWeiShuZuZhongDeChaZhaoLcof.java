@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题04. 二维数组中的查找
  * 
@@ -42,6 +45,13 @@ package com.leammin.leetcode.easy;
  */
 public interface ErWeiShuZuZhongDeChaZhaoLcof {
     boolean findNumberIn2DArray(int[][] matrix, int target);
+
+    static Testsuite<ErWeiShuZuZhongDeChaZhaoLcof> testsuite() {
+        return Testsuite.<ErWeiShuZuZhongDeChaZhaoLcof>builder()
+                .addExpected(t -> t.findNumberIn2DArray(new int[][]{{-5}}, -5), true)
+                .build();
+    }
+
     
     class Solution implements ErWeiShuZuZhongDeChaZhaoLcof {
 
@@ -62,4 +72,7 @@ public interface ErWeiShuZuZhongDeChaZhaoLcof {
         }
         
     }
+}
+
+class ErWeiShuZuZhongDeChaZhaoLcofTest extends AbstractTest<ErWeiShuZuZhongDeChaZhaoLcof> {
 }

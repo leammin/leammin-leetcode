@@ -1,5 +1,6 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.List;
@@ -124,4 +125,7 @@ public interface ShortestCommonSupersequence {
             return result.toString();
         }
     }
+}
+
+class ShortestCommonSupersequenceTest extends AbstractTest<ShortestCommonSupersequence> {
 }

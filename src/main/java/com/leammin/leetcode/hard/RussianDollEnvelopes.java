@@ -4,6 +4,10 @@ import com.leammin.leetcode.util.Execute;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 354. 俄罗斯套娃信封问题
  *
@@ -26,6 +30,16 @@ import java.util.*;
  */
 public interface RussianDollEnvelopes {
     int maxEnvelopes(int[][] envelopes);
+
+    static Testsuite<RussianDollEnvelopes> testsuite() {
+        return Testsuite.<RussianDollEnvelopes>builder()
+                .add(ExpectedTestcase.of(t -> t.maxEnvelopes(new int[][]{{5, 4}, {6, 4}, {6, 7}, {2, 3}}), 3))
+                .add(ExpectedTestcase.of(t -> t.maxEnvelopes(new int[][]{{1,2},{2,3},{3,4},{4,5},{5,6},{5,5},{6,7},{7,8}}), 7))
+                .add(ExpectedTestcase.of(t -> t.maxEnvelopes(new int[][]{{1,2},{2,3},{3,4},{4,5},{5,5},{5,6},{6,1},{7,7},{8,8}}), 7))
+                .add(ExpectedTestcase.of(t -> t.maxEnvelopes(new int[][]{{15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},{2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19}}), 5))
+                .build();
+    }
+
 
     class Solution implements RussianDollEnvelopes {
 
@@ -91,4 +105,7 @@ public interface RussianDollEnvelopes {
             return len;
         }
     }
+}
+
+class RussianDollEnvelopesTest extends AbstractTest<RussianDollEnvelopes> {
 }

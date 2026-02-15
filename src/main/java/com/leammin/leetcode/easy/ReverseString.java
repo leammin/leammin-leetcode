@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 344. 反转字符串
  *
@@ -23,6 +27,17 @@ package com.leammin.leetcode.easy;
 public interface ReverseString {
     void reverseString(char[] s);
 
+    static Testsuite<ReverseString> testsuite() {
+        return Testsuite.<ReverseString>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    char[] c = "hello".toCharArray();
+                    t.reverseString(c);
+                    return c;
+                }, "olleh".toCharArray()))
+                .build();
+    }
+
+
     class Solution implements ReverseString {
         @Override
         public void reverseString(char[] s) {
@@ -37,4 +52,7 @@ public interface ReverseString {
         }
     }
 
+}
+
+class ReverseStringTest extends AbstractTest<ReverseString> {
 }

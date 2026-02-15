@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1095. 山脉数组中查找目标值
  *
@@ -72,6 +76,15 @@ package com.leammin.leetcode.hard;
  */
 public interface FindInMountainArray {
     int findInMountainArray(int target, MountainArray mountainArr);
+
+    static Testsuite<FindInMountainArray> testsuite() {
+        return Testsuite.<FindInMountainArray>builder()
+                .add(ExpectedTestcase.of(t -> t.findInMountainArray(3, new FindInMountainArray.MountainArray(1,2,3,4,5,3,1)), 2))
+                .add(ExpectedTestcase.of(t -> t.findInMountainArray(3, new FindInMountainArray.MountainArray(0,1,2,4,2,1)), -1))
+                .add(ExpectedTestcase.of(t -> t.findInMountainArray(1, new FindInMountainArray.MountainArray(1,5,2)), 0))
+                .build();
+    }
+
 
     class Solution implements FindInMountainArray {
 
@@ -151,4 +164,7 @@ public interface FindInMountainArray {
             return array.length;
         }
     }
+}
+
+class FindInMountainArrayTest extends AbstractTest<FindInMountainArray> {
 }

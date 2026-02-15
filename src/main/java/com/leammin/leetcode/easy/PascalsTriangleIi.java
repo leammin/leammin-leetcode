@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.Arrays;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 119. 杨辉三角 II
  * 
@@ -29,6 +33,13 @@ import java.util.List;
 public interface PascalsTriangleIi {
     List<Integer> getRow(int rowIndex);
 
+    static Testsuite<PascalsTriangleIi> testsuite() {
+        return Testsuite.<PascalsTriangleIi>builder()
+                .add(ExpectedTestcase.of(t -> t.getRow(3), List.of(1, 3, 3, 1)))
+                .build();
+    }
+
+
     class Solution implements PascalsTriangleIi {
 
         @Override
@@ -47,4 +58,7 @@ public interface PascalsTriangleIi {
             return Arrays.asList(res);
         }
     }
+}
+
+class PascalsTriangleIiTest extends AbstractTest<PascalsTriangleIi> {
 }

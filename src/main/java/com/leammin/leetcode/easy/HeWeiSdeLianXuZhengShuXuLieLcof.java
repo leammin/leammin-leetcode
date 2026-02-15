@@ -3,6 +3,12 @@ package com.leammin.leetcode.easy;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import com.google.common.primitives.Ints;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * 面试题57 - II. 和为s的连续正数序列
@@ -42,6 +48,33 @@ import java.util.List;
 public interface HeWeiSdeLianXuZhengShuXuLieLcof {
     int[][] findContinuousSequence(int target);
 
+    static Testsuite<HeWeiSdeLianXuZhengShuXuLieLcof> testsuite() {
+        return Testsuite.<HeWeiSdeLianXuZhengShuXuLieLcof>builder()
+                .add(VerifiableTestcase.of(t -> t.findContinuousSequence(9), output -> {
+                    List<List<Integer>> expected = List.of(
+                            List.of(2, 3, 4),
+                            List.of(4, 5)
+                    );
+                    List<List<Integer>> outputSet = Arrays.stream(output)
+                            .map(Ints::asList)
+                            .collect(Collectors.toList());
+                    return expected.equals(outputSet);
+                }))
+                .add(VerifiableTestcase.of(t -> t.findContinuousSequence(15), output -> {
+                    List<List<Integer>> expected = List.of(
+                            List.of(1, 2, 3, 4, 5),
+                            List.of(4, 5, 6),
+                            List.of(7, 8)
+                    );
+                    List<List<Integer>> outputSet = Arrays.stream(output)
+                            .map(Ints::asList)
+                            .collect(Collectors.toList());
+                    return expected.equals(outputSet);
+                }))
+                .build();
+    }
+
+
     class Solution implements HeWeiSdeLianXuZhengShuXuLieLcof {
 
         @Override
@@ -65,4 +98,7 @@ public interface HeWeiSdeLianXuZhengShuXuLieLcof {
             return result.toArray(int[][]::new);
         }
     }
+}
+
+class HeWeiSdeLianXuZhengShuXuLieLcofTest extends AbstractTest<HeWeiSdeLianXuZhengShuXuLieLcof> {
 }

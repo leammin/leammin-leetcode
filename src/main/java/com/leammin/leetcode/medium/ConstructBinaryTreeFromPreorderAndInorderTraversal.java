@@ -5,6 +5,10 @@ import com.leammin.leetcode.struct.TreeNode;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 105. 从前序与中序遍历序列构造二叉树
  * 
@@ -32,6 +36,13 @@ import java.util.Map;
  */
 public interface ConstructBinaryTreeFromPreorderAndInorderTraversal {
     TreeNode buildTree(int[] preorder, int[] inorder);
+
+    static Testsuite<ConstructBinaryTreeFromPreorderAndInorderTraversal> testsuite() {
+        return Testsuite.<ConstructBinaryTreeFromPreorderAndInorderTraversal>builder()
+                .add(ExpectedTestcase.of(t -> t.buildTree(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}), TreeNode.of(3, 9, 20, null, null, 15, 7)))
+                .build();
+    }
+
 
     class Solution implements ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
@@ -102,4 +113,7 @@ public interface ConstructBinaryTreeFromPreorderAndInorderTraversal {
             return root;
         }
     }
+}
+
+class ConstructBinaryTreeFromPreorderAndInorderTraversalTest extends AbstractTest<ConstructBinaryTreeFromPreorderAndInorderTraversal> {
 }

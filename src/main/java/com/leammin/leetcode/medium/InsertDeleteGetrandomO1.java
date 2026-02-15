@@ -2,6 +2,11 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+
 /**
  * 380. 常数时间插入、删除和获取随机元素
  * 
@@ -54,6 +59,33 @@ public interface InsertDeleteGetrandomO1 {
 
     /** Get a random element from the set. */
     int getRandom();
+
+    static Testsuite<InsertDeleteGetrandomO1> testsuite() {
+        return Testsuite.<InsertDeleteGetrandomO1>builder()
+                .add(Testcase.of(t -> {
+                    long before = System.nanoTime();
+                    boolean b1 = t.insert(1);
+                    boolean b2 = t.remove(2);
+                    boolean b3 = t.insert(2);
+                    int i1 =  t.getRandom();
+                    boolean b4 =  t.remove(1);
+                    boolean b5 = t.insert(2);
+                    int i2 = t.getRandom();
+                    long after = System.nanoTime();
+
+                    Assertions.assertThat(b1).isTrue();
+                    Assertions.assertThat(b2).isFalse();
+                    Assertions.assertThat(b3).isTrue();
+                    Assertions.assertThat(i1).isIn(1,2);
+                    Assertions.assertThat(b4).isTrue();
+                    Assertions.assertThat(b5).isFalse();
+                    Assertions.assertThat(i2).isIn(2);
+
+                    return after - before;
+                }))
+                .build();
+    }
+
 
     class Solution implements InsertDeleteGetrandomO1 {
         Set<Integer> set = new HashSet<>();
@@ -120,4 +152,7 @@ public interface InsertDeleteGetrandomO1 {
             return list.get(random.nextInt(list.size()));
         }
     }
+}
+
+class InsertDeleteGetrandomO1Test extends AbstractTest<InsertDeleteGetrandomO1> {
 }

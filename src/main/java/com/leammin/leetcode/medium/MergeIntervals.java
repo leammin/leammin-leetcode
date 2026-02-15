@@ -5,6 +5,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 56. 合并区间
  * 
@@ -30,6 +34,14 @@ import java.util.List;
 public interface MergeIntervals {
     int[][] merge(int[][] intervals);
 
+    static Testsuite<MergeIntervals> testsuite() {
+        return Testsuite.<MergeIntervals>builder()
+                .add(ExpectedTestcase.of(t->t.merge(new int[][]{{1,3},{2,6},{8,10},{15,18}}), new int[][]{{1,6},{8,10},{15,18}}))
+                .add(ExpectedTestcase.of(t->t.merge(new int[][]{{1,4},{4,5}}), new int[][]{{1,5}}))
+                .build();
+    }
+
+
     class Solution implements MergeIntervals {
 
         @Override
@@ -49,4 +61,7 @@ public interface MergeIntervals {
             return ans.toArray(int[][]::new);
         }
     }
+}
+
+class MergeIntervalsTest extends AbstractTest<MergeIntervals> {
 }

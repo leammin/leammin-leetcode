@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.google.common.primitives.Booleans;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 1431. 拥有最多糖果的孩子
@@ -53,6 +57,14 @@ import java.util.List;
 public interface KidsWithTheGreatestNumberOfCandies {
     List<Boolean> kidsWithCandies(int[] candies, int extraCandies);
 
+    static Testsuite<KidsWithTheGreatestNumberOfCandies> testsuite() {
+        return Testsuite.<KidsWithTheGreatestNumberOfCandies>builder()
+                .add(ExpectedTestcase.of(t->t.kidsWithCandies(new int[]{2,3,5,1,3}, 3),
+                        Booleans.asList(true,true,true,false,true)))
+                .build();
+    }
+
+
     class Solution implements KidsWithTheGreatestNumberOfCandies {
 
         @Override
@@ -68,4 +80,7 @@ public interface KidsWithTheGreatestNumberOfCandies {
             return res;
         }
     }
+}
+
+class KidsWithTheGreatestNumberOfCandiesTest extends AbstractTest<KidsWithTheGreatestNumberOfCandies> {
 }

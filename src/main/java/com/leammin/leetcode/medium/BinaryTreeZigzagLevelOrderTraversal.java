@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 103. 二叉树的锯齿形层次遍历
  *
@@ -36,6 +40,26 @@ import java.util.ListIterator;
  */
 public interface BinaryTreeZigzagLevelOrderTraversal {
     List<List<Integer>> zigzagLevelOrder(TreeNode root);
+
+    static Testsuite<BinaryTreeZigzagLevelOrderTraversal> testsuite() {
+        return Testsuite.<BinaryTreeZigzagLevelOrderTraversal>builder()
+                .add(ExpectedTestcase.of(
+                        t -> t.zigzagLevelOrder(TreeNode.of(3, 9, 20, null, null, 15, 7)), List.of(
+                                List.of(3),
+                                List.of(20, 9),
+                                List.of(15, 7)
+                        )
+                ))
+                .add(ExpectedTestcase.of(
+                        t -> t.zigzagLevelOrder(TreeNode.of(1,2,3,4,null,null,5)), List.of(
+                                List.of(1),
+                                List.of(3, 2),
+                                List.of(4, 5)
+                        )
+                ))
+                .build();
+    }
+
 
     class Solution implements BinaryTreeZigzagLevelOrderTraversal {
         @Override
@@ -73,4 +97,7 @@ public interface BinaryTreeZigzagLevelOrderTraversal {
             return res;
         }
     }
+}
+
+class BinaryTreeZigzagLevelOrderTraversalTest extends AbstractTest<BinaryTreeZigzagLevelOrderTraversal> {
 }

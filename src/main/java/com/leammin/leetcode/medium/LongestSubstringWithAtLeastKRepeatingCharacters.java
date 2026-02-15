@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 395. 至少有K个重复字符的最长子串
  * 
@@ -35,6 +39,15 @@ package com.leammin.leetcode.medium;
  */
 public interface LongestSubstringWithAtLeastKRepeatingCharacters {
     int longestSubstring(String s, int k);
+
+    static Testsuite<LongestSubstringWithAtLeastKRepeatingCharacters> testsuite() {
+        return Testsuite.<LongestSubstringWithAtLeastKRepeatingCharacters>builder()
+                .add(ExpectedTestcase.of(t -> t.longestSubstring("aaabb", 3), 3))
+                .add(ExpectedTestcase.of(t -> t.longestSubstring("ababbc", 2), 5))
+                .add(ExpectedTestcase.of(t -> t.longestSubstring("ayaayxaaaxccycc", 3), 3))
+                .build();
+    }
+
 
     class Solution implements LongestSubstringWithAtLeastKRepeatingCharacters {
 
@@ -84,4 +97,7 @@ public interface LongestSubstringWithAtLeastKRepeatingCharacters {
             return s;
         }
     }
+}
+
+class LongestSubstringWithAtLeastKRepeatingCharactersTest extends AbstractTest<LongestSubstringWithAtLeastKRepeatingCharacters> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 392. 判断子序列
  * 
@@ -37,6 +41,14 @@ public interface IsSubsequence {
     /**
      * n
      */
+
+    static Testsuite<IsSubsequence> testsuite() {
+        return Testsuite.<IsSubsequence>builder()
+                .add(ExpectedTestcase.of(t -> t.isSubsequence("abc", "ahbgdc"), true))
+                .add(ExpectedTestcase.of(t -> t.isSubsequence("axc", "ahbgdc"), false))
+                .build();
+    }
+
     class Solution implements IsSubsequence {
         @Override
         public boolean isSubsequence(String s, String t) {
@@ -51,4 +63,7 @@ public interface IsSubsequence {
             return true;
         }
     }
+}
+
+class IsSubsequenceTest extends AbstractTest<IsSubsequence> {
 }

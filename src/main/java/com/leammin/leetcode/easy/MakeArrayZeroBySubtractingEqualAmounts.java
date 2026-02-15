@@ -2,6 +2,9 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2357. 使数组中所有元素都等于零
  *
@@ -49,6 +52,14 @@ import java.util.Arrays;
 public interface MakeArrayZeroBySubtractingEqualAmounts {
     int minimumOperations(int[] nums);
 
+    static Testsuite<MakeArrayZeroBySubtractingEqualAmounts> testsuite() {
+        return Testsuite.<MakeArrayZeroBySubtractingEqualAmounts>builder()
+                .addExpected(t -> t.minimumOperations(new int[]{1, 5, 0, 3, 5}), 3)
+                .addExpected(t -> t.minimumOperations(new int[]{0}), 0)
+                .build();
+    }
+
+
     class Solution implements MakeArrayZeroBySubtractingEqualAmounts {
 
         @Override
@@ -92,4 +103,7 @@ public interface MakeArrayZeroBySubtractingEqualAmounts {
             return (int) Arrays.stream(nums).filter(i -> i > 0).distinct().count();
         }
     }
+}
+
+class MakeArrayZeroBySubtractingEqualAmountsTest extends AbstractTest<MakeArrayZeroBySubtractingEqualAmounts> {
 }

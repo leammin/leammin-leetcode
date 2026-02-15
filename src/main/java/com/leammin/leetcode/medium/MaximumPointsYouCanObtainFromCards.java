@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1423. 可获得的最大点数
  * 
@@ -64,6 +68,17 @@ package com.leammin.leetcode.medium;
 public interface MaximumPointsYouCanObtainFromCards {
     int maxScore(int[] cardPoints, int k);
 
+    static Testsuite<MaximumPointsYouCanObtainFromCards> testsuite() {
+        return Testsuite.<MaximumPointsYouCanObtainFromCards>builder()
+                .add(ExpectedTestcase.of(t -> t.maxScore(new int[]{1, 2, 3, 4, 5, 6, 1}, 3), 12))
+                .add(ExpectedTestcase.of(t -> t.maxScore(new int[]{2, 2, 2}, 2), 4))
+                .add(ExpectedTestcase.of(t -> t.maxScore(new int[]{9, 7, 7, 9, 7, 7, 9}, 7), 55))
+                .add(ExpectedTestcase.of(t -> t.maxScore(new int[]{1, 1000, 1}, 1), 1))
+                .add(ExpectedTestcase.of(t -> t.maxScore(new int[]{1, 79, 80, 1, 1, 1, 200, 1}, 3), 202))
+                .build();
+    }
+
+
     class Solution implements MaximumPointsYouCanObtainFromCards {
 
         @Override
@@ -80,4 +95,7 @@ public interface MaximumPointsYouCanObtainFromCards {
             return maxSum;
         }
     }
+}
+
+class MaximumPointsYouCanObtainFromCardsTest extends AbstractTest<MaximumPointsYouCanObtainFromCards> {
 }

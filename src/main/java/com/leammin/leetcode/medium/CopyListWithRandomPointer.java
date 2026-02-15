@@ -3,6 +3,9 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 138. 复制带随机指针的链表
  * 
@@ -50,6 +53,12 @@ public interface CopyListWithRandomPointer {
     }
 
     Node copyRandomList(Node head);
+
+    static Testsuite<CopyListWithRandomPointer> testsuite() {
+        return Testsuite.<CopyListWithRandomPointer>builder()
+                .build();
+    }
+
 
     class Solution implements CopyListWithRandomPointer {
 
@@ -114,4 +123,7 @@ public interface CopyListWithRandomPointer {
             return newHead;
         }
     }
+}
+
+class CopyListWithRandomPointerTest extends AbstractTest<CopyListWithRandomPointer> {
 }

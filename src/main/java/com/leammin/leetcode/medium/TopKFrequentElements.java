@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 347. 前 K 个高频元素
  * 
@@ -35,6 +40,16 @@ import java.util.PriorityQueue;
 public interface TopKFrequentElements {
     int[] topKFrequent(int[] nums, int k);
 
+    static Testsuite<TopKFrequentElements> testsuite() {
+        return Testsuite.<TopKFrequentElements>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1, 2)
+                ))
+                .add(VerifiableTestcase.ofConsumer(t -> t.topKFrequent(new int[]{1}, 1), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(1)
+                ))
+                .build();
+    }
+
+
     class Solution implements TopKFrequentElements {
 
         @Override
@@ -58,4 +73,7 @@ public interface TopKFrequentElements {
             return res;
         }
     }
+}
+
+class TopKFrequentElementsTest extends AbstractTest<TopKFrequentElements> {
 }

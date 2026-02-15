@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 739. 每日温度
  * 
@@ -18,6 +22,13 @@ import java.util.Deque;
  */
 public interface DailyTemperatures {
     int[] dailyTemperatures(int[] T);
+
+    static Testsuite<DailyTemperatures> testsuite() {
+        return Testsuite.<DailyTemperatures>builder()
+                .add(ExpectedTestcase.of(t -> t.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73}), new int[]{1, 1, 4, 2, 1, 1, 0, 0}))
+                .build();
+    }
+
 
     class Solution implements DailyTemperatures {
 
@@ -36,4 +47,7 @@ public interface DailyTemperatures {
             return res;
         }
     }
+}
+
+class DailyTemperaturesTest extends AbstractTest<DailyTemperatures> {
 }

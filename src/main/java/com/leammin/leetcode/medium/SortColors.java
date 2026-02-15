@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 75. 颜色分类
  * 
@@ -29,6 +33,22 @@ package com.leammin.leetcode.medium;
  */
 public interface SortColors {
     void sortColors(int[] nums);
+
+    static Testsuite<SortColors> testsuite() {
+        return Testsuite.<SortColors>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    int[] nums = {2, 0, 2, 1, 1, 0};
+                    t.sortColors(nums);
+                    return nums;
+                }, new int[]{0, 0, 1, 1, 2, 2}))
+                .add(ExpectedTestcase.of(t -> {
+                    int[] nums = {1, 2, 0};
+                    t.sortColors(nums);
+                    return nums;
+                }, new int[]{0, 1, 2}))
+                .build();
+    }
+
 
     class Solution implements SortColors {
 
@@ -73,4 +93,7 @@ public interface SortColors {
             }
         }
     }
+}
+
+class SortColorsTest extends AbstractTest<SortColors> {
 }

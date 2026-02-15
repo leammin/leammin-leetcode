@@ -3,6 +3,9 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 447. 回旋镖的数量
  * 
@@ -52,6 +55,15 @@ import java.util.Map;
 public interface NumberOfBoomerangs {
     int numberOfBoomerangs(int[][] points);
 
+    static Testsuite<NumberOfBoomerangs> testsuite() {
+        return Testsuite.<NumberOfBoomerangs>builder()
+                .addExpected(t -> t.numberOfBoomerangs(new int[][]{{0,0},{1,0},{2,0}}), 2)
+                .addExpected(t -> t.numberOfBoomerangs(new int[][]{{1,1},{2,2},{3,3}}), 2)
+                .addExpected(t -> t.numberOfBoomerangs(new int[][]{{1,1}}), 0)
+                .build();
+    }
+
+
     class Solution implements NumberOfBoomerangs {
 
         @Override
@@ -74,4 +86,7 @@ public interface NumberOfBoomerangs {
             return res;
         }
     }
+}
+
+class NumberOfBoomerangsTest extends AbstractTest<NumberOfBoomerangs> {
 }

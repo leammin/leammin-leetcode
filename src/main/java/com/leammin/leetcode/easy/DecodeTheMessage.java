@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 2325. 解密消息
  * 
@@ -61,6 +64,14 @@ package com.leammin.leetcode.easy;
 public interface DecodeTheMessage {
     String decodeMessage(String key, String message);
 
+    static Testsuite<DecodeTheMessage> testsuite() {
+        return Testsuite.<DecodeTheMessage>builder()
+                .addExpected(t -> t.decodeMessage("the quick brown fox jumps over the lazy dog", "vkbs bs t suepuv"), "this is a secret")
+                .addExpected(t -> t.decodeMessage("eljuxhpwnyrdgtqkviszcfmabo", "zwx hnfx lqantp mnoeius ycgk vcnjrdb"), "the five boxing wizards jump quickly")
+                .build();
+    }
+
+
     class Solution implements DecodeTheMessage {
 
         @Override
@@ -82,4 +93,7 @@ public interface DecodeTheMessage {
             return String.valueOf(chars);
         }
     }
+}
+
+class DecodeTheMessageTest extends AbstractTest<DecodeTheMessage> {
 }

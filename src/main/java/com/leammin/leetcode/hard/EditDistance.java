@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 72. 编辑距离
  *
@@ -40,6 +44,16 @@ package com.leammin.leetcode.hard;
  */
 public interface EditDistance {
     int minDistance(String word1, String word2);
+
+    static Testsuite<EditDistance> testsuite() {
+        return Testsuite.<EditDistance>builder()
+                .add(ExpectedTestcase.of(t -> t.minDistance("horse", "ros"), 3))
+                .add(ExpectedTestcase.of(t -> t.minDistance("intention", "execution"), 5))
+                .add(ExpectedTestcase.of(t -> t.minDistance("mart", "karma"), 3))
+                .add(ExpectedTestcase.of(t -> t.minDistance("park", "spake"), 3))
+                .build();
+    }
+
 
     class Solution implements EditDistance {
 
@@ -109,4 +123,7 @@ public interface EditDistance {
             return dp[word1.length()][word2.length()];
         }
     }
+}
+
+class EditDistanceTest extends AbstractTest<EditDistance> {
 }

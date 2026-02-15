@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 136. 只出现一次的数字
  *
@@ -30,6 +34,14 @@ import java.util.Set;
  */
 public interface SingleNumber {
     int singleNumber(int[] nums);
+
+    static Testsuite<SingleNumber> testsuite() {
+        return Testsuite.<SingleNumber>builder()
+                .add(ExpectedTestcase.of(t -> t.singleNumber(new int[]{2,2,1}), 1))
+                .add(ExpectedTestcase.of(t -> t.singleNumber(new int[]{4,1,2,1,2}), 4))
+                .build();
+    }
+
 
     class Solution implements SingleNumber {
         @Override
@@ -88,4 +100,7 @@ public interface SingleNumber {
         }
     }
 
+}
+
+class SingleNumberTest extends AbstractTest<SingleNumber> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 154. 寻找旋转排序数组中的最小值 II
  *
@@ -34,6 +38,21 @@ package com.leammin.leetcode.hard;
 public interface FindMinimumInRotatedSortedArrayIi {
     int findMin(int[] nums);
 
+    static Testsuite<FindMinimumInRotatedSortedArrayIi> testsuite() {
+        return Testsuite.<FindMinimumInRotatedSortedArrayIi>builder()
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{1,3,5}), 1))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,2,2,0,1}), 0))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,2,2,2,2,2,2,0,1,2,2}), 0))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,2,2,2,2,2,2,0,2,2,2}), 0))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,2,0,1,2,2,2,2,2,2,2}), 0))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,2,0,2,2,2,2,2,2,2,2}), 0))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,2,2,2,2,2,2,2,2,2,2}), 2))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{2,3,4,5,1}), 1))
+                .add(ExpectedTestcase.of(t -> t.findMin(new int[]{1,2,0,0,1}), 0))
+                .build();
+    }
+
+
     class Solution implements FindMinimumInRotatedSortedArrayIi {
 
         @Override
@@ -60,4 +79,7 @@ public interface FindMinimumInRotatedSortedArrayIi {
             return nums[lo];
         }
     }
+}
+
+class FindMinimumInRotatedSortedArrayIiTest extends AbstractTest<FindMinimumInRotatedSortedArrayIi> {
 }

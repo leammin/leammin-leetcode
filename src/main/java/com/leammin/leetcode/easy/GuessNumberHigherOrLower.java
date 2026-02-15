@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 374. 猜数字大小
  * 
@@ -29,6 +33,13 @@ public interface GuessNumberHigherOrLower {
         return Integer.compare(6, num);
     }
 
+    static Testsuite<GuessNumberHigherOrLower> testsuite() {
+        return Testsuite.<GuessNumberHigherOrLower>builder()
+                .add(ExpectedTestcase.of(t -> t.guessNumber(10), 6))
+                .build();
+    }
+
+
     class Solution implements GuessNumberHigherOrLower {
 
         @Override
@@ -49,4 +60,7 @@ public interface GuessNumberHigherOrLower {
             return -1;
         }
     }
+}
+
+class GuessNumberHigherOrLowerTest extends AbstractTest<GuessNumberHigherOrLower> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 707. 设计链表
  *
@@ -66,6 +70,22 @@ public interface DesignLinkedList {
      * Delete the index-th node in the linked list, if the index is valid.
      */
     void deleteAtIndex(int index);
+
+    static Testsuite<DesignLinkedList> testsuite() {
+        return Testsuite.<DesignLinkedList>builder()
+                .add(Testcase.of(t -> {
+                    long before = System.nanoTime();
+                    t.addAtHead(1);
+                    t.addAtTail(3);
+                    t.addAtIndex(1, 2);
+                    assert t.get(1) == 2;
+                    t.deleteAtIndex(1);
+                    assert t.get(1) == 3;
+                    return System.nanoTime() - before;
+                }))
+                .build();
+    }
+
 
     class Solution implements DesignLinkedList {
         private static class Node {
@@ -161,4 +181,7 @@ public interface DesignLinkedList {
             size++;
         }
     }
+}
+
+class DesignLinkedListTest extends AbstractTest<DesignLinkedList> {
 }

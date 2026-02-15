@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 62. 不同路径
  *
@@ -44,6 +48,18 @@ public interface UniquePaths {
     /**
      * 这是一个组合问题，机器人一共要走 m+n-2 步，取出 m-1 步向下走。
      */
+
+    static Testsuite<UniquePaths> testsuite() {
+        return Testsuite.<UniquePaths>builder()
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(3, 2), 3))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(3, 7), 28))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(3, 3), 6))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(4, 4), 20))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(5, 5), 70))
+                .add(ExpectedTestcase.of(s -> s.uniquePaths(6, 6), 252))
+                .build();
+    }
+
     class Best implements UniquePaths {
 
         @Override
@@ -103,4 +119,7 @@ public interface UniquePaths {
             return result;
         }
     }
+}
+
+class UniquePathsTest extends AbstractTest<UniquePaths> {
 }

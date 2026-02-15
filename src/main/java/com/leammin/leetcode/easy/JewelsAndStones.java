@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 771. 宝石与石头
  * 
@@ -33,6 +37,14 @@ package com.leammin.leetcode.easy;
 public interface JewelsAndStones {
     int numJewelsInStones(String J, String S);
 
+    static Testsuite<JewelsAndStones> testsuite() {
+        return Testsuite.<JewelsAndStones>builder()
+                .add(ExpectedTestcase.of(t -> t.numJewelsInStones("aA", "aAAbbbb"), 3))
+                .add(ExpectedTestcase.of(t -> t.numJewelsInStones("z", "ZZ"), 0))
+                .build();
+    }
+
+
     class Solution implements JewelsAndStones {
 
         @Override
@@ -58,4 +70,7 @@ public interface JewelsAndStones {
             }
         }
     }
+}
+
+class JewelsAndStonesTest extends AbstractTest<JewelsAndStones> {
 }

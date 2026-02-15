@@ -5,6 +5,10 @@ import com.leammin.leetcode.struct.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 297. 二叉树的序列化与反序列化
  *
@@ -38,6 +42,18 @@ public interface SerializeAndDeserializeBinaryTree {
 
     // Decodes your encoded data to tree.
     TreeNode deserialize(String data);
+
+    static Testsuite<SerializeAndDeserializeBinaryTree> testsuite() {
+        return Testsuite.<SerializeAndDeserializeBinaryTree>builder()
+                .add(ExpectedTestcase.of(s -> s.serialize(s.deserialize("0,null,1,2,3")), "0,null,1,2,3"
+                ))
+                .add(ExpectedTestcase.of(s -> s.serialize(s.deserialize("0,1,null,2,3")), "0,1,null,2,3"
+                ))
+                .add(ExpectedTestcase.of(s -> s.serialize(s.deserialize("5,4,7,3,null,2,null,-1,null,9")), "5,4,7,3,null,2,null,-1,null,9"
+                ))
+                .build();
+    }
+
 
     class Solution implements SerializeAndDeserializeBinaryTree {
 
@@ -101,4 +117,7 @@ public interface SerializeAndDeserializeBinaryTree {
             }
         }
     }
+}
+
+class SerializeAndDeserializeBinaryTreeTest extends AbstractTest<SerializeAndDeserializeBinaryTree> {
 }

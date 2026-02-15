@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 209. 长度最小的子数组
  * 
@@ -24,6 +28,16 @@ import java.util.Arrays;
  */
 public interface MinimumSizeSubarraySum {
     int minSubArrayLen(int s, int[] nums);
+
+    static Testsuite<MinimumSizeSubarraySum> testsuite() {
+        return Testsuite.<MinimumSizeSubarraySum>builder()
+                .add(ExpectedTestcase.of(t -> t.minSubArrayLen(7, new int[]{2,3,1,2,4,3}), 2))
+                .add(ExpectedTestcase.of(t -> t.minSubArrayLen(100, new int[]{}), 0))
+                .add(ExpectedTestcase.of(t -> t.minSubArrayLen(15, new int[]{5,1,3,5,10,7,4,9,2,8}), 2))
+                .add(ExpectedTestcase.of(t -> t.minSubArrayLen(3, new int[]{1, 1}), 0))
+                .build();
+    }
+
 
     class Solution implements MinimumSizeSubarraySum {
 
@@ -79,4 +93,7 @@ public interface MinimumSizeSubarraySum {
             return res;
         }
     }
+}
+
+class MinimumSizeSubarraySumTest extends AbstractTest<MinimumSizeSubarraySum> {
 }

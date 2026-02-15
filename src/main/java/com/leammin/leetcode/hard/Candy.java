@@ -3,6 +3,10 @@ package com.leammin.leetcode.hard;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 135. 分发糖果
  * 
@@ -42,6 +46,16 @@ public interface Candy {
      * 时间复杂度 nlogn
      * 空间复杂度 n
      */
+
+    static Testsuite<Candy> testsuite() {
+        return Testsuite.<Candy>builder()
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,0,2}), 5))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,2,2}), 4))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,3,2,2,1}), 7))
+                .add(ExpectedTestcase.of(t -> t.candy(new int[]{1,6,10,8,7,3,2}), 18))
+                .build();
+    }
+
     class Solution implements Candy {
 
         @Override
@@ -115,4 +129,7 @@ public interface Candy {
         }
 
     }
+}
+
+class CandyTest extends AbstractTest<Candy> {
 }

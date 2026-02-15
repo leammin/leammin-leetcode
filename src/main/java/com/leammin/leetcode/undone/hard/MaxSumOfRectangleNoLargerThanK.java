@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 363. 矩形区域不超过 K 的最大数值和
  * 
@@ -25,6 +28,14 @@ package com.leammin.leetcode.undone.hard;
  */
 public interface MaxSumOfRectangleNoLargerThanK {
     int maxSumSubmatrix(int[][] matrix, int k);
+
+    static Testsuite<MaxSumOfRectangleNoLargerThanK> testsuite() {
+        return Testsuite.<MaxSumOfRectangleNoLargerThanK>builder()
+            .addExpected(t -> t.maxSumSubmatrix(new int[][]{{1,0,1},{0,-2,3}}, 2), 2)
+            .addExpected(t -> t.maxSumSubmatrix(new int[][]{{5,-4,-3,4},{-3,-4,4,5},{5,1,5,-4}}, 8), 8)
+            .build();
+    }
+
 
     class Solution implements MaxSumOfRectangleNoLargerThanK {
 
@@ -64,4 +75,7 @@ public interface MaxSumOfRectangleNoLargerThanK {
             return i >= 0 && i < matrix.length && j >= 0 && j < matrix[i].length ? matrix[i][j] : 0;
         }
     }
+}
+
+class MaxSumOfRectangleNoLargerThanKTest extends AbstractTest<MaxSumOfRectangleNoLargerThanK> {
 }

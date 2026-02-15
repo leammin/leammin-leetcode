@@ -1,5 +1,6 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.*;
@@ -146,4 +147,7 @@ public interface MakingFileNamesUnique {
             return 0;
         }
     }
+}
+
+class MakingFileNamesUniqueTest extends AbstractTest<MakingFileNamesUnique> {
 }

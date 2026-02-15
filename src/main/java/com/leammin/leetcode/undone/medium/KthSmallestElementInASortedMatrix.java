@@ -3,6 +3,10 @@ package com.leammin.leetcode.undone.medium;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 378. 有序矩阵中第K小的元素
  * 
@@ -32,6 +36,17 @@ import java.util.PriorityQueue;
 public interface KthSmallestElementInASortedMatrix {
     int kthSmallest(int[][] matrix, int k);
 
+    static Testsuite<KthSmallestElementInASortedMatrix> testsuite() {
+        return Testsuite.<KthSmallestElementInASortedMatrix>builder()
+                .add(ExpectedTestcase.of(t -> t.kthSmallest(new int[][]{
+                        {1, 5, 9},
+                        {10, 11, 13},
+                        {12, 13, 15}
+                }, 8), 13))
+                .build();
+    }
+
+
     class Solution implements KthSmallestElementInASortedMatrix {
 
         @Override
@@ -48,4 +63,7 @@ public interface KthSmallestElementInASortedMatrix {
             return queue.peek();
         }
     }
+}
+
+class KthSmallestElementInASortedMatrixTest extends AbstractTest<KthSmallestElementInASortedMatrix> {
 }

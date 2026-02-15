@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1025. 除数博弈
  *
@@ -50,6 +54,16 @@ package com.leammin.leetcode.easy;
 public interface DivisorGame {
     boolean divisorGame(int n);
 
+    static Testsuite<DivisorGame> testsuite() {
+        return Testsuite.<DivisorGame>builder()
+                .add(ExpectedTestcase.of(s -> s.divisorGame(2), true))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(4), true))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(5), false))
+                .add(ExpectedTestcase.of(s -> s.divisorGame(3), false))
+                .build();
+    }
+
+
     class Solution implements DivisorGame {
         @Override
         public boolean divisorGame(int n) {
@@ -57,4 +71,7 @@ public interface DivisorGame {
         }
     }
 
+}
+
+class DivisorGameTest extends AbstractTest<DivisorGame> {
 }

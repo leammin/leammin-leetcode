@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 712. 两个字符串的最小ASCII删除和
  *
@@ -39,6 +43,15 @@ import java.util.*;
  */
 public interface MinimumAsciiDeleteSumForTwoStrings {
     int minimumDeleteSum(String s1, String s2);
+
+    static Testsuite<MinimumAsciiDeleteSumForTwoStrings> testsuite() {
+        return Testsuite.<MinimumAsciiDeleteSumForTwoStrings>builder()
+                .add(ExpectedTestcase.of(s -> s.minimumDeleteSum("sea", "eat"), 231))
+                .add(ExpectedTestcase.of(s -> s.minimumDeleteSum("delete", "leet"), 403))
+                .add(ExpectedTestcase.of(s -> s.minimumDeleteSum("sjfqkfxqoditw", "fxymelgo"), 1638))
+                .build();
+    }
+
 
     class Best implements MinimumAsciiDeleteSumForTwoStrings {
 
@@ -196,4 +209,7 @@ public interface MinimumAsciiDeleteSumForTwoStrings {
             return res;
         }
     }
+}
+
+class MinimumAsciiDeleteSumForTwoStringsTest extends AbstractTest<MinimumAsciiDeleteSumForTwoStrings> {
 }

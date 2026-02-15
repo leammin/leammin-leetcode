@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 63. 不同路径 II
  *
@@ -39,6 +43,26 @@ import java.util.Queue;
  */
 public interface UniquePathsIi {
     int uniquePathsWithObstacles(int[][] obstacleGrid);
+
+    static Testsuite<UniquePathsIi> testsuite() {
+        return Testsuite.<UniquePathsIi>builder()
+                .add(ExpectedTestcase.of(t -> t.uniquePathsWithObstacles(new int[][]{
+                        {0, 0, 0},
+                        {0, 1, 0},
+                        {0, 0, 0}
+                }), 2))
+                .add(ExpectedTestcase.of(t -> t.uniquePathsWithObstacles(new int[][]{
+                        {0},
+                }), 1))
+                .add(ExpectedTestcase.of(t -> t.uniquePathsWithObstacles(new int[][]{
+                        {1},
+                }), 0))
+                .add(ExpectedTestcase.of(t -> t.uniquePathsWithObstacles(new int[][]{
+                        {0,1},
+                }), 0))
+                .build();
+    }
+
 
     class Solution implements UniquePathsIi {
 
@@ -105,4 +129,7 @@ public interface UniquePathsIi {
         }
 
     }
+}
+
+class UniquePathsIiTest extends AbstractTest<UniquePathsIi> {
 }

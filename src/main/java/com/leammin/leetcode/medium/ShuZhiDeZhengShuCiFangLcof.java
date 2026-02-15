@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题16. 数值的整数次方
  * 
@@ -43,6 +46,16 @@ package com.leammin.leetcode.medium;
 public interface ShuZhiDeZhengShuCiFangLcof {
     double myPow(double x, int n);
 
+    static Testsuite<ShuZhiDeZhengShuCiFangLcof> testsuite() {
+        return Testsuite.<ShuZhiDeZhengShuCiFangLcof>builder()
+                .addExpected(t -> t.myPow(2.00000, 10), 1024.00000)
+                .addExpected(t -> t.myPow(2.10000, 3), 9.261000000000001)
+                .addExpected(t -> t.myPow(2.00000, -2), 0.25000)
+                .addExpected(t -> t.myPow(1.00000, -2147483648), 1.0)
+                .build();
+    }
+
+
     class Solution implements ShuZhiDeZhengShuCiFangLcof {
 
         @Override
@@ -62,4 +75,7 @@ public interface ShuZhiDeZhengShuCiFangLcof {
             return h * h * ((n & 1) > 0 ? x : 1);
         }
     }
+}
+
+class ShuZhiDeZhengShuCiFangLcofTest extends AbstractTest<ShuZhiDeZhengShuCiFangLcof> {
 }

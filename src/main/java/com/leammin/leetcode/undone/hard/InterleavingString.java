@@ -1,5 +1,9 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 97. 交错字符串
  *
@@ -21,6 +25,14 @@ package com.leammin.leetcode.undone.hard;
  */
 public interface InterleavingString {
     boolean isInterleave(String s1, String s2, String s3);
+
+    static Testsuite<InterleavingString> testsuite() {
+        return Testsuite.<InterleavingString>builder()
+                .add(ExpectedTestcase.of(t -> t.isInterleave("aabcc", "dbbca", "aadbbcbcac"), true))
+                .add(ExpectedTestcase.of(t -> t.isInterleave("aabcc", "dbbca", "aadbbbaccc"), false))
+                .build();
+    }
+
 
     class Solution implements InterleavingString {
 
@@ -103,4 +115,7 @@ public interface InterleavingString {
             return r;
         }
     }
+}
+
+class InterleavingStringTest extends AbstractTest<InterleavingString> {
 }

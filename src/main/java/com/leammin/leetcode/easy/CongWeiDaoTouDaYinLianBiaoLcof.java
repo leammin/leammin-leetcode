@@ -1,6 +1,8 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 面试题06. 从尾到头打印链表
@@ -27,6 +29,13 @@ import com.leammin.leetcode.struct.ListNode;
 public interface CongWeiDaoTouDaYinLianBiaoLcof {
     int[] reversePrint(ListNode head);
 
+    static Testsuite<CongWeiDaoTouDaYinLianBiaoLcof> testsuite() {
+        return Testsuite.<CongWeiDaoTouDaYinLianBiaoLcof>builder()
+                .addExpected(t -> t.reversePrint(ListNode.of(1,3,2)), new int[]{2,3,1})
+                .build();
+    }
+
+
     class Solution implements CongWeiDaoTouDaYinLianBiaoLcof {
 
         @Override
@@ -46,4 +55,7 @@ public interface CongWeiDaoTouDaYinLianBiaoLcof {
             return res;
         }
     }
+}
+
+class CongWeiDaoTouDaYinLianBiaoLcofTest extends AbstractTest<CongWeiDaoTouDaYinLianBiaoLcof> {
 }

@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 387. 字符串中的第一个唯一字符
  *
@@ -27,6 +31,14 @@ import java.util.Map;
  */
 public interface FirstUniqueCharacterInAString {
     int firstUniqChar(String s);
+
+    static Testsuite<FirstUniqueCharacterInAString> testsuite() {
+        return Testsuite.<FirstUniqueCharacterInAString>builder()
+                .add(ExpectedTestcase.of(t -> t.firstUniqChar("leetcode"), 0))
+                .add(ExpectedTestcase.of(t -> t.firstUniqChar("loveleetcode"), 2))
+                .build();
+    }
+
 
     class Solution implements FirstUniqueCharacterInAString {
         @Override
@@ -64,4 +76,7 @@ public interface FirstUniqueCharacterInAString {
             return result;
         }
     }
+}
+
+class FirstUniqueCharacterInAStringTest extends AbstractTest<FirstUniqueCharacterInAString> {
 }

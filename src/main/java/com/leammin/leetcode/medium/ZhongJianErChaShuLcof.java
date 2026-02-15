@@ -1,6 +1,8 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 面试题07. 重建二叉树
@@ -37,6 +39,14 @@ import com.leammin.leetcode.struct.TreeNode;
  */
 public interface ZhongJianErChaShuLcof {
     TreeNode buildTree(int[] preorder, int[] inorder);
+
+    static Testsuite<ZhongJianErChaShuLcof> testsuite() {
+        return Testsuite.<ZhongJianErChaShuLcof>builder()
+                .addExpected(t -> t.buildTree(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}), TreeNode.of(3, 9, 20, null, null, 15, 7))
+                .addExpected(t -> t.buildTree(new int[]{-1}, new int[]{-1}), TreeNode.of(-1))
+                .build();
+    }
+
 
     class Solution implements ZhongJianErChaShuLcof {
 
@@ -102,4 +112,7 @@ public interface ZhongJianErChaShuLcof {
             return -1;
         }
     }
+}
+
+class ZhongJianErChaShuLcofTest extends AbstractTest<ZhongJianErChaShuLcof> {
 }

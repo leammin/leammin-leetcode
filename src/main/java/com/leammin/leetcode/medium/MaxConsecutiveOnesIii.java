@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1004. 最大连续1的个数 III
  * 
@@ -42,6 +46,14 @@ package com.leammin.leetcode.medium;
 public interface MaxConsecutiveOnesIii {
     int longestOnes(int[] A, int K);
 
+    static Testsuite<MaxConsecutiveOnesIii> testsuite() {
+        return Testsuite.<MaxConsecutiveOnesIii>builder()
+                .add(ExpectedTestcase.of(t -> t.longestOnes(new int[]{1,1,1,0,0,0,1,1,1,1,0}, 2), 6))
+                .add(ExpectedTestcase.of(t -> t.longestOnes(new int[]{0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1}, 3), 10))
+                .build();
+    }
+
+
     class Solution implements MaxConsecutiveOnesIii {
 
         @Override
@@ -63,4 +75,7 @@ public interface MaxConsecutiveOnesIii {
             return max;
         }
     }
+}
+
+class MaxConsecutiveOnesIiiTest extends AbstractTest<MaxConsecutiveOnesIii> {
 }

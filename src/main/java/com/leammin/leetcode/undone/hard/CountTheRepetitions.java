@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 466. 统计重复个数
  * 
@@ -26,6 +29,12 @@ package com.leammin.leetcode.undone.hard;
 public interface CountTheRepetitions {
     int getMaxRepetitions(String s1, int n1, String s2, int n2);
 
+    static Testsuite<CountTheRepetitions> testsuite() {
+        return Testsuite.<CountTheRepetitions>builder()
+                .build();
+    }
+
+
     class Solution implements CountTheRepetitions {
 
         @Override
@@ -33,4 +42,7 @@ public interface CountTheRepetitions {
             return 0;
         }
     }
+}
+
+class CountTheRepetitionsTest extends AbstractTest<CountTheRepetitions> {
 }

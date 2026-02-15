@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 217. 存在重复元素
  *
@@ -32,6 +36,15 @@ import java.util.Set;
 public interface ContainsDuplicate {
     boolean containsDuplicate(int[] nums);
 
+    static Testsuite<ContainsDuplicate> testsuite() {
+        return Testsuite.<ContainsDuplicate>builder()
+                .add(ExpectedTestcase.of(s -> s.containsDuplicate(new int[]{1, 2, 3, 1}), true))
+                .add(ExpectedTestcase.of(s -> s.containsDuplicate(new int[]{1, 2, 3, 4, 5}), false))
+                .add(ExpectedTestcase.of(s -> s.containsDuplicate(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12}), true))
+                .build();
+    }
+
+
     class Solution implements ContainsDuplicate {
         @Override
         public boolean containsDuplicate(int[] nums) {
@@ -44,4 +57,7 @@ public interface ContainsDuplicate {
             return false;
         }
     }
+}
+
+class ContainsDuplicateTest extends AbstractTest<ContainsDuplicate> {
 }

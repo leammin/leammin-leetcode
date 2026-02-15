@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 643. 子数组最大平均数 I
  * 
@@ -28,6 +32,13 @@ package com.leammin.leetcode.easy;
 public interface MaximumAverageSubarrayI {
     double findMaxAverage(int[] nums, int k);
 
+    static Testsuite<MaximumAverageSubarrayI> testsuite() {
+        return Testsuite.<MaximumAverageSubarrayI>builder()
+                .add(ExpectedTestcase.of(t -> t.findMaxAverage(new int[]{1,12,-5,-6,50,3}, 4), 12.75))
+                .build();
+    }
+
+
     class Solution implements MaximumAverageSubarrayI {
 
         @Override
@@ -44,4 +55,7 @@ public interface MaximumAverageSubarrayI {
             return (double) max / k;
         }
     }
+}
+
+class MaximumAverageSubarrayITest extends AbstractTest<MaximumAverageSubarrayI> {
 }

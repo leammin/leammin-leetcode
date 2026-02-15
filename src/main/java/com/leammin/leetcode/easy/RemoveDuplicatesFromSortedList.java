@@ -1,6 +1,8 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 83. 删除排序链表中的重复元素
@@ -25,6 +27,15 @@ import com.leammin.leetcode.struct.ListNode;
 public interface RemoveDuplicatesFromSortedList {
     ListNode deleteDuplicates(ListNode head);
 
+    static Testsuite<RemoveDuplicatesFromSortedList> testsuite() {
+        return Testsuite.<RemoveDuplicatesFromSortedList>builder()
+                .addExpected(t -> t.deleteDuplicates(ListNode.of(1, 1, 2)), ListNode.of(1, 2))
+                .addExpected(t -> t.deleteDuplicates(ListNode.of(1, 1, 2, 3, 3)), ListNode.of(1, 2, 3))
+                .addExpected(t -> t.deleteDuplicates(ListNode.of(1, 1, 1)), ListNode.of(1))
+                .build();
+    }
+
+
     class Solution implements RemoveDuplicatesFromSortedList {
 
         @Override
@@ -40,4 +51,7 @@ public interface RemoveDuplicatesFromSortedList {
             return head;
         }
     }
+}
+
+class RemoveDuplicatesFromSortedListTest extends AbstractTest<RemoveDuplicatesFromSortedList> {
 }

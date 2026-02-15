@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 402. 移掉K位数字
  *
@@ -42,6 +45,17 @@ package com.leammin.leetcode.medium;
 public interface RemoveKDigits {
     String removeKdigits(String num, int k);
 
+    static Testsuite<RemoveKDigits> testsuite() {
+        return Testsuite.<RemoveKDigits>builder()
+                .addExpected(t -> t.removeKdigits("1432219", 3), "1219")
+                .addExpected(t -> t.removeKdigits("10200", 1), "200")
+                .addExpected(t -> t.removeKdigits("10200", 2), "0")
+                .addExpected(t -> t.removeKdigits("10", 2), "0")
+                .addExpected(t -> t.removeKdigits("112", 1), "11")
+                .build();
+    }
+
+
     class Solution implements RemoveKDigits {
 
         @Override
@@ -73,4 +87,7 @@ public interface RemoveKDigits {
             return keep.toString();
         }
     }
+}
+
+class RemoveKDigitsTest extends AbstractTest<RemoveKDigits> {
 }

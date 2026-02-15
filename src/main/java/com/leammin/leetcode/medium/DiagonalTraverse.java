@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 498. 对角线遍历
  *
@@ -36,6 +40,17 @@ package com.leammin.leetcode.medium;
 public interface DiagonalTraverse {
     int[] findDiagonalOrder(int[][] matrix);
 
+    static Testsuite<DiagonalTraverse> testsuite() {
+        return Testsuite.<DiagonalTraverse>builder()
+                .add(ExpectedTestcase.of(t -> t.findDiagonalOrder(new int[][]{
+                        {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9}
+                }), new int[]{1, 2, 4, 7, 5, 3, 6, 8, 9}))
+                .build();
+    }
+
+
     class Solution implements DiagonalTraverse {
 
         @Override
@@ -61,4 +76,7 @@ public interface DiagonalTraverse {
             return res;
         }
     }
+}
+
+class DiagonalTraverseTest extends AbstractTest<DiagonalTraverse> {
 }

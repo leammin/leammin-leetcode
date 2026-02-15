@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 572. 另一个树的子树
@@ -58,6 +61,15 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface SubtreeOfAnotherTree {
     boolean isSubtree(TreeNode s, TreeNode t);
 
+    static Testsuite<SubtreeOfAnotherTree> testsuite() {
+        return Testsuite.<SubtreeOfAnotherTree>builder()
+                .add(ExpectedTestcase.of(t -> t.isSubtree(TreeNode.of(3, 4, 5, 1, 2), TreeNode.of(4, 1, 2)), true))
+                .add(ExpectedTestcase.of(t -> t.isSubtree(TreeNode.of(3, 4, 5, 1, 2, null, null, null, null, 0), TreeNode.of(4, 1, 2)), false))
+                .add(ExpectedTestcase.of(t -> t.isSubtree(TreeNode.of(3, 4, 5, 1, null, 2), TreeNode.of(3, 1, 2)), false))
+                .build();
+    }
+
+
     class Solution implements SubtreeOfAnotherTree {
 
         @Override
@@ -87,4 +99,7 @@ public interface SubtreeOfAnotherTree {
             return isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
         }
     }
+}
+
+class SubtreeOfAnotherTreeTest extends AbstractTest<SubtreeOfAnotherTree> {
 }

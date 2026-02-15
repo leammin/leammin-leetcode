@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 322. 零钱兑换
  *
@@ -27,6 +31,16 @@ import java.util.Map;
  */
 public interface CoinChange {
     int coinChange(int[] coins, int amount);
+
+    static Testsuite<CoinChange> testsuite() {
+        return Testsuite.<CoinChange>builder()
+                .add(ExpectedTestcase.of(t -> t.coinChange(new int[]{1, 2, 5}, 11), 3))
+                .add(ExpectedTestcase.of(t -> t.coinChange(new int[]{2}, 3), -1))
+                .add(ExpectedTestcase.of(t -> t.coinChange(new int[]{2, 5, 10, 1}, 27), 4))
+                .add(ExpectedTestcase.of(t -> t.coinChange(new int[]{186,419,83,408}, 6249), 20))
+                .build();
+    }
+
 
     class Solution implements CoinChange {
         Map<Integer, Integer> cache = new HashMap<>();
@@ -71,4 +85,7 @@ public interface CoinChange {
             return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
         }
     }
+}
+
+class CoinChangeTest extends AbstractTest<CoinChange> {
 }

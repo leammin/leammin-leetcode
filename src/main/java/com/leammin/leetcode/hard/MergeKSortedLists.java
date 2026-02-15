@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 23. 合并K个排序链表
  * 
@@ -27,6 +31,19 @@ import java.util.Queue;
  */
 public interface MergeKSortedLists {
     ListNode mergeKLists(ListNode[] lists);
+
+    static Testsuite<MergeKSortedLists> testsuite() {
+        return Testsuite.<MergeKSortedLists>builder()
+                .add(ExpectedTestcase.of(t -> t.mergeKLists(new ListNode[]{
+                                ListNode.of(1, 4, 5),
+                                ListNode.of(1, 3, 4),
+                                ListNode.of(2, 6)}),
+                        ListNode.of(1, 1, 2, 3, 4, 4, 5, 6)))
+                .add(ExpectedTestcase.of(t -> t.mergeKLists(new ListNode[]{null}),
+                        ListNode.of()))
+                .build();
+    }
+
 
     class Solution implements MergeKSortedLists {
 
@@ -111,4 +128,7 @@ public interface MergeKSortedLists {
             return head;
         }
     }
+}
+
+class MergeKSortedListsTest extends AbstractTest<MergeKSortedLists> {
 }

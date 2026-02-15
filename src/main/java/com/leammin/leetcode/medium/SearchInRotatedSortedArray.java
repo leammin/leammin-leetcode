@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 33. 搜索旋转排序数组
  *
@@ -29,6 +33,15 @@ package com.leammin.leetcode.medium;
  */
 public interface SearchInRotatedSortedArray {
     int search(int[] nums, int target);
+
+    static Testsuite<SearchInRotatedSortedArray> testsuite() {
+        return Testsuite.<SearchInRotatedSortedArray>builder()
+                .add(ExpectedTestcase.of(t->t.search(new int[]{4,5,6,7,0,1,2}, 0), 4))
+                .add(ExpectedTestcase.of(t->t.search(new int[]{4,5,6,7,0,1,2}, 3), -1))
+                .add(ExpectedTestcase.of(t->t.search(new int[]{1,3}, 3), 1))
+                .build();
+    }
+
 
     class Solution implements SearchInRotatedSortedArray {
 
@@ -76,4 +89,7 @@ public interface SearchInRotatedSortedArray {
             return -1;
         }
     }
+}
+
+class SearchInRotatedSortedArrayTest extends AbstractTest<SearchInRotatedSortedArray> {
 }

@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 70. 爬楼梯
  *
@@ -36,6 +40,16 @@ import java.util.Map;
  */
 public interface ClimbingStairs {
     int climbStairs(int n);
+
+    static Testsuite<ClimbingStairs> testsuite() {
+        return Testsuite.<ClimbingStairs>builder()
+                .add(ExpectedTestcase.of(solution -> solution.climbStairs(2), 2))
+                .add(ExpectedTestcase.of(solution -> solution.climbStairs(3), 3))
+                .add(ExpectedTestcase.of(solution -> solution.climbStairs(45), 1836311903))
+                .add(ExpectedTestcase.of(solution -> solution.climbStairs(40), 165580141))
+                .build();
+    }
+
 
     class Solution implements ClimbingStairs {
         private Map<Integer, Integer> res = new HashMap<>();
@@ -75,4 +89,7 @@ public interface ClimbingStairs {
             return b;
         }
     }
+}
+
+class ClimbingStairsTest extends AbstractTest<ClimbingStairs> {
 }

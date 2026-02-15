@@ -3,6 +3,10 @@ package com.leammin.leetcode.undone.hard;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 44. 通配符匹配
  *
@@ -69,6 +73,25 @@ import java.util.Map;
 public interface WildcardMatching {
     boolean isMatch(String s, String p);
 
+    static Testsuite<WildcardMatching> testsuite() {
+        return Testsuite.<WildcardMatching>builder()
+                .add(ExpectedTestcase.of(t -> t.isMatch("aa", "a"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("cb", "?a"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("acdcb", "a*c?b"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aa", "*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("adceb", "*a*b"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("adcasdeb", "*a*d*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("aaaa", "***a"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("", "*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("c", "*?*"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("ho", "ho**"), true))
+                .add(ExpectedTestcase.of(t -> t.isMatch("mississippi", "m??*ss*?i*pi"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbabababa", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b*"), false))
+                .add(ExpectedTestcase.of(t -> t.isMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"), false))
+                .build();
+    }
+
+
     class Solution implements WildcardMatching {
         @Override
         public boolean isMatch(String s, String p) {
@@ -112,4 +135,7 @@ public interface WildcardMatching {
             return false;
         }
     }
+}
+
+class WildcardMatchingTest extends AbstractTest<WildcardMatching> {
 }

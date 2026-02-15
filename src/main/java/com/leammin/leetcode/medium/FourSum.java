@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.List;
+
 /**
  * 18. 四数之和
  *
@@ -28,6 +32,21 @@ import java.util.*;
  */
 public interface FourSum {
     List<List<Integer>> fourSum(int[] nums, int target);
+
+    static Testsuite<FourSum> testsuite() {
+        return Testsuite.<FourSum>builder()
+                .addExpected(t -> t.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0), List.of(
+                        List.of(-2, -1, 1, 2),
+                        List.of(-2,  0, 0, 2),
+                        List.of(-1,  0, 0, 1)
+                ))
+                .addExpected(t -> t.fourSum(new int[]{-2,-1,-1,1,1,2,2}, 0), List.of(
+                        List.of(-2,-1,1,2),
+                        List.of(-1,-1,1,1)
+                ))
+                .build();
+    }
+
 
     class Solution implements FourSum {
 
@@ -122,4 +141,7 @@ public interface FourSum {
             return res;
         }
     }
+}
+
+class FourSumTest extends AbstractTest<FourSum> {
 }

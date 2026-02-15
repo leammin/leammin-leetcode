@@ -2,6 +2,10 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 198. 打家劫舍
  *
@@ -30,6 +34,14 @@ import java.util.Arrays;
  */
 public interface HouseRobber {
     int rob(int[] nums);
+
+    static Testsuite<HouseRobber> testsuite() {
+        return Testsuite.<HouseRobber>builder()
+                .add(ExpectedTestcase.of(t -> t.rob(new int[]{1, 2, 3, 1}), 4))
+                .add(ExpectedTestcase.of(t -> t.rob(new int[]{2, 7, 9, 3, 1}), 12))
+                .build();
+    }
+
 
     class Solution implements HouseRobber {
         @Override
@@ -76,4 +88,7 @@ public interface HouseRobber {
         }
     }
 
+}
+
+class HouseRobberTest extends AbstractTest<HouseRobber> {
 }

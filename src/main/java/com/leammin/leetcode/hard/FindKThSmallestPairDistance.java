@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 719. 找出第 k 小的距离对
  *
@@ -37,6 +41,20 @@ import java.util.PriorityQueue;
  */
 public interface FindKThSmallestPairDistance {
     int smallestDistancePair(int[] nums, int k);
+
+    static Testsuite<FindKThSmallestPairDistance> testsuite() {
+        return Testsuite.<FindKThSmallestPairDistance>builder()
+                .add(ExpectedTestcase.of(t -> t.smallestDistancePair(new int[]{1, 3, 1}, 1), 0))
+                .add(ExpectedTestcase.of(t -> t.smallestDistancePair(new int[]{1, 6, 1}, 3), 5))
+                .add(ExpectedTestcase.of(t -> t.smallestDistancePair(new int[]{1, 1, 1}, 2), 0))
+                .add(ExpectedTestcase.of(t -> t.smallestDistancePair(new int[]{0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2,
+                        3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10,
+                        10, 10, 10, 10}, 444), 2))
+                .add(ExpectedTestcase.of(t -> t.smallestDistancePair(new int[]{62,100,4}, 2), 58))
+                .build();
+
+    }
+
 
     class Solution implements FindKThSmallestPairDistance {
 
@@ -129,4 +147,7 @@ public interface FindKThSmallestPairDistance {
             }
         }
     }
+}
+
+class FindKThSmallestPairDistanceTest extends AbstractTest<FindKThSmallestPairDistance> {
 }

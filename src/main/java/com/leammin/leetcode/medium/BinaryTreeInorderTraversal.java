@@ -4,6 +4,11 @@ import com.leammin.leetcode.struct.TreeNode;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import java.util.List;
+
 /**
  * 94. 二叉树的中序遍历
  *
@@ -28,6 +33,13 @@ import java.util.*;
  */
 public interface BinaryTreeInorderTraversal {
     List<Integer> inorderTraversal(TreeNode root);
+
+    static Testsuite<BinaryTreeInorderTraversal> testsuite() {
+        return Testsuite.<BinaryTreeInorderTraversal>builder()
+                .add(ExpectedTestcase.of(s -> s.inorderTraversal(TreeNode.of(1, null, 2, 3)), List.of(1, 3, 2)))
+                .build();
+    }
+
 
     class Solution implements BinaryTreeInorderTraversal {
         @Override
@@ -89,4 +101,7 @@ public interface BinaryTreeInorderTraversal {
         }
     }
 
+}
+
+class BinaryTreeInorderTraversalTest extends AbstractTest<BinaryTreeInorderTraversal> {
 }

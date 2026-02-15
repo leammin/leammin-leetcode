@@ -4,6 +4,10 @@ import com.leammin.leetcode.util.Execute;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 309. 最佳买卖股票时机含冷冻期
  *
@@ -27,6 +31,17 @@ import java.util.Arrays;
  */
 public interface BestTimeToBuyAndSellStockWithCooldown {
     int maxProfit(int[] prices);
+
+    static Testsuite<BestTimeToBuyAndSellStockWithCooldown> testsuite() {
+        return Testsuite.<BestTimeToBuyAndSellStockWithCooldown>builder()
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{1, 2, 3, 0, 2}), 3))
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{}), 0))
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{1, 2, 4}), 3))
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{2,6,8,7,8,7,9,4,1,2,4,5,8}), 15))
+                .add(ExpectedTestcase.of(t -> t.maxProfit(new int[]{8,6,4,3,3,2,3,5,8,3,8,2,6}), 10))
+                .build();
+    }
+
 
     class Solution implements BestTimeToBuyAndSellStockWithCooldown {
 
@@ -372,4 +387,7 @@ public interface BestTimeToBuyAndSellStockWithCooldown {
             return dp0;
         }
     }
+}
+
+class BestTimeToBuyAndSellStockWithCooldownTest extends AbstractTest<BestTimeToBuyAndSellStockWithCooldown> {
 }

@@ -2,6 +2,7 @@ package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.util.convert.IntMatrixConverter;
 import com.leammin.leetcode.util.convert.IntegerListListConverter;
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 import java.util.ArrayList;
@@ -113,4 +114,7 @@ public interface MergeSimilarItems {
             return res;
         }
     }
+}
+
+class MergeSimilarItemsTest extends AbstractTest<MergeSimilarItems> {
 }

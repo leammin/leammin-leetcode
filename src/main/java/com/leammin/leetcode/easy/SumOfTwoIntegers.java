@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 371. 两整数之和
  * 
@@ -23,6 +27,15 @@ package com.leammin.leetcode.easy;
 public interface SumOfTwoIntegers {
     int getSum(int a, int b);
 
+    static Testsuite<SumOfTwoIntegers> testsuite() {
+        return Testsuite.<SumOfTwoIntegers>builder()
+                .add(ExpectedTestcase.of(t -> t.getSum(1,2), 3))
+                .add(ExpectedTestcase.of(t -> t.getSum(-2,3), 1))
+                .add(ExpectedTestcase.of(t -> t.getSum(-5,3), -2))
+                .build();
+    }
+
+
     class Solution implements SumOfTwoIntegers {
 
         @Override
@@ -40,4 +53,7 @@ public interface SumOfTwoIntegers {
             return res;
         }
     }
+}
+
+class SumOfTwoIntegersTest extends AbstractTest<SumOfTwoIntegers> {
 }

@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 239. 滑动窗口最大值
  * 
@@ -48,6 +52,13 @@ import java.util.PriorityQueue;
 public interface SlidingWindowMaximum {
     int[] maxSlidingWindow(int[] nums, int k);
 
+    static Testsuite<SlidingWindowMaximum> testsuite() {
+        return Testsuite.<SlidingWindowMaximum>builder()
+                .add(ExpectedTestcase.of(t -> t.maxSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3), new int[]{3, 3, 5, 5, 6, 7}))
+                .build();
+    }
+
+
     class Solution implements SlidingWindowMaximum {
 
         @Override
@@ -73,4 +84,7 @@ public interface SlidingWindowMaximum {
             return result;
         }
     }
+}
+
+class SlidingWindowMaximumTest extends AbstractTest<SlidingWindowMaximum> {
 }

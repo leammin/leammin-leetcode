@@ -1,6 +1,8 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 1144. 递减元素使数组呈锯齿状
@@ -46,7 +48,15 @@ import com.leammin.leetcode.util.Execute;
 public interface DecreaseElementsToMakeArrayZigzag {
     int movesToMakeZigzag(int[] nums);
 
+    static Testsuite<DecreaseElementsToMakeArrayZigzag> testsuite() {
+        return Testsuite.<DecreaseElementsToMakeArrayZigzag>builder()
+                .addExpected(t -> t.movesToMakeZigzag(new int[]{1,2,3}), 2)
+                .addExpected(t -> t.movesToMakeZigzag(new int[]{9,6,1,6,2}), 4)
+                .build();
+    }
     @Execute(cases = -1)
+
+
     class Solution implements DecreaseElementsToMakeArrayZigzag {
 
         @Override
@@ -72,4 +82,7 @@ public interface DecreaseElementsToMakeArrayZigzag {
             return res;
         }
     }
+}
+
+class DecreaseElementsToMakeArrayZigzagTest extends AbstractTest<DecreaseElementsToMakeArrayZigzag> {
 }

@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 978. 最长湍流子数组
  * 
@@ -51,6 +55,15 @@ package com.leammin.leetcode.medium;
 public interface LongestTurbulentSubarray {
     int maxTurbulenceSize(int[] arr);
 
+    static Testsuite<LongestTurbulentSubarray> testsuite() {
+        return Testsuite.<LongestTurbulentSubarray>builder()
+                .add(ExpectedTestcase.of(t -> t.maxTurbulenceSize(new int[]{9,4,2,10,7,8,8,1,9}), 5))
+                .add(ExpectedTestcase.of(t -> t.maxTurbulenceSize(new int[]{4,8,12,16}), 2))
+                .add(ExpectedTestcase.of(t -> t.maxTurbulenceSize(new int[]{100}), 1))
+                .build();
+    }
+
+
     class Solution implements LongestTurbulentSubarray {
 
         @Override
@@ -74,4 +87,7 @@ public interface LongestTurbulentSubarray {
             return Math.max(max, r - l);
         }
     }
+}
+
+class LongestTurbulentSubarrayTest extends AbstractTest<LongestTurbulentSubarray> {
 }

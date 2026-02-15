@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 424. 替换后的最长重复字符
  *
@@ -39,6 +43,14 @@ package com.leammin.leetcode.medium;
  */
 public interface LongestRepeatingCharacterReplacement {
     int characterReplacement(String s, int k);
+
+    static Testsuite<LongestRepeatingCharacterReplacement> testsuite() {
+        return Testsuite.<LongestRepeatingCharacterReplacement>builder()
+                .add(ExpectedTestcase.of(t -> t.characterReplacement("ABAB", 2), 4))
+                .add(ExpectedTestcase.of(t -> t.characterReplacement("AABABBA", 1), 4))
+                .build();
+    }
+
 
     class Solution implements LongestRepeatingCharacterReplacement {
 
@@ -84,4 +96,7 @@ public interface LongestRepeatingCharacterReplacement {
             return r - l;
         }
     }
+}
+
+class LongestRepeatingCharacterReplacementTest extends AbstractTest<LongestRepeatingCharacterReplacement> {
 }

@@ -2,6 +2,10 @@ package com.leammin.leetcode.undone.hard;
 
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.TreeNodeUtils;
 
 /**
  * 99. 恢复二叉搜索树
@@ -61,6 +65,17 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface RecoverBinarySearchTree {
     void recoverTree(TreeNode root);
 
+    static Testsuite<RecoverBinarySearchTree> testsuite() {
+        return Testsuite.<RecoverBinarySearchTree>builder()
+                .add(ExpectedTestcase.of(t -> {
+                    TreeNode root = TreeNode.of(1, 3, null, null, 2);
+                    t.recoverTree(root);
+                    return TreeNodeUtils.isBst(root);
+                }, true))
+                .build();
+    }
+
+
     class Solution implements RecoverBinarySearchTree {
 
         @Override
@@ -100,4 +115,7 @@ public interface RecoverBinarySearchTree {
             b.val = t;
         }
     }
+}
+
+class RecoverBinarySearchTreeTest extends AbstractTest<RecoverBinarySearchTree> {
 }

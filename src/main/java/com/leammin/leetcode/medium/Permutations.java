@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 46. 全排列
  *
@@ -27,6 +32,20 @@ import java.util.List;
  */
 public interface Permutations {
     List<List<Integer>> permute(int[] nums);
+
+    static Testsuite<Permutations> testsuite() {
+        return Testsuite.<Permutations>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.permute(new int[]{1, 2, 3}), res -> Assertions.assertThat(res).containsExactlyInAnyOrder(
+                        List.of(1, 2, 3),
+                        List.of(1, 3, 2),
+                        List.of(2, 1, 3),
+                        List.of(2, 3, 1),
+                        List.of(3, 1, 2),
+                        List.of(3, 2, 1)
+                )))
+                .build();
+    }
+
 
     class Solution implements Permutations {
 
@@ -120,4 +139,7 @@ public interface Permutations {
             return res;
         }
     }
+}
+
+class PermutationsTest extends AbstractTest<Permutations> {
 }

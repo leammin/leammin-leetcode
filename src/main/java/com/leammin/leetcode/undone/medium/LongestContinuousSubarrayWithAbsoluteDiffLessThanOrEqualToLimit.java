@@ -2,6 +2,10 @@ package com.leammin.leetcode.undone.medium;
 
 import java.util.TreeMap;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1438. 绝对差不超过限制的最长连续子数组
  * 
@@ -59,6 +63,15 @@ import java.util.TreeMap;
 public interface LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit {
     int longestSubarray(int[] nums, int limit);
 
+    static Testsuite<LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit> testsuite() {
+        return Testsuite.<LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit>builder()
+                .add(ExpectedTestcase.of(t -> t.longestSubarray(new int[]{8,2,4,7}, 4), 2))
+                .add(ExpectedTestcase.of(t -> t.longestSubarray(new int[]{10,1,2,4,7,2}, 5), 4))
+                .add(ExpectedTestcase.of(t -> t.longestSubarray(new int[]{4,2,2,2,4,4,2,2}, 0), 3))
+                .build();
+    }
+
+
     class Solution implements LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit {
 
         @Override
@@ -76,4 +89,7 @@ public interface LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit
         }
     }
 
+}
+
+class LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimitTest extends AbstractTest<LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit> {
 }

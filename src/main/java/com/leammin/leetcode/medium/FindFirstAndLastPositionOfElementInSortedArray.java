@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 34. 在排序数组中查找元素的第一个和最后一个位置
  * 
@@ -25,6 +29,15 @@ package com.leammin.leetcode.medium;
  */
 public interface FindFirstAndLastPositionOfElementInSortedArray {
     int[] searchRange(int[] nums, int target);
+
+    static Testsuite<FindFirstAndLastPositionOfElementInSortedArray> testsuite() {
+        return Testsuite.<FindFirstAndLastPositionOfElementInSortedArray>builder()
+                .add(ExpectedTestcase.of(t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8), new int[]{3, 4}))
+                .add(ExpectedTestcase.of(t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6), new int[]{-1, -1}))
+                .add(ExpectedTestcase.of(t -> t.searchRange(new int[]{5, 7, 7, 8, 8, 10}, 5), new int[]{0, 0}))
+                .build();
+    }
+
 
     class Solution implements FindFirstAndLastPositionOfElementInSortedArray {
 
@@ -59,4 +72,7 @@ public interface FindFirstAndLastPositionOfElementInSortedArray {
         }
 
     }
+}
+
+class FindFirstAndLastPositionOfElementInSortedArrayTest extends AbstractTest<FindFirstAndLastPositionOfElementInSortedArray> {
 }

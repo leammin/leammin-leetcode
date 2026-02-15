@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题29. 顺时针打印矩阵
  *
@@ -35,6 +39,27 @@ package com.leammin.leetcode.easy;
  */
 public interface ShunShiZhenDaYinJuZhenLcof {
     int[] spiralOrder(int[][] matrix);
+
+    static Testsuite<ShunShiZhenDaYinJuZhenLcof> testsuite() {
+        return Testsuite.<ShunShiZhenDaYinJuZhenLcof>builder()
+                .add(ExpectedTestcase.of(t -> t.spiralOrder(new int[][]{
+                        {1, 2, 3},
+                        {4, 5, 6},
+                        {7, 8, 9}
+                }), new int[]{1, 2, 3, 6, 9, 8, 7, 4, 5}))
+                .add(ExpectedTestcase.of(t -> t.spiralOrder(new int[][]{
+                        {1, 2, 3, 4},
+                        {5, 6, 7, 8},
+                        {9, 10, 11, 12}
+                }), new int[]{1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7}))
+                .add(ExpectedTestcase.of(t -> t.spiralOrder(new int[][]{
+                        {1, 2, 3, 4, 13},
+                        {5, 6, 7, 8, 14},
+                        {9, 10, 11, 12, 15}
+                }), new int[]{1, 2, 3, 4, 13, 14, 15, 12, 11, 10, 9, 5, 6, 7, 8}))
+                .build();
+    }
+
 
     class Solution implements ShunShiZhenDaYinJuZhenLcof {
 
@@ -74,4 +99,7 @@ public interface ShunShiZhenDaYinJuZhenLcof {
             return res;
         }
     }
+}
+
+class ShunShiZhenDaYinJuZhenLcofTest extends AbstractTest<ShunShiZhenDaYinJuZhenLcof> {
 }

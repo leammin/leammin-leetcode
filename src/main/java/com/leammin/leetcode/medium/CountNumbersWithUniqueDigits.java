@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 357. 计算各个位数不同的数字个数
  * 
@@ -18,6 +21,14 @@ package com.leammin.leetcode.medium;
  */
 public interface CountNumbersWithUniqueDigits {
     int countNumbersWithUniqueDigits(int n);
+
+    static Testsuite<CountNumbersWithUniqueDigits> testsuite() {
+        return Testsuite.<CountNumbersWithUniqueDigits>builder()
+                .addExpected(t -> t.countNumbersWithUniqueDigits(2), 91)
+                .addExpected(t -> t.countNumbersWithUniqueDigits(0), 1)
+                .build();
+    }
+
     class Solution implements CountNumbersWithUniqueDigits {
 
         @Override
@@ -34,4 +45,7 @@ public interface CountNumbersWithUniqueDigits {
             return res;
         }
     }
+}
+
+class CountNumbersWithUniqueDigitsTest extends AbstractTest<CountNumbersWithUniqueDigits> {
 }

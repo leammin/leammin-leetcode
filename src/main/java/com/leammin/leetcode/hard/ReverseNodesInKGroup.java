@@ -1,6 +1,9 @@
 package com.leammin.leetcode.hard;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 25. K 个一组翻转链表
@@ -32,6 +35,16 @@ import com.leammin.leetcode.struct.ListNode;
  */
 public interface ReverseNodesInKGroup {
     ListNode reverseKGroup(ListNode head, int k);
+
+    static Testsuite<ReverseNodesInKGroup> testsuite() {
+        return Testsuite.<ReverseNodesInKGroup>builder()
+                .add(ExpectedTestcase.of(t -> t.reverseKGroup(ListNode.of(1, 2, 3, 4, 5), 2), ListNode.of(2, 1, 4, 3, 5)))
+                .add(ExpectedTestcase.of(t -> t.reverseKGroup(ListNode.of(1, 2, 3, 4, 5), 3), ListNode.of(3, 2, 1, 4, 5)))
+                .add(ExpectedTestcase.of(t -> t.reverseKGroup(ListNode.of(1, 2, 3, 4, 5), 5), ListNode.of(5, 4, 3, 2, 1)))
+                .add(ExpectedTestcase.of(t -> t.reverseKGroup(ListNode.of(1, 2, 3, 4, 5), 0), ListNode.of(1, 2, 3, 4, 5)))
+                .build();
+    }
+
 
     class Solution implements ReverseNodesInKGroup {
         ListNode empty = new ListNode(0);
@@ -82,4 +95,7 @@ public interface ReverseNodesInKGroup {
         }
 
     }
+}
+
+class ReverseNodesInKGroupTest extends AbstractTest<ReverseNodesInKGroup> {
 }

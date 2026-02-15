@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 781. 森林中的兔子
  * 
@@ -39,6 +42,15 @@ package com.leammin.leetcode.medium;
 public interface RabbitsInForest {
     int numRabbits(int[] answers);
 
+    static Testsuite<RabbitsInForest> testsuite() {
+        return Testsuite.<RabbitsInForest>builder()
+                .addExpected(t -> t.numRabbits(new int[]{1, 1, 2}), 5)
+                .addExpected(t -> t.numRabbits(new int[]{10, 10, 10}), 11)
+                .addExpected(t -> t.numRabbits(new int[]{}), 0)
+                .build();
+    }
+
+
     class Solution implements RabbitsInForest {
 
         @Override
@@ -59,4 +71,7 @@ public interface RabbitsInForest {
             return res;
         }
     }
+}
+
+class RabbitsInForestTest extends AbstractTest<RabbitsInForest> {
 }

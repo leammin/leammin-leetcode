@@ -31,6 +31,7 @@ public class LeetcodeClass {
         String className = getClassName(question);
         return "package " + getPackage(question) + ";\n" +
                 "\n" +
+                "import com.leammin.leetcode.test.AbstractTest;\n" +
                 "import com.leammin.leetcode.util.test.Testsuite;\n" +
                 "\n" +
                 "/**\n" +
@@ -51,6 +52,9 @@ public class LeetcodeClass {
                 "    class Solution implements " + className + " {\n" +
                 "        \n" +
                 "    }\n" +
+                "}\n" +
+                "\n" +
+                "class " + className + "Test extends AbstractTest<" + className + "> {\n" +
                 "}\n";
     }
 
@@ -80,31 +84,6 @@ public class LeetcodeClass {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static String generateTest(Question question) {
-        String className = getClassName(question);
-        return "package " + "com.leammin.leetcode." + question.getDifficulty().toLowerCase() + ";\n" +
-                "\n" +
-                "import " + getPackage(question) + "." + className + ";\n" +
-                "import com.leammin.leetcode.util.AbstractTest;\n" +
-                "\n" +
-                "/**\n" +
-                " * @author Leammin\n" +
-                " * @date " + LocalDate.now() + "\n" +
-                " */\n" +
-                "class " + className + "Test extends AbstractTest<" + className + "> {\n" +
-                "}";
-    }
-
-    private static Path getTestPath(Question question) {
-        return Paths.get("src", "test", "java", "com", "leammin", "leetcode",
-                question.getDifficulty().toLowerCase(),
-                getClassName(question) + "Test.java");
-    }
-
-    public static void createTestFile(Question question) {
-        createFile(getTestPath(question), generateTest(question));
     }
 
     public static void createCodeFile(Question question) {

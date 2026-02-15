@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 128. 最长连续序列
  *
@@ -22,6 +26,15 @@ import java.util.Map;
  */
 public interface LongestConsecutiveSequence {
     int longestConsecutive(int[] nums);
+
+    static Testsuite<LongestConsecutiveSequence> testsuite() {
+        return Testsuite.<LongestConsecutiveSequence>builder()
+                .add(ExpectedTestcase.of(t -> t.longestConsecutive(new int[]{100, 4, 200, 1, 3, 2}), 4))
+                .add(ExpectedTestcase.of(t -> t.longestConsecutive(new int[]{1, 2, 0, 1}), 3))
+                .add(ExpectedTestcase.of(t -> t.longestConsecutive(new int[]{-7, -1, 3, -9, -4, 7, -3, 2, 4, 9, 4, -9, 8, -7, 5, -1, -7}), 4))
+                .build();
+    }
+
 
     class Solution implements LongestConsecutiveSequence {
 
@@ -80,4 +93,7 @@ public interface LongestConsecutiveSequence {
             }
         }
     }
+}
+
+class LongestConsecutiveSequenceTest extends AbstractTest<LongestConsecutiveSequence> {
 }

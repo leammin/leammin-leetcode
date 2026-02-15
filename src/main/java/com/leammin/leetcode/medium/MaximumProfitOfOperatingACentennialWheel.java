@@ -1,5 +1,6 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
 /**
@@ -123,4 +124,7 @@ public interface MaximumProfitOfOperatingACentennialWheel {
             return res;
         }
     }
+}
+
+class MaximumProfitOfOperatingACentennialWheelTest extends AbstractTest<MaximumProfitOfOperatingACentennialWheel> {
 }

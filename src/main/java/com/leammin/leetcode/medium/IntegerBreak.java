@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 343. 整数拆分
  *
@@ -25,6 +29,24 @@ package com.leammin.leetcode.medium;
  */
 public interface IntegerBreak {
     int integerBreak(int n);
+
+    static Testsuite<IntegerBreak> testsuite() {
+        return Testsuite.<IntegerBreak>builder()
+                .add(ExpectedTestcase.of(s -> s.integerBreak(2), 1 * 1))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(3), 1 * 2))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(4), 2 * 2))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(5), 3 * 2))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(6), 3 * 3))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(10), 3 * 3 * 4))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(12), 3 * 3 * 3 * 3))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(15), 3 * 3 * 3 * 3 * 3))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(16), 3 * 3 * 3 * 3 * 4))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(17), 3 * 3 * 3 * 3 * 3 * 2))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(18), 3 * 3 * 3 * 3 * 3 * 3))
+                .add(ExpectedTestcase.of(s -> s.integerBreak(26), 3 * 3 * 3 * 3 * 3 * 3 * 3 * 3 * 2))
+                .build();
+    }
+
 
     class Solution implements IntegerBreak {
 
@@ -65,4 +87,7 @@ public interface IntegerBreak {
             return (int) Math.pow(3, i) * j;
         }
     }
+}
+
+class IntegerBreakTest extends AbstractTest<IntegerBreak> {
 }

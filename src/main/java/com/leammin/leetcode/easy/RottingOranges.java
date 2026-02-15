@@ -3,6 +3,10 @@ package com.leammin.leetcode.easy;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 994. 腐烂的橘子
  *
@@ -61,6 +65,22 @@ public interface RottingOranges {
     /**
      * 深度优先
      */
+
+    static Testsuite<RottingOranges> testsuite() {
+        return Testsuite.<RottingOranges>builder()
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{2, 1, 1}, {1, 1, 0}, {0, 1, 1}}), 4))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{2, 1, 1}, {0, 1, 1}, {1, 0, 1}}), -1))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{0, 2}}), 0))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{0}}), 0))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{0, 0, 0, 0}}), 0))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{0, 0, 2, 0}}), 0))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{0, 0, 1, 0}}), -1))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{2, 0, 1, 0}}), -1))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{0, 2, 2}}), 0))
+                .add(ExpectedTestcase.of(t -> t.orangesRotting(new int[][]{{1, 2, 1, 1, 2, 1, 1}}), 2))
+                .build();
+    }
+
     class Solution implements RottingOranges {
 
         @Override
@@ -232,4 +252,7 @@ public interface RottingOranges {
             }
         }
     }
+}
+
+class RottingOrangesTest extends AbstractTest<RottingOranges> {
 }

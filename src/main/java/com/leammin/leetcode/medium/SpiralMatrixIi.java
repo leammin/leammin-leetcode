@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 59. 螺旋矩阵 II
  * 
@@ -21,6 +25,24 @@ package com.leammin.leetcode.medium;
  */
 public interface SpiralMatrixIi {
     int[][] generateMatrix(int n);
+
+    static Testsuite<SpiralMatrixIi> testsuite() {
+        return Testsuite.<SpiralMatrixIi>builder()
+                .add(ExpectedTestcase.of(t -> t.generateMatrix(3), new int[][]{
+                        {1, 2, 3},
+                        {8, 9, 4},
+                        {7, 6, 5}
+                }))
+                .add(ExpectedTestcase.of(t -> t.generateMatrix(1), new int[][]{
+                        {1},
+                }))
+                .add(ExpectedTestcase.of(t -> t.generateMatrix(2), new int[][]{
+                        {1, 2},
+                        {4, 3},
+                }))
+                .build();
+    }
+
 
     class Solution implements SpiralMatrixIi {
 
@@ -52,4 +74,7 @@ public interface SpiralMatrixIi {
             return res;
         }
     }
+}
+
+class SpiralMatrixIiTest extends AbstractTest<SpiralMatrixIi> {
 }

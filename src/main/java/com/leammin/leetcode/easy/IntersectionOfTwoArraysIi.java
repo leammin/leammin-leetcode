@@ -2,6 +2,11 @@ package com.leammin.leetcode.easy;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
+
 /**
  * 350. 两个数组的交集 II
  *
@@ -44,6 +49,16 @@ public interface IntersectionOfTwoArraysIi {
      * nums1 大小比 nums2 小很多此方法更优
      * nums2 存储在此磁盘上也使用此方法 分多次读取磁盘数据
      */
+
+    static Testsuite<IntersectionOfTwoArraysIi> testsuite() {
+        return Testsuite.<IntersectionOfTwoArraysIi>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2}),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder(2, 2)))
+                .add(VerifiableTestcase.ofConsumer(t -> t.intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}),
+                        r -> Assertions.assertThat(r).containsExactlyInAnyOrder(4, 9)))
+                .build();
+    }
+
     class Solution implements IntersectionOfTwoArraysIi {
 
         @Override
@@ -99,4 +114,7 @@ public interface IntersectionOfTwoArraysIi {
     }
 
 
+}
+
+class IntersectionOfTwoArraysIiTest extends AbstractTest<IntersectionOfTwoArraysIi> {
 }

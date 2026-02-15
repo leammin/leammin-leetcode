@@ -2,6 +2,11 @@ package com.leammin.leetcode.easy;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testcase;
+import com.leammin.leetcode.util.test.Testsuite;
+import org.assertj.core.api.Assertions;
+
 /**
  * 706. 设计哈希映射
  * 
@@ -49,6 +54,29 @@ public interface DesignHashmap {
     int get(int key);
 
     void remove(int key);
+
+    static Testsuite<DesignHashmap> testsuite() {
+        return Testsuite.<DesignHashmap>builder()
+                .add(Testcase.of(t -> {
+                    long b = System.nanoTime();
+                    t.put(1, 1);
+                    t.put(2, 2);
+                    int r1 = t.get(1);// 返回 1
+                    int r2 = t.get(3);            // 返回 -1 (未找到)
+                    t.put(2, 1);         // 更新已有的值
+                    int r3 = t.get(2);            // 返回 1
+                    t.remove(2);         // 删除键为2的数据
+                    int r4 = t.get(2);            // 返回 -1 (未找到)
+                    long a = System.nanoTime();
+                    Assertions.assertThat(r1).isEqualTo(1);
+                    Assertions.assertThat(r2).isEqualTo(-1);
+                    Assertions.assertThat(r3).isEqualTo(1);
+                    Assertions.assertThat(r4).isEqualTo(-1);
+                    return a - b;
+                }))
+                .build();
+    }
+
 
     class Solution implements DesignHashmap {
         int[] hash = new int[1000001];
@@ -142,4 +170,7 @@ public interface DesignHashmap {
             return key * 33 % nodes.length;
         }
     }
+}
+
+class DesignHashmapTest extends AbstractTest<DesignHashmap> {
 }

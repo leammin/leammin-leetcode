@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 5722. 截断句子
  * 
@@ -57,6 +60,15 @@ package com.leammin.leetcode.easy;
 public interface TruncateSentence {
     String truncateSentence(String s, int k);
 
+    static Testsuite<TruncateSentence> testsuite() {
+        return Testsuite.<TruncateSentence>builder()
+                .addExpected(t -> t.truncateSentence("Hello how are you Contestant", 4), "Hello how are you")
+                .addExpected(t -> t.truncateSentence("What is the solution to this problem", 4), "What is the solution")
+                .addExpected(t -> t.truncateSentence("chopper is not a tanuki", 5), "chopper is not a tanuki")
+                .build();
+    }
+
+
     class Solution implements TruncateSentence {
 
         @Override
@@ -73,4 +85,7 @@ public interface TruncateSentence {
             return s;
         }
     }
+}
+
+class TruncateSentenceTest extends AbstractTest<TruncateSentence> {
 }

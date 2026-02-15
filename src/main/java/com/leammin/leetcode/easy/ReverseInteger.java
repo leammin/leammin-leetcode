@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 7. 反转整数
  *
@@ -33,6 +36,15 @@ package com.leammin.leetcode.easy;
  */
 public interface ReverseInteger {
     int reverse(int x);
+
+    static Testsuite<ReverseInteger> testsuite() {
+        return Testsuite.<ReverseInteger>builder()
+            .addExpected(t -> t.reverse(123), 321)
+            .addExpected(t -> t.reverse(-123), -321)
+            .addExpected(t -> t.reverse(120), 21)
+            .build();
+    }
+
 
     class Solution implements ReverseInteger {
         @Override
@@ -104,4 +116,7 @@ public interface ReverseInteger {
             return (int) res;
         }
     }
+}
+
+class ReverseIntegerTest extends AbstractTest<ReverseInteger> {
 }

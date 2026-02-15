@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 55. 跳跃游戏
  * 
@@ -30,6 +34,18 @@ package com.leammin.leetcode.medium;
 public interface JumpGame {
     boolean canJump(int[] nums);
 
+    static Testsuite<JumpGame> testsuite() {
+        return Testsuite.<JumpGame>builder()
+                .add(ExpectedTestcase.of(t -> t.canJump(new int[]{2, 3, 1, 1, 4}), true))
+                .add(ExpectedTestcase.of(t -> t.canJump(new int[]{3, 2, 1, 0, 4}), false))
+                .add(ExpectedTestcase.of(t -> t.canJump(new int[]{0}), true))
+                .add(ExpectedTestcase.of(t -> t.canJump(new int[]{2, 0, 0}), true))
+                .add(ExpectedTestcase.of(t -> t.canJump(new int[]{3, 0, 0, 0}), true))
+                .add(ExpectedTestcase.of(t -> t.canJump(new int[]{10, 0, 0, 2, 0, 0, 0}), true))
+                .build();
+    }
+
+
     class Solution implements JumpGame {
         @Override
         public boolean canJump(int[] nums) {
@@ -44,4 +60,7 @@ public interface JumpGame {
             return true;
         }
     }
+}
+
+class JumpGameTest extends AbstractTest<JumpGame> {
 }

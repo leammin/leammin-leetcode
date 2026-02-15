@@ -1,5 +1,9 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题46. 把数字翻译成字符串
  * 
@@ -28,6 +32,15 @@ package com.leammin.leetcode.medium;
 public interface BaShuZiFanYiChengZiFuChuanLcof {
     int translateNum(int num);
 
+    static Testsuite<BaShuZiFanYiChengZiFuChuanLcof> testsuite() {
+        return Testsuite.<BaShuZiFanYiChengZiFuChuanLcof>builder()
+                .add(ExpectedTestcase.of(t -> t.translateNum(12258), 5))
+                .add(ExpectedTestcase.of(t -> t.translateNum(542), 1))
+                .add(ExpectedTestcase.of(t -> t.translateNum(506), 1))
+                .build();
+    }
+
+
     class Solution implements BaShuZiFanYiChengZiFuChuanLcof {
 
         @Override
@@ -46,4 +59,7 @@ public interface BaShuZiFanYiChengZiFuChuanLcof {
             return l;
         }
     }
+}
+
+class BaShuZiFanYiChengZiFuChuanLcofTest extends AbstractTest<BaShuZiFanYiChengZiFuChuanLcof> {
 }

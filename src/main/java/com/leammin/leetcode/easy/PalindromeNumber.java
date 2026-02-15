@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 9. 回文数
  * 
@@ -36,6 +40,18 @@ package com.leammin.leetcode.easy;
 public interface PalindromeNumber {
     boolean isPalindrome(int x);
 
+    static Testsuite<PalindromeNumber> testsuite() {
+        return Testsuite.<PalindromeNumber>builder()
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(101), true))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(1), true))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(10), false))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(1122332211), true))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(-121), false))
+                .add(ExpectedTestcase.of(t-> t.isPalindrome(-1), false))
+                .build();
+    }
+
+
     class Solution implements PalindromeNumber {
         @Override
         public boolean isPalindrome(int x) {
@@ -52,4 +68,7 @@ public interface PalindromeNumber {
         }
     }
 
+}
+
+class PalindromeNumberTest extends AbstractTest<PalindromeNumber> {
 }

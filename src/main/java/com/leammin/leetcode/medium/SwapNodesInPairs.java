@@ -1,6 +1,8 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 24. 两两交换链表中的节点
@@ -22,6 +24,13 @@ import com.leammin.leetcode.struct.ListNode;
  */
 public interface SwapNodesInPairs {
     ListNode swapPairs(ListNode head);
+
+    static Testsuite<SwapNodesInPairs> testsuite() {
+        return Testsuite.<SwapNodesInPairs>builder()
+                .addExpected(t -> t.swapPairs(ListNode.of(1, 2, 3, 4)), ListNode.of(2, 1, 4, 3))
+                .build();
+    }
+
 
     class Solution implements SwapNodesInPairs {
 
@@ -46,4 +55,7 @@ public interface SwapNodesInPairs {
             return newHead;
         }
     }
+}
+
+class SwapNodesInPairsTest extends AbstractTest<SwapNodesInPairs> {
 }

@@ -3,6 +3,10 @@ package com.leammin.leetcode.medium;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 365. 水壶问题
  *
@@ -35,6 +39,15 @@ import java.util.Queue;
  */
 public interface WaterAndJugProblem {
     boolean canMeasureWater(int x, int y, int z);
+
+    static Testsuite<WaterAndJugProblem> testsuite() {
+        return Testsuite.<WaterAndJugProblem>builder()
+                .add(ExpectedTestcase.of(t -> t.canMeasureWater(3, 5, 4), true))
+                .add(ExpectedTestcase.of(t -> t.canMeasureWater(2, 6, 5), false))
+                .add(ExpectedTestcase.of(t -> t.canMeasureWater(22003, 31237, 1), true))
+                .build();
+    }
+
 
     class Solution implements WaterAndJugProblem {
         @Override
@@ -107,4 +120,7 @@ public interface WaterAndJugProblem {
             return x;
         }
     }
+}
+
+class WaterAndJugProblemTest extends AbstractTest<WaterAndJugProblem> {
 }

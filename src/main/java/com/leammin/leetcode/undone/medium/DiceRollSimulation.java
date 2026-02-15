@@ -1,5 +1,8 @@
 package com.leammin.leetcode.undone.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1223. 掷骰子模拟
  * 
@@ -49,6 +52,15 @@ package com.leammin.leetcode.undone.medium;
 public interface DiceRollSimulation {
     int dieSimulator(int n, int[] rollMax);
 
+    static Testsuite<DiceRollSimulation> testsuite() {
+        return Testsuite.<DiceRollSimulation>builder()
+                .addExpected(t -> t.dieSimulator(2, new int[]{1, 1, 2, 2, 2, 3}), 34)
+                .addExpected(t -> t.dieSimulator(2, new int[]{1, 1, 1, 1, 1, 1}), 30)
+                .addExpected(t -> t.dieSimulator(3, new int[]{1, 1, 1, 2, 2, 3}), 181)
+                .build();
+    }
+
+
     class Solution implements DiceRollSimulation {
 
         @Override
@@ -56,4 +68,7 @@ public interface DiceRollSimulation {
             return 0;
         }
     }
+}
+
+class DiceRollSimulationTest extends AbstractTest<DiceRollSimulation> {
 }

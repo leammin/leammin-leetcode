@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+import com.leammin.leetcode.util.test.VerifiableTestcase;
+import org.assertj.core.api.Assertions;
 
 /**
  * 450. 删除二叉搜索树中的节点
@@ -55,7 +59,15 @@ import com.leammin.leetcode.util.Execute;
 public interface DeleteNodeInABst {
     TreeNode deleteNode(TreeNode root, int key);
 
+    static Testsuite<DeleteNodeInABst> testsuite() {
+        return Testsuite.<DeleteNodeInABst>builder()
+                .add(VerifiableTestcase.ofConsumer(t -> t.deleteNode(TreeNode.of(5,3,6,2,4,null,7), 3),
+                        r -> Assertions.assertThat(r).isIn(TreeNode.of(5,4,6,2,null,null,7), TreeNode.of(5,2,6,null,4,null,7))))
+                .build();
+    }
     @Execute(cases = 0)
+
+
     class Solution implements DeleteNodeInABst {
 
         @Override
@@ -117,4 +129,7 @@ public interface DeleteNodeInABst {
             return root;
         }
     }
+}
+
+class DeleteNodeInABstTest extends AbstractTest<DeleteNodeInABst> {
 }

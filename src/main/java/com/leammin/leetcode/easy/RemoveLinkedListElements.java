@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.ListNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 203. 移除链表元素
@@ -19,6 +22,13 @@ import com.leammin.leetcode.struct.ListNode;
  */
 public interface RemoveLinkedListElements {
     ListNode removeElements(ListNode head, int val);
+
+    static Testsuite<RemoveLinkedListElements> testsuite() {
+        return Testsuite.<RemoveLinkedListElements>builder()
+                .add(ExpectedTestcase.of(t -> t.removeElements(ListNode.of(1, 2, 6, 3, 4, 5, 6), 6), ListNode.of(1, 2, 3, 4, 5)))
+                .build();
+    }
+
 
     class Solution implements RemoveLinkedListElements {
 
@@ -43,4 +53,7 @@ public interface RemoveLinkedListElements {
             return head;
         }
     }
+}
+
+class RemoveLinkedListElementsTest extends AbstractTest<RemoveLinkedListElements> {
 }

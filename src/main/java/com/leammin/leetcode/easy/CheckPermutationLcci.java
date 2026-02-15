@@ -1,5 +1,8 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 01.02. 判定是否互为字符重排
  * 
@@ -31,6 +34,13 @@ package com.leammin.leetcode.easy;
 public interface CheckPermutationLcci {
     boolean CheckPermutation(String s1, String s2);
 
+    static Testsuite<CheckPermutationLcci> testsuite() {
+        return Testsuite.<CheckPermutationLcci>builder()
+                .addExpected(t -> t.CheckPermutation("abc", "cba"), true)
+                .build();
+    }
+
+
     class Solution implements CheckPermutationLcci {
 
         @Override
@@ -53,4 +63,7 @@ public interface CheckPermutationLcci {
             return true;
         }
     }
+}
+
+class CheckPermutationLcciTest extends AbstractTest<CheckPermutationLcci> {
 }

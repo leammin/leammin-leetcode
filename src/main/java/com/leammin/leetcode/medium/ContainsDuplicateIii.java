@@ -4,6 +4,9 @@ import com.leammin.leetcode.util.Execute;
 
 import java.util.*;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 220. 存在重复元素 III
  *
@@ -29,6 +32,19 @@ import java.util.*;
  */
 public interface ContainsDuplicateIii {
     boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t);
+
+    static Testsuite<ContainsDuplicateIii> testsuite() {
+        return Testsuite.<ContainsDuplicateIii>builder()
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,2,3,1}, 3 , 0), true)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,0,1,1}, 1 , 2), true)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,5,9,1,5,9}, 2 , 3), false)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{-2147483648,2147483647}, 1 , 1), false)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,3,6,2}, 1 , 2), true)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{1,2,5,6,7,2,4}, 4 , 0), true)
+                .addExpected(t -> t.containsNearbyAlmostDuplicate(new int[]{-3, 3}, 2 , 4), false)
+                .build();
+    }
+
 
     class Solution implements ContainsDuplicateIii {
 
@@ -194,4 +210,7 @@ public interface ContainsDuplicateIii {
                     && Math.abs((long) a[1] - b[1]) <= valueDiff;
         }
     }
+}
+
+class ContainsDuplicateIiiTest extends AbstractTest<ContainsDuplicateIii> {
 }

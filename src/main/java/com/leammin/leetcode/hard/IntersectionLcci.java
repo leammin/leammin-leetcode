@@ -1,5 +1,9 @@
 package com.leammin.leetcode.hard;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 面试题 16.03. 交点
  * 
@@ -35,6 +39,15 @@ package com.leammin.leetcode.hard;
  */
 public interface IntersectionLcci {
     double[] intersection(int[] start1, int[] end1, int[] start2, int[] end2);
+
+    static Testsuite<IntersectionLcci> testsuite() {
+        return Testsuite.<IntersectionLcci>builder()
+                .add(ExpectedTestcase.of(t -> t.intersection(new int[]{0, 0}, new int[]{1, 0}, new int[]{1, 1}, new int[]{0, -1}), new double[]{0.5, 0}))
+                .add(ExpectedTestcase.of(t -> t.intersection(new int[]{0, 0}, new int[]{3, 3}, new int[]{1, 1}, new int[]{2, 2}), new double[]{1, 1}))
+                .add(ExpectedTestcase.of(t -> t.intersection(new int[]{0, 0}, new int[]{1, 1}, new int[]{1, 0}, new int[]{2, 1}), new double[]{}))
+                .build();
+    }
+
 
     class Solution implements IntersectionLcci {
 
@@ -130,4 +143,7 @@ public interface IntersectionLcci {
             return t2;
         }
     }
+}
+
+class IntersectionLcciTest extends AbstractTest<IntersectionLcci> {
 }

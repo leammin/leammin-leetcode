@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.Arrays;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 16. 最接近的三数之和
  * 
@@ -18,6 +22,13 @@ import java.util.Arrays;
  */
 public interface ThreeSumClosest {
     int threeSumClosest(int[] nums, int target);
+
+    static Testsuite<ThreeSumClosest> testsuite() {
+        return Testsuite.<ThreeSumClosest>builder()
+                .add(ExpectedTestcase.of(t -> t.threeSumClosest(new int[]{-1, 2, 1, -4}, 1), 2))
+                .build();
+    }
+
 
     class Solution implements ThreeSumClosest {
 
@@ -47,4 +58,7 @@ public interface ThreeSumClosest {
             return res;
         }
     }
+}
+
+class ThreeSumClosestTest extends AbstractTest<ThreeSumClosest> {
 }

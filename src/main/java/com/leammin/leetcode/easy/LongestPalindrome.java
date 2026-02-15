@@ -1,5 +1,9 @@
 package com.leammin.leetcode.easy;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 409. 最长回文串
  * 
@@ -30,6 +34,13 @@ package com.leammin.leetcode.easy;
 public interface LongestPalindrome {
     int longestPalindrome(String s);
 
+    static Testsuite<LongestPalindrome> testsuite() {
+        return Testsuite.<LongestPalindrome>builder()
+                .add(ExpectedTestcase.of(t -> t.longestPalindrome("abccccdd"), 7))
+                .build();
+    }
+
+
     class Solution implements LongestPalindrome {
 
         @Override
@@ -49,4 +60,7 @@ public interface LongestPalindrome {
             return ans < s.length() ? ans + 1 : ans;
         }
     }
+}
+
+class LongestPalindromeTest extends AbstractTest<LongestPalindrome> {
 }

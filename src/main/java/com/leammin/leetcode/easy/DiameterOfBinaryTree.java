@@ -1,6 +1,9 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
 
 /**
  * 543. 二叉树的直径
@@ -29,6 +32,13 @@ import com.leammin.leetcode.struct.TreeNode;
 public interface DiameterOfBinaryTree {
     int diameterOfBinaryTree(TreeNode root);
 
+    static Testsuite<DiameterOfBinaryTree> testsuite() {
+        return Testsuite.<DiameterOfBinaryTree>builder()
+                .add(ExpectedTestcase.of(t -> t.diameterOfBinaryTree(TreeNode.of(1, 2, 3, 4, 5)), 3))
+                .build();
+    }
+
+
     class Solution implements DiameterOfBinaryTree {
         int result = 0;
 
@@ -50,4 +60,7 @@ public interface DiameterOfBinaryTree {
             return Math.max(left, right) + 1;
         }
     }
+}
+
+class DiameterOfBinaryTreeTest extends AbstractTest<DiameterOfBinaryTree> {
 }

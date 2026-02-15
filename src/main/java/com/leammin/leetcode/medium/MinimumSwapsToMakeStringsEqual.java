@@ -1,5 +1,8 @@
 package com.leammin.leetcode.medium;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 1247. 交换字符使得字符串相同
  * 
@@ -57,6 +60,16 @@ package com.leammin.leetcode.medium;
 public interface MinimumSwapsToMakeStringsEqual {
     int minimumSwap(String s1, String s2);
 
+    static Testsuite<MinimumSwapsToMakeStringsEqual> testsuite() {
+        return Testsuite.<MinimumSwapsToMakeStringsEqual>builder()
+                .addExpected(t -> t.minimumSwap("xx", "yy"), 1)
+                .addExpected(t -> t.minimumSwap("xy", "yx"), 2)
+                .addExpected(t -> t.minimumSwap("xx", "yx"), -1)
+                .addExpected(t -> t.minimumSwap("xxyyxyxyxx", "xyyxyxxxyx"), 4)
+                .build();
+    }
+
+
     class Solution implements MinimumSwapsToMakeStringsEqual {
 
         @Override
@@ -75,4 +88,7 @@ public interface MinimumSwapsToMakeStringsEqual {
             return ((xc + yc) & 1) == 0 ? ((xc >> 1) + (yc >> 1) + ((xc & 1) << 1)) : -1;
         }
     }
+}
+
+class MinimumSwapsToMakeStringsEqualTest extends AbstractTest<MinimumSwapsToMakeStringsEqual> {
 }

@@ -2,6 +2,10 @@ package com.leammin.leetcode.medium;
 
 import java.util.PriorityQueue;
 
+import com.leammin.leetcode.util.test.AbstractTest;
+import com.leammin.leetcode.util.test.ExpectedTestcase;
+import com.leammin.leetcode.util.test.Testsuite;
+
 /**
  * 215. 数组中的第K个最大元素
  * 
@@ -28,6 +32,14 @@ import java.util.PriorityQueue;
  */
 public interface KthLargestElementInAnArray {
     int findKthLargest(int[] nums, int k);
+
+    static Testsuite<KthLargestElementInAnArray> testsuite() {
+        return Testsuite.<KthLargestElementInAnArray>builder()
+                .add(ExpectedTestcase.of(t -> t.findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2), 5))
+                .add(ExpectedTestcase.of(t -> t.findKthLargest(new int[]{3, 2, 3, 1, 2, 4, 5, 5, 6}, 4), 4))
+                .build();
+    }
+
 
     class Solution implements KthLargestElementInAnArray {
 
@@ -90,4 +102,7 @@ public interface KthLargestElementInAnArray {
             nums[j] = tmp;
         }
     }
+}
+
+class KthLargestElementInAnArrayTest extends AbstractTest<KthLargestElementInAnArray> {
 }
