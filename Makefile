@@ -1,6 +1,6 @@
 BASE = src/main/java/com/leammin/leetcode
 
-.PHONY: test test-all new
+.PHONY: test test-all new done
 
 # Create a new problem file
 # Usage: make new                  - interactive input
@@ -14,35 +14,29 @@ new:
 test-all:
 	mvn test -Dtest="com.leammin.leetcode.easy.*Test, com.leammin.leetcode.medium.*Test, com.leammin.leetcode.hard.*Test"
 
-# Run exact test by problem name
-# Usage: make test AddBinary
+# Run test by id/title/url/class name
+# Usage: make test two-sum
+#        make test 1
+#        make test TwoSum
+#        make test https://leetcode.cn/problems/two-sum/
 test:
-	@FILE=$$(find $(BASE)/easy $(BASE)/medium $(BASE)/hard $(BASE)/undone \
-		-name "$(filter-out $@,$(MAKECMDGOALS)).java" 2>/dev/null | head -1); \
-	if [ -z "$$FILE" ]; then \
-		echo "Error: '$(filter-out $@,$(MAKECMDGOALS))' not found"; exit 1; \
-	fi; \
-	CLASS=$$(basename "$$FILE" .java); \
-	PKG=$$(head -1 "$$FILE" | sed 's/package //;s/;//'); \
-	echo "Running: $$PKG.$${CLASS}Test"; \
-	mvn test -Dtest="$$PKG.$${CLASS}Test"
+	@TEST_CLASS=$$(mvn -q exec:java \
+		-Dexec.mainClass="com.leammin.leetcode.main.LeetcodeResolver" \
+		$(if $(filter-out $@,$(MAKECMDGOALS)),-Dexec.args="$(filter-out $@,$(MAKECMDGOALS))") \
+		| grep '^TEST:' | cut -d: -f2); \
+	if [ -z "$$TEST_CLASS" ]; then exit 1; fi; \
+	echo "Running: $$TEST_CLASS"; \
+	mvn test -Dtest="$$TEST_CLASS"
 
-# Fuzzy search and run matching tests (case-insensitive)
-# Usage: make search sort
-search:
-	@FILES=$$(find $(BASE)/easy $(BASE)/medium $(BASE)/hard $(BASE)/undone \
-		-iname "*$(filter-out $@,$(MAKECMDGOALS))*.java" 2>/dev/null); \
-	if [ -z "$$FILES" ]; then \
-		echo "Error: No problem matching '$(filter-out $@,$(MAKECMDGOALS))'"; exit 1; \
-	fi; \
-	TESTS=""; \
-	for FILE in $$FILES; do \
-		CLASS=$$(basename "$$FILE" .java); \
-		PKG=$$(head -1 "$$FILE" | sed 's/package //;s/;//'); \
-		TESTS="$${TESTS:+$$TESTS, }$$PKG.$${CLASS}Test"; \
-	done; \
-	echo "Running: $$TESTS"; \
-	mvn test -Dtest="$$TESTS"
+# Mark problem as done (move from undone to done directory)
+# Re-running on completed problem only prints a reminder, no error.
+# Usage: make done two-sum
+#        make done 1
+#        make done TwoSum
+#        make done https://leetcode.cn/problems/two-sum/
+done:
+	mvn -q exec:java -Dexec.mainClass="com.leammin.leetcode.main.LeetcodeDone" \
+		$(if $(filter-out $@,$(MAKECMDGOALS)),-Dexec.args="$(filter-out $@,$(MAKECMDGOALS))")
 
 # Catch extra arguments so make doesn't complain about unknown targets
 %:
