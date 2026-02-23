@@ -1,4 +1,4 @@
-package com.leammin.leetcode.easy;
+package com.leammin.leetcode.undone.easy;
 
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
