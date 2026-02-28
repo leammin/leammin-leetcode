@@ -1,7 +1,6 @@
 package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.struct.TreeNode;
-import com.leammin.leetcode.util.Execute;
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 import com.leammin.leetcode.util.test.VerifiableTestcase;
@@ -65,7 +64,6 @@ public interface DeleteNodeInABst {
                         r -> Assertions.assertThat(r).isIn(TreeNode.of(5,4,6,2,null,null,7), TreeNode.of(5,2,6,null,4,null,7))))
                 .build();
     }
-    @Execute(cases = 0)
 
 
     class Solution implements DeleteNodeInABst {

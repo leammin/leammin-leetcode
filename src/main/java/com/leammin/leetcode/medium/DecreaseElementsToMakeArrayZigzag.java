@@ -1,6 +1,5 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.util.Execute;
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
@@ -54,7 +53,6 @@ public interface DecreaseElementsToMakeArrayZigzag {
                 .addExpected(t -> t.movesToMakeZigzag(new int[]{9,6,1,6,2}), 4)
                 .build();
     }
-    @Execute(cases = -1)
 
 
     class Solution implements DecreaseElementsToMakeArrayZigzag {

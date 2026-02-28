@@ -1,7 +1,6 @@
 package com.leammin.leetcode.easy;
 
 import com.leammin.leetcode.struct.TreeNode;
-import com.leammin.leetcode.util.Execute;
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.ExpectedTestcase;
 import com.leammin.leetcode.util.test.Testsuite;
@@ -56,7 +55,6 @@ public interface LowestCommonAncestorOfABinarySearchTree {
                         TreeNode.of(2), TreeNode.of(4)).val, 2))
                 .build();
     }
-    @Execute(cases = 1)
 
 
     class Solution implements LowestCommonAncestorOfABinarySearchTree {

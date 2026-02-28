@@ -1,6 +1,5 @@
 package com.leammin.leetcode.hard;
 
-import com.leammin.leetcode.util.Execute;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -148,7 +147,6 @@ public interface NumberOfValidWordsForEachPuzzle {
         }
     }
 
-    @Execute(cases = -1)
     class Solution3 implements NumberOfValidWordsForEachPuzzle {
 
         @Override

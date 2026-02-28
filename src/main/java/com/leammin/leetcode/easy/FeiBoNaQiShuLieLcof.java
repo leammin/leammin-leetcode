@@ -1,6 +1,5 @@
 package com.leammin.leetcode.easy;
 
-import com.leammin.leetcode.util.Execute;
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 
@@ -55,7 +54,6 @@ public interface FeiBoNaQiShuLieLcof {
                 .addExpected(t -> t.fib(72), 8390086)
                 .build();
     }
-    @Execute(cases = -1)
 
 
     class Solution implements FeiBoNaQiShuLieLcof {
