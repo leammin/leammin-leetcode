@@ -135,6 +135,7 @@ public interface MinimumNumberOfTapsToOpenToWaterAGarden {
     }
 
     class Solution2 implements MinimumNumberOfTapsToOpenToWaterAGarden {
+        @SuppressWarnings("unchecked")
         @Override
         public int minTaps(int n, int[] ranges) {
             List<Integer>[] taps = new List[n];

@@ -108,6 +108,7 @@ public interface NumberOfValidWordsForEachPuzzle {
 
     class Solution2 implements NumberOfValidWordsForEachPuzzle {
 
+        @SuppressWarnings("unchecked")
         @Override
         public List<Integer> findNumOfValidWords(String[] words, String[] puzzles) {
             int[][] puzzleCount = new int[puzzles.length][26];

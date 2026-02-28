@@ -31,6 +31,7 @@ import java.util.Set;
  * @author Leammin
  * @date 2021-04-23
  */
+@SuppressWarnings("unchecked")
 public interface LargestDivisibleSubset {
     List<Integer> largestDivisibleSubset(int[] nums);
 

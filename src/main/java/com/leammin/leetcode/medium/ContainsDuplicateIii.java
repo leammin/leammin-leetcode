@@ -30,6 +30,7 @@ import com.leammin.leetcode.util.test.Testsuite;
  * @author Leammin
  * @date 2021-03-31
  */
+@SuppressWarnings("unchecked")
 public interface ContainsDuplicateIii {
     boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t);
 

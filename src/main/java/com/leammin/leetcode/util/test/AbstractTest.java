@@ -73,9 +73,6 @@ public abstract class AbstractTest<PROBLEM> {
 
     private void test(Testsuite<PROBLEM> testsuite, Class<? extends PROBLEM> solution) {
         Execute execute = solution.getDeclaredAnnotation(Execute.class);
-        if (execute != null && !execute.value()) {
-            return;
-        }
         long time;
         if (execute == null) {
             time = testsuite.test(solution);
