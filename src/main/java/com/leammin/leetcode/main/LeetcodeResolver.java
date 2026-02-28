@@ -18,7 +18,7 @@ public final class LeetcodeResolver {
     private static final String BASE = "src/main/java/com/leammin/leetcode";
     private static final String[] SEARCH_DIRS = {
             "easy", "medium", "hard",
-            "undone/easy", "undone/medium", "undone/hard"
+            "todo/easy", "todo/medium", "todo/hard"
     };
 
     public static void main(String[] args) {
@@ -69,7 +69,7 @@ public final class LeetcodeResolver {
 
     static String findDifficulty(String className) {
         for (String diff : new String[]{"easy", "medium", "hard"}) {
-            if (Paths.get(BASE, "undone", diff, className + ".java").toFile().exists()
+            if (Paths.get(BASE, "todo", diff, className + ".java").toFile().exists()
                     || Paths.get(BASE, diff, className + ".java").toFile().exists()) {
                 return diff;
             }

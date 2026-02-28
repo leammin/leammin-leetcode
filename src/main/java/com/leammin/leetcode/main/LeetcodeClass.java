@@ -24,7 +24,7 @@ public class LeetcodeClass {
     }
 
     private static String getPackage(Question question) {
-        return "com.leammin.leetcode.undone." + question.getDifficulty().toLowerCase();
+        return "com.leammin.leetcode.todo." + question.getDifficulty().toLowerCase();
     }
 
     private static String generateCode(Question question) {
@@ -63,7 +63,7 @@ public class LeetcodeClass {
     }
 
     private static Path getCodePath(Question question) {
-        return Paths.get("src", "main", "java", "com", "leammin", "leetcode", "undone",
+        return Paths.get("src", "main", "java", "com", "leammin", "leetcode", "todo",
                 question.getDifficulty().toLowerCase(),
                 getClassName(question) + ".java");
     }

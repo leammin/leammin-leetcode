@@ -14,6 +14,6 @@ run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeResol
 description = "标记题目为已完成: mise run done <id/title/url/class>"
 run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeDone -Dexec.args={{arg(n=0)}}'
 
-[tasks.undone]
-description = "取消标记题目: mise run undone <id/title/url/class>"
-run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeUndone -Dexec.args={{arg(n=0)}}'
+[tasks.todo]
+description = "取消标记题目: mise run todo <id/title/url/class>"
+run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeTodo -Dexec.args={{arg(n=0)}}'

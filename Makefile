@@ -1,4 +1,4 @@
-.PHONY: test test-all new done undone
+.PHONY: test test-all new done todo
 
 MVN_EXEC = mvn -q exec:java
 ARGS = $(if $(filter-out $@,$(MAKECMDGOALS)),-Dexec.args="$(filter-out $@,$(MAKECMDGOALS))")
@@ -19,9 +19,9 @@ test:
 done:
 	$(MVN_EXEC) -Dexec.mainClass="com.leammin.leetcode.main.LeetcodeDone" $(ARGS)
 
-# Usage: make undone [id/title/url/class]
-undone:
-	$(MVN_EXEC) -Dexec.mainClass="com.leammin.leetcode.main.LeetcodeUndone" $(ARGS)
+# Usage: make todo [id/title/url/class]
+todo:
+	$(MVN_EXEC) -Dexec.mainClass="com.leammin.leetcode.main.LeetcodeTodo" $(ARGS)
 
 %:
 	@:
