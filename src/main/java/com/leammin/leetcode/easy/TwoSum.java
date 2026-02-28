@@ -55,6 +55,21 @@ public interface TwoSum {
             return null;
         }
     }
+
+    class Solution2 implements TwoSum {
+        @Override
+        public int[] twoSum(int[] nums, int target) {
+            Map<Integer, Integer> numToIdx = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                Integer r = numToIdx.get(target - nums[i]);
+                if (r != null && r != i) {
+                    return new int[]{i, r};
+                }
+                numToIdx.put(nums[i], i);
+            }
+            return null;
+        }
+    }
 }
 
 class TwoSumTest extends AbstractTest<TwoSum> {
