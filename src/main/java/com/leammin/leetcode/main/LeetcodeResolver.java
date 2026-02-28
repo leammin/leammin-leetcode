@@ -1,7 +1,6 @@
 package com.leammin.leetcode.main;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +14,7 @@ import java.util.Scanner;
  */
 public final class LeetcodeResolver {
 
-    private static final String BASE = "src/main/java/com/leammin/leetcode";
-    private static final String[] SEARCH_DIRS = {
-            "easy", "medium", "hard",
-            "undone/easy", "undone/medium", "undone/hard"
-    };
+    private static final String[] DIFFICULTIES = {"easy", "medium", "hard"};
 
     public static void main(String[] args) {
         String key = readKey(args);
@@ -49,11 +44,12 @@ public final class LeetcodeResolver {
     }
 
     static String findTestClass(String className) {
-        for (String dir : SEARCH_DIRS) {
-            Path path = Paths.get(BASE, dir.split("/")).resolve(className + ".java");
-            if (path.toFile().exists()) {
-                String pkg = "com.leammin.leetcode." + dir.replace('/', '.');
-                return pkg + "." + className + "Test";
+        for (String diff : DIFFICULTIES) {
+            if (LeetcodeClass.donePath(diff, className).toFile().exists()) {
+                return "com.leammin.leetcode." + diff + "." + className + "Test";
+            }
+            if (LeetcodeClass.todoPath(diff, className).toFile().exists()) {
+                return "com.leammin.leetcode.todo." + diff + "." + className + "Test";
             }
         }
         return null;
@@ -68,9 +64,9 @@ public final class LeetcodeResolver {
     }
 
     static String findDifficulty(String className) {
-        for (String diff : new String[]{"easy", "medium", "hard"}) {
-            if (Paths.get(BASE, "undone", diff, className + ".java").toFile().exists()
-                    || Paths.get(BASE, diff, className + ".java").toFile().exists()) {
+        for (String diff : DIFFICULTIES) {
+            if (LeetcodeClass.todoPath(diff, className).toFile().exists()
+                    || LeetcodeClass.donePath(diff, className).toFile().exists()) {
                 return diff;
             }
         }

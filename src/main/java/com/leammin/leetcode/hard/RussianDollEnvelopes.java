@@ -1,6 +1,5 @@
 package com.leammin.leetcode.hard;
 
-import com.leammin.leetcode.util.Execute;
 
 import java.util.*;
 
@@ -82,7 +81,6 @@ public interface RussianDollEnvelopes {
         }
     }
 
-    @Execute
     class Solution2 implements RussianDollEnvelopes {
 
         @Override

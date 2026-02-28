@@ -1,6 +1,6 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.Skip;
 
 import java.util.Arrays;
 
@@ -280,7 +280,7 @@ public interface BestTimeToBuyAndSellStockWithCooldown {
         }
     }
 
-    @Execute(value = false)
+    @Skip
     class Solution8 implements BestTimeToBuyAndSellStockWithCooldown {
         // 错误解法，无法通过纯贪心完成
         // 用例：8,6,4,3,3,2,3,5,8,3,8,2,6

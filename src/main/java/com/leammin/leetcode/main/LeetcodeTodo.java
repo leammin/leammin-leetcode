@@ -3,13 +3,13 @@ package com.leammin.leetcode.main;
 import java.nio.file.Path;
 
 /**
- * 将题目从 todo 目录移动到对应的难度目录，并更新 package 声明。
+ * 将题目从难度目录移回 todo 目录，并更新 package 声明。
  * 移动成功后自动 git commit & push。
  * 重复执行仅提醒，不报错；若有未提交/未推送的变更会自动补上。
  *
  * @author Leammin
  */
-public final class LeetcodeDone {
+public final class LeetcodeTodo {
 
     public static void main(String[] args) {
         String key = LeetcodeResolver.readKey(args);
@@ -34,20 +34,20 @@ public final class LeetcodeDone {
         Path donePath = LeetcodeClass.donePath(difficulty, className);
         Path todoPath = LeetcodeClass.todoPath(difficulty, className);
 
-        if (todoPath.toFile().exists()) {
-            LeetcodeClass.moveFile(todoPath, donePath,
-                    "com.leammin.leetcode.todo." + difficulty,
-                    "com.leammin.leetcode." + difficulty);
-            System.out.println("完成: " + todoPath + " -> " + donePath);
-        } else if (donePath.toFile().exists()) {
-            System.out.println("题目已完成: " + donePath);
+        if (donePath.toFile().exists()) {
+            LeetcodeClass.moveFile(donePath, todoPath,
+                    "com.leammin.leetcode." + difficulty,
+                    "com.leammin.leetcode.todo." + difficulty);
+            System.out.println("撤回: " + donePath + " -> " + todoPath);
+        } else if (todoPath.toFile().exists()) {
+            System.out.println("题目已在未完成目录: " + todoPath);
         } else {
-            System.err.println("文件不存在: " + todoPath);
+            System.err.println("文件不存在: " + donePath);
             System.exit(1);
             return;
         }
 
-        LeetcodeResolver.gitCommit("done: " + className,
+        LeetcodeResolver.gitCommit("todo: " + className,
                 donePath.toString(), todoPath.toString());
     }
 }

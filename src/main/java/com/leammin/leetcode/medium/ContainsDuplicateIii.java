@@ -1,6 +1,6 @@
 package com.leammin.leetcode.medium;
 
-import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.Skip;
 
 import java.util.*;
 
@@ -70,7 +70,7 @@ public interface ContainsDuplicateIii {
         }
     }
 
-    @Execute(value = false)
+    @Skip
     class Solution2 implements ContainsDuplicateIii {
         @Override
         public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {

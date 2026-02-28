@@ -3,7 +3,7 @@ package com.leammin.leetcode.main;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Streams;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +11,28 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 public class LeetcodeClass {
+
+    private static final String BASE = "src/main/java/com/leammin/leetcode";
+
+    static Path todoPath(String difficulty, String className) {
+        return Paths.get(BASE, "todo", difficulty, className + ".java");
+    }
+
+    static Path donePath(String difficulty, String className) {
+        return Paths.get(BASE, difficulty, className + ".java");
+    }
+
+    static void moveFile(Path from, Path to, String fromPkg, String toPkg) {
+        try {
+            String content = Files.readString(from);
+            content = content.replace("package " + fromPkg, "package " + toPkg);
+            Files.createDirectories(to.getParent());
+            Files.writeString(to, content);
+            Files.delete(from);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static String getClassName(Question question) {
         String titleSlug = question.getTitleSlug();
@@ -24,7 +46,7 @@ public class LeetcodeClass {
     }
 
     private static String getPackage(Question question) {
-        return "com.leammin.leetcode.undone." + question.getDifficulty().toLowerCase();
+        return "com.leammin.leetcode.todo." + question.getDifficulty().toLowerCase();
     }
 
     private static String generateCode(Question question) {
@@ -62,32 +84,21 @@ public class LeetcodeClass {
         return content.replace("\n", "\n * ");
     }
 
-    private static Path getCodePath(Question question) {
-        return Paths.get("src", "main", "java", "com", "leammin", "leetcode", "undone",
-                question.getDifficulty().toLowerCase(),
-                getClassName(question) + ".java");
-    }
-
     private static void createFile(Path path, String content) {
-        File file = path.toFile();
-        if (file.exists()) {
-            throw new RuntimeException("文件已存在: " + file.getAbsolutePath());
+        if (Files.exists(path)) {
+            throw new RuntimeException("文件已存在: " + path.toAbsolutePath());
         }
         try {
             Files.createDirectories(path.getParent());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try (Writer writer = new BufferedWriter(new FileWriter(file))) {
-            writer.append(content);
-            writer.flush();
+            Files.writeString(path, content);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public static void createCodeFile(Question question) {
-        createFile(getCodePath(question), generateCode(question));
+        String difficulty = question.getDifficulty().toLowerCase();
+        createFile(todoPath(difficulty, getClassName(question)), generateCode(question));
     }
 
 

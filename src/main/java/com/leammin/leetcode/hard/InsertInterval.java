@@ -1,6 +1,5 @@
 package com.leammin.leetcode.hard;
 
-import com.leammin.leetcode.util.Execute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,6 @@ public interface InsertInterval {
                         new int[]{0, 0}), new int[][]{{0, 0}, {1, 5}}))
                 .build();
     }
-    @Execute(cases = -1)
 
 
     class Solution implements InsertInterval {

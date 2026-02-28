@@ -1,6 +1,5 @@
 package com.leammin.leetcode.hard;
 
-import com.leammin.leetcode.util.Execute;
 
 import java.util.Arrays;
 import java.util.TreeMap;
@@ -119,7 +118,6 @@ public abstract class FindingMkAverage {
         }
     }
 
-    @Execute(cases = -1)
     static class Solution2 extends FindingMkAverage {
         static class CountMap {
             private TreeMap<Integer, Integer> map = new TreeMap<>();
