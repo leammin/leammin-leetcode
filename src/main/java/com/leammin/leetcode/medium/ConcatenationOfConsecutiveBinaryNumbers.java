@@ -1,4 +1,4 @@
-package com.leammin.leetcode.undone.medium;
+package com.leammin.leetcode.medium;
 
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
@@ -51,6 +51,9 @@ public interface ConcatenationOfConsecutiveBinaryNumbers {
 
     static Testsuite<ConcatenationOfConsecutiveBinaryNumbers> testsuite() {
         return Testsuite.<ConcatenationOfConsecutiveBinaryNumbers>builder()
+        .addExpected(t -> t.concatenatedBinary(1), 1)
+        .addExpected(t -> t.concatenatedBinary(3), 27)
+        .addExpected(t -> t.concatenatedBinary(12), 505379714)
         .build();
     }
 
@@ -58,11 +61,47 @@ public interface ConcatenationOfConsecutiveBinaryNumbers {
 
         public int concatenatedBinary(int n) {
             int mod = 1000000007;
-            int result = 0;
-            for (int i = n; i >= 1; i--) {
-                
+            int result = n % mod;
+            int curBits = 0;
+            while ((n >> curBits) > 0) {
+                curBits++;
             }
-            return 0;
+            int sumBits = curBits;
+            for (int i = n-1; i >= 1; i--) {
+                int x = i;  // x =  (i << sumBits) % mod
+                for(int j = 0; j < sumBits; j++) {
+                    x = (x << 1) % mod;
+                }
+                result = (x + result) % mod;
+                if (i >> (curBits - 1) == 0) {
+                    curBits--;
+                }
+                sumBits += curBits;
+            }
+            return result;
+        }
+    }
+    
+    
+    class Solution2 implements ConcatenationOfConsecutiveBinaryNumbers {
+
+        public int concatenatedBinary(int n) {
+            int mod = 1000000007;
+            long result = n % mod;
+            int curBits = 0;
+            while ((n >> curBits) > 0) {
+                curBits++;
+            }
+            long factor = 1;
+            for (int m = n-1; m >= 1; m--) {
+                factor = (((1 << curBits) % mod) * factor) % mod;
+                long x = (factor * m) % mod;
+                result = (x + result) % mod;
+                if (m >> (curBits - 1) == 0) {
+                    curBits--;
+                }
+            }
+            return (int) result;
         }
     }
 }
