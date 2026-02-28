@@ -1,0 +1,19 @@
+[tasks.new]
+description = "创建新的 LeetCode 题目: mise run new <id/title/url>"
+run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.Leetcoder -Dexec.args={{arg(n=0)}}'
+
+[tasks.test-all]
+description = "运行所有测试用例"
+run = 'mvn test -Dtest=com.leammin.leetcode.easy.*Test,com.leammin.leetcode.medium.*Test,com.leammin.leetcode.hard.*Test'
+
+[tasks.test]
+description = "测试指定题目: mise run test <id/title/url/class>"
+run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeResolver -Dexec.args={{arg(n=0)}}'
+
+[tasks.done]
+description = "标记题目为已完成: mise run done <id/title/url/class>"
+run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeDone -Dexec.args={{arg(n=0)}}'
+
+[tasks.undone]
+description = "取消标记题目: mise run undone <id/title/url/class>"
+run = 'mvn -q exec:java -Dexec.mainClass=com.leammin.leetcode.main.LeetcodeUndone -Dexec.args={{arg(n=0)}}'
