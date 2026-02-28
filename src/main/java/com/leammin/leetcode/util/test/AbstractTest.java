@@ -2,6 +2,7 @@ package com.leammin.leetcode.util.test;
 
 import com.google.common.reflect.TypeToken;
 import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.Skip;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -44,14 +45,10 @@ public abstract class AbstractTest<PROBLEM> {
                 .collect(Collectors.toList());
         Collections.reverse(solutions);
         boolean hasExecute = solutions.stream()
-                .map(s -> s.getDeclaredAnnotation(Execute.class))
-                .anyMatch(e -> e != null && e.value());
+                .anyMatch(s -> s.getDeclaredAnnotation(Execute.class) != null);
         return solutions.stream()
-                .filter(s -> {
-                    Execute execute = s.getDeclaredAnnotation(Execute.class);
-                    return (!hasExecute && execute == null) ||
-                            (hasExecute && execute != null && execute.value());
-                })
+                .filter(s -> s.getDeclaredAnnotation(Skip.class) == null)
+                .filter(s -> !hasExecute || s.getDeclaredAnnotation(Execute.class) != null)
                 .collect(Collectors.toList());
     }
 

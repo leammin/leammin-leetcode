@@ -1,6 +1,6 @@
 package com.leammin.leetcode.todo.hard;
 
-import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.Skip;
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 import org.assertj.core.api.Assertions;
@@ -121,7 +121,7 @@ public interface TriplesWithBitwiseAndEqualToZero {
     }
 
 
-    @Execute(false)
+    @Skip
     class Solution3 implements TriplesWithBitwiseAndEqualToZero {
 
         @Override

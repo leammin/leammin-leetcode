@@ -1,6 +1,6 @@
 package com.leammin.leetcode.todo.hard;
 
-import com.leammin.leetcode.util.Execute;
+import com.leammin.leetcode.util.Skip;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -125,7 +125,7 @@ public interface SuperEggDrop {
         }
     }
 
-    @Execute(false)
+    @Skip
     class Solution2 implements SuperEggDrop {
 
         @Override
