@@ -1,9 +1,6 @@
 package com.leammin.leetcode.main;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * 将题目从 todo 目录移动到对应的难度目录，并更新 package 声明。
@@ -13,8 +10,6 @@ import java.nio.file.Paths;
  * @author Leammin
  */
 public final class LeetcodeDone {
-
-    private static final String BASE = "src/main/java/com/leammin/leetcode";
 
     public static void main(String[] args) {
         String key = LeetcodeResolver.readKey(args);
@@ -36,11 +31,13 @@ public final class LeetcodeDone {
             }
         }
 
-        Path donePath = Paths.get(BASE, difficulty, className + ".java");
-        Path todoPath = Paths.get(BASE, "todo", difficulty, className + ".java");
+        Path donePath = LeetcodeClass.donePath(difficulty, className);
+        Path todoPath = LeetcodeClass.todoPath(difficulty, className);
 
         if (todoPath.toFile().exists()) {
-            moveFile(todoPath, donePath, difficulty);
+            LeetcodeClass.moveFile(todoPath, donePath,
+                    "com.leammin.leetcode.todo." + difficulty,
+                    "com.leammin.leetcode." + difficulty);
             System.out.println("完成: " + todoPath + " -> " + donePath);
         } else if (donePath.toFile().exists()) {
             System.out.println("题目已完成: " + donePath);
@@ -52,20 +49,5 @@ public final class LeetcodeDone {
 
         LeetcodeResolver.gitCommit("done: " + className,
                 donePath.toString(), todoPath.toString());
-    }
-
-    private static void moveFile(Path from, Path to, String difficulty) {
-        try {
-            String content = Files.readString(from);
-            content = content.replace(
-                    "package com.leammin.leetcode.todo." + difficulty,
-                    "package com.leammin.leetcode." + difficulty
-            );
-            Files.createDirectories(to.getParent());
-            Files.writeString(to, content);
-            Files.delete(from);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

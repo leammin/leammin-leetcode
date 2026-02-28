@@ -1,6 +1,6 @@
 package com.leammin.leetcode.main;
 
-import java.util.Scanner;
+import java.nio.file.Path;
 
 /**
  * @author Leammin
@@ -9,18 +9,26 @@ import java.util.Scanner;
 public final class Leetcoder {
 
     public static void main(String[] args) {
-        String key;
-        if (args.length > 0) {
-            key = args[0];
-        } else {
-            Scanner sc = new Scanner(System.in).useDelimiter("\n");
-            System.out.print("请输入id/title/url: ");
-            key = sc.next();
-        }
+        String key = LeetcodeResolver.readKey(args);
 
         Question question = LeetcodeQuestions.getQuestion(key);
-        System.out.println("\n" + LeetcodeClass.getClassName(question));
+        String className = LeetcodeClass.getClassName(question);
+        String difficulty = question.getDifficulty().toLowerCase();
+
+        System.out.println("\n" + className);
         System.out.println(question.getJavaCode());
+        
+        Path todoPath = LeetcodeClass.todoPath(difficulty, className);
+        Path donePath = LeetcodeClass.donePath(difficulty, className);
+        if (todoPath.toFile().exists()) {
+            System.out.println("题目已存在(todo): " + todoPath);
+            return;
+        }
+        if (donePath.toFile().exists()) {
+            System.out.println("题目已存在(done): " + donePath);
+            return;
+        }
+
         LeetcodeClass.createCodeFile(question);
     }
 }
