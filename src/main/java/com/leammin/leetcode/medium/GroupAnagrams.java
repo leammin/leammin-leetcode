@@ -1,14 +1,10 @@
 package com.leammin.leetcode.medium;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.Testsuite;
 import com.leammin.leetcode.util.test.VerifiableTestcase;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 49. 字母异位词分组
@@ -72,6 +68,52 @@ public interface GroupAnagrams {
                 map.compute(sum + product, (k, v) -> (v == null ? new ArrayList<>() : v)).add(str);
             }
 
+            return new ArrayList<>(map.values());
+        }
+    }
+
+    class Solution2 implements GroupAnagrams {
+        @Override
+        public List<List<String>> groupAnagrams(String[] strs) {
+            Map<String, List<String>> map = new HashMap<>();
+            for (String str : strs) {
+                Integer[] countLetter = new Integer[26];
+                for (char c : str.toCharArray()) {
+                    countLetter[c - 'a'] = countLetter[c - 'a'] == null ? 1 : countLetter[c - 'a'] + 1;
+                }
+                map.computeIfAbsent(Arrays.toString(countLetter), key -> new ArrayList<>()).add(str);
+            }
+            return new ArrayList<>(map.values());
+        }
+    }
+
+
+    class Solution3 implements GroupAnagrams {
+        @Override
+        public List<List<String>> groupAnagrams(String[] strs) {
+            class Key {
+                int[] arr;
+                Key(int[] a) {
+                    this.arr = a;
+                }
+                @Override
+                public int hashCode() {
+                    return Arrays.hashCode(arr);
+                }
+                @Override
+                public boolean equals(Object obj) {
+                    return Arrays.equals(arr, ((Key) obj).arr);
+                }
+            }
+
+            Map<Key, List<String>> map = new HashMap<>();
+            for (String str : strs) {
+                int[] countLetter = new int[26];
+                for (char c : str.toCharArray()) {
+                    countLetter[c - 'a']++;
+                }
+                map.computeIfAbsent(new Key(countLetter), key -> new ArrayList<>()).add(str);
+            }
             return new ArrayList<>(map.values());
         }
     }
