@@ -35,17 +35,17 @@ import com.leammin.leetcode.util.test.Testsuite;
  * @author Leammin
  * @date 2020-06-28
  */
-public interface FourSumIi {
+public interface L4sumIi {
     int fourSumCount(int[] A, int[] B, int[] C, int[] D);
 
-    static Testsuite<FourSumIi> testsuite() {
-        return Testsuite.<FourSumIi>builder()
+    static Testsuite<L4sumIi> testsuite() {
+        return Testsuite.<L4sumIi>builder()
                 .add(ExpectedTestcase.of(t -> t.fourSumCount(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}), 2))
                 .build();
     }
 
 
-    class Solution implements FourSumIi {
+    class Solution implements L4sumIi {
 
         @Override
         public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
@@ -64,7 +64,7 @@ public interface FourSumIi {
         }
     }
 
-    class Solution2 implements FourSumIi {
+    class Solution2 implements L4sumIi {
 
         @Override
         public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
@@ -93,7 +93,7 @@ public interface FourSumIi {
         }
     }
 
-    class Solution3 implements FourSumIi {
+    class Solution3 implements L4sumIi {
 
         @Override
         public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
@@ -118,7 +118,7 @@ public interface FourSumIi {
         }
     }
 
-    class Solution4 implements FourSumIi {
+    class Solution4 implements L4sumIi {
 
         @Override
         public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
@@ -154,7 +154,7 @@ public interface FourSumIi {
         }
     }
 
-    class Solution5 implements FourSumIi {
+    class Solution5 implements L4sumIi {
 
         @Override
         public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
@@ -180,5 +180,5 @@ public interface FourSumIi {
     }
 }
 
-class FourSumIiTest extends AbstractTest<FourSumIi> {
+class L4sumIiTest extends AbstractTest<L4sumIi> {
 }

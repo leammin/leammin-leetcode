@@ -20,17 +20,17 @@ import com.leammin.leetcode.util.test.Testsuite;
  * @author Leammin
  * @date 2020-06-24
  */
-public interface ThreeSumClosest {
+public interface L3sumClosest {
     int threeSumClosest(int[] nums, int target);
 
-    static Testsuite<ThreeSumClosest> testsuite() {
-        return Testsuite.<ThreeSumClosest>builder()
+    static Testsuite<L3sumClosest> testsuite() {
+        return Testsuite.<L3sumClosest>builder()
                 .add(ExpectedTestcase.of(t -> t.threeSumClosest(new int[]{-1, 2, 1, -4}, 1), 2))
                 .build();
     }
 
 
-    class Solution implements ThreeSumClosest {
+    class Solution implements L3sumClosest {
 
         @Override
         public int threeSumClosest(int[] nums, int target) {
@@ -60,5 +60,5 @@ public interface ThreeSumClosest {
     }
 }
 
-class ThreeSumClosestTest extends AbstractTest<ThreeSumClosest> {
+class L3sumClosestTest extends AbstractTest<L3sumClosest> {
 }

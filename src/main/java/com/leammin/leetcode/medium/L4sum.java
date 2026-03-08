@@ -30,11 +30,11 @@ import java.util.List;
  * @author Leammin
  * @date 2021-04-01
  */
-public interface FourSum {
+public interface L4sum {
     List<List<Integer>> fourSum(int[] nums, int target);
 
-    static Testsuite<FourSum> testsuite() {
-        return Testsuite.<FourSum>builder()
+    static Testsuite<L4sum> testsuite() {
+        return Testsuite.<L4sum>builder()
                 .addExpected(t -> t.fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0), List.of(
                         List.of(-2, -1, 1, 2),
                         List.of(-2,  0, 0, 2),
@@ -48,7 +48,7 @@ public interface FourSum {
     }
 
 
-    class Solution implements FourSum {
+    class Solution implements L4sum {
 
         @Override
         public List<List<Integer>> fourSum(int[] nums, int target) {
@@ -86,7 +86,7 @@ public interface FourSum {
         }
     }
 
-    class Solution2 implements FourSum {
+    class Solution2 implements L4sum {
 
         @Override
         public List<List<Integer>> fourSum(int[] nums, int target) {
@@ -143,5 +143,5 @@ public interface FourSum {
     }
 }
 
-class FourSumTest extends AbstractTest<FourSum> {
+class L4sumTest extends AbstractTest<L4sum> {
 }
