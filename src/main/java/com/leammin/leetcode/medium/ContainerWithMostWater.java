@@ -21,7 +21,7 @@ import com.leammin.leetcode.util.test.Testsuite;
  * 
  * <pre><strong>输入:</strong> [1,8,6,2,5,4,8,3,7]
  * <strong>输出:</strong> 49</pre>
- * 
+ *
  * 
  * @author Leammin
  * @date 2020-04-18
@@ -128,6 +128,26 @@ public interface ContainerWithMostWater {
                 }
             }
             return ans;
+        }
+    }
+
+
+    class Solution4 implements ContainerWithMostWater {
+
+        @Override
+        public int maxArea(int[] height) {
+            int l = 0;
+            int r = height.length - 1;
+            int res = 0;
+            while (l < r) {
+                res = Math.max(res, (r - l) * Math.min(height[l], height[r]));
+                if (height[l] < height[r]) {
+                    l++;
+                } else {
+                    r--;
+                }
+            }
+            return res;
         }
     }
 }
