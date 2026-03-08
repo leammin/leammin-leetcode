@@ -30,7 +30,7 @@ public final class LeetcodeResolver {
         }
         try {
             Question question = LeetcodeQuestions.getQuestion(key);
-            String className = LeetcodeClass.getClassName(question);
+            String className = question.getClassName();
             testClass = findTestClass(className);
             if (testClass != null) {
                 return testClass;
@@ -46,10 +46,10 @@ public final class LeetcodeResolver {
     static String findTestClass(String className) {
         for (String diff : DIFFICULTIES) {
             if (LeetcodeClass.donePath(diff, className).toFile().exists()) {
-                return "com.leammin.leetcode." + diff + "." + className + "Test";
+                return LeetcodeClass.donePackage(diff) + "." + className + "Test";
             }
             if (LeetcodeClass.todoPath(diff, className).toFile().exists()) {
-                return "com.leammin.leetcode.todo." + diff + "." + className + "Test";
+                return LeetcodeClass.todoPackage(diff) + "." + className + "Test";
             }
         }
         return null;

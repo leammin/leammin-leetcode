@@ -12,7 +12,7 @@ public final class Leetcoder {
         String key = LeetcodeResolver.readKey(args);
 
         Question question = LeetcodeQuestions.getQuestion(key);
-        String className = LeetcodeClass.getClassName(question);
+        String className = question.getClassName();
         String difficulty = question.getDifficulty().toLowerCase();
 
         System.out.println("\n" + className);

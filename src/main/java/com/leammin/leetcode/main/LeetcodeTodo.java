@@ -19,7 +19,7 @@ public final class LeetcodeTodo {
 
         try {
             Question question = LeetcodeQuestions.getQuestion(key);
-            className = LeetcodeClass.getClassName(question);
+            className = question.getClassName();
             difficulty = question.getDifficulty().toLowerCase();
         } catch (RuntimeException e) {
             className = key;
@@ -35,9 +35,7 @@ public final class LeetcodeTodo {
         Path todoPath = LeetcodeClass.todoPath(difficulty, className);
 
         if (donePath.toFile().exists()) {
-            LeetcodeClass.moveFile(donePath, todoPath,
-                    "com.leammin.leetcode." + difficulty,
-                    "com.leammin.leetcode.todo." + difficulty);
+            LeetcodeClass.moveFile(donePath, todoPath, LeetcodeClass.donePackage(difficulty), LeetcodeClass.todoPackage(difficulty));
             System.out.println("撤回: " + donePath + " -> " + todoPath);
         } else if (todoPath.toFile().exists()) {
             System.out.println("题目已在未完成目录: " + todoPath);

@@ -1,14 +1,10 @@
 package com.leammin.leetcode.main;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Streams;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 public class LeetcodeClass {
 
@@ -20,6 +16,14 @@ public class LeetcodeClass {
 
     static Path donePath(String difficulty, String className) {
         return Paths.get(BASE, difficulty, className + ".java");
+    }
+
+    static String todoPackage(String difficulty) {
+        return "com.leammin.leetcode.todo." + difficulty;
+    }
+
+    static String donePackage(String difficulty) {
+        return "com.leammin.leetcode." + difficulty;
     }
 
     static void moveFile(Path from, Path to, String fromPkg, String toPkg) {
@@ -34,24 +38,9 @@ public class LeetcodeClass {
         }
     }
 
-    public static String getClassName(Question question) {
-        String titleSlug = question.getTitleSlug();
-        char fst = titleSlug.charAt(0);
-        if (!Character.isLowerCase(fst) && !Character.isUpperCase(fst)) {
-            titleSlug = "L" + titleSlug;
-        }
-        return Streams.stream(Splitter.on('-').trimResults().omitEmptyStrings().split(titleSlug))
-                .map(t -> Character.toUpperCase(t.charAt(0)) + (t.length() > 1 ? t.substring(1) : ""))
-                .collect(Collectors.joining());
-    }
-
-    private static String getPackage(Question question) {
-        return "com.leammin.leetcode.todo." + question.getDifficulty().toLowerCase();
-    }
-
     private static String generateCode(Question question) {
-        String className = getClassName(question);
-        return "package " + getPackage(question) + ";\n" +
+        String className = question.getClassName();
+        return "package " + todoPackage(question.getDifficulty().toLowerCase()) + ";\n" +
                 "\n" +
                 "import com.leammin.leetcode.util.test.AbstractTest;\n" +
                 "import com.leammin.leetcode.util.test.Testsuite;\n" +
@@ -98,7 +87,7 @@ public class LeetcodeClass {
 
     public static void createCodeFile(Question question) {
         String difficulty = question.getDifficulty().toLowerCase();
-        createFile(todoPath(difficulty, getClassName(question)), generateCode(question));
+        createFile(todoPath(difficulty, question.getClassName()), generateCode(question));
     }
 
 

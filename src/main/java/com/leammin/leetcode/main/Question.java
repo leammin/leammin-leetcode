@@ -1,6 +1,10 @@
 package com.leammin.leetcode.main;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Streams;
 import org.apache.commons.lang3.StringUtils;
 
 public class Question {
@@ -17,6 +21,29 @@ public class Question {
     private String jsonExampleTestcases;
     private Boolean isPaidOnly;
     private List<CodeSnippet> codeSnippets;
+
+    public String getClassName() {
+        String titleSlug = this.getTitleSlug();
+        char fst = titleSlug.charAt(0);
+        if (!Character.isLowerCase(fst) && !Character.isUpperCase(fst)) {
+            titleSlug = "L" + titleSlug;
+        }
+        return Streams.stream(Splitter.on('-').trimResults().omitEmptyStrings().split(titleSlug))
+                .map(t -> Character.toUpperCase(t.charAt(0)) + (t.length() > 1 ? t.substring(1) : ""))
+                .collect(Collectors.joining());
+    }
+
+    public String getJavaCode() {
+        if (codeSnippets == null) {
+            return null;
+        }
+        return codeSnippets
+                .stream()
+                .filter(cs -> "Java".equalsIgnoreCase(cs.getLang()))
+                .findAny()
+                .map(CodeSnippet::getCode)
+                .orElse(null);
+    }
 
     public String getQuestionId() {
         return questionId;
@@ -52,18 +79,6 @@ public class Question {
 
     public List<CodeSnippet> getCodeSnippets() {
         return codeSnippets;
-    }
-
-    public String getJavaCode() {
-        if (codeSnippets == null) {
-            return null;
-        }
-        return codeSnippets
-            .stream()
-            .filter(cs -> "Java".equalsIgnoreCase(cs.getLang()))
-            .findAny()
-            .map(CodeSnippet::getCode)
-            .orElse(null);
     }
 
     public boolean needInit() {
