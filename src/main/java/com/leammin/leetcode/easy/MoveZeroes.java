@@ -4,6 +4,8 @@ import com.leammin.leetcode.util.test.AbstractTest;
 import com.leammin.leetcode.util.test.ExpectedTestcase;
 import com.leammin.leetcode.util.test.Testsuite;
 
+import java.util.Arrays;
+
 /**
  * 283. 移动零
  *
@@ -104,6 +106,24 @@ public interface MoveZeroes {
                 }
             }
             for (int i = nums.length - zero; i < nums.length; i++) {
+                nums[i] = 0;
+            }
+        }
+    }
+
+    class Solution4 implements MoveZeroes {
+
+        @Override
+        public void moveZeroes(int[] nums) {
+            int zeroCount = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] == 0) {
+                    zeroCount++;
+                } else if (zeroCount > 0) {
+                    nums[i - zeroCount] = nums[i];
+                }
+            }
+            for (int i = nums.length - zeroCount; i < nums.length; i++) {
                 nums[i] = 0;
             }
         }
